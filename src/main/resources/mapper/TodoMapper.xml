@@ -8,54 +8,66 @@
     <!-- Q-001: 全件取得（作成日時順） -->
     <select id="selectAll" resultType="com.example.demo.Todo">
         SELECT
-            ID,
-            TITLE,
-            DESCRIPTION,
-            COMPLETED,
-            CREATED_AT,
-            PROJECT_ID,
-            START_DATE,
-            DUE_DATE
+            T.ID,
+            T.TITLE,
+            T.DESCRIPTION,
+            T.COMPLETED,
+            T.CREATED_AT,
+            T.PROJECT_ID,
+            T.START_DATE,
+            T.DUE_DATE,
+            T.ASSIGNEE_ID,
+            U.NAME AS ASSIGNEE_NAME
         FROM
-            TODO
+            TODO T
+        LEFT JOIN
+            APP_USER U ON T.ASSIGNEE_ID = U.ID
         ORDER BY
-            CREATED_AT ASC
+            T.CREATED_AT ASC
     </select>
 
     <!-- Q-002: ID指定取得 -->
     <select id="selectById" resultType="com.example.demo.Todo">
         SELECT
-            ID,
-            TITLE,
-            DESCRIPTION,
-            COMPLETED,
-            CREATED_AT,
-            PROJECT_ID,
-            START_DATE,
-            DUE_DATE
+            T.ID,
+            T.TITLE,
+            T.DESCRIPTION,
+            T.COMPLETED,
+            T.CREATED_AT,
+            T.PROJECT_ID,
+            T.START_DATE,
+            T.DUE_DATE,
+            T.ASSIGNEE_ID,
+            U.NAME AS ASSIGNEE_NAME
         FROM
-            TODO
+            TODO T
+        LEFT JOIN
+            APP_USER U ON T.ASSIGNEE_ID = U.ID
         WHERE
-            ID = #{id}
+            T.ID = #{id}
     </select>
 
     <!-- Q-003: 完了状態フィルタ -->
     <select id="selectByCompleted" resultType="com.example.demo.Todo">
         SELECT
-            ID,
-            TITLE,
-            DESCRIPTION,
-            COMPLETED,
-            CREATED_AT,
-            PROJECT_ID,
-            START_DATE,
-            DUE_DATE
+            T.ID,
+            T.TITLE,
+            T.DESCRIPTION,
+            T.COMPLETED,
+            T.CREATED_AT,
+            T.PROJECT_ID,
+            T.START_DATE,
+            T.DUE_DATE,
+            T.ASSIGNEE_ID,
+            U.NAME AS ASSIGNEE_NAME
         FROM
-            TODO
+            TODO T
+        LEFT JOIN
+            APP_USER U ON T.ASSIGNEE_ID = U.ID
         WHERE
-            COMPLETED = #{completed}
+            T.COMPLETED = #{completed}
         ORDER BY
-            CREATED_AT ASC
+            T.CREATED_AT ASC
     </select>
 
     <!-- Q-004: 新規作成 -->
@@ -67,7 +79,8 @@
             CREATED_AT,
             PROJECT_ID,
             START_DATE,
-            DUE_DATE
+            DUE_DATE,
+            ASSIGNEE_ID
         ) VALUES (
             #{title},
             #{description},
@@ -75,7 +88,8 @@
             #{createdAt},
             #{projectId},
             #{startDate},
-            #{dueDate}
+            #{dueDate},
+            #{assigneeId}
         )
     </insert>
 
@@ -88,7 +102,8 @@
             COMPLETED = #{completed},
             PROJECT_ID = #{projectId},
             START_DATE = #{startDate},
-            DUE_DATE = #{dueDate}
+            DUE_DATE = #{dueDate},
+            ASSIGNEE_ID = #{assigneeId}
         WHERE
             ID = #{id}
     </update>
@@ -119,39 +134,47 @@
     <!-- Q-T01: 案件ID指定取得 -->
     <select id="selectByProjectId" resultType="com.example.demo.Todo">
         SELECT
-            ID,
-            TITLE,
-            DESCRIPTION,
-            COMPLETED,
-            CREATED_AT,
-            PROJECT_ID,
-            START_DATE,
-            DUE_DATE
+            T.ID,
+            T.TITLE,
+            T.DESCRIPTION,
+            T.COMPLETED,
+            T.CREATED_AT,
+            T.PROJECT_ID,
+            T.START_DATE,
+            T.DUE_DATE,
+            T.ASSIGNEE_ID,
+            U.NAME AS ASSIGNEE_NAME
         FROM
-            TODO
+            TODO T
+        LEFT JOIN
+            APP_USER U ON T.ASSIGNEE_ID = U.ID
         WHERE
-            PROJECT_ID = #{projectId}
+            T.PROJECT_ID = #{projectId}
         ORDER BY
-            CREATED_AT DESC
+            T.CREATED_AT DESC
     </select>
 
     <!-- Q-T02: 案件未設定のチケット取得 -->
     <select id="selectByProjectIdIsNull" resultType="com.example.demo.Todo">
         SELECT
-            ID,
-            TITLE,
-            DESCRIPTION,
-            COMPLETED,
-            CREATED_AT,
-            PROJECT_ID,
-            START_DATE,
-            DUE_DATE
+            T.ID,
+            T.TITLE,
+            T.DESCRIPTION,
+            T.COMPLETED,
+            T.CREATED_AT,
+            T.PROJECT_ID,
+            T.START_DATE,
+            T.DUE_DATE,
+            T.ASSIGNEE_ID,
+            U.NAME AS ASSIGNEE_NAME
         FROM
-            TODO
+            TODO T
+        LEFT JOIN
+            APP_USER U ON T.ASSIGNEE_ID = U.ID
         WHERE
-            PROJECT_ID IS NULL
+            T.PROJECT_ID IS NULL
         ORDER BY
-            CREATED_AT DESC
+            T.CREATED_AT DESC
     </select>
 
     <!-- Q-T03: 案件別件数 -->

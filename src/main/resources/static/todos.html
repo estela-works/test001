@@ -45,13 +45,21 @@
             background-color: #f8f9fa;
             border-radius: 5px;
         }
-        .add-todo input, .add-todo textarea {
+        .add-todo input, .add-todo textarea, .add-todo select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+        }
+        .assignee-field {
+            margin: 10px 0;
+        }
+        .assignee-field label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
         }
         .add-todo button {
             background-color: #007bff;
@@ -121,6 +129,14 @@
         .todo-item .date-range {
             color: #17a2b8;
             font-size: 14px;
+        }
+        .todo-item .assignee {
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .todo-item .assignee.unassigned {
+            color: #999;
+            font-style: italic;
         }
         .todo-item .actions {
             margin-top: 10px;
@@ -193,6 +209,12 @@
                     <input type="date" id="due-date-input">
                 </div>
             </div>
+            <div class="assignee-field">
+                <label for="assignee-input">担当者:</label>
+                <select id="assignee-input">
+                    <option value="">未割当</option>
+                </select>
+            </div>
             <button onclick="addTodo()">追加</button>
         </div>
 
@@ -213,6 +235,7 @@
 
     <script>
         let todos = [];
+        let users = [];
         let currentFilter = 'all';
         let currentProjectId = null;
         let currentProjectName = '';
@@ -221,8 +244,38 @@
         window.onload = function() {
             parseProjectId();
             loadProjectInfo();
+            loadUsers();
             loadTodos();
         };
+
+        // ユーザーリストを取得
+        async function loadUsers() {
+            try {
+                const response = await fetch('/api/users');
+                if (response.ok) {
+                    users = await response.json();
+                    populateAssigneeDropdown();
+                }
+            } catch (error) {
+                console.error('ユーザーリストの取得に失敗しました:', error);
+            }
+        }
+
+        // 担当者ドロップダウンを更新
+        function populateAssigneeDropdown() {
+            const select = document.getElementById('assignee-input');
+            // 最初のオプション（未割当）以外を削除
+            while (select.options.length > 1) {
+                select.remove(1);
+            }
+            // ユーザーを追加
+            users.forEach(user => {
+                const option = document.createElement('option');
+                option.value = user.id;
+                option.textContent = user.name;
+                select.appendChild(option);
+            });
+        }
 
         // URLパラメータから案件IDを取得
         function parseProjectId() {
@@ -330,11 +383,15 @@
             todoList.innerHTML = filteredTodos.map(todo => {
                 const dateRange = formatDateRange(todo.startDate, todo.dueDate);
                 const dateRangeHtml = dateRange ? `<p class="date-range">期間: ${dateRange}</p>` : '';
+                const assigneeHtml = todo.assigneeName
+                    ? `<p class="assignee">担当: ${escapeHtml(todo.assigneeName)}</p>`
+                    : `<p class="assignee unassigned">担当: 未割当</p>`;
                 return `
                 <div class="todo-item ${todo.completed ? 'completed' : ''}">
                     <h3>${escapeHtml(todo.title)}</h3>
                     <p>${escapeHtml(todo.description || '')}</p>
                     ${dateRangeHtml}
+                    ${assigneeHtml}
                     <p><small>作成日: ${new Date(todo.createdAt).toLocaleString('ja-JP')}</small></p>
                     <div class="actions">
                         <button class="toggle-btn" onclick="toggleTodo(${todo.id})">
@@ -358,6 +415,7 @@
             const description = document.getElementById('description-input').value.trim();
             const startDate = document.getElementById('start-date-input').value;
             const dueDate = document.getElementById('due-date-input').value;
+            const assigneeId = document.getElementById('assignee-input').value;
 
             if (!title) {
                 showError('タイトルを入力してください。');
@@ -373,7 +431,8 @@
                 title: title,
                 description: description,
                 startDate: startDate || null,
-                dueDate: dueDate || null
+                dueDate: dueDate || null,
+                assigneeId: assigneeId ? parseInt(assigneeId) : null
             };
 
             // 案件IDを設定（'none'の場合はnull）
@@ -395,6 +454,7 @@
                     document.getElementById('description-input').value = '';
                     document.getElementById('start-date-input').value = '';
                     document.getElementById('due-date-input').value = '';
+                    document.getElementById('assignee-input').value = '';
                     await loadTodos();
                 } else {
                     showError('ToDoの追加に失敗しました。');

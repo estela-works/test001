@@ -61,19 +61,20 @@ public class TodoService {
     /**
      * 新しいToDoアイテムを作成
      * @param todo 作成するToDoアイテム
-     * @return 作成されたToDoアイテム
+     * @return 作成されたToDoアイテム（担当者名を含む）
      */
     public Todo createTodo(Todo todo) {
         validateDateRange(todo.getStartDate(), todo.getDueDate());
         todoMapper.insert(todo);
-        return todo;
+        // 担当者名を含めて再取得
+        return todoMapper.selectById(todo.getId());
     }
 
     /**
      * ToDoアイテムを更新
      * @param id 更新するToDoアイテムのID
      * @param updatedTodo 更新内容
-     * @return 更新されたToDoアイテム（見つからない場合はnull）
+     * @return 更新されたToDoアイテム（担当者名を含む、見つからない場合はnull）
      */
     public Todo updateTodo(Long id, Todo updatedTodo) {
         Todo existingTodo = todoMapper.selectById(id);
@@ -85,8 +86,10 @@ public class TodoService {
             existingTodo.setProjectId(updatedTodo.getProjectId());
             existingTodo.setStartDate(updatedTodo.getStartDate());
             existingTodo.setDueDate(updatedTodo.getDueDate());
+            existingTodo.setAssigneeId(updatedTodo.getAssigneeId());
             todoMapper.update(existingTodo);
-            return existingTodo;
+            // 担当者名を含めて再取得
+            return todoMapper.selectById(id);
         }
         return null;
     }

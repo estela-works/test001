@@ -27,6 +27,9 @@ class TodoMapperTest {
     @Autowired
     private TodoMapper todoMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @BeforeEach
     void setUp() {
         // テストデータをクリアして初期データを投入
@@ -314,6 +317,114 @@ class TodoMapperTest {
             todoMapper.update(todo);
 
             assertThat(todoMapper.countByCompleted(false)).isEqualTo(2);
+        }
+    }
+
+    // ========================================
+    // 担当者関連テスト (TC-M10 ~ TC-M13)
+    // ========================================
+    @Nested
+    @DisplayName("担当者関連")
+    class AssigneeTest {
+
+        @Test
+        @DisplayName("TC-M10: 担当者名が取得できること")
+        void selectAll_WithAssignee_ReturnsAssigneeName() {
+            // ユーザーを取得
+            List<User> users = userMapper.selectAll();
+            assertThat(users).isNotEmpty();
+            User user = users.get(0);
+
+            // 担当者付きToDoを作成
+            Todo todo = new Todo("担当者ありタスク", "説明");
+            todo.setAssigneeId(user.getId());
+            todoMapper.insert(todo);
+
+            // 取得して確認
+            Todo saved = todoMapper.selectById(todo.getId());
+            assertThat(saved.getAssigneeId()).isEqualTo(user.getId());
+            assertThat(saved.getAssigneeName()).isEqualTo(user.getName());
+        }
+
+        @Test
+        @DisplayName("TC-M11: 担当者未設定でassigneeNameがnullになること")
+        void selectAll_WithoutAssignee_ReturnsNullAssigneeName() {
+            // 担当者なしToDoを作成
+            Todo todo = new Todo("担当者なしタスク", "説明");
+            todoMapper.insert(todo);
+
+            // 取得して確認
+            Todo saved = todoMapper.selectById(todo.getId());
+            assertThat(saved.getAssigneeId()).isNull();
+            assertThat(saved.getAssigneeName()).isNull();
+        }
+
+        @Test
+        @DisplayName("TC-M12: 担当者ID付きでToDoが登録できること")
+        void insert_WithAssigneeId_InsertsSuccessfully() {
+            // ユーザーを取得
+            List<User> users = userMapper.selectAll();
+            assertThat(users).isNotEmpty();
+            User user = users.get(0);
+
+            // 担当者付きToDoを作成
+            Todo todo = new Todo("担当者付きタスク", "説明");
+            todo.setAssigneeId(user.getId());
+
+            todoMapper.insert(todo);
+
+            assertThat(todo.getId()).isNotNull();
+
+            // DBから取得して確認
+            Todo saved = todoMapper.selectById(todo.getId());
+            assertThat(saved.getAssigneeId()).isEqualTo(user.getId());
+        }
+
+        @Test
+        @DisplayName("TC-M13: 担当者を変更できること")
+        void update_ChangeAssignee_UpdatesSuccessfully() {
+            // ユーザーを取得
+            List<User> users = userMapper.selectAll();
+            assertThat(users).hasSizeGreaterThanOrEqualTo(2);
+            User user1 = users.get(0);
+            User user2 = users.get(1);
+
+            // 担当者1でToDoを作成
+            Todo todo = new Todo("担当者変更タスク", "説明");
+            todo.setAssigneeId(user1.getId());
+            todoMapper.insert(todo);
+
+            // 担当者を変更
+            todo.setAssigneeId(user2.getId());
+            todoMapper.update(todo);
+
+            // 確認
+            Todo updated = todoMapper.selectById(todo.getId());
+            assertThat(updated.getAssigneeId()).isEqualTo(user2.getId());
+            assertThat(updated.getAssigneeName()).isEqualTo(user2.getName());
+        }
+
+        @Test
+        @DisplayName("TC-M13b: 担当者を解除できること")
+        void update_RemoveAssignee_UpdatesSuccessfully() {
+            // ユーザーを取得
+            List<User> users = userMapper.selectAll();
+            assertThat(users).isNotEmpty();
+            User user = users.get(0);
+
+            // 担当者付きでToDoを作成
+            Todo todo = new Todo("担当者解除タスク", "説明");
+            todo.setAssigneeId(user.getId());
+            todoMapper.insert(todo);
+
+            // 担当者を解除
+            todo.setAssigneeId(null);
+            todoMapper.update(todo);
+
+            // 確認
+            Todo updated = todoMapper.selectById(todo.getId());
+            assertThat(updated.getAssigneeId()).isNull();
+            assertThat(updated.getAssigneeName()).isNull();
         }
     }
 }

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー管理 - Spring Boot App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .add-form {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .add-form h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .add-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .add-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .add-form button:hover {
+            background-color: #0056b3;
+        }
+        .user-card {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-card .user-info h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .user-card .user-info p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .user-card .actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+        .error {
+            color: #dc3545;
+            text-align: center;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .stats {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ユーザー管理</h1>
+
+        <div class="stats">
+            <span>登録ユーザー数: <span id="user-count">0</span>人</span>
+        </div>
+
+        <div class="add-form">
+            <h3>新しいユーザーを追加</h3>
+            <input type="text" id="name-input" placeholder="ユーザー名を入力してください" maxlength="100" required>
+            <button onclick="addUser()">追加</button>
+        </div>
+
+        <div id="error-message" class="error" style="display: none;"></div>
+        <div id="loading" class="loading">読み込み中...</div>
+        <div id="user-list"></div>
+
+        <div class="back-link">
+            <a href="/projects.html">← 案件一覧に戻る</a>
+        </div>
+    </div>
+
+    <script>
+        let users = [];
+
+        // ページ読み込み時にユーザーリストを取得
+        window.onload = function() {
+            loadUsers();
+        };
+
+        // エラーメッセージを表示
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // ユーザーリストを取得
+        async function loadUsers() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                const response = await fetch('/api/users');
+                if (response.ok) {
+                    users = await response.json();
+                    displayUsers();
+                    updateStats();
+                } else {
+                    showError('ユーザーリストの読み込みに失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // 統計を更新
+        function updateStats() {
+            document.getElementById('user-count').textContent = users.length;
+        }
+
+        // ユーザーリストを表示
+        function displayUsers() {
+            const userList = document.getElementById('user-list');
+
+            if (users.length === 0) {
+                userList.innerHTML = '<p style="text-align: center; color: #666;">ユーザーが登録されていません。</p>';
+                return;
+            }
+
+            userList.innerHTML = users.map(user => `
+                <div class="user-card">
+                    <div class="user-info">
+                        <h3>${escapeHtml(user.name)}</h3>
+                        <p>登録日: ${new Date(user.createdAt).toLocaleString('ja-JP')}</p>
+                    </div>
+                    <div class="actions">
+                        <button class="delete-btn" onclick="deleteUser(${user.id})">削除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 新しいユーザーを追加
+        async function addUser() {
+            const name = document.getElementById('name-input').value.trim();
+
+            if (!name) {
+                showError('ユーザー名を入力してください。');
+                return;
+            }
+
+            if (name.length > 100) {
+                showError('ユーザー名は100文字以内で入力してください。');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('name-input').value = '';
+                    await loadUsers();
+                } else if (response.status === 409) {
+                    showError('同じ名前のユーザーが既に存在します。');
+                } else {
+                    showError('ユーザーの追加に失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            }
+        }
+
+        // ユーザーを削除
+        async function deleteUser(id) {
+            if (!confirm('このユーザーを削除しますか？担当中のチケットは「未割当」になります。')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/users/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    await loadUsers();
+                } else {
+                    showError('ユーザーの削除に失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            }
+        }
+
+        // HTMLエスケープ
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Enterキーでの追加をサポート
+        document.getElementById('name-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addUser();
+            }
+        });
+    </script>
+</body>
+</html>

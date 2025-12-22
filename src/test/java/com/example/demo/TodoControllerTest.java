@@ -41,6 +41,9 @@ class TodoControllerTest {
     @Autowired
     private ProjectMapper projectMapper;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @BeforeEach
     void setUp() {
         // テストデータをクリアして初期データを投入
@@ -415,6 +418,195 @@ class TodoControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.startDate", is("2025-01-01")))
                 .andExpect(jsonPath("$.dueDate", is("2025-01-31")));
+        }
+    }
+
+    // ========================================
+    // 担当者関連テスト (IT-20 ~ IT-25, IT-30 ~ IT-32)
+    // ========================================
+    @Nested
+    @DisplayName("担当者関連 POST/PUT/GET")
+    class AssigneeTest {
+
+        @Test
+        @DisplayName("IT-20: 担当者付きでToDoが作成できること")
+        void createTodo_WithAssignee_Returns201Created() throws Exception {
+            var users = userMapper.selectAll();
+            Long userId = users.get(0).getId();
+            String userName = users.get(0).getName();
+
+            String json = String.format("""
+                {
+                    "title": "担当者付きタスク",
+                    "assigneeId": %d
+                }
+                """, userId);
+
+            mockMvc.perform(post("/api/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.assigneeId", is(userId.intValue())))
+                .andExpect(jsonPath("$.assigneeName", is(userName)));
+        }
+
+        @Test
+        @DisplayName("IT-21: 担当者なしでToDoが作成できること")
+        void createTodo_WithoutAssignee_Returns201Created() throws Exception {
+            String json = """
+                {
+                    "title": "担当者なしタスク"
+                }
+                """;
+
+            mockMvc.perform(post("/api/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.assigneeId").doesNotExist());
+        }
+
+        @Test
+        @DisplayName("IT-22: 存在しない担当者IDで400が返却されること")
+        void createTodo_WithInvalidAssignee_Returns400BadRequest() throws Exception {
+            String json = """
+                {
+                    "title": "不正担当者タスク",
+                    "assigneeId": 999
+                }
+                """;
+
+            mockMvc.perform(post("/api/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isBadRequest());
+        }
+
+        @Test
+        @DisplayName("IT-23: ToDoの担当者を変更できること")
+        void updateTodo_ChangeAssignee_Returns200OK() throws Exception {
+            var users = userMapper.selectAll();
+            User user1 = users.get(0);
+            User user2 = users.get(1);
+
+            // 担当者1でToDoを作成
+            Todo todo = new Todo("担当者変更タスク", "説明");
+            todo.setAssigneeId(user1.getId());
+            todoMapper.insert(todo);
+            Long todoId = todo.getId();
+
+            // 担当者を変更
+            String json = String.format("""
+                {
+                    "title": "担当者変更タスク",
+                    "assigneeId": %d
+                }
+                """, user2.getId());
+
+            mockMvc.perform(put("/api/todos/{id}", todoId)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.assigneeId", is(user2.getId().intValue())))
+                .andExpect(jsonPath("$.assigneeName", is(user2.getName())));
+        }
+
+        @Test
+        @DisplayName("IT-24: ToDoの担当者を解除できること")
+        void updateTodo_RemoveAssignee_Returns200OK() throws Exception {
+            var users = userMapper.selectAll();
+            User user = users.get(0);
+
+            // 担当者付きでToDoを作成
+            Todo todo = new Todo("担当者解除タスク", "説明");
+            todo.setAssigneeId(user.getId());
+            todoMapper.insert(todo);
+            Long todoId = todo.getId();
+
+            // 担当者を解除
+            String json = """
+                {
+                    "title": "担当者解除タスク",
+                    "assigneeId": null
+                }
+                """;
+
+            mockMvc.perform(put("/api/todos/{id}", todoId)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.assigneeId").doesNotExist());
+        }
+
+        @Test
+        @DisplayName("IT-25: ToDo一覧に担当者名が含まれること")
+        void getTodos_WithAssignee_ReturnsAssigneeName() throws Exception {
+            var users = userMapper.selectAll();
+            User user = users.get(0);
+
+            // 担当者付きでToDoを作成
+            Todo todo = new Todo("担当者情報確認タスク", "説明");
+            todo.setAssigneeId(user.getId());
+            todoMapper.insert(todo);
+
+            mockMvc.perform(get("/api/todos"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[?(@.title == '担当者情報確認タスク')].assigneeName",
+                    hasItem(user.getName())));
+        }
+    }
+
+    // ========================================
+    // 後方互換性テスト (IT-30 ~ IT-32)
+    // ========================================
+    @Nested
+    @DisplayName("後方互換性テスト")
+    class BackwardCompatibilityTest {
+
+        @Test
+        @DisplayName("IT-30: 既存のToDo作成が正常に動作すること")
+        void createTodo_ExistingFormat_Returns201Created() throws Exception {
+            String json = """
+                {
+                    "title": "テスト",
+                    "description": "説明"
+                }
+                """;
+
+            mockMvc.perform(post("/api/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title", is("テスト")))
+                .andExpect(jsonPath("$.description", is("説明")));
+        }
+
+        @Test
+        @DisplayName("IT-31: 既存の完了切替が正常に動作すること")
+        void toggleComplete_ExistingFunction_Returns200OK() throws Exception {
+            var todos = todoMapper.selectAll();
+            Long existingId = todos.get(0).getId();
+            boolean originalCompleted = todos.get(0).isCompleted();
+
+            mockMvc.perform(patch("/api/todos/{id}/toggle", existingId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.completed", is(!originalCompleted)));
+        }
+
+        @Test
+        @DisplayName("IT-32: 既存のToDo削除が正常に動作すること")
+        void deleteTodo_ExistingFunction_Returns204NoContent() throws Exception {
+            // 新しいToDoを作成して削除
+            Todo todo = new Todo("削除テストタスク", "説明");
+            todoMapper.insert(todo);
+            Long todoId = todo.getId();
+
+            mockMvc.perform(delete("/api/todos/{id}", todoId))
+                .andExpect(status().isNoContent());
+
+            // 削除確認
+            mockMvc.perform(get("/api/todos/{id}", todoId))
+                .andExpect(status().isNotFound());
         }
     }
 }

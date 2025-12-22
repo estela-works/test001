@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.UserMapper">
+
+    <!-- Q-U01: 全件取得（作成日時順） -->
+    <select id="selectAll" resultType="com.example.demo.User">
+        SELECT
+            ID,
+            NAME,
+            CREATED_AT
+        FROM
+            APP_USER
+        ORDER BY
+            CREATED_AT ASC
+    </select>
+
+    <!-- Q-U02: ID指定取得 -->
+    <select id="selectById" resultType="com.example.demo.User">
+        SELECT
+            ID,
+            NAME,
+            CREATED_AT
+        FROM
+            APP_USER
+        WHERE
+            ID = #{id}
+    </select>
+
+    <!-- Q-U03: 名前指定取得 -->
+    <select id="selectByName" resultType="com.example.demo.User">
+        SELECT
+            ID,
+            NAME,
+            CREATED_AT
+        FROM
+            APP_USER
+        WHERE
+            NAME = #{name}
+    </select>
+
+    <!-- Q-U04: 新規作成 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO APP_USER (
+            NAME,
+            CREATED_AT
+        ) VALUES (
+            #{name},
+            #{createdAt}
+        )
+    </insert>
+
+    <!-- Q-U05: ID指定削除 -->
+    <delete id="deleteById">
+        DELETE FROM APP_USER
+        WHERE ID = #{id}
+    </delete>
+
+    <!-- Q-U06: 件数取得 -->
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM APP_USER
+    </select>
+
+</mapper>

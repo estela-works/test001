@@ -16,9 +16,10 @@
 
 ## 2. テーブル一覧
 
-| テーブル名 | 説明 | 行数目安 |
-|-----------|------|----------|
-| TODO | ToDoアイテム管理テーブル | 数十〜数百件 |
+| テーブル名 | 説明 | 行数目安 | 追加案件 |
+|-----------|------|----------|----------|
+| TODO | ToDoアイテム管理テーブル | 数十〜数百件 | 初期構築 |
+| USER | ユーザー管理テーブル | 数件〜数十件 | 202512_担当者機能追加 |
 
 ---
 
@@ -35,8 +36,15 @@
 | DESCRIPTION | VARCHAR(1000) | YES | NULL | 説明（任意） |
 | COMPLETED | BOOLEAN | NO | FALSE | 完了フラグ |
 | CREATED_AT | TIMESTAMP | NO | CURRENT_TIMESTAMP | 作成日時（自動設定） |
+| PROJECT_ID | BIGINT | YES | NULL | プロジェクトID（外部キー） |
+| START_DATE | DATE | YES | NULL | 開始日 |
+| DUE_DATE | DATE | YES | NULL | 終了日 |
+| ASSIGNEE_ID | BIGINT | YES | NULL | 担当者ID（外部キー） |
 
 **主キー**: ID
+
+**外部キー**:
+- ASSIGNEE_ID → USER(ID) ON DELETE SET NULL
 
 **インデックス**: なし（現時点では不要）
 
@@ -48,6 +56,37 @@ CREATE TABLE IF NOT EXISTS TODO (
     TITLE VARCHAR(255) NOT NULL,
     DESCRIPTION VARCHAR(1000),
     COMPLETED BOOLEAN NOT NULL DEFAULT FALSE,
+    CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PROJECT_ID BIGINT,
+    START_DATE DATE,
+    DUE_DATE DATE,
+    ASSIGNEE_ID BIGINT,
+    FOREIGN KEY (ASSIGNEE_ID) REFERENCES USER(ID) ON DELETE SET NULL
+);
+```
+
+---
+
+### 3.2 USER
+
+**テーブル名**: USER
+
+| カラム名 | データ型 | NULL | デフォルト | 説明 |
+|---------|----------|------|-----------|------|
+| ID | BIGINT | NO | AUTO_INCREMENT | 主キー（自動採番） |
+| NAME | VARCHAR(100) | NO | - | ユーザー名（必須、一意） |
+| CREATED_AT | TIMESTAMP | NO | CURRENT_TIMESTAMP | 作成日時（自動設定） |
+
+**主キー**: ID
+
+**ユニーク制約**: NAME
+
+#### DDL
+
+```sql
+CREATE TABLE IF NOT EXISTS USER (
+    ID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(100) NOT NULL UNIQUE,
     CREATED_AT TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -65,6 +104,19 @@ CREATE TABLE IF NOT EXISTS TODO (
 | DESCRIPTION | description | String | 任意 |
 | COMPLETED | completed | boolean | プリミティブ型 |
 | CREATED_AT | createdAt | LocalDateTime | camelCase変換 |
+| PROJECT_ID | projectId | Long | 任意 |
+| START_DATE | startDate | LocalDate | 任意 |
+| DUE_DATE | dueDate | LocalDate | 任意 |
+| ASSIGNEE_ID | assigneeId | Long | 任意 |
+| (JOIN) | assigneeName | String | USER.NAMEから取得（非永続化） |
+
+### 4.2 User.java
+
+| カラム名 | フィールド名 | Javaの型 | 備考 |
+|---------|-------------|----------|------|
+| ID | id | Long | 主キー |
+| NAME | name | String | 必須、一意 |
+| CREATED_AT | createdAt | LocalDateTime | camelCase変換 |
 
 **マッピング設定**:
 ```properties
@@ -74,6 +126,18 @@ mybatis.configuration.map-underscore-to-camel-case=true
 ---
 
 ## 5. 初期データ
+
+### 5.1 USER初期データ
+
+アプリケーション起動時に3件のユーザーデータが投入される:
+
+| ID | NAME | CREATED_AT |
+|----|------|------------|
+| 1 | 山田太郎 | 起動時刻 |
+| 2 | 鈴木花子 | 起動時刻 |
+| 3 | 佐藤一郎 | 起動時刻 |
+
+### 5.2 TODO初期データ
 
 アプリケーション起動時に3件のサンプルデータが投入される:
 
@@ -86,13 +150,20 @@ mybatis.configuration.map-underscore-to-camel-case=true
 #### DML（data.sql）
 
 ```sql
+-- USERテーブル初期データ（TODOより先に投入）
+MERGE INTO USER (ID, NAME) KEY(ID) VALUES
+(1, '山田太郎'),
+(2, '鈴木花子'),
+(3, '佐藤一郎');
+
+-- TODOテーブル初期データ
 MERGE INTO TODO (ID, TITLE, DESCRIPTION, COMPLETED) KEY(ID) VALUES
 (1, 'Spring Bootの学習', 'Spring Bootアプリケーションの基本を理解する', FALSE),
 (2, 'ToDoリストの実装', 'REST APIとフロントエンドを実装する', FALSE),
 (3, 'プロジェクトのテスト', '作成したアプリケーションの動作確認', FALSE);
 ```
 
-**補足**: `MERGE INTO ... KEY(ID)` により、既存データがあれば更新、なければ挿入となる。
+**補足**: `MERGE INTO ... KEY(ID)` により、既存データがあれば更新、なければ挿入となる。USERテーブルはTODOより先に投入する必要がある（外部キー制約のため）。
 
 ---
 
@@ -113,6 +184,7 @@ MERGE INTO TODO (ID, TITLE, DESCRIPTION, COMPLETED) KEY(ID) VALUES
 |------|------|
 | HikariCP | Spring Boot標準のコネクションプール |
 | H2ロック機構 | データベースレベルでの整合性保証 |
+| ユーザー名一意制約 | DBレベルでの重複防止 |
 
 ### 6.3 スキーマ管理
 
@@ -156,3 +228,4 @@ MERGE INTO TODO (ID, TITLE, DESCRIPTION, COMPLETED) KEY(ID) VALUES
 |------|----------|----------|
 | 2025-12-22 | 初版作成（インメモリ構造） | 初期構築 |
 | 2025-12-22 | H2 Database移行（テーブル定義追加） | 202512_H2DB移行 |
+| 2025-12-22 | USERテーブル追加、TODOにASSIGNEE_ID追加 | 202512_担当者機能追加 |

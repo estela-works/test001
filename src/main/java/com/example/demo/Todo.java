@@ -15,6 +15,8 @@ public class Todo {
     private Long projectId;
     private LocalDate startDate;
     private LocalDate dueDate;
+    private Long assigneeId;
+    private String assigneeName;
 
     // デフォルトコンストラクタ
     public Todo() {
@@ -94,6 +96,22 @@ public class Todo {
         this.dueDate = dueDate;
     }
 
+    public Long getAssigneeId() {
+        return assigneeId;
+    }
+
+    public void setAssigneeId(Long assigneeId) {
+        this.assigneeId = assigneeId;
+    }
+
+    public String getAssigneeName() {
+        return assigneeName;
+    }
+
+    public void setAssigneeName(String assigneeName) {
+        this.assigneeName = assigneeName;
+    }
+
     @Override
     public String toString() {
         return "Todo{" +
@@ -105,6 +123,8 @@ public class Todo {
                 ", projectId=" + projectId +
                 ", startDate=" + startDate +
                 ", dueDate=" + dueDate +
+                ", assigneeId=" + assigneeId +
+                ", assigneeName='" + assigneeName + '\'' +
                 '}';
     }
 }

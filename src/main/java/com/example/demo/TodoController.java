@@ -19,6 +19,9 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * すべてのToDoアイテムを取得
      * @param completed 完了状態でフィルタリング（オプション）
@@ -76,6 +79,10 @@ public class TodoController {
         if (todo.getTitle() == null || todo.getTitle().trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
+        // 担当者IDが指定されている場合、存在チェック
+        if (todo.getAssigneeId() != null && userService.getUserById(todo.getAssigneeId()) == null) {
+            return ResponseEntity.badRequest().build();
+        }
         try {
             Todo createdTodo = todoService.createTodo(todo);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
@@ -93,6 +100,10 @@ public class TodoController {
     @PutMapping("/{id}")
     public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody Todo todo) {
         if (todo.getTitle() == null || todo.getTitle().trim().isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        // 担当者IDが指定されている場合、存在チェック
+        if (todo.getAssigneeId() != null && userService.getUserById(todo.getAssigneeId()) == null) {
             return ResponseEntity.badRequest().build();
         }
         try {

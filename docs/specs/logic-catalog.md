@@ -21,10 +21,20 @@
 | BL-002 | 作成日時自動設定 | ToDo作成時にDBのCURRENT_TIMESTAMPで自動設定 | TodoMapper.insert (DDL) | 初期構築 |
 | BL-003 | 完了状態トグル | completedフラグを反転させる | TodoService.toggleComplete | 初期構築 |
 | BL-004 | 更新時のcreatedAt保持 | 更新時に作成日時は変更しない | TodoMapper.update | 初期構築 |
+| BL-005 | 担当者名の取得 | ToDoのSELECT時にLEFT JOINでユーザー名を取得 | TodoMapper.selectAll等 | 202512_担当者機能追加 |
+| BL-006 | 担当者名を含む再取得 | ToDo作成/更新後にDBから再取得して担当者名を含める | TodoService.createTodo/updateTodo | 202512_担当者機能追加 |
+
+### 2.2 ユーザー管理ロジック
+
+| ID | ロジック名 | 概要 | 適用箇所 | 追加案件 |
+|----|-----------|------|----------|----------|
+| BL-U01 | ユーザーID自動採番 | ユーザー作成時にAUTO_INCREMENTで連番IDを付与 | UserMapper.insert | 202512_担当者機能追加 |
+| BL-U02 | ユーザー名一意チェック | ユーザー名の重複を検証 | UserService.existsByName | 202512_担当者機能追加 |
+| BL-U03 | ユーザー削除時の担当解除 | ユーザー削除時に関連ToDoの担当者をNULLに設定 | UserController.deleteUser → TodoMapper.clearAssigneeByUserId | 202512_担当者機能追加 |
 
 ---
 
-### 2.2 統計計算ロジック
+### 2.3 統計計算ロジック
 
 | ID | ロジック名 | 概要 | 適用箇所 | 追加案件 |
 |----|-----------|------|----------|----------|
@@ -34,7 +44,7 @@
 
 ---
 
-### 2.3 ソート・フィルタロジック
+### 2.4 ソート・フィルタロジック
 
 | ID | ロジック名 | 概要 | 適用箇所 | 追加案件 |
 |----|-----------|------|----------|----------|
@@ -49,15 +59,29 @@
 
 | メソッド名 | 戻り値 | 概要 | SQL種別 |
 |-----------|--------|------|---------|
-| selectAll() | List\<Todo\> | 全件取得（作成日時順） | SELECT |
-| selectById(Long id) | Todo | ID指定で1件取得 | SELECT |
-| selectByCompleted(boolean completed) | List\<Todo\> | 完了状態で抽出 | SELECT |
-| insert(Todo todo) | void | 新規登録（ID自動採番） | INSERT |
-| update(Todo todo) | void | 更新（createdAt以外） | UPDATE |
+| selectAll() | List\<Todo\> | 全件取得（作成日時順）、担当者名をJOINで取得 | SELECT |
+| selectById(Long id) | Todo | ID指定で1件取得、担当者名をJOINで取得 | SELECT |
+| selectByCompleted(boolean completed) | List\<Todo\> | 完了状態で抽出、担当者名をJOINで取得 | SELECT |
+| selectByProjectId(Long projectId) | List\<Todo\> | プロジェクトIDで抽出 | SELECT |
+| selectByProjectIdIsNull() | List\<Todo\> | 未分類のToDoを取得 | SELECT |
+| insert(Todo todo) | void | 新規登録（ID自動採番、assigneeId含む） | INSERT |
+| update(Todo todo) | void | 更新（assigneeId含む、createdAt以外） | UPDATE |
 | deleteById(Long id) | void | ID指定で削除 | DELETE |
 | deleteAll() | void | 全件削除 | DELETE |
 | count() | int | 総件数取得 | SELECT |
 | countByCompleted(boolean completed) | int | 完了/未完了件数取得 | SELECT |
+| clearAssigneeByUserId(Long userId) | void | 指定ユーザーIDの担当をNULLに設定 | UPDATE |
+
+### 3.2 UserMapper
+
+| メソッド名 | 戻り値 | 概要 | SQL種別 |
+|-----------|--------|------|---------|
+| selectAll() | List\<User\> | 全件取得（作成日時順） | SELECT |
+| selectById(Long id) | User | ID指定で1件取得 | SELECT |
+| selectByName(String name) | User | 名前指定で1件取得 | SELECT |
+| insert(User user) | void | 新規登録（ID自動採番） | INSERT |
+| deleteById(Long id) | void | ID指定で削除 | DELETE |
+| count() | int | 総件数取得 | SELECT |
 
 ---
 
@@ -67,6 +91,10 @@
 |----|------|--------|-----------|-----------------|----------|----------|
 | VL-001 | title | 必須チェック | null または 空文字 | 400 Bad Request | TodoController.createTodo | 初期構築 |
 | VL-002 | title | 必須チェック | null または 空文字 | 400 Bad Request | TodoController.updateTodo | 初期構築 |
+| VL-003 | assigneeId | 存在チェック | 指定IDのユーザーが存在しない | 400 Bad Request | TodoController.createTodo/updateTodo | 202512_担当者機能追加 |
+| VL-U01 | name | 必須チェック | null または 空文字 または 空白のみ | 400 Bad Request | UserController.createUser | 202512_担当者機能追加 |
+| VL-U02 | name | 長さチェック | 100文字超過 | 400 Bad Request | UserController.createUser | 202512_担当者機能追加 |
+| VL-U03 | name | 一意チェック | 同名ユーザーが存在 | 409 Conflict | UserController.createUser | 202512_担当者機能追加 |
 
 ---
 
@@ -146,14 +174,26 @@ SELECT * FROM TODO ORDER BY CREATED_AT ASC
 | getAllTodos() | List\<Todo\> | 全件取得 | selectAll() |
 | getTodoById(Long id) | Todo | ID指定取得 | selectById() |
 | getTodosByCompleted(boolean completed) | List\<Todo\> | 完了状態フィルタ | selectByCompleted() |
-| createTodo(Todo todo) | Todo | 新規作成 | insert() |
-| updateTodo(Long id, Todo todo) | Todo | 更新 | selectById(), update() |
+| getTodosByProjectId(Long projectId) | List\<Todo\> | プロジェクトIDフィルタ | selectByProjectId() / selectByProjectIdIsNull() |
+| createTodo(Todo todo) | Todo | 新規作成（担当者名含む再取得） | insert(), selectById() |
+| updateTodo(Long id, Todo todo) | Todo | 更新（担当者名含む再取得） | selectById(), update(), selectById() |
 | toggleComplete(Long id) | Todo | 完了切替 | selectById(), update() |
 | deleteTodo(Long id) | Todo | 削除 | selectById(), deleteById() |
 | deleteAllTodos() | void | 全件削除 | deleteAll() |
 | getTotalCount() | int | 総数取得 | count() |
 | getCompletedCount() | int | 完了数取得 | countByCompleted(true) |
 | getPendingCount() | int | 未完了数取得 | (計算ロジック) |
+
+### 6.2 UserService
+
+| メソッド名 | 戻り値 | 概要 | 呼び出すMapper |
+|-----------|--------|------|---------------|
+| getAllUsers() | List\<User\> | 全件取得 | selectAll() |
+| getUserById(Long id) | User | ID指定取得 | selectById() |
+| createUser(User user) | User | 新規作成 | insert() |
+| deleteUser(Long id) | User | 削除 | selectById(), deleteById() |
+| existsByName(String name) | boolean | 名前重複チェック | selectByName() |
+| getCount() | int | 総数取得 | count() |
 
 ---
 
@@ -163,3 +203,4 @@ SELECT * FROM TODO ORDER BY CREATED_AT ASC
 |------|----------|----------|
 | 2025-12-22 | 初版作成 | 初期構築 |
 | 2025-12-22 | Mapper層追加、ロジックをDB処理に変更 | 202512_H2DB移行 |
+| 2025-12-22 | UserMapper/UserService追加、担当者関連ロジック追加 | 202512_担当者機能追加 |
