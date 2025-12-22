@@ -1,0 +1,24 @@
+# Compiled class files
+target/
+
+# Log files
+*.log
+
+# IDE
+.idea/
+*.iml
+.vscode/
+!.vscode/settings.json
+!.vscode/launch.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Claude Code
+.claude/

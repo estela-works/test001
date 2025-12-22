@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoリスト - Spring Boot App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .stats {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats span {
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        .add-todo {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .add-todo input, .add-todo textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .add-todo button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .add-todo button:hover {
+            background-color: #0056b3;
+        }
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .filter-buttons button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            border: 1px solid #007bff;
+            background-color: white;
+            color: #007bff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .filter-buttons button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        .todo-item {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .todo-item.completed {
+            background-color: #f8f9fa;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        .todo-item h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+        }
+        .todo-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .todo-item .actions {
+            margin-top: 10px;
+        }
+        .todo-item button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .toggle-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .toggle-btn:hover {
+            background-color: #218838;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .loading {
+            text-align: center;
+            color: #666;
+        }
+        .error {
+            color: #dc3545;
+            text-align: center;
+            padding: 10px;
+            background-color: #f8d7da;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 ToDoリスト</h1>
+        
+        <div class="stats" id="stats">
+            <span>総数: <span id="total-count">0</span></span>
+            <span>完了: <span id="completed-count">0</span></span>
+            <span>未完了: <span id="pending-count">0</span></span>
+        </div>
+
+        <div class="add-todo">
+            <h3>新しいToDoを追加</h3>
+            <input type="text" id="title-input" placeholder="タイトルを入力してください" required>
+            <textarea id="description-input" rows="3" placeholder="説明を入力してください（オプション）"></textarea>
+            <button onclick="addTodo()">追加</button>
+        </div>
+
+        <div class="filter-buttons">
+            <button id="all-btn" class="active" onclick="showAll()">すべて</button>
+            <button id="pending-btn" onclick="showPending()">未完了</button>
+            <button id="completed-btn" onclick="showCompleted()">完了済み</button>
+        </div>
+
+        <div id="error-message" class="error" style="display: none;"></div>
+        <div id="loading" class="loading">読み込み中...</div>
+        <div id="todo-list"></div>
+        
+        <div class="back-link">
+            <a href="/">← ホームに戻る</a>
+        </div>
+    </div>
+
+    <script>
+        let todos = [];
+        let currentFilter = 'all';
+
+        // ページ読み込み時にToDoリストを取得
+        window.onload = function() {
+            loadTodos();
+            loadStats();
+        };
+
+        // エラーメッセージを表示
+        function showError(message) {
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // ToDoリストを取得
+        async function loadTodos() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                const response = await fetch('/api/todos');
+                if (response.ok) {
+                    todos = await response.json();
+                    displayTodos();
+                } else {
+                    showError('ToDoリストの読み込みに失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // 統計情報を取得
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/todos/stats');
+                if (response.ok) {
+                    const stats = await response.json();
+                    document.getElementById('total-count').textContent = stats.total;
+                    document.getElementById('completed-count').textContent = stats.completed;
+                    document.getElementById('pending-count').textContent = stats.pending;
+                }
+            } catch (error) {
+                console.error('統計情報の取得に失敗しました:', error);
+            }
+        }
+
+        // ToDoリストを表示
+        function displayTodos() {
+            const todoList = document.getElementById('todo-list');
+            let filteredTodos = todos;
+
+            if (currentFilter === 'pending') {
+                filteredTodos = todos.filter(todo => !todo.completed);
+            } else if (currentFilter === 'completed') {
+                filteredTodos = todos.filter(todo => todo.completed);
+            }
+
+            if (filteredTodos.length === 0) {
+                todoList.innerHTML = '<p style="text-align: center; color: #666;">ToDoアイテムがありません。</p>';
+                return;
+            }
+
+            todoList.innerHTML = filteredTodos.map(todo => `
+                <div class="todo-item ${todo.completed ? 'completed' : ''}">
+                    <h3>${todo.title}</h3>
+                    <p>${todo.description || ''}</p>
+                    <p><small>作成日: ${new Date(todo.createdAt).toLocaleString('ja-JP')}</small></p>
+                    <div class="actions">
+                        <button class="toggle-btn" onclick="toggleTodo(${todo.id})">
+                            ${todo.completed ? '未完了にする' : '完了にする'}
+                        </button>
+                        <button class="delete-btn" onclick="deleteTodo(${todo.id})">削除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 新しいToDoを追加
+        async function addTodo() {
+            const title = document.getElementById('title-input').value.trim();
+            const description = document.getElementById('description-input').value.trim();
+
+            if (!title) {
+                showError('タイトルを入力してください。');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/todos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        description: description
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('title-input').value = '';
+                    document.getElementById('description-input').value = '';
+                    await loadTodos();
+                    await loadStats();
+                } else {
+                    showError('ToDoの追加に失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            }
+        }
+
+        // ToDoの完了状態を切り替え
+        async function toggleTodo(id) {
+            try {
+                const response = await fetch(`/api/todos/${id}/toggle`, {
+                    method: 'PATCH'
+                });
+
+                if (response.ok) {
+                    await loadTodos();
+                    await loadStats();
+                } else {
+                    showError('ToDoの更新に失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            }
+        }
+
+        // ToDoを削除
+        async function deleteTodo(id) {
+            if (!confirm('このToDoを削除しますか？')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/todos/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    await loadTodos();
+                    await loadStats();
+                } else {
+                    showError('ToDoの削除に失敗しました。');
+                }
+            } catch (error) {
+                showError('ネットワークエラーが発生しました。');
+            }
+        }
+
+        // フィルタボタンの状態を更新
+        function updateFilterButtons(activeFilter) {
+            document.getElementById('all-btn').classList.remove('active');
+            document.getElementById('pending-btn').classList.remove('active');
+            document.getElementById('completed-btn').classList.remove('active');
+            document.getElementById(`${activeFilter}-btn`).classList.add('active');
+        }
+
+        // すべてのToDoを表示
+        function showAll() {
+            currentFilter = 'all';
+            updateFilterButtons('all');
+            displayTodos();
+        }
+
+        // 未完了のToDoを表示
+        function showPending() {
+            currentFilter = 'pending';
+            updateFilterButtons('pending');
+            displayTodos();
+        }
+
+        // 完了済みのToDoを表示
+        function showCompleted() {
+            currentFilter = 'completed';
+            updateFilterButtons('completed');
+            displayTodos();
+        }
+
+        // Enterキーでの追加をサポート
+        document.getElementById('title-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+    </script>
+</body>
+</html>
