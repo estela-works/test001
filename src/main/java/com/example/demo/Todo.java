@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -11,6 +12,9 @@ public class Todo {
     private String description;
     private boolean completed;
     private LocalDateTime createdAt;
+    private Long projectId;
+    private LocalDate startDate;
+    private LocalDate dueDate;
 
     // デフォルトコンストラクタ
     public Todo() {
@@ -66,6 +70,30 @@ public class Todo {
         this.createdAt = createdAt;
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
     @Override
     public String toString() {
         return "Todo{" +
@@ -74,6 +102,9 @@ public class Todo {
                 ", description='" + description + '\'' +
                 ", completed=" + completed +
                 ", createdAt=" + createdAt +
+                ", projectId=" + projectId +
+                ", startDate=" + startDate +
+                ", dueDate=" + dueDate +
                 '}';
     }
 }

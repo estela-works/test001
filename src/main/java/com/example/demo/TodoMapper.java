@@ -53,4 +53,29 @@ public interface TodoMapper {
      * 完了状態別件数取得
      */
     int countByCompleted(boolean completed);
+
+    /**
+     * 案件ID指定取得
+     */
+    List<Todo> selectByProjectId(Long projectId);
+
+    /**
+     * 案件未設定のチケット取得
+     */
+    List<Todo> selectByProjectIdIsNull();
+
+    /**
+     * 案件別件数取得
+     */
+    int countByProjectId(Long projectId);
+
+    /**
+     * 案件別完了状態件数取得
+     */
+    int countByProjectIdAndCompleted(Long projectId, boolean completed);
+
+    /**
+     * 案件ID指定削除
+     */
+    void deleteByProjectId(Long projectId);
 }

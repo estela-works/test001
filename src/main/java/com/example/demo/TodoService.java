@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -46,11 +47,24 @@ public class TodoService {
     }
 
     /**
+     * 案件IDでToDoアイテムをフィルタリング取得
+     * @param projectId 案件ID（nullの場合は未分類）
+     * @return フィルタリングされたToDoアイテムのリスト
+     */
+    public List<Todo> getTodosByProjectId(Long projectId) {
+        if (projectId == null) {
+            return todoMapper.selectByProjectIdIsNull();
+        }
+        return todoMapper.selectByProjectId(projectId);
+    }
+
+    /**
      * 新しいToDoアイテムを作成
      * @param todo 作成するToDoアイテム
      * @return 作成されたToDoアイテム
      */
     public Todo createTodo(Todo todo) {
+        validateDateRange(todo.getStartDate(), todo.getDueDate());
         todoMapper.insert(todo);
         return todo;
     }
@@ -64,9 +78,13 @@ public class TodoService {
     public Todo updateTodo(Long id, Todo updatedTodo) {
         Todo existingTodo = todoMapper.selectById(id);
         if (existingTodo != null) {
+            validateDateRange(updatedTodo.getStartDate(), updatedTodo.getDueDate());
             existingTodo.setTitle(updatedTodo.getTitle());
             existingTodo.setDescription(updatedTodo.getDescription());
             existingTodo.setCompleted(updatedTodo.isCompleted());
+            existingTodo.setProjectId(updatedTodo.getProjectId());
+            existingTodo.setStartDate(updatedTodo.getStartDate());
+            existingTodo.setDueDate(updatedTodo.getDueDate());
             todoMapper.update(existingTodo);
             return existingTodo;
         }
@@ -131,5 +149,19 @@ public class TodoService {
      */
     public int getPendingCount() {
         return getTotalCount() - getCompletedCount();
+    }
+
+    /**
+     * 開始日・終了日の整合性をチェック
+     * @param startDate 開始日
+     * @param dueDate 終了日
+     * @throws IllegalArgumentException 終了日が開始日より前の場合
+     */
+    private void validateDateRange(LocalDate startDate, LocalDate dueDate) {
+        if (startDate != null && dueDate != null) {
+            if (dueDate.isBefore(startDate)) {
+                throw new IllegalArgumentException("終了日は開始日以降である必要があります");
+            }
+        }
     }
 }

@@ -22,12 +22,28 @@ public class TodoController {
     /**
      * すべてのToDoアイテムを取得
      * @param completed 完了状態でフィルタリング（オプション）
+     * @param projectId 案件IDでフィルタリング（オプション、"none"で未分類）
      * @return ToDoアイテムのリスト
      */
     @GetMapping
-    public ResponseEntity<List<Todo>> getAllTodos(@RequestParam(required = false) Boolean completed) {
+    public ResponseEntity<List<Todo>> getAllTodos(
+            @RequestParam(required = false) Boolean completed,
+            @RequestParam(required = false) String projectId) {
         List<Todo> todos;
-        if (completed != null) {
+
+        // projectIdパラメータが指定されている場合
+        if (projectId != null) {
+            if ("none".equals(projectId)) {
+                todos = todoService.getTodosByProjectId(null);
+            } else {
+                try {
+                    Long projectIdLong = Long.parseLong(projectId);
+                    todos = todoService.getTodosByProjectId(projectIdLong);
+                } catch (NumberFormatException e) {
+                    return ResponseEntity.badRequest().build();
+                }
+            }
+        } else if (completed != null) {
             todos = todoService.getTodosByCompleted(completed);
         } else {
             todos = todoService.getAllTodos();

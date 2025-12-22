@@ -12,7 +12,10 @@
             TITLE,
             DESCRIPTION,
             COMPLETED,
-            CREATED_AT
+            CREATED_AT,
+            PROJECT_ID,
+            START_DATE,
+            DUE_DATE
         FROM
             TODO
         ORDER BY
@@ -26,7 +29,10 @@
             TITLE,
             DESCRIPTION,
             COMPLETED,
-            CREATED_AT
+            CREATED_AT,
+            PROJECT_ID,
+            START_DATE,
+            DUE_DATE
         FROM
             TODO
         WHERE
@@ -40,7 +46,10 @@
             TITLE,
             DESCRIPTION,
             COMPLETED,
-            CREATED_AT
+            CREATED_AT,
+            PROJECT_ID,
+            START_DATE,
+            DUE_DATE
         FROM
             TODO
         WHERE
@@ -55,12 +64,18 @@
             TITLE,
             DESCRIPTION,
             COMPLETED,
-            CREATED_AT
+            CREATED_AT,
+            PROJECT_ID,
+            START_DATE,
+            DUE_DATE
         ) VALUES (
             #{title},
             #{description},
             #{completed},
-            #{createdAt}
+            #{createdAt},
+            #{projectId},
+            #{startDate},
+            #{dueDate}
         )
     </insert>
 
@@ -70,7 +85,10 @@
         SET
             TITLE = #{title},
             DESCRIPTION = #{description},
-            COMPLETED = #{completed}
+            COMPLETED = #{completed},
+            PROJECT_ID = #{projectId},
+            START_DATE = #{startDate},
+            DUE_DATE = #{dueDate}
         WHERE
             ID = #{id}
     </update>
@@ -97,5 +115,64 @@
         FROM TODO
         WHERE COMPLETED = #{completed}
     </select>
+
+    <!-- Q-T01: 案件ID指定取得 -->
+    <select id="selectByProjectId" resultType="com.example.demo.Todo">
+        SELECT
+            ID,
+            TITLE,
+            DESCRIPTION,
+            COMPLETED,
+            CREATED_AT,
+            PROJECT_ID,
+            START_DATE,
+            DUE_DATE
+        FROM
+            TODO
+        WHERE
+            PROJECT_ID = #{projectId}
+        ORDER BY
+            CREATED_AT DESC
+    </select>
+
+    <!-- Q-T02: 案件未設定のチケット取得 -->
+    <select id="selectByProjectIdIsNull" resultType="com.example.demo.Todo">
+        SELECT
+            ID,
+            TITLE,
+            DESCRIPTION,
+            COMPLETED,
+            CREATED_AT,
+            PROJECT_ID,
+            START_DATE,
+            DUE_DATE
+        FROM
+            TODO
+        WHERE
+            PROJECT_ID IS NULL
+        ORDER BY
+            CREATED_AT DESC
+    </select>
+
+    <!-- Q-T03: 案件別件数 -->
+    <select id="countByProjectId" resultType="int">
+        SELECT COUNT(*)
+        FROM TODO
+        WHERE PROJECT_ID = #{projectId}
+    </select>
+
+    <!-- Q-T04: 案件別完了状態件数 -->
+    <select id="countByProjectIdAndCompleted" resultType="int">
+        SELECT COUNT(*)
+        FROM TODO
+        WHERE PROJECT_ID = #{projectId}
+          AND COMPLETED = #{completed}
+    </select>
+
+    <!-- Q-T05: 案件ID指定削除 -->
+    <delete id="deleteByProjectId">
+        DELETE FROM TODO
+        WHERE PROJECT_ID = #{projectId}
+    </delete>
 
 </mapper>
