@@ -15,16 +15,24 @@
 
 ### 1.1 本設計書の目的
 
-H2 Database移行に伴うバックエンドの変更内容を定義する。ConcurrentHashMapによるインメモリ管理からH2 Database + Spring Data JPAへの移行に必要な機能・データ・構成の変更を明確にする。
+H2 Database移行に伴うバックエンドの変更内容を定義する。ConcurrentHashMapによるインメモリ管理からH2 Database + MyBatisへの移行に必要な機能・データ・構成の変更を明確にする。
 
 ### 1.2 バックエンドの役割
 
 | 責務 | 現状 | 移行後 |
 |------|------|--------|
 | データ管理 | ConcurrentHashMapでメモリ上に保持 | H2 Databaseでファイルに永続化 |
-| ビジネスロジック | TodoServiceで実装 | 変更なし（Repositoryへ委譲） |
+| データアクセス | Serviceクラス内で直接操作 | MyBatis Mapperで手書きSQL実行 |
+| ビジネスロジック | TodoServiceで実装 | 変更なし（Mapperへ委譲） |
 | API提供 | REST API（TodoController） | 変更なし |
 | バリデーション | Controllerで必須チェック | 変更なし |
+
+### 1.3 技術選定理由
+
+| 技術 | 選定理由 |
+|------|---------|
+| MyBatis | SQLを完全制御可能、手書きSQLによる明示的なDB操作 |
+| H2 Database | 軽量な組み込みDB、開発環境に最適 |
 
 ---
 
@@ -35,20 +43,23 @@ H2 Database移行に伴うバックエンドの変更内容を定義する。Con
 | ID | 機能名 | 概要 | 対応US |
 |----|--------|------|--------|
 | F-001 | データ永続化 | H2ファイルモードでToDoデータを永続化 | US-001 |
-| F-002 | JPA Repository | Spring Data JPAによるデータアクセス層追加 | US-002 |
+| F-002 | MyBatis Mapper | 手書きSQLによるデータアクセス層追加 | US-002 |
 | F-003 | H2 Console | ブラウザからDB操作可能なコンソール提供 | US-002 |
 | F-004 | 初期データ投入 | 空DB時にサンプルToDoを作成 | - |
-| F-005 | 自動スキーマ生成 | Hibernateによるテーブル自動作成 | US-003 |
+| F-005 | スキーマ管理 | schema.sqlによるテーブル定義 | US-003 |
 
 ### 2.2 変更対象コンポーネント
 
 | コンポーネント | 変更内容 |
 |---------------|---------|
-| Todo.java | JPAエンティティ化（@Entity, @Id等のアノテーション追加） |
-| TodoService.java | Repository経由でのデータアクセスに変更 |
-| TodoRepository.java | 新規作成（Spring Data JPA Repository） |
-| application.properties | H2設定追加 |
-| pom.xml | 依存関係追加（spring-boot-starter-data-jpa, h2） |
+| Todo.java | 変更なし（POJOとして継続利用） |
+| TodoService.java | Mapper経由でのデータアクセスに変更 |
+| TodoMapper.java | 新規作成（MyBatis Mapperインターフェース） |
+| TodoMapper.xml | 新規作成（SQL定義ファイル） |
+| application.properties | H2・MyBatis設定追加 |
+| pom.xml | 依存関係追加（mybatis-spring-boot-starter, h2） |
+| schema.sql | 新規作成（テーブル定義DDL） |
+| data.sql | 新規作成（初期データDML） |
 
 ### 2.3 変更なしコンポーネント
 
@@ -68,9 +79,11 @@ H2 Database移行に伴うバックエンドの変更内容を定義する。Con
 |---------|------|------|--------|
 | ToDo | タスク情報 | ConcurrentHashMap | H2 Databaseテーブル |
 
-### 3.2 エンティティ（変更後）
+### 3.2 エンティティ（変更なし）
 
 #### Todo
+
+Todo.javaはPOJOとして変更なしで継続利用する。
 
 | 属性 | 型 | 必須 | DBカラム | 説明 |
 |------|-----|------|----------|------|
@@ -82,8 +95,10 @@ H2 Database移行に伴うバックエンドの変更内容を定義する。Con
 
 ### 3.3 テーブル定義
 
+schema.sqlで定義する。
+
 ```sql
-CREATE TABLE TODO (
+CREATE TABLE IF NOT EXISTS TODO (
     ID BIGINT AUTO_INCREMENT PRIMARY KEY,
     TITLE VARCHAR(255) NOT NULL,
     DESCRIPTION VARCHAR(1000),
@@ -91,8 +106,6 @@ CREATE TABLE TODO (
     CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
-
-※ Hibernateのddl-auto設定により自動生成される
 
 ---
 
@@ -152,8 +165,9 @@ CREATE TABLE TODO (
 | spring.datasource.driver-class-name | org.h2.Driver | JDBCドライバ |
 | spring.datasource.username | sa | DBユーザー名 |
 | spring.datasource.password | (空) | DBパスワード |
-| spring.jpa.database-platform | org.hibernate.dialect.H2Dialect | Hibernate方言 |
-| spring.jpa.hibernate.ddl-auto | update | スキーマ自動更新 |
+| spring.sql.init.mode | always | 起動時にschema.sql/data.sql実行 |
+| mybatis.mapper-locations | classpath:mapper/*.xml | Mapper XMLの場所 |
+| mybatis.configuration.map-underscore-to-camel-case | true | スネークケース→キャメルケース変換 |
 | spring.h2.console.enabled | true | H2 Console有効化 |
 | spring.h2.console.path | /h2-console | コンソールパス |
 
@@ -161,7 +175,7 @@ CREATE TABLE TODO (
 
 | 依存関係 | 用途 |
 |---------|------|
-| spring-boot-starter-data-jpa | JPA/Hibernateサポート |
+| mybatis-spring-boot-starter | MyBatisサポート |
 | com.h2database:h2 | H2 Database |
 
 ---
@@ -173,7 +187,7 @@ CREATE TABLE TODO (
 | 項目 | 要件 | 備考 |
 |------|------|------|
 | API応答時間 | 現状維持（1秒以内） | H2組み込みのため遅延なし |
-| 同時アクセス | 複数リクエストの安全な処理 | JPAのトランザクション管理で対応 |
+| 同時アクセス | 複数リクエストの安全な処理 | Spring管理のコネクションプールで対応 |
 
 ### 6.2 セキュリティ要件
 
@@ -181,6 +195,7 @@ CREATE TABLE TODO (
 |------|------|
 | 認証 | なし（開発環境） |
 | H2 Console | ローカルアクセスのみ許可 |
+| SQLインジェクション | MyBatisのパラメータバインディング（#{param}）で防止 |
 | 入力バリデーション | 既存のtitle必須チェック維持 |
 
 ---
@@ -190,7 +205,8 @@ CREATE TABLE TODO (
 | 項目 | 制約 |
 |------|------|
 | データベース | H2 Database（ファイルモード） |
-| ORM | Spring Data JPA (Hibernate) |
+| O/Rマッパー | MyBatis |
+| SQL管理 | XMLファイルで手書き |
 | データ保存先 | ./data/tododb |
 | JDKバージョン | 21 |
 | Spring Bootバージョン | 3.2.0 |
@@ -208,13 +224,16 @@ CREATE TABLE TODO (
                       ▼
 ┌─────────────────────────────────────────────┐
 │          TodoService (ビジネスロジック)       │
-│     ※ConcurrentHashMap → Repository        │
+│     ※ConcurrentHashMap → Mapper呼び出し     │
 └─────────────────────────────────────────────┘
                       │
                       ▼
 ┌─────────────────────────────────────────────┐
-│      TodoRepository (Spring Data JPA)       │
+│          TodoMapper (MyBatis Mapper)         │
 │             ※新規追加                        │
+├─────────────────────────────────────────────┤
+│          TodoMapper.xml (SQL定義)            │
+│             ※新規追加（手書きSQL）            │
 └─────────────────────────────────────────────┘
                       │
                       ▼
@@ -226,8 +245,30 @@ CREATE TABLE TODO (
 
 ---
 
+## 9. ファイル構成（移行後）
+
+```
+src/main/
+├── java/com/example/demo/
+│   ├── SimpleSpringApplication.java  # 変更なし
+│   ├── HelloController.java          # 変更なし
+│   ├── TodoController.java           # 変更なし
+│   ├── TodoService.java              # Mapper利用に変更
+│   ├── Todo.java                     # 変更なし
+│   └── TodoMapper.java               # 新規追加
+└── resources/
+    ├── application.properties        # 設定追加
+    ├── schema.sql                    # 新規追加（DDL）
+    ├── data.sql                      # 新規追加（初期データ）
+    └── mapper/
+        └── TodoMapper.xml            # 新規追加（SQL定義）
+```
+
+---
+
 ## 改版履歴
 
 | 版数 | 日付 | 変更内容 | 変更者 |
 |------|------|----------|--------|
 | 1.0 | 2025-12-22 | 初版作成 | - |
+| 2.0 | 2025-12-22 | Spring Data JPA → MyBatis方式に変更 | - |

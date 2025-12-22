@@ -1,27 +1,22 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
+import java.util.List;
 
 /**
  * ToDoアイテムの管理を担当するサービスクラス
- * メモリ内でToDoアイテムを管理します（簡単な実装のため）
+ * H2 DatabaseとMyBatisを使用してデータを永続化します
  */
 @Service
 public class TodoService {
-    
-    private final Map<Long, Todo> todos = new ConcurrentHashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
 
-    public TodoService() {
-        // サンプルデータの追加
-        createTodo(new Todo("Spring Bootの学習", "Spring Bootアプリケーションの基本を理解する"));
-        createTodo(new Todo("ToDoリストの実装", "REST APIとフロントエンドを実装する"));
-        createTodo(new Todo("プロジェクトのテスト", "作成したアプリケーションの動作確認"));
+    private final TodoMapper todoMapper;
+
+    @Autowired
+    public TodoService(TodoMapper todoMapper) {
+        this.todoMapper = todoMapper;
     }
 
     /**
@@ -29,9 +24,7 @@ public class TodoService {
      * @return ToDoアイテムのリスト
      */
     public List<Todo> getAllTodos() {
-        return new ArrayList<>(todos.values()).stream()
-                .sorted(Comparator.comparing(Todo::getCreatedAt))
-                .collect(Collectors.toList());
+        return todoMapper.selectAll();
     }
 
     /**
@@ -40,10 +33,7 @@ public class TodoService {
      * @return フィルタリングされたToDoアイテムのリスト
      */
     public List<Todo> getTodosByCompleted(boolean completed) {
-        return todos.values().stream()
-                .filter(todo -> todo.isCompleted() == completed)
-                .sorted(Comparator.comparing(Todo::getCreatedAt))
-                .collect(Collectors.toList());
+        return todoMapper.selectByCompleted(completed);
     }
 
     /**
@@ -52,7 +42,7 @@ public class TodoService {
      * @return ToDoアイテム（見つからない場合はnull）
      */
     public Todo getTodoById(Long id) {
-        return todos.get(id);
+        return todoMapper.selectById(id);
     }
 
     /**
@@ -61,9 +51,7 @@ public class TodoService {
      * @return 作成されたToDoアイテム
      */
     public Todo createTodo(Todo todo) {
-        Long id = idGenerator.getAndIncrement();
-        todo.setId(id);
-        todos.put(id, todo);
+        todoMapper.insert(todo);
         return todo;
     }
 
@@ -74,11 +62,12 @@ public class TodoService {
      * @return 更新されたToDoアイテム（見つからない場合はnull）
      */
     public Todo updateTodo(Long id, Todo updatedTodo) {
-        Todo existingTodo = todos.get(id);
+        Todo existingTodo = todoMapper.selectById(id);
         if (existingTodo != null) {
             existingTodo.setTitle(updatedTodo.getTitle());
             existingTodo.setDescription(updatedTodo.getDescription());
             existingTodo.setCompleted(updatedTodo.isCompleted());
+            todoMapper.update(existingTodo);
             return existingTodo;
         }
         return null;
@@ -90,9 +79,10 @@ public class TodoService {
      * @return 更新されたToDoアイテム（見つからない場合はnull）
      */
     public Todo toggleComplete(Long id) {
-        Todo todo = todos.get(id);
+        Todo todo = todoMapper.selectById(id);
         if (todo != null) {
             todo.setCompleted(!todo.isCompleted());
+            todoMapper.update(todo);
             return todo;
         }
         return null;
@@ -104,14 +94,19 @@ public class TodoService {
      * @return 削除されたToDoアイテム（見つからない場合はnull）
      */
     public Todo deleteTodo(Long id) {
-        return todos.remove(id);
+        Todo todo = todoMapper.selectById(id);
+        if (todo != null) {
+            todoMapper.deleteById(id);
+            return todo;
+        }
+        return null;
     }
 
     /**
      * すべてのToDoアイテムを削除
      */
     public void deleteAllTodos() {
-        todos.clear();
+        todoMapper.deleteAll();
     }
 
     /**
@@ -119,7 +114,7 @@ public class TodoService {
      * @return ToDoアイテムの総数
      */
     public int getTotalCount() {
-        return todos.size();
+        return todoMapper.count();
     }
 
     /**
@@ -127,9 +122,7 @@ public class TodoService {
      * @return 完了済みのToDoアイテム数
      */
     public int getCompletedCount() {
-        return (int) todos.values().stream()
-                .filter(Todo::isCompleted)
-                .count();
+        return todoMapper.countByCompleted(true);
     }
 
     /**
