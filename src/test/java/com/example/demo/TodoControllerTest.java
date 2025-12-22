@@ -38,6 +38,9 @@ class TodoControllerTest {
     @Autowired
     private TodoMapper todoMapper;
 
+    @Autowired
+    private ProjectMapper projectMapper;
+
     @BeforeEach
     void setUp() {
         // テストデータをクリアして初期データを投入
@@ -316,6 +319,102 @@ class TodoControllerTest {
                 .andExpect(jsonPath("$.total", is(3)))
                 .andExpect(jsonPath("$.completed", is(1)))
                 .andExpect(jsonPath("$.pending", is(2)));
+        }
+    }
+
+    // ========================================
+    // GET /api/todos?projectId テスト（案件フィルタ）
+    // ========================================
+    @Nested
+    @DisplayName("GET /api/todos?projectId")
+    class GetTodosByProjectIdTest {
+
+        @Test
+        @DisplayName("IT-TC-001: projectIdで案件別チケット取得")
+        void getTodos_WithProjectId_ReturnsFilteredTodos() throws Exception {
+            // 案件を作成
+            Project project = new Project("テスト案件", "説明");
+            projectMapper.insert(project);
+
+            // 案件に紐づくチケットを作成
+            Todo todo1 = new Todo("案件タスク1", "説明1");
+            todo1.setProjectId(project.getId());
+            todoMapper.insert(todo1);
+
+            Todo todo2 = new Todo("案件タスク2", "説明2");
+            todo2.setProjectId(project.getId());
+            todoMapper.insert(todo2);
+
+            mockMvc.perform(get("/api/todos")
+                    .param("projectId", project.getId().toString()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[*].projectId", everyItem(is(project.getId().intValue()))));
+        }
+
+        @Test
+        @DisplayName("IT-TC-002: projectId=noneで未分類チケット取得")
+        void getTodos_WithProjectIdNone_ReturnsUnassignedTodos() throws Exception {
+            // 初期データは案件なし（projectId=null）
+            mockMvc.perform(get("/api/todos")
+                    .param("projectId", "none"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(3)));
+        }
+
+        @Test
+        @DisplayName("IT-TC-003: 存在しない案件IDで空配列が返却される")
+        void getTodos_WithNonExistentProjectId_ReturnsEmptyArray() throws Exception {
+            mockMvc.perform(get("/api/todos")
+                    .param("projectId", "999"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(0)));
+        }
+    }
+
+    // ========================================
+    // POST /api/todos 日付バリデーションテスト
+    // ========================================
+    @Nested
+    @DisplayName("POST /api/todos 日付バリデーション")
+    class CreateTodoDateValidationTest {
+
+        @Test
+        @DisplayName("IT-TC-004: dueDate < startDateで400 Bad Requestが返却される")
+        void createTodo_WithInvalidDateRange_Returns400BadRequest() throws Exception {
+            String json = """
+                {
+                    "title": "タスク",
+                    "description": "説明",
+                    "startDate": "2025-01-31",
+                    "dueDate": "2025-01-01"
+                }
+                """;
+
+            mockMvc.perform(post("/api/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isBadRequest());
+        }
+
+        @Test
+        @DisplayName("IT-TC-005: 正常な日付範囲で201 Createdが返却される")
+        void createTodo_WithValidDateRange_Returns201Created() throws Exception {
+            String json = """
+                {
+                    "title": "タスク",
+                    "description": "説明",
+                    "startDate": "2025-01-01",
+                    "dueDate": "2025-01-31"
+                }
+                """;
+
+            mockMvc.perform(post("/api/todos")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(json))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.startDate", is("2025-01-01")))
+                .andExpect(jsonPath("$.dueDate", is("2025-01-31")));
         }
     }
 }

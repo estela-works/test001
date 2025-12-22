@@ -76,8 +76,12 @@ public class TodoController {
         if (todo.getTitle() == null || todo.getTitle().trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        Todo createdTodo = todoService.createTodo(todo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
+        try {
+            Todo createdTodo = todoService.createTodo(todo);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdTodo);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     /**
@@ -91,11 +95,15 @@ public class TodoController {
         if (todo.getTitle() == null || todo.getTitle().trim().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        Todo updatedTodo = todoService.updateTodo(id, todo);
-        if (updatedTodo != null) {
-            return ResponseEntity.ok(updatedTodo);
-        } else {
-            return ResponseEntity.notFound().build();
+        try {
+            Todo updatedTodo = todoService.updateTodo(id, todo);
+            if (updatedTodo != null) {
+                return ResponseEntity.ok(updatedTodo);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 

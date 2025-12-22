@@ -9,9 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * TodoServiceの統合テストクラス
@@ -29,6 +31,9 @@ class TodoServiceTest {
 
     @Autowired
     private TodoMapper todoMapper;
+
+    @Autowired
+    private ProjectMapper projectMapper;
 
     @BeforeEach
     void setUp() {
@@ -539,6 +544,234 @@ class TodoServiceTest {
             int expected = todoService.getTotalCount() - todoService.getCompletedCount();
 
             assertThat(todoService.getPendingCount()).isEqualTo(expected);
+        }
+    }
+
+    // ========================================
+    // getTodosByProjectId() テスト
+    // ========================================
+    @Nested
+    @DisplayName("getTodosByProjectId()")
+    class GetTodosByProjectIdTest {
+
+        @Test
+        @DisplayName("TC-TS-001: 案件IDを指定して該当チケットのみ取得できる")
+        void getTodosByProjectId_WhenExists_ReturnsMatchingTodos() {
+            // 案件を作成
+            Project project = new Project("テスト案件", "説明");
+            projectMapper.insert(project);
+
+            // 案件に紐づくチケットを作成
+            Todo todo1 = new Todo("タスク1", "説明1");
+            todo1.setProjectId(project.getId());
+            todoMapper.insert(todo1);
+
+            Todo todo2 = new Todo("タスク2", "説明2");
+            todo2.setProjectId(project.getId());
+            todoMapper.insert(todo2);
+
+            List<Todo> todos = todoService.getTodosByProjectId(project.getId());
+
+            assertThat(todos).hasSize(2);
+            assertThat(todos).allMatch(t -> t.getProjectId().equals(project.getId()));
+        }
+
+        @Test
+        @DisplayName("TC-TS-002: 案件ID=nullで未分類チケットのみ取得できる")
+        void getTodosByProjectId_WhenNull_ReturnsUnassignedTodos() {
+            // 初期データは案件なし（projectId=null）
+            List<Todo> todos = todoService.getTodosByProjectId(null);
+
+            assertThat(todos).hasSize(3);
+            assertThat(todos).allMatch(t -> t.getProjectId() == null);
+        }
+
+        @Test
+        @DisplayName("TC-TS-003: 存在しない案件IDで空リストが返却される")
+        void getTodosByProjectId_WhenNotExists_ReturnsEmptyList() {
+            List<Todo> todos = todoService.getTodosByProjectId(999L);
+
+            assertThat(todos).isEmpty();
+        }
+    }
+
+    // ========================================
+    // validateDateRange() テスト（createTodo/updateTodo経由）
+    // ========================================
+    @Nested
+    @DisplayName("日付バリデーション")
+    class DateValidationTest {
+
+        @Test
+        @DisplayName("TC-TS-004: 開始日=終了日でバリデーション通過")
+        void validateDateRange_WhenStartEqualsEnd_Passes() {
+            LocalDate date = LocalDate.of(2025, 1, 15);
+            Todo todo = new Todo("タスク", "説明");
+            todo.setStartDate(date);
+            todo.setDueDate(date);
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getStartDate()).isEqualTo(date);
+            assertThat(created.getDueDate()).isEqualTo(date);
+        }
+
+        @Test
+        @DisplayName("TC-TS-005: 開始日<終了日でバリデーション通過")
+        void validateDateRange_WhenStartBeforeEnd_Passes() {
+            Todo todo = new Todo("タスク", "説明");
+            todo.setStartDate(LocalDate.of(2025, 1, 1));
+            todo.setDueDate(LocalDate.of(2025, 1, 31));
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getStartDate()).isEqualTo(LocalDate.of(2025, 1, 1));
+            assertThat(created.getDueDate()).isEqualTo(LocalDate.of(2025, 1, 31));
+        }
+
+        @Test
+        @DisplayName("TC-TS-006: 開始日>終了日でIllegalArgumentException")
+        void validateDateRange_WhenStartAfterEnd_ThrowsException() {
+            Todo todo = new Todo("タスク", "説明");
+            todo.setStartDate(LocalDate.of(2025, 1, 31));
+            todo.setDueDate(LocalDate.of(2025, 1, 1));
+
+            assertThatThrownBy(() -> todoService.createTodo(todo))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("終了日は開始日以降");
+        }
+
+        @Test
+        @DisplayName("TC-TS-007: 開始日のみ設定でバリデーション通過")
+        void validateDateRange_WhenOnlyStartDate_Passes() {
+            Todo todo = new Todo("タスク", "説明");
+            todo.setStartDate(LocalDate.of(2025, 1, 15));
+            todo.setDueDate(null);
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getStartDate()).isEqualTo(LocalDate.of(2025, 1, 15));
+            assertThat(created.getDueDate()).isNull();
+        }
+
+        @Test
+        @DisplayName("TC-TS-008: 終了日のみ設定でバリデーション通過")
+        void validateDateRange_WhenOnlyDueDate_Passes() {
+            Todo todo = new Todo("タスク", "説明");
+            todo.setStartDate(null);
+            todo.setDueDate(LocalDate.of(2025, 1, 31));
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getStartDate()).isNull();
+            assertThat(created.getDueDate()).isEqualTo(LocalDate.of(2025, 1, 31));
+        }
+
+        @Test
+        @DisplayName("TC-TS-009: 両方nullでバリデーション通過")
+        void validateDateRange_WhenBothNull_Passes() {
+            Todo todo = new Todo("タスク", "説明");
+            todo.setStartDate(null);
+            todo.setDueDate(null);
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getStartDate()).isNull();
+            assertThat(created.getDueDate()).isNull();
+        }
+    }
+
+    // ========================================
+    // createTodo() 日付関連テスト
+    // ========================================
+    @Nested
+    @DisplayName("createTodo() 日付関連")
+    class CreateTodoWithDateTest {
+
+        @Test
+        @DisplayName("TC-TS-010: 開始日・終了日を設定してチケット作成")
+        void createTodo_WithDates_CreatesSuccessfully() {
+            Todo todo = new Todo("日付ありタスク", "説明");
+            todo.setStartDate(LocalDate.of(2025, 2, 1));
+            todo.setDueDate(LocalDate.of(2025, 2, 28));
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getId()).isNotNull();
+            assertThat(created.getStartDate()).isEqualTo(LocalDate.of(2025, 2, 1));
+            assertThat(created.getDueDate()).isEqualTo(LocalDate.of(2025, 2, 28));
+        }
+
+        @Test
+        @DisplayName("TC-TS-011: 案件IDを設定してチケット作成")
+        void createTodo_WithProjectId_CreatesSuccessfully() {
+            Project project = new Project("テスト案件", "説明");
+            projectMapper.insert(project);
+
+            Todo todo = new Todo("案件ありタスク", "説明");
+            todo.setProjectId(project.getId());
+
+            Todo created = todoService.createTodo(todo);
+
+            assertThat(created.getId()).isNotNull();
+            assertThat(created.getProjectId()).isEqualTo(project.getId());
+        }
+    }
+
+    // ========================================
+    // updateTodo() 日付関連テスト
+    // ========================================
+    @Nested
+    @DisplayName("updateTodo() 日付関連")
+    class UpdateTodoWithDateTest {
+
+        @Test
+        @DisplayName("TC-TS-012: 日付フィールドを更新できる")
+        void updateTodo_WithDates_UpdatesSuccessfully() {
+            List<Todo> allTodos = todoService.getAllTodos();
+            Long existingId = allTodos.get(0).getId();
+
+            Todo updatedData = new Todo("更新タスク", "説明");
+            updatedData.setStartDate(LocalDate.of(2025, 3, 1));
+            updatedData.setDueDate(LocalDate.of(2025, 3, 31));
+
+            Todo result = todoService.updateTodo(existingId, updatedData);
+
+            assertThat(result.getStartDate()).isEqualTo(LocalDate.of(2025, 3, 1));
+            assertThat(result.getDueDate()).isEqualTo(LocalDate.of(2025, 3, 31));
+        }
+
+        @Test
+        @DisplayName("TC-TS-013: 案件IDを更新できる")
+        void updateTodo_WithProjectId_UpdatesSuccessfully() {
+            Project project = new Project("テスト案件", "説明");
+            projectMapper.insert(project);
+
+            List<Todo> allTodos = todoService.getAllTodos();
+            Long existingId = allTodos.get(0).getId();
+            assertThat(todoService.getTodoById(existingId).getProjectId()).isNull();
+
+            Todo updatedData = new Todo("更新タスク", "説明");
+            updatedData.setProjectId(project.getId());
+
+            Todo result = todoService.updateTodo(existingId, updatedData);
+
+            assertThat(result.getProjectId()).isEqualTo(project.getId());
+        }
+
+        @Test
+        @DisplayName("TC-TS-014: 更新時に不正な日付範囲でエラー")
+        void updateTodo_WithInvalidDateRange_ThrowsException() {
+            List<Todo> allTodos = todoService.getAllTodos();
+            Long existingId = allTodos.get(0).getId();
+
+            Todo updatedData = new Todo("更新タスク", "説明");
+            updatedData.setStartDate(LocalDate.of(2025, 3, 31));
+            updatedData.setDueDate(LocalDate.of(2025, 3, 1));
+
+            assertThatThrownBy(() -> todoService.updateTodo(existingId, updatedData))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("終了日は開始日以降");
         }
     }
 }
