@@ -6,7 +6,8 @@
 
 | 項目 | 内容 |
 |------|------|
-| テストフレームワーク | JUnit 5 + AssertJ + MockMvc |
+| テストフレームワーク | JUnit 5 + AssertJ |
+| APIテストユーティリティ | Spring MockMvc（コントローラ/APIテストに使用） |
 | Mapperテスト | @MybatisTest |
 | 統合テスト | @SpringBootTest |
 | 最終更新日 | 2025-12-22 |
