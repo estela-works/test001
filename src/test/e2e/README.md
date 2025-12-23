@@ -259,3 +259,7 @@ npm run extract-spec:all
 
 1. 各コンポーネントに `data-testid` 属性を追加
 2. ページオブジェクトの `getVueAwareLocator()` を使用してセレクタを切り替え
+
+---
+
+*最終更新: 2025-12-23*

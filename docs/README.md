@@ -14,7 +14,8 @@ docs/
 │   │   ├── detail-design-logic.md          # ロジック詳細設計書
 │   │   ├── detail-design-sql.md            # SQL詳細設計書
 │   │   ├── detail-design-db.md             # DB詳細設計書
-│   │   └── test-spec.md                    # テスト仕様書
+│   │   ├── test-spec-frontend.md            # フロントエンドテスト方針書
+│   │   └── test-spec-backend.md             # バックエンドテスト方針書
 │   └── template/                            # テンプレート
 │       ├── requirements-template.md
 │       ├── basic-design-frontend-template.md
@@ -24,7 +25,8 @@ docs/
 │       ├── detail-design-logic-template.md
 │       ├── detail-design-sql-template.md
 │       ├── detail-design-db-template.md
-│       └── test-spec-template.md
+│       ├── test-spec-frontend-template.md
+│       └── test-spec-backend-template.md
 │
 ├── specs/                                   # 最新仕様ドキュメント
 │   ├── architecture.md                      # アーキテクチャ仕様書
@@ -92,7 +94,8 @@ docs/
 
 | ドキュメント | 目的 |
 |-------------|------|
-| test-spec.md | 追加するテストケース |
+| test-spec-frontend.md | フロントエンドテスト方針 |
+| test-spec-backend.md | バックエンドテスト方針 |
 
 **注意**: 案件の規模や内容に応じて、必要なドキュメントのみ作成する。
 
