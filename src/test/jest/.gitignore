@@ -1,0 +1,12 @@
+# 依存関係
+node_modules/
+
+# 出力ファイル
+output/coverage/*
+output/reports/*
+!output/coverage/README.md
+!output/reports/README.md
+
+# ログ
+*.log
+npm-debug.log*
