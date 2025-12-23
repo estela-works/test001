@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+  {Entity}Mapper XMLテンプレート
+
+  使い方:
+  1. このファイルをコピーして {Entity}Mapper.xml にリネーム
+  2. {Entity} を実際のエンティティ名に置換
+  3. {entity} を小文字のエンティティ名に置換
+  4. {TABLE_NAME} をテーブル名に置換
+  5. カラム名を実際のテーブル定義に合わせて修正
+  6. 必要に応じてクエリを追加・削除
+
+  命名規則:
+  - クエリID: Q-XXX 形式でコメントにIDを記載
+  - 例: Q-001, Q-002, Q-T01（機能追加時）
+-->
+<mapper namespace="com.example.demo.{Entity}Mapper">
+
+    <!-- ========================================
+         ResultMap（必要に応じて定義）
+         ======================================== -->
+
+    <!--
+    <resultMap id="{entity}ResultMap" type="com.example.demo.{Entity}">
+        <id property="id" column="ID"/>
+        <result property="name" column="NAME"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+    </resultMap>
+    -->
+
+    <!-- ========================================
+         取得系クエリ
+         ======================================== -->
+
+    <!-- Q-001: 全件取得（作成日時順） -->
+    <!--
+    <select id="selectAll" resultType="com.example.demo.{Entity}">
+        SELECT
+            ID,
+            NAME,
+            DESCRIPTION,
+            CREATED_AT,
+            UPDATED_AT
+        FROM
+            {TABLE_NAME}
+        ORDER BY
+            CREATED_AT ASC
+    </select>
+    -->
+
+    <!-- Q-002: ID指定取得 -->
+    <!--
+    <select id="selectById" resultType="com.example.demo.{Entity}">
+        SELECT
+            ID,
+            NAME,
+            DESCRIPTION,
+            CREATED_AT,
+            UPDATED_AT
+        FROM
+            {TABLE_NAME}
+        WHERE
+            ID = #{id}
+    </select>
+    -->
+
+    <!-- Q-003: 条件指定取得 -->
+    <!--
+    <select id="selectByStatus" resultType="com.example.demo.{Entity}">
+        SELECT
+            ID,
+            NAME,
+            DESCRIPTION,
+            STATUS,
+            CREATED_AT
+        FROM
+            {TABLE_NAME}
+        WHERE
+            STATUS = #{status}
+        ORDER BY
+            CREATED_AT ASC
+    </select>
+    -->
+
+    <!-- Q-004: 名前指定取得（一意制約チェック用） -->
+    <!--
+    <select id="selectByName" resultType="com.example.demo.{Entity}">
+        SELECT
+            ID,
+            NAME,
+            DESCRIPTION,
+            CREATED_AT
+        FROM
+            {TABLE_NAME}
+        WHERE
+            NAME = #{name}
+    </select>
+    -->
+
+    <!-- ========================================
+         作成・更新・削除クエリ
+         ======================================== -->
+
+    <!-- Q-005: 新規作成 -->
+    <!--
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO {TABLE_NAME} (
+            NAME,
+            DESCRIPTION,
+            CREATED_AT,
+            UPDATED_AT
+        ) VALUES (
+            #{name},
+            #{description},
+            #{createdAt},
+            #{updatedAt}
+        )
+    </insert>
+    -->
+
+    <!-- Q-006: 更新 -->
+    <!--
+    <update id="update">
+        UPDATE {TABLE_NAME}
+        SET
+            NAME = #{name},
+            DESCRIPTION = #{description},
+            UPDATED_AT = #{updatedAt}
+        WHERE
+            ID = #{id}
+    </update>
+    -->
+
+    <!-- Q-007: ID指定削除 -->
+    <!--
+    <delete id="deleteById">
+        DELETE FROM {TABLE_NAME}
+        WHERE ID = #{id}
+    </delete>
+    -->
+
+    <!-- Q-008: 全件削除 -->
+    <!--
+    <delete id="deleteAll">
+        DELETE FROM {TABLE_NAME}
+    </delete>
+    -->
+
+    <!-- ========================================
+         件数取得クエリ
+         ======================================== -->
+
+    <!-- Q-009: 件数取得 -->
+    <!--
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM {TABLE_NAME}
+    </select>
+    -->
+
+    <!-- Q-010: 条件別件数取得 -->
+    <!--
+    <select id="countByStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM {TABLE_NAME}
+        WHERE STATUS = #{status}
+    </select>
+    -->
+
+    <!-- ========================================
+         関連テーブルとのJOINクエリ例
+         ======================================== -->
+
+    <!-- Q-J01: 関連テーブルとのJOIN取得 -->
+    <!--
+    <select id="selectAllWithRelation" resultType="com.example.demo.{Entity}">
+        SELECT
+            E.ID,
+            E.NAME,
+            E.DESCRIPTION,
+            E.PARENT_ID,
+            E.CREATED_AT,
+            P.NAME AS PARENT_NAME
+        FROM
+            {TABLE_NAME} E
+        LEFT JOIN
+            PARENT_TABLE P ON E.PARENT_ID = P.ID
+        ORDER BY
+            E.CREATED_AT ASC
+    </select>
+    -->
+
+    <!-- Q-J02: ID指定で関連データ含む取得 -->
+    <!--
+    <select id="selectByIdWithRelation" resultType="com.example.demo.{Entity}">
+        SELECT
+            E.ID,
+            E.NAME,
+            E.DESCRIPTION,
+            E.PARENT_ID,
+            E.CREATED_AT,
+            P.NAME AS PARENT_NAME
+        FROM
+            {TABLE_NAME} E
+        LEFT JOIN
+            PARENT_TABLE P ON E.PARENT_ID = P.ID
+        WHERE
+            E.ID = #{id}
+    </select>
+    -->
+
+    <!-- ========================================
+         親子関係用クエリ
+         ======================================== -->
+
+    <!-- Q-P01: 親ID指定取得 -->
+    <!--
+    <select id="selectByParentId" resultType="com.example.demo.{Entity}">
+        SELECT
+            ID,
+            NAME,
+            DESCRIPTION,
+            PARENT_ID,
+            CREATED_AT
+        FROM
+            {TABLE_NAME}
+        WHERE
+            PARENT_ID = #{parentId}
+        ORDER BY
+            CREATED_AT ASC
+    </select>
+    -->
+
+    <!-- Q-P02: 親ID指定削除（カスケード削除用） -->
+    <!--
+    <delete id="deleteByParentId">
+        DELETE FROM {TABLE_NAME}
+        WHERE PARENT_ID = #{parentId}
+    </delete>
+    -->
+
+    <!-- Q-P03: 親ID指定件数取得 -->
+    <!--
+    <select id="countByParentId" resultType="int">
+        SELECT COUNT(*)
+        FROM {TABLE_NAME}
+        WHERE PARENT_ID = #{parentId}
+    </select>
+    -->
+
+    <!-- ========================================
+         動的SQLの例
+         ======================================== -->
+
+    <!-- Q-D01: 動的条件での検索 -->
+    <!--
+    <select id="selectByCondition" resultType="com.example.demo.{Entity}">
+        SELECT
+            ID,
+            NAME,
+            DESCRIPTION,
+            STATUS,
+            CREATED_AT
+        FROM
+            {TABLE_NAME}
+        <where>
+            <if test="name != null and name != ''">
+                AND NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="status != null">
+                AND STATUS = #{status}
+            </if>
+            <if test="fromDate != null">
+                AND CREATED_AT >= #{fromDate}
+            </if>
+            <if test="toDate != null">
+                AND CREATED_AT <= #{toDate}
+            </if>
+        </where>
+        ORDER BY
+            CREATED_AT DESC
+    </select>
+    -->
+
+    <!-- Q-D02: 動的更新（null以外のフィールドのみ更新） -->
+    <!--
+    <update id="updateSelective">
+        UPDATE {TABLE_NAME}
+        <set>
+            <if test="name != null">
+                NAME = #{name},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description},
+            </if>
+            UPDATED_AT = #{updatedAt}
+        </set>
+        WHERE
+            ID = #{id}
+    </update>
+    -->
+
+</mapper>

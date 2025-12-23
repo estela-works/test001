@@ -226,7 +226,11 @@ docs/specs/
 ┌─────────────────────────────────────────────────────────────┐
 │                      3. 実装・テスト                         │
 │                                                              │
-│   案件スコープドキュメントに基づいて実装                       │
+│   実装テンプレートを参照して実装                              │
+│   → implementation/IMPLEMENTATION_GUIDE.md                   │
+│                                                              │
+│   テストテンプレートを参照してテスト作成                       │
+│   → testing/TEST_GUIDE.md                                    │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -311,6 +315,32 @@ docs/specs/
 ### 6.2 最新仕様用テンプレート
 
 最新仕様ドキュメントは継続的に更新するため、テンプレートではなく実体ファイルを直接編集する。
+
+### 6.3 実装テンプレート
+
+実装時は以下のテンプレートを参照して、一貫性のあるコードを作成する。
+
+| テンプレート | 用途 | 配置場所 |
+|-------------|------|---------|
+| [EntityTemplate.java](../src/main/java/com/example/demo/template/EntityTemplate.java) | エンティティクラス | Entity層 |
+| [MapperTemplate.java](../src/main/java/com/example/demo/template/MapperTemplate.java) | Mapperインターフェース | Mapper層 |
+| [MapperTemplate.xml](../src/main/resources/mapper/template/MapperTemplate.xml) | Mapper XML | Mapper層 |
+| [ServiceTemplate.java](../src/main/java/com/example/demo/template/ServiceTemplate.java) | Serviceクラス | Service層 |
+| [ControllerTemplate.java](../src/main/java/com/example/demo/template/ControllerTemplate.java) | Controllerクラス | Controller層 |
+
+詳細な使い方は [IMPLEMENTATION_GUIDE.md](implementation/IMPLEMENTATION_GUIDE.md) を参照。
+
+### 6.4 テストテンプレート
+
+テスト作成時は以下のテンプレートを参照して、一貫性のあるテストを作成する。
+
+| テンプレート | 用途 | 配置場所 |
+|-------------|------|---------|
+| [ControllerTestTemplate.java](../src/test/java/com/example/demo/template/ControllerTestTemplate.java) | REST API テスト | Controller層 |
+| [ServiceTestTemplate.java](../src/test/java/com/example/demo/template/ServiceTestTemplate.java) | ビジネスロジックテスト | Service層 |
+| [MapperTestTemplate.java](../src/test/java/com/example/demo/template/MapperTestTemplate.java) | データアクセス層テスト | Mapper層 |
+
+詳細な使い方は [TEST_GUIDE.md](testing/TEST_GUIDE.md) を参照。
 
 ---
 
