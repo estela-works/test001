@@ -34,6 +34,9 @@ docs/
 │   ├── db-schema.md                         # DB構造
 │   └── test-catalog.md                      # テストケース集積
 │
+├── testing/                                 # テストガイド
+│   └── TEST_GUIDE.md                        # テストテンプレート使用ガイド
+│
 ├── document-guide.md                        # ドキュメント体系ガイド
 └── README.md                                # このファイル
 ```
