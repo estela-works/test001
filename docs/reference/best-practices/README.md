@@ -6,4 +6,4 @@
 
 | ドキュメント | 説明 |
 |-------------|------|
-| [frontend-testing-strategies.md](frontend-testing-strategies.md) | フロントエンドテスト戦略 |
+| [frontend-testing-strategies/](frontend-testing-strategies/) | フロントエンドテスト戦略 |

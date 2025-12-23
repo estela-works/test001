@@ -6,7 +6,7 @@
 
 | ファイル | 説明 |
 |----------|------|
-| [backend-test-catalog.md](backend-test-catalog.md) | バックエンドテスト詳細（JUnit 5） |
+| [backend-test-catalog/](backend-test-catalog/) | バックエンドテスト詳細（JUnit 5） |
 | [e2e-test-catalog.md](e2e-test-catalog.md) | E2Eテスト詳細（Playwright） |
 
 ## 関連ドキュメント

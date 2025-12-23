@@ -14,7 +14,10 @@ specs/
 │   └── API-USER-XXX.md      # User API詳細
 ├── logic-catalog.md         # ロジック一覧
 ├── db-schema.md             # DB構造
-├── test-catalog.md          # テストケース集積
+├── test-catalog.md          # テストケース概要
+├── test/                    # テスト詳細仕様
+│   ├── backend-test-catalog.md  # バックエンドテスト詳細
+│   └── e2e-test-catalog.md      # E2Eテスト詳細
 └── screens/                 # 画面一覧・詳細
     ├── index.md             # 画面一覧
     ├── SC-001/              # ホーム画面
@@ -33,7 +36,8 @@ specs/
 | [api/](api/) | API詳細仕様 |
 | [logic-catalog.md](logic-catalog.md) | ビジネスロジック一覧 |
 | [db-schema.md](db-schema.md) | DB構造・テーブル定義 |
-| [test-catalog.md](test-catalog.md) | 全テストケース集積 |
+| [test-catalog.md](test-catalog.md) | テストケース概要 |
+| [test/](test/) | テスト詳細仕様 |
 
 ## 更新タイミング
 

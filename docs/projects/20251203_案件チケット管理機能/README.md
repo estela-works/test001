@@ -14,11 +14,11 @@ ToDoに紐づく案件（プロジェクト）を管理する機能を追加。�
 | [basic-design-frontend.md](basic-design-frontend.md) | フロントエンド基本設計書 |
 | [basic-design-backend.md](basic-design-backend.md) | バックエンド基本設計書 |
 | [detail-design-frontend.md](detail-design-frontend.md) | フロントエンド詳細設計書 |
-| [detail-design-api.md](detail-design-api.md) | API詳細設計書 |
+| [detail-design-api/](detail-design-api/) | API詳細設計書 |
 | [detail-design-logic.md](detail-design-logic.md) | ロジック詳細設計書 |
 | [detail-design-sql.md](detail-design-sql.md) | SQL詳細設計書 |
 | [detail-design-db.md](detail-design-db.md) | DB詳細設計書 |
-| [test-spec.md](test-spec.md) | テスト仕様書 |
+| [test-spec/](test-spec/) | テスト仕様書 |
 
 ## 状態
 

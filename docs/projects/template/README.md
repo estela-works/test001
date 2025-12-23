@@ -41,3 +41,42 @@
 3. 内容を記入
 
 詳細は [ドキュメント体系ガイド](../../document-guide.md) を参照。
+
+---
+
+## ファイル分割ガイド
+
+ドキュメントが400行を超えた場合、可読性向上のためファイル分割を推奨。
+
+### 分割基準
+
+| 行数 | 推奨アクション |
+|------|---------------|
+| 300行未満 | 分割不要 |
+| 300-400行 | 分割検討 |
+| 400行以上 | 分割推奨 |
+
+### 分割方法
+
+1. 元ファイル名でフォルダを作成（例: `test-spec/`）
+2. フォルダ内に `README.md` を配置（目次・概要・改版履歴）
+3. セクションごとにファイルを分割
+4. 各分割ファイルの冒頭に「← 目次に戻る」リンクを追加
+5. 元ファイルを削除
+
+### 分割パターン例
+
+```
+test-spec.md (500行)
+    ↓ 分割
+test-spec/
+├── README.md         # 目次・概要・改版履歴
+├── unit-tests.md     # 単体テスト
+├── integration-tests.md  # 結合テスト
+└── test-metadata.md  # テストデータ・環境
+```
+
+### 既存の分割済みドキュメント
+
+- [frontend-testing-strategies/](../../reference/best-practices/frontend-testing-strategies/)
+- [backend-test-catalog/](../../specs/test/backend-test-catalog/)
