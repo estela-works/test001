@@ -1,0 +1,128 @@
+{
+  "screenId": "SCR-USERS-001",
+  "screenName": "ユーザー管理画面",
+  "url": "/users.html",
+  "elements": {
+    "inputs": [
+      {
+        "id": "nameinput",
+        "selector": "#name-input",
+        "altSelectors": [
+          "[placeholder='ユーザー名を入力してください']"
+        ],
+        "type": "text",
+        "label": "ユーザー名",
+        "placeholder": "ユーザー名を入力してください",
+        "required": true,
+        "vueSelector": "[data-testid='name-input']"
+      }
+    ],
+    "buttons": [
+      {
+        "id": "btnfbap",
+        "selector": "button",
+        "altSelectors": [
+          "button:has-text('追加')"
+        ],
+        "type": "button",
+        "label": "追加",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btn230q",
+        "selector": ".delete-btn",
+        "altSelectors": [
+          "button:has-text('削除')"
+        ],
+        "type": "button",
+        "label": "削除",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btnf55j",
+        "selector": ".delete-btn",
+        "altSelectors": [
+          "button:has-text('削除')"
+        ],
+        "type": "button",
+        "label": "削除",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btnq11t",
+        "selector": ".delete-btn",
+        "altSelectors": [
+          "button:has-text('削除')"
+        ],
+        "type": "button",
+        "label": "削除",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      }
+    ],
+    "dynamicElements": [],
+    "stats": [
+      {
+        "id": "user-count",
+        "selector": "#user-count",
+        "label": "登録ユーザー数: 人",
+        "vueSelector": "[data-testid='user-count']"
+      }
+    ],
+    "messages": [
+      {
+        "id": "error-message",
+        "selector": "#error-message",
+        "type": "error",
+        "vueSelector": "[data-testid='error-message']"
+      },
+      {
+        "id": "loading",
+        "selector": "#loading",
+        "type": "loading",
+        "vueSelector": "[data-testid='loading']"
+      }
+    ],
+    "links": [
+      {
+        "id": "link48oo",
+        "selector": "a[href='/projects.html']",
+        "label": "案件一覧に戻る",
+        "url": "/projects.html",
+        "vueSelector": "[data-testid='link']"
+      }
+    ]
+  },
+  "waitConditions": {
+    "pageLoad": {
+      "selector": "body",
+      "state": "visible"
+    },
+    "loadingComplete": {
+      "selector": "#loading",
+      "state": "hidden"
+    }
+  },
+  "apiEndpoints": {
+    "create": {
+      "method": "POST",
+      "url": "/api/users"
+    },
+    "single": {
+      "method": "POST",
+      "url": "/api/users/{id}"
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-12-23",
+    "sourceHtml": "users.html",
+    "extractedAt": "2025-12-23T05:08:01.306Z",
+    "notes": [
+      "自動抽出により生成",
+      "altSelectors, vueSelector は必要に応じて調整してください"
+    ]
+  }
+}

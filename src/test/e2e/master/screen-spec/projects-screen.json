@@ -1,0 +1,131 @@
+{
+  "screenId": "SCR-PROJECTS-001",
+  "screenName": "案件一覧画面",
+  "url": "/projects.html",
+  "elements": {
+    "inputs": [
+      {
+        "id": "projectnameinput",
+        "selector": "#project-name-input",
+        "altSelectors": [
+          "[placeholder='案件名を入力してください']"
+        ],
+        "type": "text",
+        "label": "案件名",
+        "placeholder": "案件名を入力してください",
+        "required": true,
+        "vueSelector": "[data-testid='project-name-input']"
+      },
+      {
+        "id": "projectdescriptioninput",
+        "selector": "#project-description-input",
+        "altSelectors": [
+          "[placeholder='説明を入力してください（オプション）']"
+        ],
+        "type": "textarea",
+        "label": "説明",
+        "placeholder": "説明を入力してください（オプション）",
+        "required": false,
+        "vueSelector": "[data-testid='project-description-input']"
+      }
+    ],
+    "buttons": [
+      {
+        "id": "addprojectbtn",
+        "selector": "#add-project-btn",
+        "altSelectors": [
+          "button:has-text('作成')"
+        ],
+        "type": "button",
+        "label": "作成",
+        "action": "onclick",
+        "vueSelector": "[data-testid='add-project-btn']"
+      },
+      {
+        "id": "btn3ugq",
+        "selector": ".view-btn",
+        "altSelectors": [
+          "button:has-text('チケット一覧')"
+        ],
+        "type": "button",
+        "label": "チケット一覧",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      }
+    ],
+    "dynamicElements": [],
+    "stats": [
+      {
+        "id": "no-project-total",
+        "selector": "#no-project-total",
+        "label": "チケット: 件 / 完了: 件",
+        "vueSelector": "[data-testid='no-project-total']"
+      },
+      {
+        "id": "no-project-completed",
+        "selector": "#no-project-completed",
+        "label": "チケット: 件 / 完了: 件",
+        "vueSelector": "[data-testid='no-project-completed']"
+      }
+    ],
+    "messages": [
+      {
+        "id": "error-message",
+        "selector": "#error-message",
+        "type": "error",
+        "vueSelector": "[data-testid='error-message']"
+      },
+      {
+        "id": "loading",
+        "selector": "#loading",
+        "type": "loading",
+        "vueSelector": "[data-testid='loading']"
+      }
+    ],
+    "links": [
+      {
+        "id": "linka2qu",
+        "selector": "a[href='/users.html']",
+        "label": "ユーザー管理",
+        "url": "/users.html",
+        "vueSelector": "[data-testid='link']"
+      },
+      {
+        "id": "linke8xt",
+        "selector": "a[href='/']",
+        "label": "ホームに戻る",
+        "url": "/",
+        "vueSelector": "[data-testid='link']"
+      }
+    ]
+  },
+  "waitConditions": {
+    "pageLoad": {
+      "selector": "body",
+      "state": "visible"
+    },
+    "loadingComplete": {
+      "selector": "#loading",
+      "state": "hidden"
+    }
+  },
+  "apiEndpoints": {
+    "create": {
+      "method": "POST",
+      "url": "/api/projects"
+    },
+    "single": {
+      "method": "POST",
+      "url": "/api/projects/{id}"
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-12-23",
+    "sourceHtml": "projects.html",
+    "extractedAt": "2025-12-23T05:08:00.770Z",
+    "notes": [
+      "自動抽出により生成",
+      "altSelectors, vueSelector は必要に応じて調整してください"
+    ]
+  }
+}

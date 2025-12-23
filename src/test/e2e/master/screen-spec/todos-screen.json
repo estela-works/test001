@@ -1,0 +1,278 @@
+{
+  "screenId": "SCR-TODOS-001",
+  "screenName": "ToDo管理画面",
+  "url": "/todos.html",
+  "elements": {
+    "inputs": [
+      {
+        "id": "titleinput",
+        "selector": "#title-input",
+        "altSelectors": [
+          "[placeholder='タイトルを入力してください']"
+        ],
+        "type": "text",
+        "label": "タイトル",
+        "placeholder": "タイトルを入力してください",
+        "required": true,
+        "vueSelector": "[data-testid='title-input']"
+      },
+      {
+        "id": "descriptioninput",
+        "selector": "#description-input",
+        "altSelectors": [
+          "[placeholder='説明を入力してください（オプション）']"
+        ],
+        "type": "textarea",
+        "label": "説明",
+        "placeholder": "説明を入力してください（オプション）",
+        "required": false,
+        "vueSelector": "[data-testid='description-input']"
+      },
+      {
+        "id": "startdateinput",
+        "selector": "#start-date-input",
+        "altSelectors": [],
+        "type": "date",
+        "label": "開始日:",
+        "required": false,
+        "vueSelector": "[data-testid='start-date-input']"
+      },
+      {
+        "id": "duedateinput",
+        "selector": "#due-date-input",
+        "altSelectors": [],
+        "type": "date",
+        "label": "終了日:",
+        "required": false,
+        "vueSelector": "[data-testid='due-date-input']"
+      },
+      {
+        "id": "assigneeinput",
+        "selector": "#assignee-input",
+        "altSelectors": [],
+        "type": "select",
+        "label": "担当者:",
+        "required": false,
+        "vueSelector": "[data-testid='assignee-input']"
+      }
+    ],
+    "buttons": [
+      {
+        "id": "btnbamu",
+        "selector": "button",
+        "altSelectors": [
+          "button:has-text('追加')"
+        ],
+        "type": "button",
+        "label": "追加",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "allbtn",
+        "selector": "#all-btn",
+        "altSelectors": [
+          "button:has-text('すべて')"
+        ],
+        "type": "button",
+        "label": "すべて",
+        "action": "filter",
+        "vueSelector": "[data-testid='all-btn']"
+      },
+      {
+        "id": "pendingbtn",
+        "selector": "#pending-btn",
+        "altSelectors": [
+          "button:has-text('未完了')"
+        ],
+        "type": "button",
+        "label": "未完了",
+        "action": "filter",
+        "vueSelector": "[data-testid='pending-btn']"
+      },
+      {
+        "id": "completedbtn",
+        "selector": "#completed-btn",
+        "altSelectors": [
+          "button:has-text('完了済み')"
+        ],
+        "type": "button",
+        "label": "完了済み",
+        "action": "filter",
+        "vueSelector": "[data-testid='completed-btn']"
+      },
+      {
+        "id": "btn443g",
+        "selector": ".toggle-btn",
+        "altSelectors": [
+          "button:has-text('完了にする')"
+        ],
+        "type": "button",
+        "label": "完了にする",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btn0vp2",
+        "selector": ".delete-btn",
+        "altSelectors": [
+          "button:has-text('削除')"
+        ],
+        "type": "button",
+        "label": "削除",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btn2cgg",
+        "selector": ".toggle-btn",
+        "altSelectors": [
+          "button:has-text('完了にする')"
+        ],
+        "type": "button",
+        "label": "完了にする",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btnt2l4",
+        "selector": ".delete-btn",
+        "altSelectors": [
+          "button:has-text('削除')"
+        ],
+        "type": "button",
+        "label": "削除",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btnrbeg",
+        "selector": ".toggle-btn",
+        "altSelectors": [
+          "button:has-text('完了にする')"
+        ],
+        "type": "button",
+        "label": "完了にする",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      },
+      {
+        "id": "btnmgug",
+        "selector": ".delete-btn",
+        "altSelectors": [
+          "button:has-text('削除')"
+        ],
+        "type": "button",
+        "label": "削除",
+        "action": "onclick",
+        "vueSelector": "[data-testid='-btn']"
+      }
+    ],
+    "dynamicElements": [
+      {
+        "id": "todoitem",
+        "selector": ".todo-item",
+        "type": "list-item",
+        "vueSelector": "[data-testid='todo-item']",
+        "children": {
+          "h3": {
+            "selector": "h3",
+            "vueSelector": "[data-testid='item-h3']"
+          },
+          "p": {
+            "selector": "p",
+            "vueSelector": "[data-testid='item-p']"
+          },
+          "assignee": {
+            "selector": ".assignee",
+            "vueSelector": "[data-testid='item-assignee']"
+          },
+          "togglebtn": {
+            "selector": ".toggle-btn",
+            "vueSelector": "[data-testid='item-toggle-btn']"
+          },
+          "deletebtn": {
+            "selector": ".delete-btn",
+            "vueSelector": "[data-testid='item-delete-btn']"
+          }
+        }
+      }
+    ],
+    "stats": [
+      {
+        "id": "total-count",
+        "selector": "#total-count",
+        "label": "総数:",
+        "vueSelector": "[data-testid='total-count']"
+      },
+      {
+        "id": "completed-count",
+        "selector": "#completed-count",
+        "label": "完了:",
+        "vueSelector": "[data-testid='completed-count']"
+      },
+      {
+        "id": "pending-count",
+        "selector": "#pending-count",
+        "label": "未完了:",
+        "vueSelector": "[data-testid='pending-count']"
+      }
+    ],
+    "messages": [
+      {
+        "id": "error-message",
+        "selector": "#error-message",
+        "type": "error",
+        "vueSelector": "[data-testid='error-message']"
+      },
+      {
+        "id": "loading",
+        "selector": "#loading",
+        "type": "loading",
+        "vueSelector": "[data-testid='loading']"
+      }
+    ],
+    "links": [
+      {
+        "id": "linkrkzk",
+        "selector": "a[href='/projects.html']",
+        "label": "案件一覧に戻る",
+        "url": "/projects.html",
+        "vueSelector": "[data-testid='link']"
+      }
+    ]
+  },
+  "waitConditions": {
+    "pageLoad": {
+      "selector": "body",
+      "state": "visible"
+    },
+    "loadingComplete": {
+      "selector": "#loading",
+      "state": "hidden"
+    },
+    "itemVisible": {
+      "selector": ".todo-item",
+      "state": "visible"
+    }
+  },
+  "apiEndpoints": {
+    "create": {
+      "method": "POST",
+      "url": "/api/todos"
+    },
+    "single": {
+      "method": "POST",
+      "url": "/api/todos/{id}"
+    }
+  },
+  "metadata": {
+    "lastUpdated": "2025-12-23",
+    "sourceHtml": "todos.html",
+    "extractedAt": "2025-12-23T05:08:00.243Z",
+    "notes": [
+      "自動抽出により生成",
+      "altSelectors, vueSelector は必要に応じて調整してください"
+    ]
+  }
+}

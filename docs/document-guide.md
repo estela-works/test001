@@ -61,7 +61,8 @@
 
 | ドキュメント | 目的 | 記載内容 |
 |-------------|------|----------|
-| テスト仕様書 | 追加・変更するテストケースを定義 | テストケース、期待結果、前提条件 |
+| フロントエンドテスト方針書 | フロントエンドのテストケースを定義 | コンポーネントテスト、E2Eテスト、ストア戦略 |
+| バックエンドテスト方針書 | バックエンドのテストケースを定義 | Mapper/Service/Controller層テスト |
 
 ### 3.3 フォルダ構成
 
@@ -76,7 +77,8 @@ docs/projects/
 │   ├── detail-design-logic.md       # ロジック詳細設計書
 │   ├── detail-design-sql.md         # SQL詳細設計書
 │   ├── detail-design-db.md          # DB詳細設計書
-│   └── test-spec.md                 # テスト仕様書
+│   ├── test-spec-frontend.md        # フロントエンドテスト方針書
+│   └── test-spec-backend.md         # バックエンドテスト方針書
 └── template/
     ├── requirements-template.md
     ├── basic-design-frontend-template.md
@@ -86,7 +88,8 @@ docs/projects/
     ├── detail-design-logic-template.md
     ├── detail-design-sql-template.md
     ├── detail-design-db-template.md
-    └── test-spec-template.md
+    ├── test-spec-frontend-template.md
+    └── test-spec-backend-template.md
 ```
 
 **注意**: 案件の規模や内容に応じて、必要なドキュメントのみ作成する。すべてを作成する必要はない。
@@ -114,7 +117,9 @@ docs/projects/
     │     ├─ SQL詳細設計書
     │     └─ DB詳細設計書
     │
-    ├─→ テスト仕様書を作成（何をテストするか）
+    ├─→ テスト方針書を作成（何をテストするか）
+    │     ├─ フロントエンドテスト方針書
+    │     └─ バックエンドテスト方針書
     │
     ▼
 実装・テスト
@@ -354,7 +359,8 @@ docs/reference/
 
 | ドキュメント | テンプレート |
 |-------------|-------------|
-| テスト仕様書 | [test-spec-template.md](projects/template/test-spec-template.md) |
+| フロントエンドテスト方針書 | [test-spec-frontend-template.md](projects/template/test-spec-frontend-template.md) |
+| バックエンドテスト方針書 | [test-spec-backend-template.md](projects/template/test-spec-backend-template.md) |
 
 ### 7.2 最新仕様用テンプレート
 
@@ -398,3 +404,4 @@ docs/reference/
 | 3.0 | 2025-12-22 | 要件整理書を追加、基本設計・詳細設計を細分化 |
 | 3.1 | 2025-12-22 | 画面詳細の階層構造（screen/events/EV-XXX-XX）を追加 |
 | 4.0 | 2025-12-23 | リファレンスドキュメント（技術ノウハウ集）を追加 |
+| 4.1 | 2025-12-23 | テスト仕様書をフロントエンド/バックエンドの2テンプレートに分離 |
