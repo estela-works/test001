@@ -31,7 +31,8 @@ docs/
 ├── specs/                                   # 最新仕様ドキュメント
 │   ├── architecture.md                      # アーキテクチャ仕様書
 │   ├── api-catalog.md                       # API一覧
-│   ├── screen-catalog.md                    # 画面一覧
+│   ├── api/                                 # API詳細仕様
+│   ├── screens/                             # 画面一覧・詳細仕様
 │   ├── logic-catalog.md                     # ロジック一覧
 │   ├── db-schema.md                         # DB構造
 │   └── test-catalog.md                      # テストケース集積
@@ -107,7 +108,7 @@ docs/
 |-------------|------|
 | [architecture.md](specs/architecture.md) | 技術構成・システム構造 |
 | [api-catalog.md](specs/api-catalog.md) | 全APIエンドポイント一覧 |
-| [screen-catalog.md](specs/screen-catalog.md) | 画面一覧・UI仕様 |
+| [screens/](specs/screens/) | 画面一覧・UI仕様 |
 | [logic-catalog.md](specs/logic-catalog.md) | ビジネスロジック一覧 |
 | [db-schema.md](specs/db-schema.md) | DB構造・テーブル定義 |
 | [test-catalog.md](specs/test-catalog.md) | 全テストケース集積 |

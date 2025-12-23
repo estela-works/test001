@@ -8,14 +8,19 @@
 specs/
 ├── architecture.md          # アーキテクチャ仕様書
 ├── api-catalog.md           # API一覧
-├── screen-catalog.md        # 画面一覧
+├── api/                     # API詳細仕様
+│   ├── index.md             # APIインデックス
+│   ├── API-TODO-XXX.md      # Todo API詳細
+│   └── API-USER-XXX.md      # User API詳細
 ├── logic-catalog.md         # ロジック一覧
 ├── db-schema.md             # DB構造
 ├── test-catalog.md          # テストケース集積
-└── screens/                 # 画面詳細
-    ├── index.md             # 画面インデックス
+└── screens/                 # 画面一覧・詳細
+    ├── index.md             # 画面一覧
     ├── SC-001/              # ホーム画面
-    └── SC-002/              # ToDoリスト画面
+    ├── SC-002/              # ToDoリスト画面
+    ├── SC-003/              # プロジェクト画面
+    └── SC-004/              # ユーザー管理画面
 ```
 
 ## ドキュメント一覧
@@ -24,11 +29,11 @@ specs/
 |-------------|------|
 | [architecture.md](architecture.md) | 技術構成・システム構造 |
 | [api-catalog.md](api-catalog.md) | 全APIエンドポイント一覧 |
-| [screen-catalog.md](screen-catalog.md) | 画面一覧・UI仕様 |
+| [screens/](screens/) | 画面一覧・詳細仕様 |
+| [api/](api/) | API詳細仕様 |
 | [logic-catalog.md](logic-catalog.md) | ビジネスロジック一覧 |
 | [db-schema.md](db-schema.md) | DB構造・テーブル定義 |
 | [test-catalog.md](test-catalog.md) | 全テストケース集積 |
-| [screens/](screens/) | 画面詳細仕様 |
 
 ## 更新タイミング
 

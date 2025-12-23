@@ -9,27 +9,35 @@
 | ベースURL | `/api` |
 | 形式 | REST API |
 | コンテンツタイプ | application/json |
-| 最終更新日 | 2025-12-22 |
+| 最終更新日 | 2025-12-23 |
+| 詳細設計 | [api/](api/) フォルダ |
 
 ---
 
 ## 2. エンドポイント一覧
 
-| メソッド | パス | 機能 | レスポンス | 追加案件 |
-|---------|------|------|-----------|----------|
-| GET | /api/todos | 全件取得 | 200 + List | 初期構築 |
-| GET | /api/todos?completed={bool} | フィルタ取得 | 200 + List | 初期構築 |
-| GET | /api/todos/{id} | 単一取得 | 200 or 404 | 初期構築 |
-| GET | /api/todos/stats | 統計取得 | 200 + Map | 初期構築 |
-| POST | /api/todos | 新規作成 | 201 + Todo | 初期構築 |
-| PUT | /api/todos/{id} | 更新 | 200 or 404 | 初期構築 |
-| PATCH | /api/todos/{id}/toggle | 完了切替 | 200 or 404 | 初期構築 |
-| DELETE | /api/todos/{id} | 単一削除 | 204 or 404 | 初期構築 |
-| DELETE | /api/todos | 全件削除 | 204 | 初期構築 |
-| GET | /api/users | ユーザー全件取得 | 200 + List | 202512_担当者機能追加 |
-| GET | /api/users/{id} | ユーザー単一取得 | 200 or 404 | 202512_担当者機能追加 |
-| POST | /api/users | ユーザー新規作成 | 201 or 400 or 409 | 202512_担当者機能追加 |
-| DELETE | /api/users/{id} | ユーザー削除 | 204 or 404 | 202512_担当者機能追加 |
+### 2.1 Todo API
+
+| ID | メソッド | パス | 機能 | レスポンス | 追加案件 | 詳細 |
+|----|---------|------|------|-----------|----------|------|
+| API-TODO-001 | GET | /api/todos | 全件取得 | 200 + List | 初期構築 | [詳細](api/API-TODO-001.md) |
+| API-TODO-002 | GET | /api/todos?completed={bool} | フィルタ取得 | 200 + List | 初期構築 | [詳細](api/API-TODO-002.md) |
+| API-TODO-003 | GET | /api/todos/{id} | 単一取得 | 200 or 404 | 初期構築 | [詳細](api/API-TODO-003.md) |
+| API-TODO-004 | GET | /api/todos/stats | 統計取得 | 200 + Map | 初期構築 | [詳細](api/API-TODO-004.md) |
+| API-TODO-005 | POST | /api/todos | 新規作成 | 201 + Todo | 初期構築 | [詳細](api/API-TODO-005.md) |
+| API-TODO-006 | PUT | /api/todos/{id} | 更新 | 200 or 404 | 初期構築 | [詳細](api/API-TODO-006.md) |
+| API-TODO-007 | PATCH | /api/todos/{id}/toggle | 完了切替 | 200 or 404 | 初期構築 | [詳細](api/API-TODO-007.md) |
+| API-TODO-008 | DELETE | /api/todos/{id} | 単一削除 | 204 or 404 | 初期構築 | [詳細](api/API-TODO-008.md) |
+| API-TODO-009 | DELETE | /api/todos | 全件削除 | 204 | 初期構築 | [詳細](api/API-TODO-009.md) |
+
+### 2.2 User API
+
+| ID | メソッド | パス | 機能 | レスポンス | 追加案件 | 詳細 |
+|----|---------|------|------|-----------|----------|------|
+| API-USER-001 | GET | /api/users | ユーザー全件取得 | 200 + List | 202512_担当者機能追加 | [詳細](api/API-USER-001.md) |
+| API-USER-002 | GET | /api/users/{id} | ユーザー単一取得 | 200 or 404 | 202512_担当者機能追加 | [詳細](api/API-USER-002.md) |
+| API-USER-003 | POST | /api/users | ユーザー新規作成 | 201 or 400 or 409 | 202512_担当者機能追加 | [詳細](api/API-USER-003.md) |
+| API-USER-004 | DELETE | /api/users/{id} | ユーザー削除 | 204 or 404 | 202512_担当者機能追加 | [詳細](api/API-USER-004.md) |
 
 ---
 
@@ -356,3 +364,4 @@
 |------|----------|----------|
 | 2025-12-22 | 初版作成（9エンドポイント） | 初期構築 |
 | 2025-12-22 | User API追加（4エンドポイント）、Todoにassignee追加 | 202512_担当者機能追加 |
+| 2025-12-23 | API詳細フォルダ（api/）追加、API IDを付与 | - |
