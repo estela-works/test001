@@ -34,6 +34,11 @@ docs/
 │   ├── db-schema.md                         # DB構造
 │   └── test-catalog.md                      # テストケース集積
 │
+├── reference/                               # リファレンス（技術ノウハウ集）
+│   ├── best-practices/                      # ベストプラクティス・設計指針
+│   ├── tips/                                # 実装Tips・小技集
+│   └── troubleshooting/                     # トラブルシューティング
+│
 ├── testing/                                 # テストガイド
 │   └── TEST_GUIDE.md                        # テストテンプレート使用ガイド
 │
@@ -45,12 +50,13 @@ docs/
 
 詳細は [ドキュメント体系ガイド](document-guide.md) を参照。
 
-### 案件スコープ vs 最新仕様
+### 3つのカテゴリ
 
 | カテゴリ | 目的 | ライフサイクル |
 |---------|------|---------------|
 | **案件スコープ** | 今回の変更内容を記録 | 案件ごとに作成・完結 |
 | **最新仕様** | 現在のシステム状態を反映 | 継続的にメンテナンス |
+| **リファレンス** | 技術ノウハウ・ベストプラクティス | 知見の蓄積・更新 |
 
 ## 案件スコープドキュメント
 
@@ -99,6 +105,16 @@ docs/
 | [logic-catalog.md](specs/logic-catalog.md) | ビジネスロジック一覧 |
 | [db-schema.md](specs/db-schema.md) | DB構造・テーブル定義 |
 | [test-catalog.md](specs/test-catalog.md) | 全テストケース集積 |
+
+## リファレンスドキュメント
+
+プロジェクト横断で参照できる技術ノウハウ集。詳細は [reference/README.md](reference/README.md) を参照。
+
+| フォルダ | 内容 |
+|---------|------|
+| [best-practices/](reference/best-practices/) | ベストプラクティス・設計指針 |
+| [tips/](reference/tips/) | 実装Tips・小技集 |
+| [troubleshooting/](reference/troubleshooting/) | トラブルシューティング |
 
 ## 運用フロー
 
