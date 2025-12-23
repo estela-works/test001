@@ -144,9 +144,8 @@ test.describe('ToDo管理画面', () => {
     // 削除（確認ダイアログでOK）
     await todosPage.deleteTodo(0, true);
 
-    // 件数が減る
-    const newCount = await todosPage.getTodoCount();
-    expect(newCount).toBe(initialCount - 1);
+    // 件数が減ることを待機して確認
+    await expect(todosPage.todoItems).toHaveCount(initialCount - 1);
   });
 
   test('TC-031: ToDo削除（確認キャンセル）', async ({ todosPage, cleanApiHelper }) => {

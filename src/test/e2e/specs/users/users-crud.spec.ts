@@ -74,9 +74,8 @@ test.describe('ユーザー管理画面', () => {
     // 削除（確認ダイアログでOK）
     await usersPage.deleteUser(0, true);
 
-    // 件数が減る
-    const newCount = await usersPage.getUserCount();
-    expect(newCount).toBe(initialCount - 1);
+    // 件数が減ることを待機して確認
+    await expect(usersPage.userCards).toHaveCount(initialCount - 1);
   });
 
   test('TC-021: ユーザー削除（確認キャンセル）', async ({ usersPage, cleanApiHelper }) => {
@@ -149,11 +148,20 @@ test.describe('ユーザー管理画面', () => {
     // 101文字以上の文字列を作成
     const longName = 'あ'.repeat(101);
 
-    // 長い名前を入力して追加
-    await usersPage.addUser(longName);
+    // 長い名前を入力（HTMLのmaxlength="100"により100文字に制限される）
+    await usersPage.nameInput.fill(longName);
 
-    // エラーメッセージが表示される
-    await usersPage.expectErrorMessage('ユーザー名は100文字以内で入力してください');
+    // 入力値が100文字に制限されていることを確認
+    const inputValue = await usersPage.nameInput.inputValue();
+    expect(inputValue.length).toBe(100);
+
+    // 100文字なら正常に登録できることを確認
+    await usersPage.addUserButton.click();
+    await usersPage.waitForLoadingComplete();
+
+    // ユーザーが登録される（100文字のユーザー名）
+    const truncatedName = 'あ'.repeat(100);
+    await usersPage.expectUserExists(truncatedName);
   });
 
   // ===================

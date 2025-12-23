@@ -28,3 +28,27 @@
 chmod +x scripts/*.sh
 ./scripts/check-project-status.sh
 ```
+
+## READMEのタッチ（タイムスタンプ更新）
+
+READMEの内容に変更がなく、タイムスタンプのみ更新したい場合は以下のコマンドを使用します。
+
+### 単一ファイルをタッチ
+
+```powershell
+Set-ItemProperty -Path 'パス\README.md' -Name LastWriteTime -Value (Get-Date)
+```
+
+### 複数ファイルを一括タッチ
+
+```powershell
+$folders = @('data', 'docs', 'src')  # タッチしたいフォルダ
+$basePath = 'c:\path\to\project'
+
+foreach ($folder in $folders) {
+    $path = Join-Path $basePath $folder 'README.md'
+    Set-ItemProperty -Path $path -Name LastWriteTime -Value (Get-Date)
+}
+```
+
+**注意**: 親フォルダのREADMEは子フォルダより後にタッチする必要があります（子フォルダのファイルが親より新しいと更新漏れと判定されるため）。

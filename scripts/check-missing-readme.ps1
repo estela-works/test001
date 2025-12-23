@@ -111,16 +111,17 @@ function Get-ReadmePath {
     return $null
 }
 
-# フォルダ内の最新ファイル更新時刻を取得（README自体を除く）
+# フォルダ内の最新ファイル更新時刻を取得（README自体を除く、サブディレクトリも含む）
 function Get-LatestFileTime {
     param(
         [string]$DirPath,
         [string]$ReadmePath
     )
 
-    $files = Get-ChildItem -Path $DirPath -File -ErrorAction SilentlyContinue
     $latestTime = $null
 
+    # 直下のファイルをチェック
+    $files = Get-ChildItem -Path $DirPath -File -ErrorAction SilentlyContinue
     foreach ($file in $files) {
         # README自体はスキップ
         if ($file.FullName -eq $ReadmePath) {
@@ -129,6 +130,28 @@ function Get-LatestFileTime {
 
         if ($null -eq $latestTime -or $file.LastWriteTime -gt $latestTime) {
             $latestTime = $file.LastWriteTime
+        }
+    }
+
+    # 直下のサブディレクトリをチェック（除外対象でないもの）
+    $subdirs = Get-ChildItem -Path $DirPath -Directory -ErrorAction SilentlyContinue
+    foreach ($subdir in $subdirs) {
+        # 除外対象のサブディレクトリはスキップ
+        if (Test-Excluded -DirPath $subdir.FullName) {
+            continue
+        }
+
+        # サブディレクトリ内の全ファイルを再帰的にチェック
+        $subFiles = Get-ChildItem -Path $subdir.FullName -File -Recurse -ErrorAction SilentlyContinue
+        foreach ($file in $subFiles) {
+            # 除外対象のパスに含まれるファイルはスキップ
+            if (Test-Excluded -DirPath $file.Directory.FullName) {
+                continue
+            }
+
+            if ($null -eq $latestTime -or $file.LastWriteTime -gt $latestTime) {
+                $latestTime = $file.LastWriteTime
+            }
         }
     }
 
