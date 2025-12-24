@@ -41,6 +41,8 @@ $ExcludePatterns = @(
     "src\main\java\com\*",
     "src\test\java\com",
     "src\test\java\com\*",
+    "src\backend\main\java\com",
+    "src\backend\main\java\com\*",
 
     # テスト出力
     "src\test\e2e\output",
@@ -52,12 +54,20 @@ $ExcludePatterns = @(
     "src\main\resources\static",
     "src\main\resources\mapper",
     "src\main\resources\mapper\*",
+    "src\backend\main\resources\static",
+    "src\backend\main\resources\static\*",
+    "src\backend\main\resources\mapper",
+    "src\backend\main\resources\mapper\*",
 
     # テストクラスのビルド出力
     "target\test-classes",
     "target\test-classes\*",
     "target\classes",
-    "target\classes\*"
+    "target\classes\*",
+
+    # フロントエンド（個別ファイルのみで構成されるフォルダ）
+    "src\frontend\public",
+    "src\frontend\src\assets"
 )
 
 # =============================================================================

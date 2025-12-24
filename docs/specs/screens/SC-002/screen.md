@@ -8,8 +8,11 @@
 |------|------|
 | 画面ID | SC-002 |
 | 画面名 | ToDoリスト画面 |
-| パス | `/todos.html` |
-| ファイル | `src/main/resources/static/todos.html` |
+| パス | `/todos` または `/todos?projectId={id}` |
+| Vueコンポーネント | `src/frontend/src/views/TodoView.vue` |
+| 子コンポーネント | TodoForm, TodoList, TodoItem, TodoStats, TodoFilter |
+| 状態管理 | Pinia (`useTodoStore`, `useUserStore`) |
+| 技術スタック | Vue.js 3 (Composition API) |
 | 目的 | ToDo管理のメイン機能を提供 |
 | 追加案件 | 初期構築 |
 | イベント詳細 | [events.md](./events.md) |
@@ -63,8 +66,9 @@
 
 | 遷移元 | トリガー | 遷移先 |
 |--------|---------|--------|
-| SC-001: ホーム画面 | リンククリック | 本画面 |
-| 本画面 | ホームリンククリック | SC-001: ホーム画面 |
+| SC-001: ホーム画面 | router-link | 本画面（全チケット） |
+| SC-003: プロジェクト画面 | 「表示」ボタン | 本画面（projectId付き） |
+| 本画面 | 「案件一覧に戻る」リンク | SC-003: プロジェクト画面 |
 
 ---
 
@@ -149,5 +153,6 @@
 
 | 日付 | 変更内容 | 関連案件 |
 |------|----------|----------|
+| 2025-12-24 | Vue.js 3 移行（TodoView.vue + 子コンポーネント） | 202512_Vue.js移行 |
 | 2025-12-22 | 画面詳細として分離、イベント別ファイル化 | - |
 | 2025-12-22 | 初版作成 | 初期構築 |

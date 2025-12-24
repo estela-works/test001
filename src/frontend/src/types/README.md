@@ -1,0 +1,20 @@
+# types
+
+TypeScript型定義。
+
+## ファイル一覧
+
+| ファイル | 説明 |
+|---------|------|
+| `index.ts` | 型定義の再エクスポート |
+| `todo.ts` | ToDo関連型定義 |
+| `project.ts` | プロジェクト関連型定義 |
+| `user.ts` | ユーザー関連型定義 |
+| `api.ts` | API通信関連型定義 |
+
+## 主な型
+
+- `Todo` - ToDoエンティティ
+- `Project` - プロジェクトエンティティ
+- `User` - ユーザーエンティティ
+- `ApiResponse<T>` - API応答ラッパー

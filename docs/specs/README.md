@@ -2,6 +2,16 @@
 
 アプリケーションの現在の状態を反映する仕様ドキュメントを格納するフォルダ。
 
+## システム概要
+
+| 項目 | 内容 |
+|------|------|
+| フロントエンド | Vue.js 3 (Composition API) + Pinia + Vue Router |
+| バックエンド | Spring Boot 3.2 + MyBatis |
+| データベース | H2 Database (ファイルモード) |
+| ビルドツール | Vite (フロントエンド) / Maven (バックエンド) |
+| 最終更新日 | 2025-12-24 |
+
 ## フォルダ構成
 
 ```
@@ -11,6 +21,7 @@ specs/
 ├── api/                     # API詳細仕様
 │   ├── index.md             # APIインデックス
 │   ├── API-TODO-XXX.md      # Todo API詳細
+│   ├── API-PROJECT-XXX.md   # Project API詳細
 │   └── API-USER-XXX.md      # User API詳細
 ├── logic-catalog.md         # ロジック一覧
 ├── db-schema.md             # DB構造
