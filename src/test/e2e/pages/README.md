@@ -7,6 +7,7 @@ Page Object Patternによるページクラスを格納するフォルダ。
 | ファイル | 説明 |
 |---------|------|
 | base.page.ts | ベースページクラス |
+| home.page.ts | ホーム画面ページオブジェクト |
 | todos.page.ts | ToDo管理画面ページオブジェクト |
 | projects.page.ts | 案件一覧画面ページオブジェクト |
 | users.page.ts | ユーザー管理画面ページオブジェクト |

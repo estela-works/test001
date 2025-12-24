@@ -6,6 +6,7 @@ Playwrightテストスペックを格納するフォルダ。
 
 ```
 specs/
+├── home/            # ホーム画面テスト
 ├── todos/           # ToDo管理画面テスト
 ├── projects/        # 案件一覧画面テスト
 └── users/           # ユーザー管理画面テスト
@@ -18,6 +19,7 @@ specs/
 npm test
 
 # 特定のテストフォルダを実行
+npx playwright test specs/home/
 npx playwright test specs/todos/
 npx playwright test specs/projects/
 npx playwright test specs/users/

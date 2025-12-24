@@ -45,6 +45,8 @@ $ExcludePatterns = @(
     # テスト出力
     "src\test\e2e\output",
     "src\test\e2e\output\*",
+    "test-results",
+    "test-results\*",
 
     # リソースフォルダ（内容がファイルのみの場合が多い）
     "src\main\resources\static",

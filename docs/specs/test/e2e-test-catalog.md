@@ -32,10 +32,13 @@ src/test/e2e/
 │       └── users-scenarios.md
 ├── pages/
 │   ├── base.page.ts            # ベースページオブジェクト
+│   ├── home.page.ts            # ホーム画面ページオブジェクト
 │   ├── todos.page.ts           # ToDo管理画面ページオブジェクト
 │   ├── projects.page.ts        # 案件一覧画面ページオブジェクト
 │   └── users.page.ts           # ユーザー管理画面ページオブジェクト
 ├── specs/
+│   ├── home/
+│   │   └── home.spec.ts        # ホーム画面テスト
 │   ├── todos/
 │   │   └── todos-crud.spec.ts  # ToDo管理画面テスト
 │   ├── projects/
@@ -55,16 +58,41 @@ src/test/e2e/
 
 | 画面 | 画面表示 | 追加 | 完了/切替 | 削除 | フィルタ | バリデーション | 遷移 | 合計 |
 |------|----------|------|-----------|------|----------|----------------|------|------|
+| ホーム画面 | 3 | - | - | - | - | - | 4 | 7 |
 | ToDo管理画面 | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 13 |
 | 案件一覧画面 | 1 | 2 | - | 2 | - | 1 | 3 | 9 |
 | ユーザー管理画面 | 1 | 1 | - | 3 | - | 3 | 2 | 10 |
-| **合計** | **3** | **5** | **2** | **7** | **2** | **6** | **7** | **32** |
+| **合計** | **6** | **5** | **2** | **7** | **2** | **6** | **11** | **39** |
 
 ---
 
-## 4. ToDo管理画面（todos-crud.spec.ts）
+## 4. ホーム画面（home.spec.ts）
 
-> **画面ID**: SCR-TODOS-001
+> **画面ID**: SC-001
+> **対象ファイル**: `src/test/e2e/specs/home/home.spec.ts`
+
+### 4.1 画面表示テスト
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| FT-E2E-001 | 初期表示確認 | 正常系 | ヘッダー、3つのナビカード、フッター表示 |
+| FT-E2E-002 | ヘッダー表示 | 正常系 | タイトル「Spring Boot App」、サブタイトル「タスク管理アプリケーション」 |
+| FT-E2E-003 | ナビゲーションカード表示 | 正常系 | チケット管理、案件管理、ユーザー管理カード表示 |
+
+### 4.2 画面遷移テスト
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| FT-E2E-004 | チケット管理への遷移 | 正常系 | URL=/todos.html |
+| FT-E2E-005 | 案件管理への遷移 | 正常系 | URL=/projects.html |
+| FT-E2E-006 | ユーザー管理への遷移 | 正常系 | URL=/users.html |
+| FT-E2E-007 | ホームへの戻り遷移 | 正常系 | 案件管理からURL=/ |
+
+---
+
+## 5. ToDo管理画面（todos-crud.spec.ts）
+
+> **画面ID**: SC-002
 > **対象ファイル**: `src/test/e2e/specs/todos/todos-crud.spec.ts`
 
 ### 4.1 画面表示テスト
@@ -122,9 +150,9 @@ src/test/e2e/
 
 ---
 
-## 5. 案件一覧画面（projects-crud.spec.ts）
+## 6. 案件一覧画面（projects-crud.spec.ts）
 
-> **画面ID**: SCR-PROJECTS-001
+> **画面ID**: SC-003
 > **対象ファイル**: `src/test/e2e/specs/projects/projects-crud.spec.ts`
 
 ### 5.1 画面表示テスト
@@ -175,9 +203,9 @@ src/test/e2e/
 
 ---
 
-## 6. ユーザー管理画面（users-crud.spec.ts）
+## 7. ユーザー管理画面（users-crud.spec.ts）
 
-> **画面ID**: SCR-USERS-001
+> **画面ID**: SC-004
 > **対象ファイル**: `src/test/e2e/specs/users/users-crud.spec.ts`
 
 ### 6.1 画面表示テスト
@@ -222,7 +250,7 @@ src/test/e2e/
 
 ---
 
-## 7. テストシナリオ詳細
+## 8. テストシナリオ詳細
 
 テストシナリオの詳細は以下のファイルを参照：
 
@@ -234,7 +262,7 @@ src/test/e2e/
 
 ---
 
-## 8. テスト実行方法
+## 9. テスト実行方法
 
 ```bash
 # e2eディレクトリに移動
@@ -266,9 +294,9 @@ npx playwright test --debug
 
 ---
 
-## 9. ページオブジェクト
+## 10. ページオブジェクト
 
-### 9.1 BasePage
+### 10.1 BasePage
 
 | メソッド | 説明 |
 |---------|------|
@@ -276,7 +304,18 @@ npx playwright test --debug
 | waitForLoadingComplete() | ローディング完了待機 |
 | expectUrl(pattern) | URLを検証 |
 
-### 9.2 TodosPage
+### 10.2 HomePage
+
+| メソッド | 説明 |
+|---------|------|
+| goto() | ホーム画面に移動 |
+| clickTodoCard() | チケット管理カードをクリック |
+| clickProjectCard() | 案件管理カードをクリック |
+| clickUserCard() | ユーザー管理カードをクリック |
+| getCardTitle(card) | カードのタイトルを取得 |
+| getCardDescription(card) | カードの説明を取得 |
+
+### 10.3 TodosPage
 
 | メソッド | 説明 |
 |---------|------|
@@ -291,7 +330,7 @@ npx playwright test --debug
 | expectErrorMessage(message) | エラーメッセージ確認 |
 | gotoWithProject(projectId) | 案件指定で開く |
 
-### 9.3 ProjectsPage
+### 10.4 ProjectsPage
 
 | メソッド | 説明 |
 |---------|------|
@@ -307,7 +346,7 @@ npx playwright test --debug
 | navigateToUserManagement() | ユーザー管理へ遷移 |
 | navigateToHome() | ホームへ遷移 |
 
-### 9.4 UsersPage
+### 10.5 UsersPage
 
 | メソッド | 説明 |
 |---------|------|
@@ -325,9 +364,9 @@ npx playwright test --debug
 
 ---
 
-## 10. フィクスチャとヘルパー
+## 11. フィクスチャとヘルパー
 
-### 10.1 カスタムフィクスチャ（custom-fixtures.ts）
+### 11.1 カスタムフィクスチャ（custom-fixtures.ts）
 
 | フィクスチャ | 説明 |
 |-------------|------|
@@ -336,7 +375,7 @@ npx playwright test --debug
 | usersPage | ユーザー管理画面ページオブジェクト |
 | cleanApiHelper | テストデータ作成用APIヘルパー（テスト後自動クリーンアップ） |
 
-### 10.2 APIヘルパー（api-helper.ts）
+### 11.2 APIヘルパー（api-helper.ts）
 
 | メソッド | 説明 |
 |---------|------|
@@ -352,4 +391,5 @@ npx playwright test --debug
 
 | 日付 | 変更内容 |
 |------|----------|
+| 2025-12-24 | ホーム画面テスト追加（7件） |
 | 2025-12-23 | 初版作成（実装済みテストファイルから自動生成） |
