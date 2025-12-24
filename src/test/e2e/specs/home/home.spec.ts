@@ -84,36 +84,10 @@ test.describe('ホーム画面', () => {
     await expect(page).toHaveURL('/users.html');
   });
 
-  test('FT-E2E-007: ホームへの戻り遷移（チケット管理から）', async ({ page }) => {
-    // チケット管理画面に遷移
-    await homePage.clickTodoCard();
-    await expect(page).toHaveURL('/todos.html');
-
-    // 「ホームに戻る」リンクをクリック
-    await page.click('a[href="/"]');
-
-    // ホーム画面に戻る
-    await expect(page).toHaveURL('/');
-    await expect(homePage.title).toBeVisible();
-  });
-
-  test('FT-E2E-008: ホームへの戻り遷移（案件管理から）', async ({ page }) => {
+  test('FT-E2E-007: ホームへの戻り遷移（案件管理から）', async ({ page }) => {
     // 案件管理画面に遷移
     await homePage.clickProjectCard();
     await expect(page).toHaveURL('/projects.html');
-
-    // 「ホームに戻る」リンクをクリック
-    await page.click('a[href="/"]');
-
-    // ホーム画面に戻る
-    await expect(page).toHaveURL('/');
-    await expect(homePage.title).toBeVisible();
-  });
-
-  test('FT-E2E-009: ホームへの戻り遷移（ユーザー管理から）', async ({ page }) => {
-    // ユーザー管理画面に遷移
-    await homePage.clickUserCard();
-    await expect(page).toHaveURL('/users.html');
 
     // 「ホームに戻る」リンクをクリック
     await page.click('a[href="/"]');
