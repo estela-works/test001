@@ -39,11 +39,10 @@ docs/
 │
 ├── reference/                               # リファレンス（技術ノウハウ集）
 │   ├── best-practices/                      # ベストプラクティス・設計指針
+│   │   ├── frontend-testing-strategies/     # フロントエンドテスト戦略
+│   │   └── backend-testing-guide.md         # バックエンドテストガイド
 │   ├── tips/                                # 実装Tips・小技集
 │   └── troubleshooting/                     # トラブルシューティング
-│
-├── testing/                                 # テストガイド
-│   └── TEST_GUIDE.md                        # テストテンプレート使用ガイド
 │
 ├── implementation/                          # 実装ガイド
 │   └── IMPLEMENTATION_GUIDE.md              # 実装ガイドライン

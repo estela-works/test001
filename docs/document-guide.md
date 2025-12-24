@@ -94,12 +94,46 @@ docs/projects/
 
 **注意**: 案件の規模や内容に応じて、必要なドキュメントのみ作成する。すべてを作成する必要はない。
 
-### 3.4 命名規則
+### 3.4 ドキュメント作成方針
+
+#### 3.4.1 「変更なし」も記録する
+
+案件において変更がない領域についても、ドキュメントを作成して「変更なし」であることを明記する。
+
+**理由**:
+- 「検討した結果、変更しなかった」ことと「検討を忘れた」ことを区別できる
+- 案件のスコープが明確になり、レビューや引き継ぎが容易になる
+- 将来の案件で参照した際に、影響範囲の判断材料となる
+
+**例**: フロントエンドのみの改修案件でも、バックエンド基本設計書を作成し「変更なし」と記載する
+
+```markdown
+# バックエンド基本設計書
+
+## 1. 概要
+
+### 1.1 バックエンドの役割
+
+| 責務 | 本案件での変更 |
+|------|---------------|
+| データ管理 | **変更なし** |
+| ビジネスロジック | **変更なし** |
+| API提供 | **変更なし** |
+
+### 1.2 変更なしの理由
+
+本案件はフロントエンドのみの改善であり、以下の理由によりバックエンドの変更は不要である:
+1. 静的HTMLファイルの追加のみ
+2. 新規API不要
+3. データモデル変更なし
+```
+
+### 3.5 命名規則
 
 - フォルダ名: `YYYYMM_案件名`（例: `202501_ユーザー認証機能追加`）
 - 案件名は簡潔かつ識別可能な名称とする
 
-### 3.5 ライフサイクル
+### 3.6 ライフサイクル
 
 ```
 案件開始
@@ -261,7 +295,8 @@ API仕様は2階層で管理する:
 ```
 docs/reference/
 ├── best-practices/                 # ベストプラクティス・設計指針
-│   └── frontend-testing-strategies.md
+│   ├── frontend-testing-strategies/  # フロントエンドテスト戦略
+│   └── backend-testing-guide.md      # バックエンドテストガイド
 ├── tips/                           # 実装Tips・小技集
 ├── troubleshooting/                # トラブルシューティング
 └── README.md                       # リファレンスの説明
@@ -313,7 +348,7 @@ docs/reference/
 │   → implementation/IMPLEMENTATION_GUIDE.md                   │
 │                                                              │
 │   テストテンプレートを参照してテスト作成                       │
-│   → testing/TEST_GUIDE.md                                    │
+│   → reference/best-practices/backend-testing-guide.md        │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
@@ -424,7 +459,7 @@ docs/reference/
 | [ServiceTestTemplate.java](../src/test/java/com/example/demo/template/ServiceTestTemplate.java) | ビジネスロジックテスト | Service層 |
 | [MapperTestTemplate.java](../src/test/java/com/example/demo/template/MapperTestTemplate.java) | データアクセス層テスト | Mapper層 |
 
-詳細な使い方は [TEST_GUIDE.md](testing/TEST_GUIDE.md) を参照。
+詳細な使い方は [backend-testing-guide.md](reference/best-practices/backend-testing-guide.md) を参照。
 
 ---
 
@@ -440,3 +475,5 @@ docs/reference/
 | 4.0 | 2025-12-23 | リファレンスドキュメント（技術ノウハウ集）を追加 |
 | 4.1 | 2025-12-23 | テスト仕様書をフロントエンド/バックエンドの2テンプレートに分離 |
 | 5.0 | 2025-12-23 | API詳細ドキュメント階層構造（api/API-XXX-NNN.md）を追加 |
+| 5.1 | 2025-12-23 | testing/ を廃止、reference/best-practices/ に統合 |
+| 5.2 | 2025-12-24 | 「変更なし」も記録する方針を追加 |

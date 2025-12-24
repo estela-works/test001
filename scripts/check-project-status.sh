@@ -25,7 +25,7 @@ SRC_DIR="$PROJECT_ROOT/src"
 REQUIREMENTS_FILES=("requirements.md")
 BASIC_DESIGN_FILES=("basic-design-frontend.md" "basic-design-backend.md")
 DETAIL_DESIGN_FILES=("detail-design-frontend.md" "detail-design-api.md" "detail-design-logic.md" "detail-design-db.md" "detail-design-sql.md")
-TEST_SPEC_FILES=("test-spec.md")
+TEST_SPEC_FILES=("test-spec-frontend.md" "test-spec-backend.md")
 
 # ファイル存在チェック (内容があるかも確認)
 check_file_exists() {

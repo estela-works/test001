@@ -26,7 +26,8 @@ reference/
 - パフォーマンス最適化指針
 
 **例:**
-- `frontend-testing-strategies.md` - フロントエンド単体テスト戦略
+- `frontend-testing-strategies/` - フロントエンド単体テスト戦略
+- `backend-testing-guide.md` - バックエンドテストガイド（Spring Boot + MyBatis）
 - `api-design-guidelines.md` - REST API 設計ガイドライン
 - `error-handling-patterns.md` - エラーハンドリングパターン
 
@@ -104,6 +105,5 @@ bad:  frontend_testing_strategies.md
 
 ## 関連ドキュメント
 
-- [テストガイド](../testing/TEST_GUIDE.md) - プロジェクト固有のテスト方針
 - [実装ガイド](../implementation/IMPLEMENTATION_GUIDE.md) - 実装手順
 - [ドキュメント体系ガイド](../document-guide.md) - ドキュメント全体の構成

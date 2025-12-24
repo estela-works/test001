@@ -10,16 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    /**
-     * Hello Worldを返すシンプルなGETエンドポイント
-     * @return 挨拶メッセージ
-     */
-    @GetMapping("/")
-    public String hello() {
-        return "こんにちは！Spring Bootアプリケーションへようこそ！🌸<br>" +
-               "<a href='/todos.html'>ToDoリストを見る</a><br>" +
-               "<a href='/api/todos'>ToDo API (JSON)</a>";
-    }
+    // ルートパス("/")は static/index.html で配信されるため、マッピング削除
 
     /**
      * JSON形式でメッセージを返すエンドポイント
