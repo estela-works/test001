@@ -1,10 +1,10 @@
 # Simple Spring Boot ToDo Application
 
-Spring Boot 3.2 + Java 21 で構築されたシンプルなToDoアプリケーションです。
+Spring Boot 3.2 + Java 17 で構築されたシンプルなToDoアプリケーションです。
 
 ## 必要環境
 
-- Java 21
+- Java 17
 - Maven（Maven Wrapperが同梱されているため、インストール不要）
 - Node.js（E2Eテスト実行時のみ）
 
@@ -131,7 +131,7 @@ npx playwright test
 
 | 種別 | 技術 |
 |------|------|
-| バックエンド | Spring Boot 3.2, Java 21 |
+| バックエンド | Spring Boot 3.2, Java 17 |
 | データベース | H2 Database（ファイルベース） |
 | ORM | MyBatis |
 | フロントエンド | HTML + JavaScript（Vanilla） |
