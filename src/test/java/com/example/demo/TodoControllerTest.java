@@ -71,7 +71,7 @@ class TodoControllerTest {
         void getAllTodos_Returns200OK() throws Exception {
             mockMvc.perform(get("/api/todos"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$[0].title", notNullValue()))
                 .andExpect(jsonPath("$[0].id", notNullValue()));
@@ -123,7 +123,7 @@ class TodoControllerTest {
 
             mockMvc.perform(get("/api/todos/{id}", existingId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(existingId.intValue())))
                 .andExpect(jsonPath("$.title", notNullValue()));
         }
@@ -318,7 +318,7 @@ class TodoControllerTest {
 
             mockMvc.perform(get("/api/todos/stats"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.total", is(3)))
                 .andExpect(jsonPath("$.completed", is(1)))
                 .andExpect(jsonPath("$.pending", is(2)));

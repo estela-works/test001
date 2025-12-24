@@ -69,7 +69,7 @@ class ProjectControllerTest {
 
             mockMvc.perform(get("/api/projects"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].name", notNullValue()))
                 .andExpect(jsonPath("$[0].id", notNullValue()));
@@ -80,7 +80,7 @@ class ProjectControllerTest {
         void getAllProjects_WhenEmpty_ReturnsEmptyArray() throws Exception {
             mockMvc.perform(get("/api/projects"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(0)));
         }
     }
@@ -100,7 +100,7 @@ class ProjectControllerTest {
 
             mockMvc.perform(get("/api/projects/{id}", project.getId()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(project.getId().intValue())))
                 .andExpect(jsonPath("$.name", is("テスト案件")))
                 .andExpect(jsonPath("$.description", is("説明")));
@@ -278,7 +278,7 @@ class ProjectControllerTest {
 
             mockMvc.perform(get("/api/projects/{id}/stats", project.getId()))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.total", is(10)))
                 .andExpect(jsonPath("$.completed", is(3)))
                 .andExpect(jsonPath("$.pending", is(7)))

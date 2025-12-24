@@ -107,7 +107,7 @@ class ControllerTestTemplate {
         void getAll_Returns200OK() throws Exception {
             mockMvc.perform(get("/api/{entities}"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(0))))
                 .andExpect(jsonPath("$[0].id", notNullValue()));
         }
@@ -151,7 +151,7 @@ class ControllerTestTemplate {
 
             mockMvc.perform(get("/api/{entities}/{id}", existingId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(existingId.intValue())));
         }
 

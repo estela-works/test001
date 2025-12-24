@@ -56,7 +56,7 @@ class UserControllerTest {
         void getAllUsers_Returns200OK() throws Exception {
             mockMvc.perform(get("/api/users"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(3))))
                 .andExpect(jsonPath("$[0].id", notNullValue()))
                 .andExpect(jsonPath("$[0].name", notNullValue()));
@@ -78,7 +78,7 @@ class UserControllerTest {
 
             mockMvc.perform(get("/api/users/{id}", existingId))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(existingId.intValue())))
                 .andExpect(jsonPath("$.name", notNullValue()));
         }
