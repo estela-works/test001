@@ -55,7 +55,14 @@ Vue.js移行が完了した後も、Spring Boot側の`src/backend/main/resources
 
 ## 状態
 
-設計完了 → 実装待ち
+完了
+
+### 実装結果
+
+- ✅ 静的リソース削除完了
+- ✅ FrontendRedirectController実装完了
+- ✅ テスト実装完了 (7 tests passed)
+- ✅ 動作確認完了 (Spring Boot起動、案内ページ表示、既存API動作確認)
 
 ## 関連案件
 
