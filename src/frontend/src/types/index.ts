@@ -20,6 +20,22 @@ export type { SpecialProjectId } from './project'
 // User
 export type { User, CreateUserRequest } from './user'
 
+// Comment
+export type {
+  Comment,
+  CreateCommentRequest,
+  CommentListResponse,
+  CreateCommentResponse,
+  DeleteCommentResponse
+} from './comment'
+export {
+  COMMENT_ERROR_MESSAGES,
+  COMMENT_CONSTANTS,
+  validateCreateCommentRequest,
+  isComment,
+  isCommentList
+} from './comment'
+
 // API
 export type { ApiError, Pagination, PagedResponse } from './api'
 export { ApiException } from './api'

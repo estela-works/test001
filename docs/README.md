@@ -14,6 +14,8 @@ docs/
 │   │   ├── detail-design-logic.md          # ロジック詳細設計書
 │   │   ├── detail-design-sql.md            # SQL詳細設計書
 │   │   ├── detail-design-db.md             # DB詳細設計書
+│   │   ├── detail-design-store.md          # Store詳細設計書
+│   │   ├── detail-design-types.md          # TypeScript型定義詳細設計書
 │   │   ├── test-spec-frontend.md            # フロントエンドテスト方針書
 │   │   └── test-spec-backend.md             # バックエンドテスト方針書
 │   └── template/                            # テンプレート
@@ -25,6 +27,8 @@ docs/
 │       ├── detail-design-logic-template.md
 │       ├── detail-design-sql-template.md
 │       ├── detail-design-db-template.md
+│       ├── detail-design-store-template.md
+│       ├── detail-design-types-template.md
 │       ├── test-spec-frontend-template.md
 │       └── test-spec-backend-template.md
 │
@@ -89,6 +93,8 @@ docs/
 | detail-design-logic.md | ビジネスロジック仕様 |
 | detail-design-sql.md | SQLクエリ仕様 |
 | detail-design-db.md | DB変更仕様 |
+| detail-design-store.md | Store設計仕様（Vue/Pinia） |
+| detail-design-types.md | TypeScript型定義仕様 |
 
 ### テスト設計フェーズ
 

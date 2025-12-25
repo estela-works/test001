@@ -9,6 +9,7 @@ Piniaによる状態管理ストア。
 | `todoStore.ts` | ToDoの状態管理 |
 | `projectStore.ts` | プロジェクトの状態管理 |
 | `userStore.ts` | ユーザーの状態管理 |
+| `commentStore.ts` | コメントの状態管理 |
 
 ## テストファイル
 

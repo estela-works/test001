@@ -9,6 +9,7 @@
   const emit = defineEmits<{
     (e: 'toggle', id: number): void
     (e: 'delete', id: number): void
+    (e: 'click', id: number): void
   }>()
 
   const dateRange = computed(() => {
@@ -37,7 +38,7 @@
 </script>
 
 <template>
-  <div class="todo-item card" :class="{ completed: todo.completed }">
+  <div class="todo-item card" :class="{ completed: todo.completed }" @click="$emit('click', todo.id)">
     <h3>{{ todo.title }}</h3>
     <p v-if="todo.description">{{ todo.description }}</p>
     <p v-if="dateRange" class="date-range">期間: {{ dateRange }}</p>
@@ -48,10 +49,10 @@
       <small>作成日: {{ formattedCreatedAt }}</small>
     </p>
     <div class="actions">
-      <button class="toggle-btn" @click="$emit('toggle', todo.id)">
+      <button class="toggle-btn" @click.stop="$emit('toggle', todo.id)">
         {{ todo.completed ? '未完了にする' : '完了にする' }}
       </button>
-      <button class="delete-btn btn-danger" @click="handleDelete">削除</button>
+      <button class="delete-btn btn-danger" @click.stop="handleDelete">削除</button>
     </div>
   </div>
 </template>
@@ -59,6 +60,11 @@
 <style scoped>
   .todo-item {
     transition: opacity 0.3s;
+    cursor: pointer;
+  }
+
+  .todo-item:hover {
+    background-color: #f0f4f8;
   }
 
   .todo-item.completed {

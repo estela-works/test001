@@ -10,6 +10,7 @@ TypeScript型定義。
 | `todo.ts` | ToDo関連型定義 |
 | `project.ts` | プロジェクト関連型定義 |
 | `user.ts` | ユーザー関連型定義 |
+| `comment.ts` | コメント関連型定義 |
 | `api.ts` | API通信関連型定義 |
 
 ## 主な型
@@ -17,4 +18,5 @@ TypeScript型定義。
 - `Todo` - ToDoエンティティ
 - `Project` - プロジェクトエンティティ
 - `User` - ユーザーエンティティ
+- `TodoComment` - コメントエンティティ
 - `ApiResponse<T>` - API応答ラッパー

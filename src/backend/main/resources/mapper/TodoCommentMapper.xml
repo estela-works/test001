@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.TodoCommentMapper">
+
+    <!-- ResultMap定義 -->
+    <resultMap id="todoCommentResultMap" type="com.example.demo.TodoComment">
+        <id property="id" column="id"/>
+        <result property="todoId" column="todoId"/>
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="content" column="content"/>
+        <result property="createdAt" column="createdAt"/>
+    </resultMap>
+
+    <!-- Q-001: 指定されたToDoIDに紐づくコメント一覧を取得（作成日時の降順） -->
+    <select id="selectByTodoId" resultMap="todoCommentResultMap">
+        SELECT
+            c.ID AS id,
+            c.TODO_ID AS todoId,
+            c.USER_ID AS userId,
+            u.NAME AS userName,
+            c.CONTENT AS content,
+            c.CREATED_AT AS createdAt
+        FROM TODOCOMMENT c
+        LEFT JOIN APP_USER u ON c.USER_ID = u.ID
+        WHERE c.TODO_ID = #{todoId}
+        ORDER BY c.CREATED_AT DESC
+    </select>
+
+    <!-- Q-002: コメントIDでコメントを取得 -->
+    <select id="selectById" resultMap="todoCommentResultMap">
+        SELECT
+            c.ID AS id,
+            c.TODO_ID AS todoId,
+            c.USER_ID AS userId,
+            u.NAME AS userName,
+            c.CONTENT AS content,
+            c.CREATED_AT AS createdAt
+        FROM TODOCOMMENT c
+        LEFT JOIN APP_USER u ON c.USER_ID = u.ID
+        WHERE c.ID = #{id}
+    </select>
+
+    <!-- Q-003: コメントを新規作成 -->
+    <insert id="insert" parameterType="com.example.demo.TodoComment"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO TODOCOMMENT (TODO_ID, USER_ID, CONTENT, CREATED_AT)
+        VALUES (#{todoId}, #{userId}, #{content}, CURRENT_TIMESTAMP)
+    </insert>
+
+    <!-- Q-004: コメントを削除 -->
+    <delete id="deleteById">
+        DELETE FROM TODOCOMMENT
+        WHERE ID = #{id}
+    </delete>
+
+    <!-- Q-005: 指定されたToDoIDに紐づくコメント件数を取得 -->
+    <select id="countByTodoId" resultType="int">
+        SELECT COUNT(*)
+        FROM TODOCOMMENT
+        WHERE TODO_ID = #{todoId}
+    </select>
+
+</mapper>

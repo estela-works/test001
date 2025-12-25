@@ -26,6 +26,8 @@
 | [detail-design-logic-template.md](detail-design-logic-template.md) | ロジック詳細設計書 |
 | [detail-design-sql-template.md](detail-design-sql-template.md) | SQL詳細設計書 |
 | [detail-design-db-template.md](detail-design-db-template.md) | DB詳細設計書 |
+| [detail-design-store-template.md](detail-design-store-template.md) | Store詳細設計書（Vue/Pinia） |
+| [detail-design-types-template.md](detail-design-types-template.md) | TypeScript型定義詳細設計書 |
 
 ### テスト設計
 

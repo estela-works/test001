@@ -9,6 +9,7 @@
   defineEmits<{
     (e: 'toggle', id: number): void
     (e: 'delete', id: number): void
+    (e: 'click', id: number): void
   }>()
 </script>
 
@@ -21,6 +22,7 @@
       :todo="todo"
       @toggle="$emit('toggle', $event)"
       @delete="$emit('delete', $event)"
+      @click="$emit('click', $event)"
     />
   </div>
 </template>

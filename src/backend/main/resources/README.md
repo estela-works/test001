@@ -15,6 +15,7 @@ resources/
 │   └── users.html           # 担当者管理画面
 └── mapper/                  # MyBatis Mapper XML
     ├── TodoMapper.xml
+    ├── TodoCommentMapper.xml
     ├── ProjectMapper.xml
     ├── UserMapper.xml
     └── template/            # Mapperテンプレート

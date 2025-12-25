@@ -11,6 +11,7 @@
   import TodoFilter from '@/components/todo/TodoFilter.vue'
   import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
   import ErrorMessage from '@/components/common/ErrorMessage.vue'
+  import TodoDetailModal from '@/components/todo/TodoDetailModal.vue'
 
   const route = useRoute()
   const todoStore = useTodoStore()
@@ -18,6 +19,8 @@
 
   const projectId = ref<string | null>(null)
   const projectName = ref('すべてのチケット')
+  const selectedTodoId = ref<number | null>(null)
+  const isModalOpen = ref(false)
 
   const filteredTodos = computed(() => todoStore.filteredTodos)
   const stats = computed(() => todoStore.stats)
@@ -69,6 +72,21 @@
     }
   }
 
+  const handleTodoClick = (id: number) => {
+    selectedTodoId.value = id
+    isModalOpen.value = true
+  }
+
+  const closeModal = () => {
+    isModalOpen.value = false
+    selectedTodoId.value = null
+  }
+
+  const handleTodoUpdated = () => {
+    // モーダル内でチケットが更新されたら、リストを再取得
+    todoStore.fetchTodos(projectId.value)
+  }
+
   onMounted(async () => {
     projectId.value = (route.query.projectId as string) || null
     await Promise.all([
@@ -101,11 +119,20 @@
     <ErrorMessage :message="error" />
     <LoadingSpinner v-if="loading" />
 
-    <TodoList v-else :todos="filteredTodos" @toggle="handleToggle" @delete="handleDelete" />
+    <TodoList v-else :todos="filteredTodos" @toggle="handleToggle" @delete="handleDelete" @click="handleTodoClick" />
 
     <div class="back-link">
       <router-link to="/projects">← 案件一覧に戻る</router-link>
     </div>
+
+    <!-- チケット詳細モーダル -->
+    <TodoDetailModal
+      v-if="selectedTodoId !== null"
+      :todo-id="selectedTodoId"
+      :is-open="isModalOpen"
+      @close="closeModal"
+      @todo-updated="handleTodoUpdated"
+    />
   </div>
 </template>
 

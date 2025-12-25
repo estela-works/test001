@@ -23,6 +23,10 @@
 - `TodoItem.vue` - ToDoアイテム
 - `TodoStats.vue` - 統計表示
 - `TodoFilter.vue` - フィルター
+- `TodoDetailModal.vue` - ToDo詳細モーダル
+- `CommentForm.vue` - コメント入力フォーム
+- `CommentList.vue` - コメントリスト表示
+- `CommentItem.vue` - コメントアイテム
 
 ### project/
 - `ProjectForm.vue` - プロジェクト入力フォーム
