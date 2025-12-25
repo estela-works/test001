@@ -22,7 +22,20 @@
 | [detail-design-types.md](detail-design-types.md) | TypeScript型定義詳細設計 |
 | [test-spec-backend.md](test-spec-backend.md) | バックエンドテスト仕様書 |
 | [test-spec-e2e.md](test-spec-e2e.md) | E2Eテスト仕様書 |
-| [test-spec-frontend.md](test-spec-frontend.md) | フロントエンドテスト仕様書 |
+| [test-spec-frontend.md](test-spec-frontend.md) | フロントエンドテスト仕様書（目次） |
+
+### 分割ドキュメント
+
+**フロントエンド詳細設計書の分割ファイル**:
+- [detail-design-frontend-modal.md](detail-design-frontend-modal.md) - TodoDetailModalコンポーネント
+- [detail-design-frontend-comment-parts.md](detail-design-frontend-comment-parts.md) - コメント関連コンポーネント
+- [detail-design-frontend-integration.md](detail-design-frontend-integration.md) - TodoView統合方法
+
+**フロントエンドテスト仕様書の分割ファイル**:
+- [test-spec-frontend-overview.md](test-spec-frontend-overview.md) - テスト概要・環境・実行方法
+- [test-spec-frontend-components.md](test-spec-frontend-components.md) - コンポーネントテスト詳細
+- [test-spec-frontend-store-types.md](test-spec-frontend-store-types.md) - ストア・型定義テスト詳細
+- [test-spec-frontend-integration.md](test-spec-frontend-integration.md) - 統合テスト・ケース一覧・テストデータ
 
 ## 主要機能
 

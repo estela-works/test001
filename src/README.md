@@ -18,5 +18,5 @@ src/
 ## 関連ドキュメント
 
 - [実装ガイド](../docs/implementation/IMPLEMENTATION_GUIDE.md)
-- [テストガイド](../docs/testing/TEST_GUIDE.md)
+- [アーキテクチャ仕様](../docs/specs/architecture.md)
 - [E2Eテスト README](test/e2e/README.md)
