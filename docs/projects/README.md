@@ -30,6 +30,6 @@ projects/
 
 ## テンプレート
 
-新規案件開始時は [template/](template/) フォルダのテンプレートを使用する。
+新規案件開始時は[template/](template/)フォルダのテンプレートを使用してください。
 
-詳細は [ドキュメント体系ガイド](../document-guide.md) を参照。
+詳細は[ドキュメント体系ガイド](../document-guide.md)を参照してください。
