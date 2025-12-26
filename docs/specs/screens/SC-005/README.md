@@ -5,7 +5,8 @@
 | ファイル | 内容 |
 |---------|------|
 | [screen.md](screen.md) | 画面詳細仕様 |
-| [events.md](events.md) | イベント一覧・詳細 |
+| [events.md](events.md) | イベント一覧 |
+| EV-005-01〜08.md | 各イベント詳細 |
 
 ## 概要
 

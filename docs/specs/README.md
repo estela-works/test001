@@ -20,10 +20,8 @@ specs/
 ├── api-catalog.md           # API一覧
 ├── api/                     # API詳細仕様
 │   ├── index.md             # APIインデックス
-│   ├── API-TODO-XXX.md      # Todo API詳細
-│   ├── API-PROJECT-XXX.md   # Project API詳細
-│   ├── API-USER-XXX.md      # User API詳細
-│   └── API-COMMENT-XXX.md   # Comment API詳細
+│   ├── API-TODO-XXX.md      # Todo API詳細（9件）
+│   └── API-USER-XXX.md      # User API詳細（4件）
 ├── logic-catalog.md         # ロジック一覧
 ├── db-schema.md             # DB構造
 ├── test-catalog.md          # テストケース概要
@@ -33,9 +31,10 @@ specs/
 ├── screens/                 # 画面一覧・詳細
 │   ├── index.md             # 画面一覧
 │   ├── SC-001/              # ホーム画面
-│   ├── SC-002/              # ToDoリスト画面
+│   ├── SC-002/              # チケット管理画面
 │   ├── SC-003/              # プロジェクト画面
-│   └── SC-004/              # ユーザー管理画面
+│   ├── SC-004/              # ユーザー管理画面
+│   └── SC-005/              # チケット一覧画面
 ├── frontend/                # フロントエンド仕様
 │   ├── README.md              # フロントエンド仕様概要
 │   ├── frontend-overview.md   # フロントエンド全体概要
