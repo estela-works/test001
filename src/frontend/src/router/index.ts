@@ -19,6 +19,14 @@ const routes: RouteRecordRaw[] = [
     }
   },
   {
+    path: '/todos/table',
+    name: 'todos-table',
+    component: () => import('@/views/TodoTableView.vue'),
+    meta: {
+      title: 'チケット一覧'
+    }
+  },
+  {
     path: '/projects',
     name: 'projects',
     component: () => import('@/views/ProjectView.vue'),

@@ -9,6 +9,8 @@
 | 作成日 | <!-- YYYY-MM-DD --> |
 | 作成者 | <!-- 担当者名 --> |
 | 関連詳細設計書 | [detail-design-frontend.md](./detail-design-frontend.md) |
+| 関連型定義設計書 | [detail-design-types.md](./detail-design-types.md) |
+| 関連ストア設計書 | [detail-design-store.md](./detail-design-store.md) |
 
 ---
 

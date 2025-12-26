@@ -14,22 +14,43 @@ export abstract class BasePage {
 
   /**
    * ページを開く
+   * SPAではAPIでデータが変更された後も画面が古いデータを表示することがあるため、
+   * 初回以外のアクセスでは常にリロードして最新データを取得する
+   *
+   * @param params クエリパラメータ
+   * @param options.forceReload trueの場合、常にリロードして最新データを取得（デフォルト: false）
    */
-  async goto(params?: Record<string, string>): Promise<void> {
+  async goto(params?: Record<string, string>, options?: { forceReload?: boolean }): Promise<void> {
     let url = this.url;
     if (params) {
       const queryString = new URLSearchParams(params).toString();
       url = `${url}?${queryString}`;
     }
+
+    const currentUrl = this.page.url();
+    const isInitialNavigation = currentUrl === 'about:blank';
+
     await this.page.goto(url);
+
+    // 初回アクセス以外は常にリロードして最新データを取得
+    // これにより、APIでデータが変更された後も確実に最新データが表示される
+    if (options?.forceReload || !isInitialNavigation) {
+      await this.page.reload();
+    }
   }
 
   /**
    * ローディング完了を待機
+   * Vue版では.loadingクラスを使用（LoadingSpinner.vue）
+   * 要素が存在しない場合は即座に完了として扱う
    */
   async waitForLoadingComplete(): Promise<void> {
     const loading = this.page.locator('#loading, .loading');
-    await loading.waitFor({ state: 'hidden', timeout: 10000 });
+    // ローディング要素が存在する場合のみ待機
+    const count = await loading.count();
+    if (count > 0) {
+      await loading.waitFor({ state: 'hidden', timeout: 10000 });
+    }
   }
 
   /**

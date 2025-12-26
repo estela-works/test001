@@ -11,7 +11,7 @@
 | ルーティング | Vue Router 4 |
 | ビルドツール | Vite |
 | API通信 | Axios |
-| 最終更新日 | 2025-12-24 |
+| 最終更新日 | 2025-12-26 |
 
 ---
 
@@ -20,19 +20,20 @@
 | ID | 画面名 | パス | Vueコンポーネント | 概要 | 詳細 | 追加案件 |
 |----|--------|------|------------------|------|------|----------|
 | SC-001 | ホーム画面 | `/` | HomeView.vue | アプリへの入口、各画面へのリンク | [詳細](./SC-001/screen.md) | 初期構築 |
-| SC-002 | ToDoリスト画面 | `/todos` | TodoView.vue | ToDo管理のメイン画面 | [詳細](./SC-002/screen.md) | 初期構築 |
+| SC-002 | チケット管理画面 | `/todos` | TodoView.vue | チケット管理のメイン画面（コメント機能付き） | [詳細](./SC-002/screen.md) | 初期構築 |
 | SC-003 | プロジェクト画面 | `/projects` | ProjectView.vue | プロジェクト別ToDo表示、管理画面へのリンク | [詳細](./SC-003/screen.md) | 202512_プロジェクト機能追加 |
 | SC-004 | ユーザー管理画面 | `/users` | UserView.vue | ユーザーの一覧・登録・削除 | [詳細](./SC-004/screen.md) | 202512_担当者機能追加 |
+| SC-005 | チケット一覧画面 | `/todos/table` | TodoTableView.vue | チケットの一覧表示（テーブル形式） | [詳細](./SC-005/screen.md) | 20251226_チケット一覧画面 |
 
 ---
 
 ## 3. 画面遷移図
 
 ```
-┌─────────────┐          ┌─────────────────┐
-│  ホーム画面  │ ──────→ │  ToDoリスト画面  │
-│   (/)       │          │    (/todos)     │
-└─────────────┘          └─────────────────┘
+┌─────────────┐          ┌─────────────────┐          ┌─────────────────┐
+│  ホーム画面  │ ──────→ │  チケット管理画面 │ ──────→ │  チケット一覧画面 │
+│   (/)       │          │    (/todos)     │          │ (/todos/table)  │
+└─────────────┘          └─────────────────┘          └─────────────────┘
       │                         │
       │                         │ ← 案件一覧に戻る
       │                         ▼
@@ -42,7 +43,7 @@
       │
       ├─────────────→ ┌─────────────────┐
       │               │  プロジェクト画面 │ ────→ ┌─────────────────┐
-      │               │   (/projects)    │        │  ToDoリスト画面  │
+      │               │   (/projects)    │        │  チケット管理画面 │
       │               └─────────────────┘        │ (/todos?projectId=X) │
       │                        │                  └─────────────────┘
       │                        ▼
@@ -56,11 +57,13 @@
 
 | 起点画面 | 操作 | 遷移先 | 備考 |
 |---------|------|--------|------|
-| ホーム | 「ToDoリストを開始」クリック | ToDoリスト | 全チケット表示 |
+| ホーム | 「チケット管理を開始」クリック | チケット管理 | 全チケット表示 |
+| ホーム | 「チケット一覧」クリック | チケット一覧 | テーブル形式表示 |
 | ホーム | 「プロジェクト別管理」クリック | プロジェクト | プロジェクト一覧 |
-| プロジェクト | プロジェクトカード「表示」クリック | ToDoリスト | projectId付きクエリパラメータ |
+| プロジェクト | プロジェクトカード「表示」クリック | チケット管理 | projectId付きクエリパラメータ |
 | プロジェクト | 「ユーザー管理」クリック | ユーザー管理 | - |
-| ToDoリスト | 「案件一覧に戻る」クリック | プロジェクト | - |
+| チケット管理 | 「案件一覧に戻る」クリック | プロジェクト | - |
+| チケット管理 | 「一覧表示」クリック | チケット一覧 | テーブル形式へ遷移 |
 | ユーザー管理 | 「案件一覧に戻る」クリック | プロジェクト | - |
 
 ---
@@ -72,7 +75,8 @@
 ```
 src/frontend/src/views/
 ├── HomeView.vue        # SC-001: ホーム画面
-├── TodoView.vue        # SC-002: ToDoリスト画面
+├── TodoView.vue        # SC-002: チケット管理画面
+├── TodoTableView.vue   # SC-005: チケット一覧画面
 ├── ProjectView.vue     # SC-003: プロジェクト画面
 └── UserView.vue        # SC-004: ユーザー管理画面
 ```
@@ -81,7 +85,9 @@ src/frontend/src/views/
 
 ```
 src/frontend/src/components/
+├── Header.vue                  # ヘッダー
 ├── common/                     # 共通コンポーネント
+│   ├── NavCard.vue             # ナビゲーションカード
 │   ├── LoadingSpinner.vue      # ローディング表示
 │   └── ErrorMessage.vue        # エラーメッセージ表示
 ├── todo/                       # ToDo関連コンポーネント
@@ -89,7 +95,15 @@ src/frontend/src/components/
 │   ├── TodoList.vue            # ToDoリスト表示
 │   ├── TodoItem.vue            # ToDoアイテム
 │   ├── TodoStats.vue           # 統計表示
-│   └── TodoFilter.vue          # フィルター
+│   ├── TodoFilter.vue          # フィルター
+│   ├── TodoDetailModal.vue     # 詳細モーダル
+│   ├── TodoSearchForm.vue      # 検索フォーム
+│   ├── TodoTable.vue           # テーブル表示
+│   ├── TodoTableFilter.vue     # テーブルフィルター
+│   ├── TodoTableRow.vue        # テーブル行
+│   ├── CommentForm.vue         # コメント入力フォーム
+│   ├── CommentList.vue         # コメントリスト
+│   └── CommentItem.vue         # コメントアイテム
 ├── project/                    # プロジェクト関連コンポーネント
 │   ├── ProjectForm.vue         # プロジェクト入力フォーム
 │   └── ProjectCard.vue         # プロジェクトカード
@@ -103,15 +117,45 @@ src/frontend/src/components/
 ```
 docs/specs/screens/
 ├── index.md                    # 画面一覧（本ファイル）
+├── README.md                   # 画面仕様書ナビゲーション
 ├── SC-001/                     # ホーム画面
-│   └── screen.md               # 画面詳細
-├── SC-002/                     # ToDoリスト画面
+│   ├── README.md               # フォルダ説明
 │   ├── screen.md               # 画面詳細
-│   └── events.md               # イベント一覧・詳細
+│   ├── events.md               # イベント一覧
+│   ├── EV-001-01.md            # 初期読込
+│   ├── EV-001-02.md            # カードクリック
+│   └── EV-001-03.md            # ナビゲーション
+├── SC-002/                     # チケット管理画面
+│   ├── README.md               # フォルダ説明
+│   ├── screen.md               # 画面詳細
+│   ├── events.md               # イベント一覧
+│   ├── EV-002-01.md            # 初期読込
+│   ├── EV-002-02.md            # 統計更新
+│   ├── EV-002-03.md            # ToDo追加
+│   ├── EV-002-04.md            # フィルタ切替
+│   ├── EV-002-05.md            # 完了状態切替
+│   ├── EV-002-06.md            # ToDo削除
+│   └── EV-002-07.md            # ホーム遷移
 ├── SC-003/                     # プロジェクト画面
+│   ├── README.md               # フォルダ説明
 │   ├── screen.md               # 画面詳細
-│   └── events.md               # イベント一覧・詳細
-└── SC-004/                     # ユーザー管理画面
+│   ├── events.md               # イベント一覧
+│   ├── EV-003-01.md            # 初期読込
+│   ├── EV-003-02.md            # プロジェクト追加
+│   ├── EV-003-03.md            # プロジェクト削除
+│   ├── EV-003-04.md            # ToDo表示遷移
+│   ├── EV-003-05.md            # ユーザー管理遷移
+│   └── EV-003-06.md            # 未分類ToDo表示
+├── SC-004/                     # ユーザー管理画面
+│   ├── README.md               # フォルダ説明
+│   ├── screen.md               # 画面詳細
+│   ├── events.md               # イベント一覧
+│   ├── EV-004-01.md            # 初期読込
+│   ├── EV-004-02.md            # ユーザー追加
+│   ├── EV-004-03.md            # ユーザー削除
+│   └── EV-004-04.md            # 案件一覧遷移
+└── SC-005/                     # チケット一覧画面
+    ├── README.md               # フォルダ説明
     ├── screen.md               # 画面詳細
     └── events.md               # イベント一覧・詳細
 ```
@@ -122,14 +166,18 @@ docs/specs/screens/
 
 | 画面 | 操作 | API | メソッド |
 |------|------|-----|---------|
-| ToDoリスト | 一覧取得 | /api/todos | GET |
-| ToDoリスト | フィルタ取得 | /api/todos?completed={bool} | GET |
-| ToDoリスト | 統計取得 | /api/todos/stats | GET |
-| ToDoリスト | 新規作成 | /api/todos | POST |
-| ToDoリスト | 更新 | /api/todos/{id} | PUT |
-| ToDoリスト | 完了切替 | /api/todos/{id}/toggle | PATCH |
-| ToDoリスト | 削除 | /api/todos/{id} | DELETE |
-| ToDoリスト | ユーザー一覧取得 | /api/users | GET |
+| チケット管理 | 一覧取得 | /api/todos | GET |
+| チケット管理 | フィルタ取得 | /api/todos?completed={bool} | GET |
+| チケット管理 | 統計取得 | /api/todos/stats | GET |
+| チケット管理 | 新規作成 | /api/todos | POST |
+| チケット管理 | 更新 | /api/todos/{id} | PUT |
+| チケット管理 | 完了切替 | /api/todos/{id}/toggle | PATCH |
+| チケット管理 | 削除 | /api/todos/{id} | DELETE |
+| チケット管理 | ユーザー一覧取得 | /api/users | GET |
+| チケット管理 | コメント一覧取得 | /api/todos/{id}/comments | GET |
+| チケット管理 | コメント作成 | /api/todos/{id}/comments | POST |
+| チケット管理 | コメント削除 | /api/comments/{id} | DELETE |
+| チケット一覧 | 一覧取得 | /api/todos | GET |
 | プロジェクト | 一覧取得 | /api/projects | GET |
 | プロジェクト | 統計取得 | /api/projects/{id}/stats | GET |
 | プロジェクト | 新規作成 | /api/projects | POST |
@@ -151,3 +199,5 @@ docs/specs/screens/
 | 2025-12-22 | ユーザー管理画面追加、ToDoリストに担当者選択追加 | 202512_担当者機能追加 |
 | 2025-12-23 | SC-003, SC-004 画面詳細仕様書作成 | - |
 | 2025-12-24 | Vue.js 3移行に伴い技術スタック・コンポーネント構成を更新 | 202512_Vue.js移行 |
+| 2025-12-25 | SC-002にコメント機能追加 | 20251225_チケット詳細コメント機能 |
+| 2025-12-26 | SC-005チケット一覧画面追加、コンポーネント構成更新 | 20251226_チケット一覧画面 |

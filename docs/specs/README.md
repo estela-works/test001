@@ -10,7 +10,7 @@
 | バックエンド | Spring Boot 3.2 + MyBatis |
 | データベース | H2 Database (ファイルモード) |
 | ビルドツール | Vite (フロントエンド) / Maven (バックエンド) |
-| 最終更新日 | 2025-12-24 |
+| 最終更新日 | 2025-12-26 |
 
 ## フォルダ構成
 
@@ -22,19 +22,34 @@ specs/
 │   ├── index.md             # APIインデックス
 │   ├── API-TODO-XXX.md      # Todo API詳細
 │   ├── API-PROJECT-XXX.md   # Project API詳細
-│   └── API-USER-XXX.md      # User API詳細
+│   ├── API-USER-XXX.md      # User API詳細
+│   └── API-COMMENT-XXX.md   # Comment API詳細
 ├── logic-catalog.md         # ロジック一覧
 ├── db-schema.md             # DB構造
 ├── test-catalog.md          # テストケース概要
 ├── test/                    # テスト詳細仕様
-│   ├── backend-test-catalog.md  # バックエンドテスト詳細
-│   └── e2e-test-catalog.md      # E2Eテスト詳細
-└── screens/                 # 画面一覧・詳細
-    ├── index.md             # 画面一覧
-    ├── SC-001/              # ホーム画面
-    ├── SC-002/              # ToDoリスト画面
-    ├── SC-003/              # プロジェクト画面
-    └── SC-004/              # ユーザー管理画面
+│   ├── backend-test-catalog/ # バックエンドテスト詳細
+│   └── e2e-test-catalog.md   # E2Eテスト詳細
+├── screens/                 # 画面一覧・詳細
+│   ├── index.md             # 画面一覧
+│   ├── SC-001/              # ホーム画面
+│   ├── SC-002/              # ToDoリスト画面
+│   ├── SC-003/              # プロジェクト画面
+│   └── SC-004/              # ユーザー管理画面
+├── frontend/                # フロントエンド仕様
+│   ├── README.md              # フロントエンド仕様概要
+│   ├── frontend-overview.md   # フロントエンド全体概要
+│   ├── component-catalog.md   # コンポーネントカタログ
+│   ├── store-catalog.md       # ストアカタログ
+│   ├── type-catalog.md        # 型定義カタログ
+│   └── routing-spec.md        # ルーティング仕様
+└── template/                # フロントエンド仕様書テンプレート
+    ├── README.md                       # テンプレート概要
+    ├── frontend-overview-template.md   # フロントエンド全体概要
+    ├── component-catalog-template.md   # コンポーネントカタログ
+    ├── store-catalog-template.md       # ストアカタログ
+    ├── type-catalog-template.md        # 型定義カタログ
+    └── routing-spec-template.md        # ルーティング仕様
 ```
 
 ## ドキュメント一覧
@@ -49,6 +64,8 @@ specs/
 | [db-schema.md](db-schema.md) | DB構造・テーブル定義 |
 | [test-catalog.md](test-catalog.md) | テストケース概要 |
 | [test/](test/) | テスト詳細仕様 |
+| [frontend/](frontend/) | フロントエンド仕様 |
+| [template/](template/) | フロントエンド仕様書テンプレート |
 
 ## 更新タイミング
 

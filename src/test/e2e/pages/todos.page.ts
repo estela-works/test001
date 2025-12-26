@@ -4,9 +4,11 @@ import { BasePage } from './base.page';
 /**
  * ToDo管理画面ページオブジェクト
  * 画面ID: SCR-TODOS-001
+ *
+ * Vue.js SPA対応版
  */
 export class TodosPage extends BasePage {
-  protected readonly url = '/todos.html';
+  protected readonly url = '/todos';
 
   // === 入力要素 ===
   readonly titleInput: Locator;
@@ -22,9 +24,7 @@ export class TodosPage extends BasePage {
   readonly completedFilterButton: Locator;
 
   // === 統計 ===
-  readonly totalCount: Locator;
-  readonly completedCount: Locator;
-  readonly pendingCount: Locator;
+  readonly statsContainer: Locator;
 
   // === リスト ===
   readonly todoList: Locator;
@@ -39,33 +39,31 @@ export class TodosPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    // 入力要素の初期化
-    this.titleInput = page.locator('#title-input');
-    this.descriptionInput = page.locator('#description-input');
-    this.startDateInput = page.locator('#start-date-input');
-    this.dueDateInput = page.locator('#due-date-input');
-    this.assigneeSelect = page.locator('#assignee-input');
-    this.addButton = page.locator('.add-todo button');
+    // 入力要素の初期化（Vue: TodoForm.vue）
+    this.titleInput = page.locator('.add-todo input[type="text"]');
+    this.descriptionInput = page.locator('.add-todo textarea');
+    this.startDateInput = page.locator('.add-todo .date-field:first-child input[type="date"]');
+    this.dueDateInput = page.locator('.add-todo .date-field:last-child input[type="date"]');
+    this.assigneeSelect = page.locator('.add-todo .assignee-field select');
+    this.addButton = page.locator('.add-todo button.btn-primary');
 
-    // フィルタボタンの初期化
-    this.allFilterButton = page.locator('#all-btn');
-    this.pendingFilterButton = page.locator('#pending-btn');
-    this.completedFilterButton = page.locator('#completed-btn');
+    // フィルタボタンの初期化（Vue: TodoFilter.vue）
+    this.allFilterButton = page.locator('.filter-buttons button:has-text("すべて")');
+    this.pendingFilterButton = page.locator('.filter-buttons button:has-text("未完了")');
+    this.completedFilterButton = page.locator('.filter-buttons button:has-text("完了済み")');
 
-    // 統計の初期化
-    this.totalCount = page.locator('#total-count');
-    this.completedCount = page.locator('#completed-count');
-    this.pendingCount = page.locator('#pending-count');
+    // 統計の初期化（Vue: TodoStats.vue）
+    this.statsContainer = page.locator('.stats');
 
-    // リストの初期化
-    this.todoList = page.locator('#todo-list');
+    // リストの初期化（Vue: TodoItem.vue）
+    this.todoList = page.locator('.todo-list');
     this.todoItems = page.locator('.todo-item');
 
     // その他
-    this.projectName = page.locator('#project-name');
+    this.projectName = page.locator('.project-subtitle');
     this.backLink = page.locator('.back-link a');
-    this.errorMessage = page.locator('#error-message');
-    this.loadingIndicator = page.locator('#loading');
+    this.errorMessage = page.locator('.error');
+    this.loadingIndicator = page.locator('.loading');
   }
 
   /**
@@ -154,13 +152,20 @@ export class TodosPage extends BasePage {
   }
 
   /**
-   * 統計を取得
+   * 統計を取得（Vue: TodoStats.vue）
    */
   async getStats(): Promise<{ total: number; completed: number; pending: number }> {
+    const statsText = await this.statsContainer.textContent() || '';
+
+    // "総数: X 完了: Y 未完了: Z" 形式をパース
+    const totalMatch = statsText.match(/総数:\s*(\d+)/);
+    const completedMatch = statsText.match(/完了:\s*(\d+)/);
+    const pendingMatch = statsText.match(/未完了:\s*(\d+)/);
+
     return {
-      total: parseInt(await this.totalCount.textContent() || '0'),
-      completed: parseInt(await this.completedCount.textContent() || '0'),
-      pending: parseInt(await this.pendingCount.textContent() || '0'),
+      total: totalMatch ? parseInt(totalMatch[1]) : 0,
+      completed: completedMatch ? parseInt(completedMatch[1]) : 0,
+      pending: pendingMatch ? parseInt(pendingMatch[1]) : 0,
     };
   }
 
@@ -226,5 +231,12 @@ export class TodosPage extends BasePage {
       completed: this.completedFilterButton,
     };
     await expect(buttons[filter]).toHaveClass(/active/);
+  }
+
+  /**
+   * 案件一覧へ戻る
+   */
+  async navigateToProjects(): Promise<void> {
+    await this.backLink.click();
   }
 }

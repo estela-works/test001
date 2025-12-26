@@ -8,6 +8,7 @@
 | 案件ID | <!-- YYYYMM_案件名 --> |
 | 作成日 | <!-- YYYY-MM-DD --> |
 | 関連要件整理書 | [requirements.md](./requirements.md) |
+| 関連詳細設計書 | [detail-design-frontend.md](./detail-design-frontend.md), [detail-design-store.md](./detail-design-store.md), [detail-design-types.md](./detail-design-types.md) |
 
 ---
 
@@ -153,22 +154,26 @@ Vue.js使用時は画面とコンポーネントを区別して記載
 #### Props / Emits（コンポーネントの場合）
 
 <!--
-Vueコンポーネントの場合、Props と Emits を記載
+Vueコンポーネントの場合、Props と Emits の概要を記載
+型の詳細仕様はdetail-design-types.mdで定義
+
 例:
 
 **Props**:
 
-| Prop名 | 型 | 必須 | 説明 |
-|--------|-----|------|------|
-| todoId | number | ✓ | 表示するチケットID |
-| isOpen | boolean | ✓ | モーダル開閉状態 |
+| Prop名 | 必須 | 説明 |
+|--------|------|------|
+| todoId | ✓ | 表示するチケットID |
+| isOpen | ✓ | モーダル開閉状態 |
 
 **Emits**:
 
-| イベント名 | ペイロード型 | 説明 |
-|-----------|------------|------|
-| close | - | モーダルを閉じる |
-| todoUpdated | Todo | チケット更新時 |
+| イベント名 | 説明 |
+|-----------|------|
+| close | モーダルを閉じる |
+| todoUpdated | チケット更新時 |
+
+※ 型の詳細仕様はdetail-design-types.mdで定義
 -->
 
 ---

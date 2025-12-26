@@ -9,7 +9,7 @@
 | ベースURL | `/api` |
 | 形式 | REST API |
 | コンテンツタイプ | application/json |
-| 最終更新日 | 2025-12-23 |
+| 最終更新日 | 2025-12-26 |
 | 詳細設計 | [api/](api/) フォルダ |
 
 ---
@@ -30,7 +30,17 @@
 | API-TODO-008 | DELETE | /api/todos/{id} | 単一削除 | 204 or 404 | 初期構築 | [詳細](api/API-TODO-008.md) |
 | API-TODO-009 | DELETE | /api/todos | 全件削除 | 204 | 初期構築 | [詳細](api/API-TODO-009.md) |
 
-### 2.2 User API
+### 2.2 Project API
+
+| ID | メソッド | パス | 機能 | レスポンス | 追加案件 | 詳細 |
+|----|---------|------|------|-----------|----------|------|
+| API-PROJECT-001 | GET | /api/projects | プロジェクト全件取得 | 200 + List | 202512_プロジェクト機能追加 | - |
+| API-PROJECT-002 | GET | /api/projects/{id} | プロジェクト単一取得 | 200 or 404 | 202512_プロジェクト機能追加 | - |
+| API-PROJECT-003 | POST | /api/projects | プロジェクト新規作成 | 201 + Project | 202512_プロジェクト機能追加 | - |
+| API-PROJECT-004 | DELETE | /api/projects/{id} | プロジェクト削除 | 204 or 404 | 202512_プロジェクト機能追加 | - |
+| API-PROJECT-005 | GET | /api/projects/{id}/stats | プロジェクト統計取得 | 200 + Stats | 202512_プロジェクト機能追加 | - |
+
+### 2.3 User API
 
 | ID | メソッド | パス | 機能 | レスポンス | 追加案件 | 詳細 |
 |----|---------|------|------|-----------|----------|------|
@@ -38,6 +48,14 @@
 | API-USER-002 | GET | /api/users/{id} | ユーザー単一取得 | 200 or 404 | 202512_担当者機能追加 | [詳細](api/API-USER-002.md) |
 | API-USER-003 | POST | /api/users | ユーザー新規作成 | 201 or 400 or 409 | 202512_担当者機能追加 | [詳細](api/API-USER-003.md) |
 | API-USER-004 | DELETE | /api/users/{id} | ユーザー削除 | 204 or 404 | 202512_担当者機能追加 | [詳細](api/API-USER-004.md) |
+
+### 2.4 Comment API
+
+| ID | メソッド | パス | 機能 | レスポンス | 追加案件 | 詳細 |
+|----|---------|------|------|-----------|----------|------|
+| API-COMMENT-001 | GET | /api/todos/{todoId}/comments | コメント一覧取得 | 200 + List | 20251225_チケット詳細コメント機能 | - |
+| API-COMMENT-002 | POST | /api/todos/{todoId}/comments | コメント作成 | 201 + Comment | 20251225_チケット詳細コメント機能 | - |
+| API-COMMENT-003 | DELETE | /api/comments/{id} | コメント削除 | 204 or 404 | 20251225_チケット詳細コメント機能 | - |
 
 ---
 
@@ -258,7 +276,47 @@
 | name | String | ユーザー名 |
 | createdAt | LocalDateTime | 作成日時 |
 
-### 4.3 エラーレスポンス
+### 4.3 Projectオブジェクト
+
+```json
+{
+  "id": 1,
+  "name": "プロジェクトA",
+  "description": "プロジェクトの説明",
+  "createdAt": "2025-12-22T10:00:00"
+}
+```
+
+| フィールド | 型 | 説明 |
+|-----------|-----|------|
+| id | Long | 一意識別子 |
+| name | String | プロジェクト名 |
+| description | String | 説明（nullable） |
+| createdAt | LocalDateTime | 作成日時 |
+
+### 4.4 Commentオブジェクト
+
+```json
+{
+  "id": 1,
+  "todoId": 1,
+  "userId": 1,
+  "userName": "山田太郎",
+  "content": "コメント内容",
+  "createdAt": "2025-12-25T10:00:00"
+}
+```
+
+| フィールド | 型 | 説明 |
+|-----------|-----|------|
+| id | Long | 一意識別子 |
+| todoId | Long | 対象ToDoのID |
+| userId | Long | 投稿者ID（nullable） |
+| userName | String | 投稿者名（nullable） |
+| content | String | コメント内容 |
+| createdAt | LocalDateTime | 作成日時 |
+
+### 4.5 エラーレスポンス
 
 | ステータス | 条件 |
 |-----------|------|
@@ -364,4 +422,7 @@
 |------|----------|----------|
 | 2025-12-22 | 初版作成（9エンドポイント） | 初期構築 |
 | 2025-12-22 | User API追加（4エンドポイント）、Todoにassignee追加 | 202512_担当者機能追加 |
+| 2025-12-22 | Project API追加（5エンドポイント） | 202512_プロジェクト機能追加 |
 | 2025-12-23 | API詳細フォルダ（api/）追加、API IDを付与 | - |
+| 2025-12-25 | Comment API追加（3エンドポイント） | 20251225_チケット詳細コメント機能 |
+| 2025-12-26 | Project API、Comment APIを一覧に追加 | - |

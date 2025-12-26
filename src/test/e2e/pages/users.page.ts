@@ -4,16 +4,18 @@ import { BasePage } from './base.page';
 /**
  * ユーザー管理画面ページオブジェクト
  * 画面ID: SCR-USERS-001
+ *
+ * Vue.js SPA対応版
  */
 export class UsersPage extends BasePage {
-  protected readonly url = '/users.html';
+  protected readonly url = '/users';
 
   // === 入力要素 ===
   readonly nameInput: Locator;
   readonly addUserButton: Locator;
 
   // === 統計 ===
-  readonly userCount: Locator;
+  readonly statsContainer: Locator;
 
   // === リスト ===
   readonly userList: Locator;
@@ -27,21 +29,21 @@ export class UsersPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    // 入力要素の初期化
-    this.nameInput = page.locator('#name-input');
-    this.addUserButton = page.locator('.add-form button');
+    // 入力要素の初期化（Vue: UserForm.vue）
+    this.nameInput = page.locator('.add-form input[type="text"]');
+    this.addUserButton = page.locator('.add-form button.btn-primary');
 
-    // 統計の初期化
-    this.userCount = page.locator('#user-count');
+    // 統計の初期化（Vue: UserView.vue内の.stats）
+    this.statsContainer = page.locator('.stats');
 
-    // リストの初期化
-    this.userList = page.locator('#user-list');
+    // リストの初期化（Vue: UserCard.vue）
+    this.userList = page.locator('.container');
     this.userCards = page.locator('.user-card');
 
     // その他
     this.backLink = page.locator('.back-link a');
-    this.errorMessage = page.locator('#error-message');
-    this.loadingIndicator = page.locator('#loading');
+    this.errorMessage = page.locator('.error');
+    this.loadingIndicator = page.locator('.loading');
   }
 
   /**
@@ -84,11 +86,12 @@ export class UsersPage extends BasePage {
   }
 
   /**
-   * 統計のユーザー数を取得
+   * 統計のユーザー数を取得（Vue: stats内のstrongタグ）
    */
   async getStatsUserCount(): Promise<number> {
-    const text = await this.userCount.textContent() || '0';
-    return parseInt(text);
+    const statsText = await this.statsContainer.textContent() || '';
+    const match = statsText.match(/(\d+)/);
+    return match ? parseInt(match[1]) : 0;
   }
 
   /**
@@ -113,10 +116,10 @@ export class UsersPage extends BasePage {
   }
 
   /**
-   * 空の状態メッセージが表示されていることを確認
+   * 空の状態メッセージが表示されていることを確認（Vue: empty-message）
    */
   async expectEmptyMessage(): Promise<void> {
-    await expect(this.page.locator('#user-list p')).toContainText('ユーザーが登録されていません');
+    await expect(this.page.locator('.empty-message')).toContainText('ユーザーが登録されていません');
   }
 
   /**

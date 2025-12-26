@@ -4,11 +4,11 @@
 
 ## 1. 概要
 
-本プロジェクトのテストは、バックエンド（JUnit 5）とE2E（Playwright）の2層で構成されています。
+本プロジェクトのテストは、バックエンド（JUnit 5）、フロントエンド（Vitest）、E2E（Playwright）の3層で構成されています。
 
 | 項目 | 内容 |
 |------|------|
-| 最終更新日 | 2025-12-23 |
+| 最終更新日 | 2025-12-26 |
 
 ---
 
@@ -19,8 +19,9 @@
 | テスト種別 | テストケース数 | ファイル数 |
 |------------|----------------|------------|
 | バックエンドテスト | 151 | 8 |
-| E2Eテスト（Playwright） | 32 | 3 |
-| **合計** | **183** | **11** |
+| フロントエンドテスト（Vitest） | - | 10 |
+| E2Eテスト（Playwright） | 32 | 4 |
+| **合計** | **183+** | **22** |
 
 ### 2.2 カテゴリ別内訳
 
@@ -78,10 +79,26 @@
 | ProjectServiceTest.java | ProjectService | Service層の統合テスト |
 | ProjectControllerTest.java | ProjectController | REST APIテスト |
 
-### 4.2 E2Eテスト（Playwright）
+### 4.2 フロントエンドテスト（Vitest）
 
 | ファイル | テスト対象 | 概要 |
 |----------|------------|------|
+| ErrorMessage.spec.ts | ErrorMessage | エラーメッセージコンポーネント |
+| TodoStats.spec.ts | TodoStats | 統計表示コンポーネント |
+| TodoFilter.spec.ts | TodoFilter | フィルターコンポーネント |
+| TodoSearchForm.spec.ts | TodoSearchForm | 検索フォームコンポーネント |
+| TodoTableRow.spec.ts | TodoTableRow | テーブル行コンポーネント |
+| UserCard.spec.ts | UserCard | ユーザーカードコンポーネント |
+| todoStore.spec.ts | todoStore | Todoストア |
+| projectStore.spec.ts | projectStore | Projectストア |
+| userStore.spec.ts | userStore | Userストア |
+| filter.spec.ts | filter.ts | フィルター型定義・関数 |
+
+### 4.3 E2Eテスト（Playwright）
+
+| ファイル | テスト対象 | 概要 |
+|----------|------------|------|
+| home.spec.ts | ホーム画面 | 画面表示、ナビゲーション |
 | todos-crud.spec.ts | ToDo管理画面 | 画面表示、CRUD、フィルタ |
 | projects-crud.spec.ts | 案件一覧画面 | 画面表示、CRUD、進捗表示 |
 | users-crud.spec.ts | ユーザー管理画面 | 画面表示、CRUD、バリデーション |
@@ -103,7 +120,23 @@
 ./mvnw test -Dtest=TodoServiceTest#getAllTodos*
 ```
 
-### 5.2 E2Eテスト
+### 5.2 フロントエンドテスト
+
+```bash
+# frontendディレクトリに移動
+cd src/frontend
+
+# 全テスト実行
+npm test
+
+# ウォッチモードで実行
+npm run test:watch
+
+# カバレッジ付きで実行
+npm run test:coverage
+```
+
+### 5.3 E2Eテスト
 
 ```bash
 # e2eディレクトリに移動
@@ -131,7 +164,16 @@ npx playwright test specs/todos/todos-crud.spec.ts
 | DB | H2インメモリDB |
 | トランザクション | テスト後自動ロールバック |
 
-### 6.2 E2Eテスト設定
+### 6.2 フロントエンドテスト設定
+
+| 設定 | 内容 |
+|------|------|
+| 設定ファイル | vitest.config.ts |
+| テストフレームワーク | Vitest |
+| DOM環境 | jsdom |
+| コンポーネントテスト | @vue/test-utils |
+
+### 6.3 E2Eテスト設定
 
 | 設定 | 内容 |
 |------|------|
@@ -160,3 +202,4 @@ npx playwright test specs/todos/todos-crud.spec.ts
 | 2025-12-22 | User関連テスト追加、担当者関連テスト追加（計163ケース） |
 | 2025-12-22 | Mapper・Controllerテスト追加（計68ケース） |
 | 2025-12-22 | 初版作成（TodoService: 38ケース） |
+| 2025-12-26 | フロントエンドテスト（Vitest）追加、E2Eホーム画面テスト追加 |

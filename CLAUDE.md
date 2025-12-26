@@ -117,8 +117,9 @@ Get-ChildItem -Path "パス"
    - フロントエンド：basic-design-frontend.md（変更ない場合も作成し理由明記）
 3. **詳細設計書**（detail-design-*.md）
    - API、ロジック、DB、フロントエンド
-4. **実装ガイド**（implementation-guide.md）
-5. **テスト仕様書**（test-spec-*.md）
+4. **テスト仕様書**（test-spec-*.md）
+5. **実装作業報告書**（implementation-report.md）← 実装完了時に作成
+6. **テスト実装報告書**（test-implementation-report.md）← テスト実装完了時に作成
 
 ### 重要事項
 
@@ -250,11 +251,14 @@ detail-design-store.md          # 目次ファイル（約100行）
 3. **実装中**
    - テストコード作成 → 実装 → ビルド確認
 
-4. **実装後**
-   - テスト実行 → 動作確認 → ドキュメント更新
+4. **実装完了**
+   - ビルド確認 → **実装作業報告書作成**（implementation-report.md）
 
-5. **案件完了**
-   - 案件README更新 → 案件一覧更新 → プロセス停止確認
+5. **テスト実装完了**
+   - テスト実行 → **テスト実装報告書作成**（test-implementation-report.md）
+
+6. **案件完了**
+   - 動作確認 → ドキュメント更新 → 案件README更新 → 案件一覧更新 → プロセス停止確認
 
 ---
 

@@ -6,6 +6,8 @@ import { test, expect } from '../../fixtures/custom-fixtures';
  *
  * テストシナリオ: ../master/test-scenarios/users-scenarios.md
  * 画面仕様: ../master/screen-spec/users-screen.json
+ *
+ * Vue.js SPA対応版
  */
 test.describe('ユーザー管理画面', () => {
 
@@ -24,8 +26,8 @@ test.describe('ユーザー管理画面', () => {
     await expect(usersPage.nameInput).toBeVisible();
     await expect(usersPage.addUserButton).toBeVisible();
 
-    // 登録ユーザー数統計が表示される
-    await expect(usersPage.userCount).toBeVisible();
+    // 登録ユーザー数統計が表示される（Vue: .stats）
+    await expect(usersPage.statsContainer).toBeVisible();
 
     // 案件一覧へのリンクが表示される
     await expect(usersPage.backLink).toBeVisible();
@@ -86,6 +88,7 @@ test.describe('ユーザー管理画面', () => {
 
     // 初期状態の件数を取得
     const initialCount = await usersPage.getUserCount();
+    expect(initialCount).toBeGreaterThanOrEqual(1);
 
     // 削除（確認ダイアログでキャンセル）
     await usersPage.deleteUser(0, false);
@@ -123,12 +126,19 @@ test.describe('ユーザー管理画面', () => {
   // バリデーションテスト
   // ===================
 
-  test('TC-100: バリデーション（ユーザー名未入力）', async ({ usersPage }) => {
+  test('TC-100: バリデーション（ユーザー名未入力）', async ({ usersPage, page }) => {
+    // Vue版ではalert()を使用するため、ダイアログハンドラを設定
+    let alertMessage = '';
+    page.on('dialog', async (dialog) => {
+      alertMessage = dialog.message();
+      await dialog.accept();
+    });
+
     // ユーザー名未入力で追加ボタンをクリック
     await usersPage.addUserButton.click();
 
-    // エラーメッセージが表示される
-    await usersPage.expectErrorMessage('ユーザー名を入力してください');
+    // アラートメッセージを確認
+    expect(alertMessage).toBe('ユーザー名を入力してください');
   });
 
   test('TC-101: バリデーション（重複ユーザー名）', async ({ usersPage, cleanApiHelper }) => {
@@ -140,11 +150,18 @@ test.describe('ユーザー管理画面', () => {
     // 同名のユーザーを追加しようとする
     await usersPage.addUser('既存ユーザー');
 
-    // エラーメッセージが表示される
+    // エラーメッセージが表示される（Vue: .error）
     await usersPage.expectErrorMessage('同じ名前のユーザーが既に存在します');
   });
 
-  test('TC-102: バリデーション（文字数上限）', async ({ usersPage }) => {
+  test('TC-102: バリデーション（文字数上限）', async ({ usersPage, page }) => {
+    // Vue版ではalert()を使用するため、ダイアログハンドラを設定
+    let alertMessage = '';
+    page.on('dialog', async (dialog) => {
+      alertMessage = dialog.message();
+      await dialog.accept();
+    });
+
     // 101文字以上の文字列を作成
     const longName = 'あ'.repeat(101);
 
@@ -192,7 +209,7 @@ test.describe('ユーザー管理画面', () => {
     // 戻るリンクをクリック
     await usersPage.navigateToProjects();
 
-    // 案件一覧画面に遷移
-    await usersPage.expectUrl('/projects.html');
+    // 案件一覧画面に遷移（Vue Router形式）
+    await usersPage.expectUrl('/projects');
   });
 });

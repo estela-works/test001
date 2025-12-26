@@ -12,6 +12,13 @@ TypeScript型定義。
 | `user.ts` | ユーザー関連型定義 |
 | `comment.ts` | コメント関連型定義 |
 | `api.ts` | API通信関連型定義 |
+| `filter.ts` | フィルター関連型定義 |
+
+## テストファイル
+
+| ファイル | テスト数 |
+|---------|---------|
+| `filter.spec.ts` | - |
 
 ## 主な型
 
@@ -20,3 +27,4 @@ TypeScript型定義。
 - `User` - ユーザーエンティティ
 - `TodoComment` - コメントエンティティ
 - `ApiResponse<T>` - API応答ラッパー
+- `FilterState` - フィルター状態

@@ -36,6 +36,13 @@
 | [test-spec-frontend-template.md](test-spec-frontend-template.md) | フロントエンドテスト方針書 |
 | [test-spec-backend-template.md](test-spec-backend-template.md) | バックエンドテスト方針書 |
 
+### 作業報告
+
+| テンプレート | 説明 |
+|-------------|------|
+| [implementation-report-template.md](implementation-report-template.md) | 実装作業報告書 |
+| [test-implementation-report-template.md](test-implementation-report-template.md) | テスト実装報告書 |
+
 ## 使い方
 
 1. 案件フォルダを作成: `YYYYMM_案件名`
@@ -43,6 +50,40 @@
 3. 内容を記入
 
 詳細は [ドキュメント体系ガイド](../../document-guide.md) を参照。
+
+---
+
+## フロントエンド設計書の責務分担
+
+フロントエンド関連の設計書は、以下の責務分担に従って記載する。
+
+### 責務マトリクス
+
+| 設計書 | 責務 |
+|--------|------|
+| basic-design-frontend | コンポーネント一覧、画面構成、状態管理方針、Props/Emits概要 |
+| detail-design-frontend | テンプレート構造、スタイル設計、イベント処理、Props/Emits概要表 |
+| detail-design-store | 状態定義、API呼び出し実装、エラーハンドリング |
+| detail-design-types | 型定義（Props/Emits/State/API）、バリデーション |
+
+### 記載しない項目
+
+| 設計書 | 記載しない項目 | 参照先 |
+|--------|---------------|--------|
+| detail-design-frontend | 型の詳細定義、バリデーション実装 | detail-design-types |
+| detail-design-frontend | API呼び出し実装、エラー処理ロジック | detail-design-store |
+| detail-design-store | 型定義 | detail-design-types |
+| basic-design-frontend | 型の詳細仕様 | detail-design-types |
+
+### 設計書間の参照関係
+
+```
+basic-design-frontend
+    ↓
+    ├── detail-design-frontend （テンプレート・スタイル）
+    ├── detail-design-store （状態・API・エラー処理）
+    └── detail-design-types （型・バリデーション）
+```
 
 ---
 

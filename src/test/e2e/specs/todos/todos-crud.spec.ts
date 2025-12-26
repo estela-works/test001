@@ -6,6 +6,8 @@ import { test, expect } from '../../fixtures/custom-fixtures';
  *
  * テストシナリオ: ../master/test-scenarios/todos-scenarios.md
  * 画面仕様: ../master/screen-spec/todos-screen.json
+ *
+ * Vue.js SPA対応版
  */
 test.describe('ToDo管理画面', () => {
 
@@ -20,10 +22,8 @@ test.describe('ToDo管理画面', () => {
   // ===================
 
   test('TC-001: 画面初期表示確認', async ({ todosPage }) => {
-    // 統計表示エリアが表示される
-    await expect(todosPage.totalCount).toBeVisible();
-    await expect(todosPage.completedCount).toBeVisible();
-    await expect(todosPage.pendingCount).toBeVisible();
+    // 統計表示エリアが表示される（Vue: TodoStats.vue）
+    await expect(todosPage.statsContainer).toBeVisible();
 
     // 新規ToDo追加フォームが表示される
     await expect(todosPage.titleInput).toBeVisible();
@@ -88,8 +88,12 @@ test.describe('ToDo管理画面', () => {
   test('TC-020: ToDo完了切り替え（未完了→完了）', async ({ todosPage, cleanApiHelper }) => {
     // テスト用ToDoを作成
     await cleanApiHelper.createTodo({ title: '完了テスト用タスク' });
-    await todosPage.goto();
+    // cleanApiHelperでデータ更新後は強制リロードで最新データを取得
+    await todosPage.goto(undefined, { forceReload: true });
     await todosPage.waitForLoadingComplete();
+
+    // Todoアイテムが表示されるのを待機
+    await expect(todosPage.todoItems.first()).toBeVisible();
 
     // 初期状態の統計を取得
     const initialStats = await todosPage.getStats();
@@ -110,7 +114,8 @@ test.describe('ToDo管理画面', () => {
     // テスト用ToDoを作成して完了にする
     const todo = await cleanApiHelper.createTodo({ title: '未完了復帰テスト用タスク' });
     await cleanApiHelper.toggleTodo(todo.id);
-    await todosPage.goto();
+    // cleanApiHelperでデータ更新後は強制リロードで最新データを取得
+    await todosPage.goto(undefined, { forceReload: true });
     await todosPage.waitForLoadingComplete();
 
     // 初期状態の統計を取得
@@ -132,33 +137,55 @@ test.describe('ToDo管理画面', () => {
   // 削除テスト
   // ===================
 
-  test('TC-030: ToDo削除（確認OK）', async ({ todosPage, cleanApiHelper }) => {
+  test('TC-030: ToDo削除（確認OK）', async ({ todosPage, cleanApiHelper, page }) => {
     // テスト用ToDoを作成
     await cleanApiHelper.createTodo({ title: '削除テスト用タスク' });
     await todosPage.goto();
     await todosPage.waitForLoadingComplete();
 
+    // Todoアイテムが表示されるのを待機
+    await expect(todosPage.todoItems.first()).toBeVisible();
+
     // 初期状態の件数を取得
     const initialCount = await todosPage.getTodoCount();
+    expect(initialCount).toBeGreaterThanOrEqual(1);
 
-    // 削除（確認ダイアログでOK）
-    await todosPage.deleteTodo(0, true);
+    // 確認ダイアログのハンドラを設定
+    page.once('dialog', async (dialog) => {
+      await dialog.accept();
+    });
+
+    // 削除ボタンをクリック
+    await todosPage.todoItems.first().locator('.delete-btn').click();
+    await todosPage.waitForLoadingComplete();
 
     // 件数が減ることを待機して確認
     await expect(todosPage.todoItems).toHaveCount(initialCount - 1);
   });
 
-  test('TC-031: ToDo削除（確認キャンセル）', async ({ todosPage, cleanApiHelper }) => {
+  test('TC-031: ToDo削除（確認キャンセル）', async ({ todosPage, cleanApiHelper, page }) => {
     // テスト用ToDoを作成
     await cleanApiHelper.createTodo({ title: '削除キャンセルテスト用タスク' });
     await todosPage.goto();
     await todosPage.waitForLoadingComplete();
 
+    // Todoアイテムが表示されるのを待機
+    await expect(todosPage.todoItems.first()).toBeVisible();
+
     // 初期状態の件数を取得
     const initialCount = await todosPage.getTodoCount();
+    expect(initialCount).toBeGreaterThanOrEqual(1);
 
-    // 削除（確認ダイアログでキャンセル）
-    await todosPage.deleteTodo(0, false);
+    // 確認ダイアログのハンドラを設定（キャンセル）
+    page.once('dialog', async (dialog) => {
+      await dialog.dismiss();
+    });
+
+    // 削除ボタンをクリック
+    await todosPage.todoItems.first().locator('.delete-btn').click();
+
+    // 少し待機（キャンセルの場合は即座に処理される）
+    await page.waitForTimeout(500);
 
     // 件数は変わらない
     const newCount = await todosPage.getTodoCount();
@@ -209,23 +236,37 @@ test.describe('ToDo管理画面', () => {
   // バリデーションテスト
   // ===================
 
-  test('TC-100: バリデーション（タイトル未入力）', async ({ todosPage }) => {
+  test('TC-100: バリデーション（タイトル未入力）', async ({ todosPage, page }) => {
+    // Vue版ではalert()を使用するため、ダイアログハンドラを設定
+    let alertMessage = '';
+    page.on('dialog', async (dialog) => {
+      alertMessage = dialog.message();
+      await dialog.accept();
+    });
+
     // タイトル未入力で追加ボタンをクリック
     await todosPage.addButton.click();
 
-    // エラーメッセージが表示される
-    await todosPage.expectErrorMessage('タイトルを入力してください');
+    // アラートメッセージを確認
+    expect(alertMessage).toBe('タイトルを入力してください');
   });
 
-  test('TC-101: バリデーション（日付範囲不正）', async ({ todosPage }) => {
+  test('TC-101: バリデーション（日付範囲不正）', async ({ todosPage, page }) => {
+    // Vue版ではalert()を使用するため、ダイアログハンドラを設定
+    let alertMessage = '';
+    page.on('dialog', async (dialog) => {
+      alertMessage = dialog.message();
+      await dialog.accept();
+    });
+
     // 不正な日付範囲で追加
     await todosPage.titleInput.fill('日付テスト');
     await todosPage.startDateInput.fill('2025-12-31');
     await todosPage.dueDateInput.fill('2025-01-01');
     await todosPage.addButton.click();
 
-    // エラーメッセージが表示される
-    await todosPage.expectErrorMessage('終了日は開始日以降を指定してください');
+    // アラートメッセージを確認
+    expect(alertMessage).toBe('終了日は開始日以降を指定してください');
   });
 
   // ===================
@@ -256,7 +297,7 @@ test.describe('ToDo管理画面', () => {
     // 戻るリンクをクリック
     await todosPage.backLink.click();
 
-    // 案件一覧画面に遷移
-    await todosPage.expectUrl('/projects.html');
+    // 案件一覧画面に遷移（Vue Router形式）
+    await todosPage.expectUrl('/projects');
   });
 });

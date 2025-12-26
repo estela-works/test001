@@ -6,6 +6,8 @@ import { test, expect } from '../../fixtures/custom-fixtures';
  *
  * テストシナリオ: ../master/test-scenarios/projects-scenarios.md
  * 画面仕様: ../master/screen-spec/projects-screen.json
+ *
+ * Vue.js SPA対応版
  */
 test.describe('案件一覧画面', () => {
 
@@ -80,50 +82,71 @@ test.describe('案件一覧画面', () => {
     // チケット一覧ボタンをクリック
     await projectsPage.viewProjectTodos(0);
 
-    // ToDo管理画面に遷移
-    await projectsPage.expectUrl(/todos\.html\?projectId=\d+/);
+    // ToDo管理画面に遷移（Vue Router形式: /todos?projectId=xxx）
+    await projectsPage.expectUrl(/\/todos\?projectId=\d+/);
   });
 
   test('TC-021: 案件なしチケット一覧への遷移', async ({ projectsPage }) => {
     // 案件なしチケット一覧ボタンをクリック
     await projectsPage.viewNoProjectTodos();
 
-    // ToDo管理画面に遷移（projectId=none）
-    await projectsPage.expectUrl(/todos\.html\?projectId=none/);
+    // ToDo管理画面に遷移（Vue Router形式: /todos?projectId=none）
+    await projectsPage.expectUrl(/\/todos\?projectId=none/);
   });
 
   // ===================
   // 削除テスト
   // ===================
 
-  test('TC-030: 案件削除（確認OK）', async ({ projectsPage, cleanApiHelper }) => {
+  test('TC-030: 案件削除（確認OK）', async ({ projectsPage, cleanApiHelper, page }) => {
     // テスト用案件を作成
     await cleanApiHelper.createProject('削除テスト案件');
     await projectsPage.goto();
     await projectsPage.waitForLoadingComplete();
 
+    // 案件カードが表示されるのを待機
+    await expect(projectsPage.projectCards.first()).toBeVisible();
+
     // 初期状態の件数を取得
     const initialCount = await projectsPage.getProjectCount();
+    expect(initialCount).toBeGreaterThanOrEqual(1);
 
-    // 削除（確認ダイアログでOK）
-    await projectsPage.deleteProject(0, true);
+    // 確認ダイアログのハンドラを設定
+    page.once('dialog', async (dialog) => {
+      await dialog.accept();
+    });
 
-    // 件数が減る
-    const newCount = await projectsPage.getProjectCount();
-    expect(newCount).toBe(initialCount - 1);
+    // 削除ボタンをクリック
+    await projectsPage.projectCards.first().locator('.delete-btn').click();
+    await projectsPage.waitForLoadingComplete();
+
+    // 件数が減ることを待機して確認
+    await expect(projectsPage.projectCards).toHaveCount(initialCount - 1);
   });
 
-  test('TC-031: 案件削除（確認キャンセル）', async ({ projectsPage, cleanApiHelper }) => {
+  test('TC-031: 案件削除（確認キャンセル）', async ({ projectsPage, cleanApiHelper, page }) => {
     // テスト用案件を作成
     await cleanApiHelper.createProject('削除キャンセルテスト案件');
     await projectsPage.goto();
     await projectsPage.waitForLoadingComplete();
 
-    // 初期状態の件数を取得
-    const initialCount = await projectsPage.getProjectCount();
+    // 案件カードが表示されるのを待機
+    await expect(projectsPage.projectCards.first()).toBeVisible();
 
-    // 削除（確認ダイアログでキャンセル）
-    await projectsPage.deleteProject(0, false);
+    // 初期状態の件数を取得（少なくとも1件はある）
+    const initialCount = await projectsPage.getProjectCount();
+    expect(initialCount).toBeGreaterThanOrEqual(1);
+
+    // 確認ダイアログのハンドラを設定（キャンセル）
+    page.once('dialog', async (dialog) => {
+      await dialog.dismiss();
+    });
+
+    // 削除ボタンをクリック
+    await projectsPage.projectCards.first().locator('.delete-btn').click();
+
+    // 少し待機（キャンセルの場合は即座に処理される）
+    await page.waitForTimeout(500);
 
     // 件数は変わらない
     const newCount = await projectsPage.getProjectCount();
@@ -155,12 +178,19 @@ test.describe('案件一覧画面', () => {
   // バリデーションテスト
   // ===================
 
-  test('TC-100: バリデーション（案件名未入力）', async ({ projectsPage }) => {
+  test('TC-100: バリデーション（案件名未入力）', async ({ projectsPage, page }) => {
+    // Vue版ではalert()を使用するため、ダイアログハンドラを設定
+    let alertMessage = '';
+    page.on('dialog', async (dialog) => {
+      alertMessage = dialog.message();
+      await dialog.accept();
+    });
+
     // 案件名未入力で作成ボタンをクリック
     await projectsPage.addProjectButton.click();
 
-    // エラーメッセージが表示される
-    await projectsPage.expectErrorMessage('案件名を入力してください');
+    // アラートメッセージを確認
+    expect(alertMessage).toBe('案件名を入力してください');
   });
 
   // ===================
@@ -171,8 +201,8 @@ test.describe('案件一覧画面', () => {
     // ユーザー管理リンクをクリック
     await projectsPage.navigateToUserManagement();
 
-    // ユーザー管理画面に遷移
-    await projectsPage.expectUrl('/users.html');
+    // ユーザー管理画面に遷移（Vue Router形式）
+    await projectsPage.expectUrl('/users');
   });
 
   test('TC-201: 画面遷移（ホームへ戻る）', async ({ projectsPage }) => {

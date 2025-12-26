@@ -6,6 +6,8 @@ import { HomePage } from '../../pages/home.page';
  * 画面ID: SC-001
  *
  * テスト仕様: docs/projects/20251224_インデックスページ改善/test-spec-frontend.md
+ *
+ * Vue.js SPA対応版
  */
 test.describe('ホーム画面', () => {
 
@@ -35,8 +37,8 @@ test.describe('ホーム画面', () => {
   });
 
   test('FT-E2E-002: ホーム画面 - ヘッダー表示', async () => {
-    // タイトルが正しく表示される
-    await expect(homePage.title).toHaveText('Spring Boot App');
+    // タイトルが正しく表示される（Vue版: "ToDo App"）
+    await expect(homePage.title).toHaveText('ToDo App');
 
     // サブタイトルが正しく表示される
     await expect(homePage.subtitle).toHaveText('タスク管理アプリケーション');
@@ -64,30 +66,30 @@ test.describe('ホーム画面', () => {
     // チケット管理カードをクリック
     await homePage.clickTodoCard();
 
-    // チケット管理画面に遷移する
-    await expect(page).toHaveURL('/todos.html');
+    // チケット管理画面に遷移する（Vue Router形式）
+    await expect(page).toHaveURL('/todos');
   });
 
   test('FT-E2E-005: 案件管理への遷移', async ({ page }) => {
     // 案件管理カードをクリック
     await homePage.clickProjectCard();
 
-    // 案件管理画面に遷移する
-    await expect(page).toHaveURL('/projects.html');
+    // 案件管理画面に遷移する（Vue Router形式）
+    await expect(page).toHaveURL('/projects');
   });
 
   test('FT-E2E-006: ユーザー管理への遷移', async ({ page }) => {
     // ユーザー管理カードをクリック
     await homePage.clickUserCard();
 
-    // ユーザー管理画面に遷移する
-    await expect(page).toHaveURL('/users.html');
+    // ユーザー管理画面に遷移する（Vue Router形式）
+    await expect(page).toHaveURL('/users');
   });
 
   test('FT-E2E-007: ホームへの戻り遷移（案件管理から）', async ({ page }) => {
     // 案件管理画面に遷移
     await homePage.clickProjectCard();
-    await expect(page).toHaveURL('/projects.html');
+    await expect(page).toHaveURL('/projects');
 
     // 「ホームに戻る」リンクをクリック
     await page.click('a[href="/"]');

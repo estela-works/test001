@@ -2,8 +2,20 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useProjectStore } from './projectStore'
 import * as projectService from '@/services/projectService'
+import type { Project } from '@/types'
 
 vi.mock('@/services/projectService')
+
+// テスト用のProjectを作成するヘルパー関数
+function createMockProject(overrides: Partial<Project> = {}): Project {
+  return {
+    id: 1,
+    name: 'テスト案件',
+    description: null,
+    createdAt: '2025-01-01T00:00:00Z',
+    ...overrides
+  }
+}
 
 describe('projectStore', () => {
   beforeEach(() => {
@@ -62,7 +74,7 @@ describe('projectStore', () => {
 
     describe('createProject', () => {
       it('新しい案件を作成してリストを更新する', async () => {
-        vi.mocked(projectService.create).mockResolvedValue(undefined)
+        vi.mocked(projectService.create).mockResolvedValue(createMockProject())
         vi.mocked(projectService.getAll).mockResolvedValue([])
         vi.mocked(projectService.getNoProjectStats).mockResolvedValue({
           total: 0,

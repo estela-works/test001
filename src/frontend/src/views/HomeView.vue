@@ -18,6 +18,13 @@
         color-class="card-todo"
       />
       <NavCard
+        to="/todos/table"
+        icon="📊"
+        title="チケット一覧"
+        description="テーブル形式でチケットを表示し、検索・フィルタリングできます。"
+        color-class="card-table"
+      />
+      <NavCard
         to="/projects"
         icon="📁"
         title="案件管理"

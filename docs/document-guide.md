@@ -64,6 +64,13 @@
 | フロントエンドテスト方針書 | フロントエンドのテストケースを定義 | コンポーネントテスト、E2Eテスト、ストア戦略 |
 | バックエンドテスト方針書 | バックエンドのテストケースを定義 | Mapper/Service/Controller層テスト |
 
+#### 作業報告フェーズ
+
+| ドキュメント | 目的 | 記載内容 |
+|-------------|------|----------|
+| 実装作業報告書 | 実装作業の結果を記録 | 成果物一覧、変更内容詳細、課題・残件 |
+| テスト実装報告書 | テスト実装作業の結果を記録 | テストファイル一覧、テストケース詳細、実行結果 |
+
 ### 3.3 フォルダ構成
 
 ```
@@ -78,7 +85,9 @@ docs/projects/
 │   ├── detail-design-sql.md         # SQL詳細設計書
 │   ├── detail-design-db.md          # DB詳細設計書
 │   ├── test-spec-frontend.md        # フロントエンドテスト方針書
-│   └── test-spec-backend.md         # バックエンドテスト方針書
+│   ├── test-spec-backend.md         # バックエンドテスト方針書
+│   ├── implementation-report.md     # 実装作業報告書
+│   └── test-implementation-report.md # テスト実装報告書
 └── template/
     ├── requirements-template.md
     ├── basic-design-frontend-template.md
@@ -89,7 +98,9 @@ docs/projects/
     ├── detail-design-sql-template.md
     ├── detail-design-db-template.md
     ├── test-spec-frontend-template.md
-    └── test-spec-backend-template.md
+    ├── test-spec-backend-template.md
+    ├── implementation-report-template.md
+    └── test-implementation-report-template.md
 ```
 
 **注意**: 案件の規模や内容に応じて、必要なドキュメントのみ作成する。すべてを作成する必要はない。
@@ -156,7 +167,14 @@ docs/projects/
     │     └─ バックエンドテスト方針書
     │
     ▼
-実装・テスト
+実装
+    │
+    ├─→ 実装作業報告書を作成（何を実装したか）
+    │
+    ▼
+テスト実装
+    │
+    ├─→ テスト実装報告書を作成（何をテストしたか）
     │
     ▼
 案件完了（ドキュメントはアーカイブとして保持）
@@ -431,6 +449,13 @@ docs/reference/
 | フロントエンドテスト方針書 | [test-spec-frontend-template.md](projects/template/test-spec-frontend-template.md) |
 | バックエンドテスト方針書 | [test-spec-backend-template.md](projects/template/test-spec-backend-template.md) |
 
+#### 作業報告
+
+| ドキュメント | テンプレート |
+|-------------|-------------|
+| 実装作業報告書 | [implementation-report-template.md](projects/template/implementation-report-template.md) |
+| テスト実装報告書 | [test-implementation-report-template.md](projects/template/test-implementation-report-template.md) |
+
 ### 7.2 最新仕様用テンプレート
 
 最新仕様ドキュメントは継続的に更新するため、テンプレートではなく実体ファイルを直接編集する。
@@ -477,3 +502,4 @@ docs/reference/
 | 5.0 | 2025-12-23 | API詳細ドキュメント階層構造（api/API-XXX-NNN.md）を追加 |
 | 5.1 | 2025-12-23 | testing/ を廃止、reference/best-practices/ に統合 |
 | 5.2 | 2025-12-24 | 「変更なし」も記録する方針を追加 |
+| 6.0 | 2025-12-26 | 実装作業報告書・テスト実装報告書を追加 |

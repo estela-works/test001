@@ -12,6 +12,10 @@ ToDo管理関連のコンポーネント。
 | `TodoStats.vue` | 統計表示 |
 | `TodoFilter.vue` | フィルターボタン |
 | `TodoDetailModal.vue` | ToDo詳細モーダル |
+| `TodoSearchForm.vue` | ToDo検索フォーム |
+| `TodoTable.vue` | ToDoテーブル表示 |
+| `TodoTableFilter.vue` | テーブルフィルター |
+| `TodoTableRow.vue` | テーブル行 |
 | `CommentForm.vue` | コメント入力フォーム |
 | `CommentList.vue` | コメントリスト表示 |
 | `CommentItem.vue` | コメントアイテム |
@@ -22,3 +26,5 @@ ToDo管理関連のコンポーネント。
 |---------|---------|
 | `TodoStats.spec.ts` | 4件 |
 | `TodoFilter.spec.ts` | 4件 |
+| `TodoSearchForm.spec.ts` | - |
+| `TodoTableRow.spec.ts` | - |

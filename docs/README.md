@@ -17,7 +17,9 @@ docs/
 │   │   ├── detail-design-store.md          # Store詳細設計書
 │   │   ├── detail-design-types.md          # TypeScript型定義詳細設計書
 │   │   ├── test-spec-frontend.md            # フロントエンドテスト方針書
-│   │   └── test-spec-backend.md             # バックエンドテスト方針書
+│   │   ├── test-spec-backend.md             # バックエンドテスト方針書
+│   │   ├── implementation-report.md         # 実装作業報告書
+│   │   └── test-implementation-report.md    # テスト実装報告書
 │   └── template/                            # テンプレート
 │       ├── requirements-template.md
 │       ├── basic-design-frontend-template.md
@@ -30,7 +32,9 @@ docs/
 │       ├── detail-design-store-template.md
 │       ├── detail-design-types-template.md
 │       ├── test-spec-frontend-template.md
-│       └── test-spec-backend-template.md
+│       ├── test-spec-backend-template.md
+│       ├── implementation-report-template.md
+│       └── test-implementation-report-template.md
 │
 ├── specs/                                   # 最新仕様ドキュメント
 │   ├── architecture.md                      # アーキテクチャ仕様書
@@ -103,6 +107,13 @@ docs/
 | test-spec-frontend.md | フロントエンドテスト方針 |
 | test-spec-backend.md | バックエンドテスト方針 |
 
+### 作業報告フェーズ
+
+| ドキュメント | 目的 |
+|-------------|------|
+| implementation-report.md | 実装作業の結果を記録 |
+| test-implementation-report.md | テスト実装作業の結果を記録 |
+
 **注意**: 案件の規模や内容に応じて、必要なドキュメントのみ作成する。
 
 ## 最新仕様ドキュメント
@@ -138,7 +149,10 @@ docs/
 （要件整理 → 基本設計 → 詳細設計 → テスト仕様）
     │
     ▼
-実装・テスト
+実装 → 実装作業報告書作成
+    │
+    ▼
+テスト実装 → テスト実装報告書作成
     │
     ▼
 最新仕様ドキュメント更新

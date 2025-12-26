@@ -2,8 +2,19 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useUserStore } from './userStore'
 import * as userService from '@/services/userService'
+import type { User } from '@/types'
 
 vi.mock('@/services/userService')
+
+// テスト用のUserを作成するヘルパー関数
+function createMockUser(overrides: Partial<User> = {}): User {
+  return {
+    id: 1,
+    name: 'テストユーザー',
+    createdAt: '2025-01-01T00:00:00Z',
+    ...overrides
+  }
+}
 
 describe('userStore', () => {
   beforeEach(() => {
@@ -89,7 +100,7 @@ describe('userStore', () => {
 
     describe('addUser', () => {
       it('新しいユーザーを追加してリストを更新する', async () => {
-        vi.mocked(userService.create).mockResolvedValue(undefined)
+        vi.mocked(userService.create).mockResolvedValue(createMockUser())
         vi.mocked(userService.getAll).mockResolvedValue([])
 
         const store = useUserStore()

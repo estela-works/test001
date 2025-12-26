@@ -28,7 +28,8 @@ export default defineConfig({
   // 共通設定
   use: {
     // ベースURL（環境変数で切り替え可能）
-    baseURL: process.env.BASE_URL || 'http://localhost:8080',
+    // Vue.js開発サーバー（Vite）はポート5173で動作
+    baseURL: process.env.BASE_URL || 'http://localhost:5173',
 
     // スクリーンショット設定
     screenshot: 'only-on-failure',

@@ -6,9 +6,11 @@
 
 | スクリプト | 説明 |
 |-----------|------|
-| `check-missing-readme.ps1` | READMEが不足・更新漏れのフォルダを検出（Windows PowerShell） |
+| `check-missing-readme.ps1` | READMEが不足・更新漏れのフォルダを検出（Windows PowerShell）※1分以上の差のみ検出 |
 | `find-large-markdown.ps1` | 長いMarkdownファイル（300行以上）を検出（Windows PowerShell） |
 | `check-project-status.sh` | プロジェクトの状態をチェック（Unix/Linux） |
+| `db-backup.js` | データベースバックアップ作成（Node.js） |
+| `seed-data.js` | データベースへの初期データ投入（Node.js） |
 
 ## 使用方法
 

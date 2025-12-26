@@ -3,6 +3,8 @@ import { Page, Locator } from '@playwright/test';
 /**
  * ホーム画面ページオブジェクト
  * 画面ID: SC-001
+ *
+ * Vue.js SPA対応版
  */
 export class HomePage {
   readonly page: Page;
@@ -22,11 +24,11 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page;
 
-    // ヘッダー
-    this.title = page.locator('.header h1');
-    this.subtitle = page.locator('.header .subtitle');
+    // ヘッダー（Vue: .page-header）
+    this.title = page.locator('.page-header h1');
+    this.subtitle = page.locator('.page-header .subtitle');
 
-    // ナビゲーションカード
+    // ナビゲーションカード（Vue: router-link with colorClass）
     this.todoCard = page.locator('.nav-card.card-todo');
     this.projectCard = page.locator('.nav-card.card-project');
     this.userCard = page.locator('.nav-card.card-user');

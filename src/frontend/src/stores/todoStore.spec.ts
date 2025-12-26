@@ -2,8 +2,26 @@ import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useTodoStore } from './todoStore'
 import * as todoService from '@/services/todoService'
+import type { Todo } from '@/types'
 
 vi.mock('@/services/todoService')
+
+// テスト用のTodoを作成するヘルパー関数
+function createMockTodo(overrides: Partial<Todo> = {}): Todo {
+  return {
+    id: 1,
+    title: 'タスク',
+    description: null,
+    completed: false,
+    startDate: null,
+    dueDate: null,
+    projectId: null,
+    assigneeId: null,
+    assigneeName: null,
+    createdAt: '',
+    ...overrides
+  }
+}
 
 describe('todoStore', () => {
   beforeEach(() => {
@@ -28,8 +46,8 @@ describe('todoStore', () => {
       it('filter=allの場合、すべてのToDoを返す', () => {
         const store = useTodoStore()
         store.todos = [
-          { id: 1, title: 'タスク1', completed: false, createdAt: '' },
-          { id: 2, title: 'タスク2', completed: true, createdAt: '' }
+          createMockTodo({ id: 1, title: 'タスク1', completed: false }),
+          createMockTodo({ id: 2, title: 'タスク2', completed: true })
         ]
         store.filter = 'all'
 
@@ -39,8 +57,8 @@ describe('todoStore', () => {
       it('filter=pendingの場合、未完了のToDoのみを返す', () => {
         const store = useTodoStore()
         store.todos = [
-          { id: 1, title: 'タスク1', completed: false, createdAt: '' },
-          { id: 2, title: 'タスク2', completed: true, createdAt: '' }
+          createMockTodo({ id: 1, title: 'タスク1', completed: false }),
+          createMockTodo({ id: 2, title: 'タスク2', completed: true })
         ]
         store.filter = 'pending'
 
@@ -51,8 +69,8 @@ describe('todoStore', () => {
       it('filter=completedの場合、完了済みのToDoのみを返す', () => {
         const store = useTodoStore()
         store.todos = [
-          { id: 1, title: 'タスク1', completed: false, createdAt: '' },
-          { id: 2, title: 'タスク2', completed: true, createdAt: '' }
+          createMockTodo({ id: 1, title: 'タスク1', completed: false }),
+          createMockTodo({ id: 2, title: 'タスク2', completed: true })
         ]
         store.filter = 'completed'
 
@@ -65,9 +83,9 @@ describe('todoStore', () => {
       it('統計情報を正しく計算する', () => {
         const store = useTodoStore()
         store.todos = [
-          { id: 1, title: 'タスク1', completed: false, createdAt: '' },
-          { id: 2, title: 'タスク2', completed: true, createdAt: '' },
-          { id: 3, title: 'タスク3', completed: false, createdAt: '' }
+          createMockTodo({ id: 1, title: 'タスク1', completed: false }),
+          createMockTodo({ id: 2, title: 'タスク2', completed: true }),
+          createMockTodo({ id: 3, title: 'タスク3', completed: false })
         ]
 
         expect(store.stats).toEqual({
@@ -93,9 +111,7 @@ describe('todoStore', () => {
   describe('actions', () => {
     describe('fetchTodos', () => {
       it('ToDoリストを取得して状態を更新する', async () => {
-        const mockTodos = [
-          { id: 1, title: 'テストタスク', completed: false, createdAt: '2025-01-01' }
-        ]
+        const mockTodos = [createMockTodo({ id: 1, title: 'テストタスク', createdAt: '2025-01-01' })]
         vi.mocked(todoService.getAll).mockResolvedValue(mockTodos)
 
         const store = useTodoStore()
@@ -129,7 +145,7 @@ describe('todoStore', () => {
 
     describe('addTodo', () => {
       it('新しいToDoを追加してリストを更新する', async () => {
-        vi.mocked(todoService.create).mockResolvedValue(undefined)
+        vi.mocked(todoService.create).mockResolvedValue(createMockTodo())
         vi.mocked(todoService.getAll).mockResolvedValue([])
 
         const store = useTodoStore()
@@ -151,7 +167,7 @@ describe('todoStore', () => {
 
     describe('toggleTodo', () => {
       it('ToDoの完了状態を切り替える', async () => {
-        vi.mocked(todoService.toggle).mockResolvedValue(undefined)
+        vi.mocked(todoService.toggle).mockResolvedValue(createMockTodo({ completed: true }))
         vi.mocked(todoService.getAll).mockResolvedValue([])
 
         const store = useTodoStore()

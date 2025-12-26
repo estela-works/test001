@@ -8,6 +8,8 @@
 | 案件ID | <!-- YYYYMMDD_案件名 --> |
 | 作成日 | <!-- YYYY-MM-DD --> |
 | 関連基本設計書 | <!-- [basic-design-frontend.md](./basic-design-frontend.md) --> |
+| 関連型定義設計書 | <!-- [detail-design-types.md](./detail-design-types.md) --> |
+| 関連コンポーネント設計書 | <!-- [detail-design-frontend.md](./detail-design-frontend.md) --> |
 
 ---
 
@@ -290,6 +292,10 @@ Actionsの設計方針を記載
 - **ローディング管理**: loading状態を適切に更新
 - **楽観的更新**: 可能な場合は先にUIを更新してから同期
 - **トランザクション**: 複数の状態変更は一貫性を保つ
+
+※ 重要: コンポーネントから直接fetch()を呼び出してはならない。
+  すべてのAPI通信はストアのActionsを経由する。
+  これによりAPI呼び出しロジックが一元化され、キャッシュ・エラー処理・ローディング管理が統一される。
 -->
 
 ---
@@ -321,6 +327,10 @@ APIエラーのハンドリング方法を記載
 | 404 | NOT_FOUND / TODO_NOT_FOUND | エラーメッセージを表示、空配列で初期化 |
 | 500 | FETCH_FAILED / CREATE_FAILED / DELETE_FAILED | エラーメッセージを表示、前の状態を維持 |
 | Network Error | NETWORK_ERROR | エラーメッセージを表示、再試行を促す |
+
+※ 重要: エラーハンドリングの実装はストアが唯一の責務を持つ。
+  コンポーネントはストアのerror状態を参照してUIに表示する。
+  コンポーネント側でtry-catchでエラーを処理してはならない（二重処理を防ぐため）。
 -->
 
 ---

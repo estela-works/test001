@@ -4,15 +4,17 @@
 
 ## フェーズ
 
-| # | フェーズ | プロンプト |
-|---|---------|-----------|
-| 01 | 要件定義 | [requirements.md](phases/01-requirements/requirements.md) |
-| 02 | 基本設計 | [basic-design.md](phases/02-basic-design/basic-design.md) |
-| 03 | 詳細設計 | [detail-design.md](phases/03-detail-design/detail-design.md) |
-| 04 | 実装 | [implementation.md](phases/04-implementation/implementation.md) |
-| 05 | テスト実装 | [test-implementation.md](phases/05-test-implementation/test-implementation.md) |
-| 06 | テスト | [testing.md](phases/06-testing/testing.md) |
-| 07 | ドキュメント | [documentation.md](phases/07-documentation/documentation.md) |
+| # | フェーズ | プロンプト | 出力物 |
+|---|---------|-----------|--------|
+| 01 | 要件定義 | [requirements.md](phases/01-requirements/requirements.md) | requirements.md |
+| 02 | 基本設計 | [basic-design.md](phases/02-basic-design/basic-design.md) | basic-design-*.md |
+| 03 | 詳細設計 | [detail-design.md](phases/03-detail-design/detail-design.md) | detail-design-*.md |
+| 04 | 実装 | [implementation.md](phases/04-implementation/implementation.md) | 実装コード + **implementation-report.md** |
+| 05 | テスト実装 | [test-implementation.md](phases/05-test-implementation/test-implementation.md) | テストコード + **test-implementation-report.md** |
+| 06 | テスト | [testing.md](phases/06-testing/testing.md) | テスト実行結果 |
+| 07 | ドキュメント | [documentation.md](phases/07-documentation/documentation.md) | 最新仕様更新 |
+
+**注意**: 実装フェーズ・テスト実装フェーズでは、作業完了時に報告書を作成する。
 
 ## 使い方
 

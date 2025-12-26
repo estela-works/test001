@@ -8,6 +8,8 @@
 | 案件ID | <!-- YYYYMMDD_案件名 --> |
 | 作成日 | <!-- YYYY-MM-DD --> |
 | 関連基本設計書 | <!-- [basic-design-frontend.md](./basic-design-frontend.md) --> |
+| 関連コンポーネント設計書 | <!-- [detail-design-frontend.md](./detail-design-frontend.md) --> |
+| 関連ストア設計書 | <!-- [detail-design-store.md](./detail-design-store.md) --> |
 
 ---
 
@@ -18,6 +20,10 @@
 <!--
 この型定義ファイルの目的を記載
 例: コメント機能に関連するTypeScript型定義の詳細を定義する。APIレスポンス、リクエスト、内部データ構造の型を網羅する。
+
+※ 本設計書はフロントエンドのすべての型定義とバリデーションロジックを一元管理する。
+  コンポーネントのProps/Emits型、ストアのState型、APIリクエスト/レスポンス型を網羅的に定義する。
+  型定義・バリデーションは本設計書が唯一の責務を持ち、他の設計書では定義しない。
 -->
 
 ### 1.2 ファイル構成
@@ -125,6 +131,58 @@ export interface CommentStoreState {
   loading: boolean
   error: string | null
   currentTodoId: number | null
+}
+```
+-->
+
+---
+
+## 2.5 Props/Emits型定義
+
+<!--
+コンポーネントのProps/Emits型を定義
+detail-design-frontend.mdで概要を記載し、詳細な型定義はここで行う
+
+例:
+```typescript
+/**
+ * TodoDetailModal の Props型
+ */
+export interface TodoDetailModalProps {
+  /** 表示するチケットのID */
+  todoId: number
+  /** モーダルの開閉状態 */
+  isOpen: boolean
+}
+
+/**
+ * TodoDetailModal の Emits型
+ */
+export interface TodoDetailModalEmits {
+  /** モーダルを閉じる時 */
+  (e: 'close'): void
+  /** チケット更新後 */
+  (e: 'todoUpdated', todo: Todo): void
+}
+
+/**
+ * CommentForm の Props型
+ */
+export interface CommentFormProps {
+  /** コメント対象のToDoID */
+  todoId: number
+  /** ユーザー一覧（投稿者選択用） */
+  users: User[]
+}
+
+/**
+ * CommentForm の Emits型
+ */
+export interface CommentFormEmits {
+  /** コメント投稿成功時 */
+  (e: 'submitted', comment: Comment): void
+  /** キャンセル時 */
+  (e: 'cancel'): void
 }
 ```
 -->

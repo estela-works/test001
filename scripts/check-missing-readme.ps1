@@ -213,7 +213,9 @@ function Main {
             $readmeTime = (Get-Item $readmePath).LastWriteTime
             $latestFileTime = Get-LatestFileTime -DirPath $dir.FullName -ReadmePath $readmePath
 
-            if ($null -ne $latestFileTime -and $latestFileTime -gt $readmeTime) {
+            # 1分以上の差がある場合のみ更新漏れと判定（秒単位の誤差を無視）
+            $timeDiff = $latestFileTime - $readmeTime
+            if ($null -ne $latestFileTime -and $timeDiff.TotalMinutes -gt 1) {
                 $outdatedCount++
                 $outdatedDirs += [PSCustomObject]@{
                     Path = $relativePath

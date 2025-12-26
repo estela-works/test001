@@ -7,7 +7,7 @@
 | 項目 | 内容 |
 |------|------|
 | プロジェクト名 | ToDo Application |
-| 最終更新日 | 2024-12-24 |
+| 最終更新日 | 2025-12-26 |
 
 ---
 
@@ -194,33 +194,33 @@ src/
 ┌─────────────────────────────────────────────────────────────┐
 │                    Presentation Layer                        │
 │                     （Controller層）                          │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐  │
-│  │ TodoController │ │ProjectController│ │ UserController │  │
-│  └────────────────┘ └────────────────┘ └────────────────┘  │
-│            責務: リクエスト受付、レスポンス返却、バリデーション  │
-├─────────────────────────────────────────────────────────────┤
-│                     Business Layer                           │
-│                     （Service層）                            │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐  │
-│  │  TodoService   │ │ ProjectService │ │  UserService   │  │
-│  └────────────────┘ └────────────────┘ └────────────────┘  │
-│            責務: ビジネスロジック、Mapper経由でデータ操作       │
-├─────────────────────────────────────────────────────────────┤
-│                   Data Access Layer                          │
-│                     （Mapper層）                             │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐  │
-│  │   TodoMapper   │ │ ProjectMapper  │ │  UserMapper    │  │
-│  │   (+ XML定義)  │ │   (+ XML定義)  │ │  (+ XML定義)   │  │
-│  └────────────────┘ └────────────────┘ └────────────────┘  │
-│            責務: SQL実行、データベースアクセス                  │
-├─────────────────────────────────────────────────────────────┤
-│                      Domain Layer                            │
-│                     （Entity層）                             │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐  │
-│  │      Todo      │ │    Project     │ │      User      │  │
-│  └────────────────┘ └────────────────┘ └────────────────┘  │
-│            責務: データ構造定義                               │
-└─────────────────────────────────────────────────────────────┘
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ │
+│  │ TodoController │ │ProjectController│ │ UserController │ │CommentController│ │
+│  └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ │
+│            責務: リクエスト受付、レスポンス返却、バリデーション                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                     Business Layer                                           │
+│                     （Service層）                                            │
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ │
+│  │  TodoService   │ │ ProjectService │ │  UserService   │ │ CommentService │ │
+│  └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ │
+│            責務: ビジネスロジック、Mapper経由でデータ操作                        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                   Data Access Layer                                          │
+│                     （Mapper層）                                             │
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ │
+│  │   TodoMapper   │ │ ProjectMapper  │ │  UserMapper    │ │ CommentMapper  │ │
+│  │   (+ XML定義)  │ │   (+ XML定義)  │ │  (+ XML定義)   │ │  (+ XML定義)   │ │
+│  └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ │
+│            責務: SQL実行、データベースアクセス                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                      Domain Layer                                            │
+│                     （Entity層）                                             │
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ │
+│  │      Todo      │ │    Project     │ │      User      │ │  TodoComment   │ │
+│  └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ │
+│            責務: データ構造定義                                               │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### 4.2 フロントエンドレイヤー構成
@@ -237,10 +237,10 @@ src/
 ├─────────────────────────────────────────────────────────────┤
 │                     State Layer                              │
 │                    （Pinia Stores）                          │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐  │
-│  │   todoStore    │ │  projectStore  │ │   userStore    │  │
-│  └────────────────┘ └────────────────┘ └────────────────┘  │
-│            責務: 状態管理、ビジネスロジック                    │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ │
+│  │  todoStore   │ │ projectStore │ │  userStore   │ │ commentStore │ │
+│  └──────────────┘ └──────────────┘ └──────────────┘ └──────────────┘ │
+│            責務: 状態管理、ビジネスロジック                                 │
 ├─────────────────────────────────────────────────────────────┤
 │                    Service Layer                             │
 │                   （API Services）                           │
@@ -251,14 +251,14 @@ src/
 │  └────────────────┘ └────────────────┘ └────────────────┘  │
 │            責務: API通信、レスポンス変換                      │
 ├─────────────────────────────────────────────────────────────┤
-│                      Type Layer                              │
-│                  （TypeScript Types）                        │
-│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐  │
-│  │   todo.ts      │ │   project.ts   │ │    user.ts     │  │
-│  │   api.ts       │ │                │ │                │  │
-│  └────────────────┘ └────────────────┘ └────────────────┘  │
-│            責務: 型定義                                      │
-└─────────────────────────────────────────────────────────────┘
+│                      Type Layer                                        │
+│                  （TypeScript Types）                                  │
+│  ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ ┌────────────────┐ │
+│  │   todo.ts      │ │   project.ts   │ │    user.ts     │ │  comment.ts    │ │
+│  │   api.ts       │ │   filter.ts    │ │                │ │                │ │
+│  └────────────────┘ └────────────────┘ └────────────────┘ └────────────────┘ │
+│            責務: 型定義                                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### 4.3 レイヤー間の依存関係
@@ -306,7 +306,14 @@ com.example.demo/
 ├── UserController.java           # User API Controller
 ├── UserService.java              # User Service
 ├── UserMapper.java               # User Mapper
-└── User.java                     # User Entity
+├── User.java                     # User Entity
+├── TodoCommentController.java    # Comment API Controller
+├── TodoCommentService.java       # Comment Service
+├── TodoCommentMapper.java        # Comment Mapper
+├── TodoComment.java              # Comment Entity
+├── CreateCommentRequest.java     # コメント作成リクエストDTO
+├── HelloController.java          # ヘルスチェック用Controller
+└── FrontendRedirectController.java  # SPAリダイレクト用Controller
 
 src/backend/main/resources/
 ├── application.properties         # アプリケーション設定
@@ -315,7 +322,8 @@ src/backend/main/resources/
 └── mapper/
     ├── TodoMapper.xml             # Todo SQL定義
     ├── ProjectMapper.xml          # Project SQL定義
-    └── UserMapper.xml             # User SQL定義
+    ├── UserMapper.xml             # User SQL定義
+    └── TodoCommentMapper.xml      # Comment SQL定義
 ```
 
 ### 5.2 フロントエンドファイル一覧
@@ -329,7 +337,8 @@ src/frontend/src/
 ├── stores/
 │   ├── todoStore.ts
 │   ├── projectStore.ts
-│   └── userStore.ts
+│   ├── userStore.ts
+│   └── commentStore.ts
 ├── services/
 │   ├── apiClient.ts               # 共通HTTPクライアント
 │   ├── todoService.ts
@@ -339,11 +348,14 @@ src/frontend/src/
 │   ├── todo.ts
 │   ├── project.ts
 │   ├── user.ts
+│   ├── comment.ts
+│   ├── filter.ts
 │   ├── api.ts
 │   └── index.ts
 ├── views/
 │   ├── HomeView.vue
 │   ├── TodoView.vue
+│   ├── TodoTableView.vue
 │   ├── ProjectView.vue
 │   └── UserView.vue
 ├── components/
@@ -357,7 +369,15 @@ src/frontend/src/
 │   │   ├── TodoItem.vue
 │   │   ├── TodoList.vue
 │   │   ├── TodoStats.vue
-│   │   └── TodoFilter.vue
+│   │   ├── TodoFilter.vue
+│   │   ├── TodoDetailModal.vue
+│   │   ├── TodoSearchForm.vue
+│   │   ├── TodoTable.vue
+│   │   ├── TodoTableFilter.vue
+│   │   ├── TodoTableRow.vue
+│   │   ├── CommentForm.vue
+│   │   ├── CommentList.vue
+│   │   └── CommentItem.vue
 │   ├── project/
 │   │   ├── ProjectForm.vue
 │   │   └── ProjectCard.vue
@@ -397,6 +417,7 @@ src/frontend/src/
 | todoStore | ToDoリスト、フィルタ状態、ローディング/エラー |
 | projectStore | 案件リスト、案件別統計、ローディング/エラー |
 | userStore | ユーザーリスト、ローディング/エラー |
+| commentStore | コメントリスト、対象ToDoID、ローディング/エラー |
 
 ---
 
@@ -481,4 +502,6 @@ npm run build
 | 2025-12-22 | 初版作成（初期構築） | - |
 | 2025-12-22 | H2 Database + MyBatis移行 | 202512_H2DB移行 |
 | 2025-12-24 | Java 21 → Java 17 ダウングレード | 20251224_Java17ダウングレード |
-| 2024-12-24 | Vue.js 3移行、フロントエンド/バックエンド分離 | 20241224_vue-migration |
+| 2025-12-24 | Vue.js 3移行、フロントエンド/バックエンド分離 | 20241224_vue-migration |
+| 2025-12-25 | Comment機能追加（Controller/Service/Mapper/Entity） | 20251225_チケット詳細コメント機能 |
+| 2025-12-26 | TodoTableView追加、コンポーネント構成更新 | 20251226_チケット一覧画面 |

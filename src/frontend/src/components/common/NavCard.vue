@@ -85,4 +85,8 @@
   .card-user {
     border-left: 4px solid #6f42c1;
   }
+
+  .card-table {
+    border-left: 4px solid #17a2b8;
+  }
 </style>
