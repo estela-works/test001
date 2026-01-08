@@ -192,58 +192,93 @@ docs/projects/
 
 ### 4.2 対象ドキュメント
 
+#### システム基盤
+
 | ドキュメント | 目的 | 記載内容 |
 |-------------|------|----------|
 | アーキテクチャ仕様書 | 技術構成・システム構造を定義 | 技術スタック、レイヤー構成、設計原則 |
-| API一覧 | 全エンドポイントの現在の仕様（概要） | URL、メソッド、リクエスト/レスポンス |
-| API詳細 | 各APIの詳細仕様 | 利用案件、参照システム、処理フロー |
-| 画面一覧 | 全画面の現在の仕様（概要） | 画面構成、UI要素、遷移 |
-| 画面詳細 | 各画面の詳細仕様 | 画面仕様、イベント一覧、イベント詳細 |
 | ロジック一覧 | ビジネスルール・バリデーションの集積 | ルール名、条件、適用箇所 |
 | DB構造 | データベースの現在の構造 | テーブル定義、カラム、リレーション |
-| テストケース集積 | 全テストケースの累積一覧 | テストID、対象、期待結果、ステータス |
+
+#### バックエンド
+
+| ドキュメント | 目的 | 記載内容 |
+|-------------|------|----------|
+| API一覧 | 全エンドポイントの現在の仕様（概要） | URL、メソッド、リクエスト/レスポンス |
+| API詳細 | 各APIの詳細仕様 | 利用案件、参照システム、処理フロー |
+
+#### フロントエンド
+
+| ドキュメント | 目的 | 記載内容 |
+|-------------|------|----------|
+| フロントエンド概要 | フロントエンド技術構成の全体像 | ディレクトリ構成、技術スタック、依存関係 |
+| コンポーネントカタログ | 全コンポーネントの一覧・仕様 | Props、Emits、依存関係、使用画面 |
+| ストアカタログ | Pinia Storeの一覧・仕様 | State、Getters、Actions、型定義 |
+| 型定義カタログ | TypeScript型定義の一覧・仕様 | インターフェース、型エイリアス、使用箇所 |
+| ルーティング仕様 | Vue Routerのルート定義 | パス、コンポーネント、ガード |
+
+#### 画面
+
+| ドキュメント | 目的 | 記載内容 |
+|-------------|------|----------|
+| 画面一覧 | 全画面の現在の仕様（概要） | 画面構成、UI要素、遷移 |
+| 画面詳細 | 各画面の詳細仕様 | 画面仕様、イベント一覧、イベント詳細 |
+
+#### テスト
+
+| ドキュメント | 目的 | 記載内容 |
+|-------------|------|----------|
+| テストケース概要 | テスト全体のサマリー | テスト分類、カバレッジ、実行方法 |
+| バックエンドテストカタログ | JUnitテストの詳細一覧 | Controller/Service/Mapperテスト仕様 |
+| E2Eテストカタログ | Playwrightテストの詳細一覧 | テストシナリオ、画面遷移、検証項目 |
 
 ### 4.3 フォルダ構成
 
 ```
 docs/specs/
 ├── architecture.md          # アーキテクチャ仕様書
-├── api-catalog.md           # API一覧
-├── screen-catalog.md        # 画面一覧（概要・インデックス）
 ├── logic-catalog.md         # ロジック一覧
 ├── db-schema.md             # DB構造
-├── test-catalog.md          # テストケース集積
+│
+├── api-catalog.md           # API一覧
 ├── api/                     # API詳細（階層構造）
 │   ├── index.md             # APIインデックス
-│   ├── API-TODO-001.md      # Todo全件取得
-│   ├── API-TODO-002.md      # Todoフィルタ取得
-│   ├── API-TODO-003.md      # Todo単一取得
-│   ├── API-TODO-004.md      # Todo統計取得
-│   ├── API-TODO-005.md      # Todo新規作成
-│   ├── API-TODO-006.md      # Todo更新
-│   ├── API-TODO-007.md      # Todo完了切替
-│   ├── API-TODO-008.md      # Todo単一削除
-│   ├── API-TODO-009.md      # Todo全件削除
-│   ├── API-USER-001.md      # ユーザー全件取得
-│   ├── API-USER-002.md      # ユーザー単一取得
-│   ├── API-USER-003.md      # ユーザー新規作成
-│   └── API-USER-004.md      # ユーザー削除
-└── screens/                 # 画面詳細（階層構造）
-    ├── index.md             # 画面インデックス
-    ├── SC-001/              # ホーム画面
-    │   ├── screen.md        # 画面仕様
-    │   ├── events.md        # イベント一覧
-    │   └── EV-001-01.md     # イベント詳細（個別ファイル）
-    └── SC-002/              # ToDoリスト画面
-        ├── screen.md        # 画面仕様
-        ├── events.md        # イベント一覧
-        ├── EV-002-01.md     # 初期読込
-        ├── EV-002-02.md     # 統計更新
-        ├── EV-002-03.md     # ToDo追加
-        ├── EV-002-04.md     # フィルタ切替
-        ├── EV-002-05.md     # 完了状態切替
-        ├── EV-002-06.md     # ToDo削除
-        └── EV-002-07.md     # ホーム遷移
+│   ├── API-TODO-XXX.md      # Todo API詳細（9件）
+│   └── API-USER-XXX.md      # User API詳細（4件）
+│
+├── frontend/                # フロントエンド仕様
+│   ├── frontend-overview.md    # フロントエンド全体概要
+│   ├── component-catalog.md    # コンポーネントカタログ
+│   ├── store-catalog.md        # ストアカタログ
+│   ├── type-catalog.md         # 型定義カタログ
+│   └── routing-spec.md         # ルーティング仕様
+│
+├── screens/                 # 画面詳細（階層構造）
+│   ├── index.md             # 画面一覧
+│   ├── SC-001/              # ホーム画面
+│   │   ├── screen.md        # 画面仕様
+│   │   ├── events.md        # イベント一覧
+│   │   └── EV-001-XX.md     # イベント詳細
+│   ├── SC-002/              # チケット管理画面
+│   ├── SC-003/              # プロジェクト画面
+│   ├── SC-004/              # ユーザー管理画面
+│   └── SC-005/              # チケット一覧画面
+│
+├── test-catalog.md          # テストケース概要
+├── test/                    # テスト詳細仕様
+│   ├── backend-test-catalog/   # バックエンドテスト詳細
+│   │   ├── controller-tests.md
+│   │   ├── service-tests.md
+│   │   ├── mapper-tests.md
+│   │   └── execution-guide.md
+│   └── e2e-test-catalog.md     # E2Eテスト詳細
+│
+└── template/                # 最新仕様用テンプレート
+    ├── frontend-overview-template.md
+    ├── component-catalog-template.md
+    ├── store-catalog-template.md
+    ├── type-catalog-template.md
+    └── routing-spec-template.md
 ```
 
 ### 4.4 APIドキュメント構造
@@ -274,19 +309,46 @@ API仕様は2階層で管理する:
 | 2 | events.md | イベント一覧（サマリー）、共通処理 |
 | 3 | EV-XXX-XX.md | イベント詳細（処理フロー、API、エラー処理） |
 
-### 4.6 更新タイミング
+### 4.6 フロントエンドドキュメント構造
+
+フロントエンド仕様は5つのドキュメントで管理する:
+
+| ファイル | 内容 |
+|---------|------|
+| frontend-overview.md | 技術スタック、ディレクトリ構成、依存関係 |
+| component-catalog.md | 全コンポーネント一覧、Props/Emits仕様 |
+| store-catalog.md | Pinia Store一覧、State/Getters/Actions仕様 |
+| type-catalog.md | TypeScript型定義一覧、インターフェース定義 |
+| routing-spec.md | Vue Routerルート定義、ナビゲーションガード |
+
+### 4.7 テストドキュメント構造
+
+テスト仕様は概要と詳細の2階層で管理する:
+
+| 階層 | ファイル | 内容 |
+|------|---------|------|
+| 1 | test-catalog.md | テスト全体のサマリー、分類、カバレッジ |
+| 2 | test/backend-test-catalog/ | JUnitテスト詳細（層別） |
+| 2 | test/e2e-test-catalog.md | Playwrightテストシナリオ |
+
+### 4.8 更新タイミング
 
 | タイミング | 対象ドキュメント |
 |-----------|-----------------|
 | API追加・変更時 | api-catalog.md, api/API-XXX-NNN.md |
-| 画面追加・変更時 | screen-catalog.md, screens/SC-XXX/ |
+| 画面追加・変更時 | screens/index.md, screens/SC-XXX/ |
 | イベント追加・変更時 | screens/SC-XXX/events.md, EV-XXX-XX.md |
+| コンポーネント追加・変更時 | frontend/component-catalog.md |
+| ストア追加・変更時 | frontend/store-catalog.md |
+| 型定義追加・変更時 | frontend/type-catalog.md |
+| ルート追加・変更時 | frontend/routing-spec.md |
 | ビジネスロジック追加・変更時 | logic-catalog.md |
 | DB変更時 | db-schema.md |
-| テスト追加時 | test-catalog.md |
-| 技術構成変更時 | architecture.md |
+| バックエンドテスト追加時 | test-catalog.md, test/backend-test-catalog/ |
+| E2Eテスト追加時 | test-catalog.md, test/e2e-test-catalog.md |
+| 技術構成変更時 | architecture.md, frontend/frontend-overview.md |
 
-### 4.7 更新ルール
+### 4.9 更新ルール
 
 - 案件完了時に必ず該当する最新仕様ドキュメントを更新する
 - 更新履歴セクションに変更内容と案件名を記録する
@@ -458,7 +520,17 @@ docs/reference/
 
 ### 7.2 最新仕様用テンプレート
 
-最新仕様ドキュメントは継続的に更新するため、テンプレートではなく実体ファイルを直接編集する。
+フロントエンド仕様書は以下のテンプレートを参照して作成する。
+
+| ドキュメント | テンプレート |
+|-------------|-------------|
+| フロントエンド概要 | [frontend-overview-template.md](specs/template/frontend-overview-template.md) |
+| コンポーネントカタログ | [component-catalog-template.md](specs/template/component-catalog-template.md) |
+| ストアカタログ | [store-catalog-template.md](specs/template/store-catalog-template.md) |
+| 型定義カタログ | [type-catalog-template.md](specs/template/type-catalog-template.md) |
+| ルーティング仕様 | [routing-spec-template.md](specs/template/routing-spec-template.md) |
+
+**注意**: その他の最新仕様ドキュメントは継続的に更新するため、テンプレートではなく実体ファイルを直接編集する。
 
 ### 7.3 実装テンプレート
 
@@ -503,3 +575,7 @@ docs/reference/
 | 5.1 | 2025-12-23 | testing/ を廃止、reference/best-practices/ に統合 |
 | 5.2 | 2025-12-24 | 「変更なし」も記録する方針を追加 |
 | 6.0 | 2025-12-26 | 実装作業報告書・テスト実装報告書を追加 |
+| 7.0 | 2025-12-26 | フロントエンド仕様（frontend/）を最新仕様に追加 |
+| 7.1 | 2025-12-26 | テスト詳細仕様（test/）を最新仕様に追加 |
+| 7.2 | 2025-12-26 | 画面仕様にSC-003〜SC-005を追加 |
+| 7.3 | 2025-12-26 | 最新仕様用テンプレート（specs/template/）を追加 |

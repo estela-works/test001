@@ -6,7 +6,7 @@
 
 - [Mapper層テスト](./mapper-tests.md) - TodoMapper/UserMapper
 - [Service層テスト](./service-tests.md) - TodoService/UserService/ProjectService
-- [Controller層テスト](./controller-tests.md) - TodoController/UserController/ProjectController
+- [Controller層テスト](./controller-tests.md) - TodoController/UserController/ProjectController/TodoCommentController/FrontendRedirectController
 - [実行方法・設定](./execution-guide.md) - テスト実行方法と設定
 
 ---
@@ -19,7 +19,7 @@
 | APIテストユーティリティ | Spring MockMvc（コントローラ/APIテストに使用） |
 | Mapperテスト | @MybatisTest |
 | 統合テスト | @SpringBootTest |
-| 最終更新日 | 2025-12-23 |
+| 最終更新日 | 2026-01-08 |
 
 ---
 
@@ -37,7 +37,9 @@
 | UserController | 8 | 6 | 0 | 14 |
 | ProjectService | 11 | 2 | 5 | 18 |
 | ProjectController | 11 | 4 | 0 | 15 |
-| **合計** | **109** | **24** | **18** | **151** |
+| TodoCommentController | 10 | 6 | 1 | 17 |
+| FrontendRedirectController | 7 | 0 | 0 | 7 |
+| **合計** | **126** | **30** | **19** | **175** |
 
 ---
 
@@ -47,3 +49,4 @@
 |------|----------|
 | 2025-12-23 | 初版作成（実装済みテストファイルから自動生成） |
 | 2025-12-23 | ファイル分割実施（README、Mapper、Service、Controller、実行方法に分割） |
+| 2026-01-08 | TodoCommentController（17件）、FrontendRedirectController（7件）を追加 |

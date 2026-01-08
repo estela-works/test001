@@ -19,6 +19,8 @@
 ./mvnw test -Dtest=UserControllerTest
 ./mvnw test -Dtest=ProjectServiceTest
 ./mvnw test -Dtest=ProjectControllerTest
+./mvnw test -Dtest=TodoCommentControllerTest
+./mvnw test -Dtest=FrontendRedirectControllerTest
 
 # 特定メソッドのテスト実行
 ./mvnw test -Dtest=TodoServiceTest#getAllTodos*
@@ -40,7 +42,7 @@
 |--------------|------|-----------|
 | @MybatisTest | Mapper単体テスト | TodoMapperTest, UserMapperTest |
 | @SpringBootTest | 統合テスト | TodoServiceTest, UserServiceTest, ProjectServiceTest |
-| @SpringBootTest + @AutoConfigureMockMvc | APIテスト | TodoControllerTest, UserControllerTest, ProjectControllerTest |
+| @SpringBootTest + @AutoConfigureMockMvc | APIテスト | TodoControllerTest, UserControllerTest, ProjectControllerTest, TodoCommentControllerTest, FrontendRedirectControllerTest |
 | @ActiveProfiles("test") | テストプロファイル有効化 | 全テストクラス |
 | @Transactional | テスト後ロールバック | 全テストクラス |
 

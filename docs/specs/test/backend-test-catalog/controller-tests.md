@@ -190,4 +190,65 @@
 
 ---
 
+## 4. TodoCommentController テストケース
+
+> **ファイル**: `src/test/java/com/example/demo/TodoCommentControllerTest.java`
+
+### 4.1 GET /api/todos/{todoId}/comments
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| C-001 | コメントなしで空配列が返却される | 正常系 | 200 OK、空配列 |
+| C-002 | コメントが新しい順にソートされて返却される | 正常系 | 200 OK、降順ソート |
+| C-003 | コメントにユーザー名が含まれる | 正常系 | userName含む |
+| C-004 | 存在しないToDoIDで404 Not Foundが返却される | 異常系 | 404 Not Found |
+
+### 4.2 POST /api/todos/{todoId}/comments
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| C-005 | 正常にコメントが作成される | 正常系 | 201 Created |
+| C-006 | 日本語コメントが正常に作成される | 正常系 | 201 Created |
+| C-007 | userIdがnullで400 Bad Requestが返却される | 異常系 | 400 Bad Request |
+| C-008 | contentが空で400 Bad Requestが返却される | 異常系 | 400 Bad Request |
+| C-009 | contentがnullで400 Bad Requestが返却される | 異常系 | 400 Bad Request |
+| C-010 | contentが2000文字超過で400 Bad Requestが返却される | 異常系 | 400 Bad Request |
+| C-011 | contentが2000文字ちょうどで正常作成される | 境界値 | 201 Created |
+| C-012 | 存在しないToDoIDで404 Not Foundが返却される | 異常系 | 404 Not Found |
+| C-013 | 存在しないユーザーIDで400 Bad Requestが返却される | 異常系 | 400 Bad Request |
+
+### 4.3 DELETE /api/comments/{id}
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| C-014 | 正常にコメントが削除される | 正常系 | 204 No Content |
+| C-015 | 存在しないコメントIDで404 Not Foundが返却される | 異常系 | 404 Not Found |
+| C-016 | コメント削除後、一覧から除外される | 正常系 | 一覧から除外 |
+
+### 4.4 カスケード削除テスト
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| C-017 | ToDo削除時にコメントもカスケード削除される | 正常系 | コメントも削除 |
+
+---
+
+## 5. FrontendRedirectController テストケース
+
+> **ファイル**: `src/test/java/com/example/demo/FrontendRedirectControllerTest.java`
+
+### 5.1 GET /
+
+| ID | テストケース | 分類 | 期待結果 |
+|----|-------------|------|----------|
+| A-001 | ルートパスで200 OKが返却される | 正常系 | 200 OK |
+| A-002 | Content-Typeがtext/htmlである | 正常系 | text/html |
+| A-003 | HTMLにVue Dev ServerのURL(localhost:5173)が含まれる | 正常系 | localhost:5173含む |
+| A-004 | HTMLにタイトル「Spring Boot API Server」が含まれる | 正常系 | タイトル含む |
+| A-005 | HTMLに案内メッセージが含まれる | 正常系 | 案内メッセージ含む |
+| A-006 | HTMLにAPIエンドポイント情報が含まれる | 正常系 | /api/*含む |
+| A-007 | HTMLに「Vueフロントエンドを開く」リンクが含まれる | 正常系 | リンク含む |
+
+---
+
 [← 目次に戻る](./README.md)
