@@ -7,7 +7,18 @@
 | 項目 | 内容 |
 |------|------|
 | プロジェクト名 | ToDo Application |
-| 最終更新日 | 2025-12-26 |
+| 最終更新日 | 2026-01-08 |
+
+## 関連ドキュメント
+
+| ドキュメント | 説明 |
+|-------------|------|
+| [api/api-catalog.md](api/api-catalog.md) | API一覧 |
+| [logic/logic-catalog.md](logic/logic-catalog.md) | ロジック一覧 |
+| [db/db-schema.md](db/db-schema.md) | DB構造 |
+| [test/test-catalog.md](test/test-catalog.md) | テストカタログ |
+| [screens/](screens/) | 画面仕様 |
+| [frontend/](frontend/) | フロントエンド仕様 |
 
 ---
 
@@ -505,3 +516,4 @@ npm run build
 | 2025-12-24 | Vue.js 3移行、フロントエンド/バックエンド分離 | 20241224_vue-migration |
 | 2025-12-25 | Comment機能追加（Controller/Service/Mapper/Entity） | 20251225_チケット詳細コメント機能 |
 | 2025-12-26 | TodoTableView追加、コンポーネント構成更新 | 20251226_チケット一覧画面 |
+| 2026-01-08 | 関連ドキュメントセクション追加（フォルダ構成変更対応） | - |

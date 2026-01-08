@@ -5,7 +5,7 @@
 ## 1. 概要
 
 各APIエンドポイントの詳細設計を個別ファイルで管理する。
-API一覧（サマリー）は [api-catalog.md](../api-catalog.md) を参照。
+API一覧（サマリー）は [api-catalog.md](api-catalog.md) を参照。
 
 ---
 

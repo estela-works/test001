@@ -17,17 +17,20 @@
 ```
 specs/
 ├── architecture.md          # アーキテクチャ仕様書
-├── api-catalog.md           # API一覧
-├── api/                     # API詳細仕様
+├── api/                     # API仕様
+│   ├── api-catalog.md       # API一覧
 │   ├── index.md             # APIインデックス
 │   ├── API-TODO-XXX.md      # Todo API詳細（9件）
 │   └── API-USER-XXX.md      # User API詳細（4件）
-├── logic-catalog.md         # ロジック一覧
-├── db-schema.md             # DB構造
-├── test-catalog.md          # テストケース概要
-├── test/                    # テスト詳細仕様
+├── logic/                   # ロジック仕様
+│   └── logic-catalog.md     # ロジック一覧
+├── db/                      # DB仕様
+│   └── db-schema.md         # DB構造
+├── test/                    # テスト仕様
+│   ├── test-catalog.md      # テストケース概要
 │   ├── backend-test-catalog/ # バックエンドテスト詳細
-│   └── e2e-test-catalog.md   # E2Eテスト詳細
+│   ├── frontend-test-catalog/ # フロントエンドテスト詳細
+│   └── e2e-test-catalog.md  # E2Eテスト詳細
 ├── screens/                 # 画面一覧・詳細
 │   ├── index.md             # 画面一覧
 │   ├── SC-001/              # ホーム画面
@@ -56,13 +59,11 @@ specs/
 | ドキュメント | 説明 |
 |-------------|------|
 | [architecture.md](architecture.md) | 技術構成・システム構造 |
-| [api-catalog.md](api-catalog.md) | 全APIエンドポイント一覧 |
+| [api/](api/) | API仕様（一覧・詳細） |
+| [logic/](logic/) | ロジック仕様 |
+| [db/](db/) | DB仕様（テーブル定義） |
+| [test/](test/) | テスト仕様（カタログ・詳細） |
 | [screens/](screens/) | 画面一覧・詳細仕様 |
-| [api/](api/) | API詳細仕様 |
-| [logic-catalog.md](logic-catalog.md) | ビジネスロジック一覧 |
-| [db-schema.md](db-schema.md) | DB構造・テーブル定義 |
-| [test-catalog.md](test-catalog.md) | テストケース概要 |
-| [test/](test/) | テスト詳細仕様 |
 | [frontend/](frontend/) | フロントエンド仕様 |
 | [template/](template/) | フロントエンド仕様書テンプレート |
 
