@@ -29,3 +29,10 @@ Thumbs.db
 
 # Management folder (internal use only)
 /management/
+
+# Node.js
+node_modules/
+
+# Test results (Playwright)
+/test-results/
+**/output/
