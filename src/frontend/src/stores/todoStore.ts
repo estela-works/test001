@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Todo, CreateTodoRequest } from '@/types/todo'
+import type { Todo, CreateTodoRequest, UpdateTodoRequest } from '@/types/todo'
 import * as todoService from '@/services/todoService'
 
 interface TodoState {
@@ -65,6 +65,17 @@ export const useTodoStore = defineStore('todo', {
         await this.fetchTodos(this.currentProjectId)
       } catch (e) {
         this.error = 'ToDoの追加に失敗しました'
+        throw e
+      }
+    },
+
+    async updateTodo(id: number, data: UpdateTodoRequest) {
+      this.error = null
+      try {
+        await todoService.update(id, data)
+        await this.fetchTodos(this.currentProjectId)
+      } catch (e) {
+        this.error = 'ToDoの更新に失敗しました'
         throw e
       }
     },

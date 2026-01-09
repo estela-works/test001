@@ -1,43 +1,68 @@
 # Simple Spring Boot ToDo Application
 
-Spring Boot 3.2 + Java 17 で構築されたタスク管理アプリケーションです。
+Spring Boot 3.2 + Java 17 + Vue.js 3 で構築されたタスク管理アプリケーションです。
 
 ## 必要環境
 
 - Java 17
 - Maven（Maven Wrapperが同梱されているため、インストール不要）
-- Node.js（E2Eテスト実行時のみ）
+- Node.js 18以上（フロントエンド開発・ビルドに必要）
 
 ## 起動方法
 
-### Windows
+**バックエンドとフロントエンドの両方を起動する必要があります。**
+
+### 1. バックエンド（Spring Boot）
+
+#### Windows
 
 ```cmd
-mvnw.cmd spring-boot:run
+.\mvnw.cmd spring-boot:run
 ```
 
-### Mac/Linux
+#### Mac/Linux
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
+### 2. フロントエンド（Vue.js）
+
+別のターミナルで実行：
+
+```bash
+cd src/frontend
+npm install    # 初回のみ
+npm run dev
+```
+
 ## アクセス
 
-アプリケーション起動後、ブラウザで以下にアクセス:
+両方のサーバーを起動後、ブラウザで以下にアクセス:
 
-| 画面 | URL |
-|------|-----|
-| ホーム | http://localhost:8080 |
-| チケット管理 | http://localhost:8080/todos.html |
-| 案件管理 | http://localhost:8080/projects.html |
-| ユーザー管理 | http://localhost:8080/users.html |
+| 種別 | URL | 説明 |
+|------|-----|------|
+| フロントエンド | http://localhost:5173 | メインのアクセス先 |
+| バックエンドAPI | http://localhost:8080/api/* | APIエンドポイント（直接アクセス不要） |
+
+**注意**: フロントエンド（localhost:5173）からAPIへのリクエストは、Viteのプロキシ設定により自動的にバックエンド（localhost:8080）に転送されます。
 
 ## プロジェクト構成
 
 ```
 test001/
 ├── src/
+│   ├── frontend/                     # Vue.js フロントエンド
+│   │   ├── src/
+│   │   │   ├── components/           # Vueコンポーネント
+│   │   │   ├── views/                # ページコンポーネント
+│   │   │   ├── stores/               # Piniaストア
+│   │   │   ├── services/             # APIサービス
+│   │   │   ├── router/               # Vue Router設定
+│   │   │   └── types/                # TypeScript型定義
+│   │   ├── package.json
+│   │   └── vite.config.ts
+│   │
 │   ├── main/
 │   │   ├── java/com/example/demo/    # Javaソースコード
 │   │   │   ├── SimpleSpringApplication.java
@@ -47,10 +72,10 @@ test001/
 │   │   │   ├── *.java                # エンティティ
 │   │   │   └── template/             # コードテンプレート
 │   │   └── resources/
-│   │       ├── static/               # 静的HTMLファイル
 │   │       ├── mapper/               # MyBatis XMLマッパー
 │   │       ├── schema.sql            # DBスキーマ定義
 │   │       └── data.sql              # 初期データ
+│   │
 │   └── test/
 │       ├── java/                     # JUnitテスト
 │       └── e2e/                      # Playwright E2Eテスト
@@ -116,14 +141,21 @@ test001/
 
 ## テスト
 
-### JUnitテスト
+### バックエンドテスト（JUnit）
 
 ```bash
 # Windows
-mvnw.cmd test
+.\mvnw.cmd test
 
 # Mac/Linux
 ./mvnw test
+```
+
+### フロントエンドテスト（Vitest）
+
+```bash
+cd src/frontend
+npm test
 ```
 
 ### E2Eテスト（Playwright）
@@ -145,8 +177,9 @@ npx playwright test
 | バックエンド | Spring Boot 3.2, Java 17 |
 | データベース | H2 Database（ファイルベース） |
 | ORM | MyBatis |
-| フロントエンド | HTML + JavaScript（Vanilla） |
-| ユニットテスト | JUnit 5, Mockito |
+| フロントエンド | Vue.js 3, TypeScript, Vite, Pinia |
+| バックエンドテスト | JUnit 5, Mockito |
+| フロントエンドテスト | Vitest |
 | E2Eテスト | Playwright |
 
 ## ドキュメント

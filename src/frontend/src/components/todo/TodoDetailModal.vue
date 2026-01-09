@@ -15,41 +15,60 @@
           <div class="modal-content">
             <!-- チケット情報セクション -->
             <section class="todo-info">
-              <div class="info-row">
-                <label>タイトル:</label>
-                <p class="title">{{ todo?.title }}</p>
-              </div>
-              <div class="info-row">
-                <label>説明:</label>
-                <p class="description">{{ todo?.description || '説明なし' }}</p>
-              </div>
-              <div class="info-row">
-                <label>ステータス:</label>
-                <div class="status">
-                  <span :class="['badge', todo?.completed ? 'completed' : 'pending']">
-                    {{ todo?.completed ? '完了' : '未完了' }}
-                  </span>
-                  <button
-                    v-if="!todo?.completed"
-                    class="btn-toggle"
-                    @click="handleToggleComplete"
-                  >
-                    完了にする
+              <!-- 表示モード -->
+              <template v-if="!isEditMode">
+                <div class="info-row">
+                  <label>タイトル:</label>
+                  <p class="title">{{ todo?.title }}</p>
+                </div>
+                <div class="info-row">
+                  <label>説明:</label>
+                  <p class="description">{{ todo?.description || '説明なし' }}</p>
+                </div>
+                <div class="info-row">
+                  <label>ステータス:</label>
+                  <div class="status">
+                    <span :class="['badge', todo?.completed ? 'completed' : 'pending']">
+                      {{ todo?.completed ? '完了' : '未完了' }}
+                    </span>
+                    <button
+                      v-if="!todo?.completed"
+                      class="btn-toggle"
+                      @click="handleToggleComplete"
+                    >
+                      完了にする
+                    </button>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <label>期間:</label>
+                  <p>{{ formatDateRange(todo?.startDate, todo?.dueDate) }}</p>
+                </div>
+                <div class="info-row">
+                  <label>担当:</label>
+                  <p>{{ todo?.assigneeName || '未割当' }}</p>
+                </div>
+                <div class="info-row">
+                  <label>作成日時:</label>
+                  <p>{{ formatDateTime(todo?.createdAt) }}</p>
+                </div>
+                <!-- 編集ボタン -->
+                <div class="info-row actions">
+                  <button class="btn-edit" @click="enterEditMode">
+                    編集
                   </button>
                 </div>
-              </div>
-              <div class="info-row">
-                <label>期間:</label>
-                <p>{{ formatDateRange(todo?.startDate, todo?.dueDate) }}</p>
-              </div>
-              <div class="info-row">
-                <label>担当:</label>
-                <p>{{ todo?.assigneeName || '未割当' }}</p>
-              </div>
-              <div class="info-row">
-                <label>作成日時:</label>
-                <p>{{ formatDateTime(todo?.createdAt) }}</p>
-              </div>
+              </template>
+
+              <!-- 編集モード -->
+              <TodoEditForm
+                v-else
+                :todo="todo"
+                :users="userStore.users"
+                :saving="saving"
+                @save="handleSave"
+                @cancel="exitEditMode"
+              />
             </section>
 
             <hr class="divider" />
@@ -74,10 +93,12 @@
 <script setup lang="ts">
 import { ref, watch, onUnmounted } from 'vue'
 import { useTodoStore } from '@/stores/todoStore'
+import { useUserStore } from '@/stores/userStore'
 import { useCommentStore } from '@/stores/commentStore'
+import TodoEditForm from './TodoEditForm.vue'
 import CommentList from './CommentList.vue'
 import CommentForm from './CommentForm.vue'
-import type { Todo } from '@/types'
+import type { Todo, UpdateTodoRequest } from '@/types'
 
 // Props
 const props = defineProps<{
@@ -93,10 +114,42 @@ const emit = defineEmits<{
 
 // Stores
 const todoStore = useTodoStore()
+const userStore = useUserStore()
 const commentStore = useCommentStore()
 
 // State
 const todo = ref<Todo | null>(null)
+const isEditMode = ref(false)
+const saving = ref(false)
+
+// 編集モードに入る
+function enterEditMode() {
+  isEditMode.value = true
+}
+
+// 編集モードを終了
+function exitEditMode() {
+  isEditMode.value = false
+}
+
+// 保存処理
+async function handleSave(request: UpdateTodoRequest) {
+  if (!todo.value) return
+
+  saving.value = true
+  try {
+    await todoStore.updateTodo(todo.value.id, request)
+    await loadTodoDetail()
+    exitEditMode()
+    if (todo.value) {
+      emit('todoUpdated', todo.value)
+    }
+  } catch (error) {
+    console.error('チケットの更新に失敗しました:', error)
+  } finally {
+    saving.value = false
+  }
+}
 
 // チケット詳細を取得
 async function loadTodoDetail() {
@@ -112,6 +165,7 @@ async function loadTodoDetail() {
 
 // モーダルを閉じる
 function handleClose() {
+  exitEditMode()
   emit('close')
 }
 
@@ -170,14 +224,16 @@ function handleKeyDown(event: KeyboardEvent) {
 watch(() => props.isOpen, async (newValue) => {
   if (newValue) {
     await loadTodoDetail()
+    await userStore.fetchUsers() // 担当者選択用
     document.addEventListener('keydown', handleKeyDown)
     document.body.style.overflow = 'hidden' // スクロール無効化
   } else {
+    exitEditMode()
     commentStore.clearComments()
     document.removeEventListener('keydown', handleKeyDown)
     document.body.style.overflow = '' // スクロール有効化
   }
-})
+}, { immediate: true })
 
 onUnmounted(() => {
   document.removeEventListener('keydown', handleKeyDown)
@@ -268,6 +324,11 @@ onUnmounted(() => {
   flex: 1;
 }
 
+.info-row.actions {
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
 .title {
   font-size: 1.25rem;
   font-weight: 600;
@@ -313,6 +374,20 @@ onUnmounted(() => {
 
 .btn-toggle:hover {
   background-color: #2563eb;
+}
+
+.btn-edit {
+  padding: 0.5rem 1rem;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.btn-edit:hover {
+  background-color: #4b5563;
 }
 
 .divider {

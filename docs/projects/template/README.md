@@ -33,8 +33,9 @@
 
 | テンプレート | 説明 |
 |-------------|------|
-| [test-spec-frontend-template.md](test-spec-frontend-template.md) | フロントエンドテスト方針書 |
+| [test-spec-frontend-template.md](test-spec-frontend-template.md) | フロントエンドテスト方針書（単体・統合テスト） |
 | [test-spec-backend-template.md](test-spec-backend-template.md) | バックエンドテスト方針書 |
+| [test-spec-e2e-template.md](test-spec-e2e-template.md) | E2Eテスト方針書 |
 
 ### 作業報告
 
@@ -45,7 +46,9 @@
 
 ## 使い方
 
-1. 案件フォルダを作成: `YYYYMM_案件名`
+1. 案件フォルダを作成: `YYYYMMDD_連番_案件名`
+   - 例: `20260108_01_ユーザー管理機能`
+   - 同日に複数案件がある場合は連番を増やす（01, 02, 03...）
 2. 必要なテンプレートをコピー
 3. 内容を記入
 

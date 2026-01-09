@@ -36,6 +36,23 @@ export class TodosPage extends BasePage {
   readonly errorMessage: Locator;
   readonly loadingIndicator: Locator;
 
+  // === モーダル関連 ===
+  readonly modalOverlay: Locator;
+  readonly modalContainer: Locator;
+  readonly modalCloseButton: Locator;
+  readonly modalEditButton: Locator;
+  readonly modalToggleButton: Locator;
+
+  // === 編集フォーム関連 ===
+  readonly editTitleInput: Locator;
+  readonly editDescriptionInput: Locator;
+  readonly editStartDateInput: Locator;
+  readonly editDueDateInput: Locator;
+  readonly editAssigneeSelect: Locator;
+  readonly editSaveButton: Locator;
+  readonly editCancelButton: Locator;
+  readonly editErrorMessage: Locator;
+
   constructor(page: Page) {
     super(page);
 
@@ -64,6 +81,23 @@ export class TodosPage extends BasePage {
     this.backLink = page.locator('.back-link a');
     this.errorMessage = page.locator('.error');
     this.loadingIndicator = page.locator('.loading');
+
+    // モーダル関連（TodoDetailModal.vue）
+    this.modalOverlay = page.locator('.modal-overlay');
+    this.modalContainer = page.locator('.modal-container');
+    this.modalCloseButton = page.locator('.close-button');
+    this.modalEditButton = page.locator('.btn-edit');
+    this.modalToggleButton = page.locator('.btn-toggle');
+
+    // 編集フォーム関連（TodoEditForm.vue）
+    this.editTitleInput = page.locator('#edit-title');
+    this.editDescriptionInput = page.locator('#edit-description');
+    this.editStartDateInput = page.locator('#edit-startDate');
+    this.editDueDateInput = page.locator('#edit-dueDate');
+    this.editAssigneeSelect = page.locator('#edit-assignee');
+    this.editSaveButton = page.locator('.btn-save');
+    this.editCancelButton = page.locator('.btn-cancel');
+    this.editErrorMessage = page.locator('.edit-form .error-message');
   }
 
   /**
@@ -238,5 +272,147 @@ export class TodosPage extends BasePage {
    */
   async navigateToProjects(): Promise<void> {
     await this.backLink.click();
+  }
+
+  // === チケット詳細モーダル関連メソッド ===
+
+  /**
+   * チケット詳細モーダルを開く
+   */
+  async openTodoDetail(index: number = 0): Promise<void> {
+    const todoItem = this.todoItems.nth(index);
+    // ToDoアイテムのカードのタイトル（h3）をクリック（actionsボタンを避ける）
+    await todoItem.locator('h3').click();
+    await expect(this.modalOverlay).toBeVisible();
+  }
+
+  /**
+   * チケット詳細モーダルを閉じる
+   */
+  async closeTodoDetail(): Promise<void> {
+    await this.modalCloseButton.click();
+    await expect(this.modalOverlay).not.toBeVisible();
+  }
+
+  /**
+   * 編集モードに切り替える
+   */
+  async enterEditMode(): Promise<void> {
+    await this.modalEditButton.click();
+    await expect(this.editTitleInput).toBeVisible();
+  }
+
+  /**
+   * 編集をキャンセルする
+   */
+  async cancelEdit(): Promise<void> {
+    await this.editCancelButton.click();
+    await expect(this.editTitleInput).not.toBeVisible();
+    await expect(this.modalEditButton).toBeVisible();
+  }
+
+  /**
+   * チケットを編集して保存する
+   */
+  async editTodo(options: {
+    title?: string;
+    description?: string;
+    startDate?: string;
+    dueDate?: string;
+    assigneeId?: number | null;
+  }): Promise<void> {
+    // タイトルを編集
+    if (options.title !== undefined) {
+      await this.editTitleInput.clear();
+      await this.editTitleInput.fill(options.title);
+    }
+
+    // 説明を編集
+    if (options.description !== undefined) {
+      await this.editDescriptionInput.clear();
+      await this.editDescriptionInput.fill(options.description);
+    }
+
+    // 開始日を編集
+    if (options.startDate !== undefined) {
+      await this.editStartDateInput.fill(options.startDate);
+    }
+
+    // 期限日を編集
+    if (options.dueDate !== undefined) {
+      await this.editDueDateInput.fill(options.dueDate);
+    }
+
+    // 担当者を編集
+    if (options.assigneeId !== undefined) {
+      if (options.assigneeId === null) {
+        await this.editAssigneeSelect.selectOption({ value: '' });
+      } else {
+        await this.editAssigneeSelect.selectOption({ value: String(options.assigneeId) });
+      }
+    }
+
+    // 保存
+    await this.editSaveButton.click();
+    await this.waitForLoadingComplete();
+  }
+
+  /**
+   * モーダルが表示されていることを確認
+   */
+  async expectModalVisible(): Promise<void> {
+    await expect(this.modalOverlay).toBeVisible();
+  }
+
+  /**
+   * モーダルが非表示であることを確認
+   */
+  async expectModalHidden(): Promise<void> {
+    await expect(this.modalOverlay).not.toBeVisible();
+  }
+
+  /**
+   * 編集モードであることを確認
+   */
+  async expectInEditMode(): Promise<void> {
+    await expect(this.editTitleInput).toBeVisible();
+    await expect(this.editSaveButton).toBeVisible();
+    await expect(this.editCancelButton).toBeVisible();
+  }
+
+  /**
+   * 表示モードであることを確認
+   */
+  async expectInViewMode(): Promise<void> {
+    await expect(this.editTitleInput).not.toBeVisible();
+    await expect(this.modalEditButton).toBeVisible();
+  }
+
+  /**
+   * 編集フォームにエラーメッセージが表示されていることを確認
+   */
+  async expectEditError(message: string): Promise<void> {
+    await expect(this.editErrorMessage).toContainText(message);
+  }
+
+  /**
+   * 保存ボタンが無効化されていることを確認
+   */
+  async expectSaveButtonDisabled(): Promise<void> {
+    await expect(this.editSaveButton).toBeDisabled();
+  }
+
+  /**
+   * 保存ボタンが有効であることを確認
+   */
+  async expectSaveButtonEnabled(): Promise<void> {
+    await expect(this.editSaveButton).toBeEnabled();
+  }
+
+  /**
+   * モーダル内のチケット情報を確認
+   */
+  async expectTodoDetailContains(text: string): Promise<void> {
+    await expect(this.modalContainer).toContainText(text);
   }
 }

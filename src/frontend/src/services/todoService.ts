@@ -1,5 +1,5 @@
-import { get, post, patch, del } from './apiClient'
-import type { Todo, CreateTodoRequest } from '@/types'
+import { get, post, put, patch, del } from './apiClient'
+import type { Todo, CreateTodoRequest, UpdateTodoRequest } from '@/types'
 
 /**
  * ToDo一覧取得
@@ -27,6 +27,15 @@ export async function getById(id: number): Promise<Todo> {
  */
 export async function create(data: CreateTodoRequest): Promise<Todo> {
   return post<Todo>('/todos', data)
+}
+
+/**
+ * ToDo更新
+ * @param id ToDo ID
+ * @param data 更新データ
+ */
+export async function update(id: number, data: UpdateTodoRequest): Promise<Todo> {
+  return put<Todo>(`/todos/${id}`, data)
 }
 
 /**

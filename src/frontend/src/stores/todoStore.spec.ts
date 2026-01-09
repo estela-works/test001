@@ -165,6 +165,39 @@ describe('todoStore', () => {
       })
     })
 
+    describe('updateTodo', () => {
+      it('ToDoを更新してリストを再取得する', async () => {
+        vi.mocked(todoService.update).mockResolvedValue(createMockTodo({ title: '更新後タイトル' }))
+        vi.mocked(todoService.getAll).mockResolvedValue([])
+
+        const store = useTodoStore()
+        await store.updateTodo(1, { title: '更新後タイトル' })
+
+        expect(todoService.update).toHaveBeenCalledWith(1, { title: '更新後タイトル' })
+        expect(todoService.getAll).toHaveBeenCalled()
+      })
+
+      it('currentProjectIdを保持してリストを再取得する', async () => {
+        vi.mocked(todoService.update).mockResolvedValue(createMockTodo())
+        vi.mocked(todoService.getAll).mockResolvedValue([])
+
+        const store = useTodoStore()
+        store.currentProjectId = '123'
+        await store.updateTodo(1, { title: '更新後' })
+
+        expect(todoService.getAll).toHaveBeenCalledWith('123')
+      })
+
+      it('エラー時にエラーメッセージを設定する', async () => {
+        vi.mocked(todoService.update).mockRejectedValue(new Error('API Error'))
+
+        const store = useTodoStore()
+
+        await expect(store.updateTodo(1, { title: 'テスト' })).rejects.toThrow()
+        expect(store.error).toBe('ToDoの更新に失敗しました')
+      })
+    })
+
     describe('toggleTodo', () => {
       it('ToDoの完了状態を切り替える', async () => {
         vi.mocked(todoService.toggle).mockResolvedValue(createMockTodo({ completed: true }))
