@@ -45,6 +45,13 @@ specs/
 │   ├── store-catalog.md       # ストアカタログ
 │   ├── type-catalog.md        # 型定義カタログ
 │   └── routing-spec.md        # ルーティング仕様
+├── service/                 # サービス仕様（ドコモサービスの仕様定義）
+│   ├── 01-plans/            # 料金プラン（MAX/mini/ahamo等）
+│   ├── 02-infrastructure/   # インフラ（光/home 5G/でんき/ガス）
+│   ├── 03-discounts/        # セット割引（みんなドコモ割/光セット割等）
+│   ├── 04-devices/          # 端末購入プログラム・補償
+│   ├── 05-accessories/      # アクセサリー
+│   └── 06-terminology/      # 用語・表記ルール
 └── template/                # フロントエンド仕様書テンプレート
     ├── README.md                       # テンプレート概要
     ├── frontend-overview-template.md   # フロントエンド全体概要
@@ -65,6 +72,7 @@ specs/
 | [test/](test/) | テスト仕様（カタログ・詳細） |
 | [screens/](screens/) | 画面一覧・詳細仕様 |
 | [frontend/](frontend/) | フロントエンド仕様 |
+| [service/](service/) | サービス仕様（ドコモサービスの料金・割引・インフラ・端末） |
 | [template/](template/) | フロントエンド仕様書テンプレート |
 
 ## 更新タイミング
