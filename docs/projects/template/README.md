@@ -1,55 +1,108 @@
 # テンプレート
 
 案件スコープドキュメントのテンプレート集。
+フェーズごとにフォルダ分けし、開発の流れに沿ってナンバリングしている。
+
+## フォルダ構成
+
+```
+template/
+├── 10_requirements/          # 要件定義フェーズ
+│   └── requirements-template.md
+├── 20_basic-design/          # 基本設計フェーズ
+│   ├── basic-design-frontend-template.md
+│   └── basic-design-backend-template.md
+├── 30_detail-design/         # 詳細設計フェーズ
+│   ├── detail-design-frontend-template.md
+│   ├── detail-design-api-template.md
+│   ├── detail-design-logic-template.md
+│   ├── detail-design-sql-template.md
+│   ├── detail-design-db-template.md
+│   ├── detail-design-store-template.md
+│   └── detail-design-types-template.md
+├── 40_test-spec/             # テスト設計フェーズ
+│   ├── 41_unit-test/             # 単体試験
+│   │   ├── test-spec-unit-frontend-template.md
+│   │   └── test-spec-unit-backend-template.md
+│   ├── 42_integration-test/      # 結合試験
+│   │   ├── test-spec-integration-frontend-template.md
+│   │   ├── test-spec-integration-backend-template.md
+│   │   └── test-spec-integration-external-template.md
+│   └── 43_system-test/           # 総合試験
+│       ├── test-spec-system-template.md
+│       └── test-spec-e2e-template.md
+├── 50_report/                # 作業報告フェーズ
+│   ├── implementation-report-template.md
+│   └── test-implementation-report-template.md
+└── README.md
+```
 
 ## テンプレート一覧
 
-### 要件定義
+### 10 - 要件定義
 
 | テンプレート | 説明 |
 |-------------|------|
-| [requirements-template.md](requirements-template.md) | 要件整理書 |
+| [requirements-template.md](10_requirements/requirements-template.md) | 要件整理書 |
 
-### 基本設計
-
-| テンプレート | 説明 |
-|-------------|------|
-| [basic-design-frontend-template.md](basic-design-frontend-template.md) | フロントエンド基本設計書 |
-| [basic-design-backend-template.md](basic-design-backend-template.md) | バックエンド基本設計書 |
-
-### 詳細設計
+### 20 - 基本設計
 
 | テンプレート | 説明 |
 |-------------|------|
-| [detail-design-frontend-template.md](detail-design-frontend-template.md) | フロントエンド詳細設計書 |
-| [detail-design-api-template.md](detail-design-api-template.md) | API詳細設計書 |
-| [detail-design-logic-template.md](detail-design-logic-template.md) | ロジック詳細設計書 |
-| [detail-design-sql-template.md](detail-design-sql-template.md) | SQL詳細設計書 |
-| [detail-design-db-template.md](detail-design-db-template.md) | DB詳細設計書 |
-| [detail-design-store-template.md](detail-design-store-template.md) | Store詳細設計書（Vue/Pinia） |
-| [detail-design-types-template.md](detail-design-types-template.md) | TypeScript型定義詳細設計書 |
+| [basic-design-frontend-template.md](20_basic-design/basic-design-frontend-template.md) | フロントエンド基本設計書 |
+| [basic-design-backend-template.md](20_basic-design/basic-design-backend-template.md) | バックエンド基本設計書 |
 
-### テスト設計
+### 30 - 詳細設計
 
 | テンプレート | 説明 |
 |-------------|------|
-| [test-spec-frontend-template.md](test-spec-frontend-template.md) | フロントエンドテスト方針書（単体・統合テスト） |
-| [test-spec-backend-template.md](test-spec-backend-template.md) | バックエンドテスト方針書 |
-| [test-spec-e2e-template.md](test-spec-e2e-template.md) | E2Eテスト方針書 |
+| [detail-design-frontend-template.md](30_detail-design/detail-design-frontend-template.md) | フロントエンド詳細設計書 |
+| [detail-design-api-template.md](30_detail-design/detail-design-api-template.md) | API詳細設計書 |
+| [detail-design-logic-template.md](30_detail-design/detail-design-logic-template.md) | ロジック詳細設計書 |
+| [detail-design-sql-template.md](30_detail-design/detail-design-sql-template.md) | SQL詳細設計書 |
+| [detail-design-db-template.md](30_detail-design/detail-design-db-template.md) | DB詳細設計書 |
+| [detail-design-store-template.md](30_detail-design/detail-design-store-template.md) | Store詳細設計書（Vue/Pinia） |
+| [detail-design-types-template.md](30_detail-design/detail-design-types-template.md) | TypeScript型定義詳細設計書 |
 
-### 作業報告
+### 40 - テスト設計
+
+テストレベルごとにサブフォルダで整理。詳細は [40_test-spec/README.md](40_test-spec/README.md) を参照。
+
+#### 41 - 単体試験
 
 | テンプレート | 説明 |
 |-------------|------|
-| [implementation-report-template.md](implementation-report-template.md) | 実装作業報告書 |
-| [test-implementation-report-template.md](test-implementation-report-template.md) | テスト実装報告書 |
+| [test-spec-unit-frontend-template.md](40_test-spec/41_unit-test/test-spec-unit-frontend-template.md) | フロントエンド単体テスト（コンポーネント・ストア・純粋関数） |
+| [test-spec-unit-backend-template.md](40_test-spec/41_unit-test/test-spec-unit-backend-template.md) | バックエンド単体テスト（Mapper・Service） |
+
+#### 42 - 結合試験
+
+| テンプレート | 説明 |
+|-------------|------|
+| [test-spec-integration-frontend-template.md](40_test-spec/42_integration-test/test-spec-integration-frontend-template.md) | フロントエンド結合テスト（コンポーネント+ストア・画面遷移） |
+| [test-spec-integration-backend-template.md](40_test-spec/42_integration-test/test-spec-integration-backend-template.md) | バックエンド結合テスト（Service+Mapper+DB・API全層） |
+| [test-spec-integration-external-template.md](40_test-spec/42_integration-test/test-spec-integration-external-template.md) | 外部コンポーネント接続テスト（外部API・DB・MQ・認証等） |
+
+#### 43 - 総合試験
+
+| テンプレート | 説明 |
+|-------------|------|
+| [test-spec-system-template.md](40_test-spec/43_system-test/test-spec-system-template.md) | 総合テスト（業務シナリオ・非機能・障害リカバリ） |
+| [test-spec-e2e-template.md](40_test-spec/43_system-test/test-spec-e2e-template.md) | E2Eテスト（総合試験の自動化パート） |
+
+### 50 - 作業報告
+
+| テンプレート | 説明 |
+|-------------|------|
+| [implementation-report-template.md](50_report/implementation-report-template.md) | 実装作業報告書 |
+| [test-implementation-report-template.md](50_report/test-implementation-report-template.md) | テスト実装報告書 |
 
 ## 使い方
 
 1. 案件フォルダを作成: `YYYYMMDD_連番_案件名`
    - 例: `20260108_01_ユーザー管理機能`
    - 同日に複数案件がある場合は連番を増やす（01, 02, 03...）
-2. 必要なテンプレートをコピー
+2. 必要なテンプレートをフェーズフォルダからコピー
 3. 内容を記入
 
 詳細は [ドキュメント体系ガイド](../../document-guide.md) を参照。
