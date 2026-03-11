@@ -17,6 +17,12 @@
 | [slides/test-frontend.html](slides/test-frontend.html) | フロントエンドテスト設計スライド（全9ページ） |
 | [slides/test-e2e.html](slides/test-e2e.html) | E2Eテスト設計スライド（全9ページ） |
 
+### WebRelease2リファレンス
+
+| フォルダ | 説明 |
+|----------|------|
+| [webrelease2/](webrelease2/README.md) | WebRelease2（CMS）の仕様情報リファレンス集 |
+
 ## 追加する場合
 
 技術的なTipsを発見したら、以下の形式で追加する:
