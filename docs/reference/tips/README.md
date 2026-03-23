@@ -17,6 +17,12 @@
 | [slides/test-frontend.html](slides/test-frontend.html) | フロントエンドテスト設計スライド（全9ページ） |
 | [slides/test-e2e.html](slides/test-e2e.html) | E2Eテスト設計スライド（全9ページ） |
 
+### 業務ナレッジ
+
+| ファイル | 説明 |
+|----------|------|
+| [dcard-home5g-screen-spec.md](dcard-home5g-screen-spec.md) | dカード設定処理フロー・home 5G顧客詳細画面の仕様メモ |
+
 ### WebRelease2リファレンス
 
 | フォルダ | 説明 |
