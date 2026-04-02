@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compare Template</title>
+  <link rel="stylesheet" href="./slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-2">
+    <div class="slide-head">
+      <div class="slide-title">比較したいテーマを書く</div>
+      <div class="slide-message">最適化対象がどう変わったかを1行で要約する</div>
+    </div>
+    <div class="slide-body">
+      <div class="two-col" style="flex:1;">
+        <section class="compare-col compare-old">
+          <div class="compare-label">旧</div>
+          <div class="compare-item">
+            <h3>比較軸 1</h3>
+            <p>旧来の考え方を2行以内で書く</p>
+          </div>
+          <div class="compare-item">
+            <h3>比較軸 2</h3>
+            <p>旧来の制約や判断を2行以内で書く</p>
+          </div>
+          <div class="compare-item">
+            <h3>比較軸 3</h3>
+            <p>旧来の戦略を2行以内で書く</p>
+          </div>
+        </section>
+        <section class="compare-col compare-new">
+          <div class="compare-label">新</div>
+          <div class="compare-item">
+            <h3>比較軸 1</h3>
+            <p>新しい考え方を2行以内で書く</p>
+          </div>
+          <div class="compare-item">
+            <h3>比較軸 2</h3>
+            <p>新しい制約や判断を2行以内で書く</p>
+          </div>
+          <div class="compare-item">
+            <h3>比較軸 3</h3>
+            <p>新しい戦略を2行以内で書く</p>
+          </div>
+        </section>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="compare-label" style="color:var(--old-text);">脱構築</div>
+          <div class="body">捨てる前提を短く書く。詳細説明は入れない。</div>
+        </div>
+        <div class="card">
+          <div class="compare-label" style="color:var(--accent-strong);">再構築</div>
+          <div class="body">新しい前提や実務パターンを短く書く。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

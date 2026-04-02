@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-1-05</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-1">
+    <div class="slide-head">
+      <div class="slide-title">AIエージェントでも文脈上限は消えない</div>
+      <div class="slide-message">セッション継続に見えても、一度に使える文脈は有限である</div>
+    </div>
+    <div class="slide-body">
+      <div class="causal-flow">
+        <div class="causal-step">
+          <h3>長い履歴</h3>
+          <p>過去の会話、試行錯誤、調査ログ、修正前の情報が積み上がっていく。</p>
+        </div>
+        <div class="causal-arrow">→</div>
+        <div class="causal-step">
+          <h3>選別と要約</h3>
+          <p>現在の作業に必要な情報だけを選び、短い作業文脈へ圧縮する。</p>
+        </div>
+        <div class="causal-arrow">→</div>
+        <div class="causal-step">
+          <h3>有限な作業文脈</h3>
+          <p>その時点で参照できるのは、圧縮後に残った限られた情報だけになる。</p>
+        </div>
+      </div>
+      <div class="stack-sm">
+        <div class="two-col">
+          <div class="card" style="background:#fbf7f6; border-color:#e5c8bf;">
+            <div class="compare-label" style="color:#b05a44;">誤解しがち</div>
+            <div class="bullet-lines">
+              <div class="bullet-line"><span class="icon-chip" style="background:#fff1ec; color:#b05a44;">1</span><span>セッションが続く = 以前の詳細まで全部そのまま覚えている、と見なしてしまう。</span></div>
+              <div class="bullet-line"><span class="icon-chip" style="background:#fff1ec; color:#b05a44;">2</span><span>大きな仕事を一回で頼んでも、同じ精度で最後まで持つと期待してしまう。</span></div>
+            </div>
+          </div>
+          <div class="card-accent card">
+            <div class="compare-label" style="color:var(--accent-strong);">結論</div>
+            <div class="body-sm"><strong>セッション継続と無限記憶は別物</strong>だと理解する。</div>
+            <div class="body-sm" style="margin-top:8px;">だからAIエージェントへの依頼は、文脈上限に収まる大きさへ切る必要がある。</div>
+          </div>
+        </div>
+        <div class="centered" style="gap:10px; flex-wrap:wrap;">
+          <div class="outline-pill">セッション継続</div>
+          <div class="arrow">→</div>
+          <div class="outline-pill">文脈は有限</div>
+          <div class="arrow">→</div>
+          <div class="outline-pill">仕事を小さく切る</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Agent Context Limit</span>
+      <span>Session Continuity != Infinite Memory</span>
+    </div>
+  </div>
+</body>
+</html>

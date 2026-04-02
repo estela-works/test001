@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-3-02</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-3">
+    <div class="slide-head">
+      <div class="slide-title">開発手法は「完成に向かう工程」には強いが、「完成後の情報維持」には弱い</div>
+      <div class="slide-message">コードは進化するのに、情報は放置されやすいという盲点がある</div>
+    </div>
+    <div class="slide-body">
+      <div class="two-col" style="flex:1;">
+        <div class="card-accent card stack-md">
+          <div class="compare-label">手厚い領域</div>
+          <div class="bullet-lines" style="margin-top:10px;">
+            <div class="bullet-line"><span class="icon-chip">設</span><span>新規設計プロセス</span></div>
+            <div class="bullet-line"><span class="icon-chip">試</span><span>テスト戦略（TDD / BDD）</span></div>
+            <div class="bullet-line"><span class="icon-chip">出</span><span>リリース管理（CI/CD）</span></div>
+          </div>
+          <div class="muted-panel body-sm" style="margin-top:auto; background:rgba(255,255,255,0.62);">
+            完成物を前に進める工程には、既に多くの型と改善知見がある。
+          </div>
+        </div>
+        <div class="card stack-md" style="background:#faf9f5;">
+          <div class="compare-label" style="color:#8e7742;">手薄い領域</div>
+          <div class="bullet-lines" style="margin-top:10px;">
+            <div class="bullet-line"><span class="icon-chip" style="background:#f6f1dd; color:#8e7742;">更</span><span>仕様の継続的最新化</span></div>
+            <div class="bullet-line"><span class="icon-chip" style="background:#f6f1dd; color:#8e7742;">理</span><span>変更の文脈の蓄積</span></div>
+            <div class="bullet-line"><span class="icon-chip" style="background:#f6f1dd; color:#8e7742;">維</span><span>長期の情報一貫性維持</span></div>
+          </div>
+          <div class="muted-panel body-sm" style="margin-top:auto; background:rgba(255,255,255,0.72);">
+            だから開発後半になるほど、コードは進むのに説明可能性だけが痩せていく。
+          </div>
+        </div>
+      </div>
+      <div class="callout body" style="font-weight:700;">新規に作る仕組みは設計されていても、育ち続ける情報の仕組みは設計されていない</div>
+    </div>
+    <div class="slide-footer">
+      <span>Blind Spot</span>
+      <span>Build Strong, Maintain Weak</span>
+    </div>
+  </div>
+</body>
+</html>

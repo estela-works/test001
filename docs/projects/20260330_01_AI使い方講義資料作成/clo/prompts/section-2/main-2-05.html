@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-2-05</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-2">
+    <div class="slide-head">
+      <div class="slide-title">SSOT: あらゆる情報要素は、ただ一つの場所にのみ管理される</div>
+      <div class="slide-message">DB設計では当たり前の原則なのに、プロジェクト情報管理にはまだ適用されていない</div>
+    </div>
+    <div class="slide-body">
+      <div class="diagram-board">
+        <div class="hub-layout">
+          <div class="hub-side">
+            <div class="hub-box">設計書</div>
+            <div class="hub-box">テスト仕様</div>
+            <div class="hub-box">画面仕様</div>
+          </div>
+          <div class="hub-center">SSOT<br>唯一の真実</div>
+          <div class="hub-side">
+            <div class="hub-box">コード参照</div>
+            <div class="hub-box">レビュー資料</div>
+            <div class="hub-box">運用ドキュメント</div>
+          </div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="card"><div class="body-sm"><strong>Codd 1970</strong><br>正規化で重複排除を理論化</div></div>
+        <div class="card"><div class="body-sm"><strong>Inmon 1992 以降</strong><br>組織全体で単一の信頼できるソースを扱う思想へ拡張</div></div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>SSOT</span>
+      <span>One Source Per Fact</span>
+    </div>
+  </div>
+</body>
+</html>

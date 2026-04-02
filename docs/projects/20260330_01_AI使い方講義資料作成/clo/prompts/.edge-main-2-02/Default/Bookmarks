@@ -1,0 +1,94 @@
+{
+   "checksum": "6dc3af4a09e86a38a856923bebf623d5",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13419515998638123",
+            "date_last_used": "0",
+            "guid": "e3bae227-820b-4ab0-ac1c-8a8d801cd42d",
+            "id": "10",
+            "name": "ASUS Software Portal - Exclusive technology",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://www.asus.com/Software-and-Innovations-Portal/",
+            "visit_count": 0
+         }, {
+            "date_added": "13419515998637663",
+            "date_last_used": "0",
+            "guid": "c67b71fb-cc4a-4040-a84c-4da626c18546",
+            "id": "9",
+            "name": "MyASUS Software - Get the best from ASUS PC",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://www.asus.com/ASUS-Software/",
+            "visit_count": 0
+         }, {
+            "date_added": "13419515998637181",
+            "date_last_used": "0",
+            "guid": "138bb5da-918e-4609-a7d0-5aa94f5dfaae",
+            "id": "8",
+            "name": "amazon.japan.",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "http://www.amazon.co.jp/?tag=asusjapan-22&linkCode=ure",
+            "visit_count": 0
+         }, {
+            "date_added": "13419515998636492",
+            "date_last_used": "0",
+            "guid": "d2507b55-6abd-47c5-aeaa-f106b231aafd",
+            "id": "7",
+            "name": "McAfee LiveSafe",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://home.mcafee.com/root/campaign.aspx?cid=247829",
+            "visit_count": 0
+         } ],
+         "date_added": "13419515998482702",
+         "date_last_used": "0",
+         "date_modified": "13419515998638123",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "お気に入りバー",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13419515998482702",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "その他のお気に入り",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13419515998482702",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "モバイルのお気に入り",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "workspaces_v2": {
+         "children": [  ],
+         "date_added": "13419515998482702",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "75aa6670-344f-549d-b742-660f029506ab",
+         "id": "5",
+         "name": "ワークスペース",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

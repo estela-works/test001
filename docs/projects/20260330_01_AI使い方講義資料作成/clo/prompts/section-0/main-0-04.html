@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-0-04</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .compact-compare {
+      gap: 8px;
+    }
+
+    .compact-compare .compare-col {
+      padding: 16px 16px 14px;
+      gap: 8px;
+    }
+
+    .compact-compare .compare-item {
+      padding-top: 6px;
+    }
+
+    .compact-note {
+      padding: 12px 16px;
+    }
+
+    .compact-note .body-sm {
+      color: var(--text-body);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide theme-section-0">
+    <div class="slide-head">
+      <div class="slide-title">デジタル化で重視すべき対象は「失敗回避」から「学習速度」へ変わった</div>
+      <div class="slide-message">試行コストが下がると、一発成功より速い反復のほうが合理的になる</div>
+    </div>
+    <div class="slide-body compact-compare">
+      <div class="two-col" style="flex:1;">
+        <section class="compare-col compare-old">
+          <div class="compare-label">旧</div>
+          <div class="compare-item">
+            <h3>コスト構造</h3>
+            <p>試作や検証に大きな手間と費用がかかり、失敗の代償が重かった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>最適化対象</h3>
+            <p>期待損失を減らし、なるべく外さない判断をすることが重要だった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>支配的な戦略</h3>
+            <p>事前調査、詳細設計、承認を厚くして、一発で正解に近づけようとした。</p>
+          </div>
+        </section>
+        <section class="compare-col compare-new">
+          <div class="compare-label">新</div>
+          <div class="compare-item">
+            <h3>コスト構造</h3>
+            <p>試して学ぶコストが大きく下がり、短いサイクルで改善を回せるようになった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>最適化対象</h3>
+            <p>どれだけ早く仮説検証して学習できるかが競争力になった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>支配的な戦略</h3>
+            <p>小さく出して反応を見て直す、反復前提の運営が合理的になった。</p>
+          </div>
+        </section>
+      </div>
+      <div class="two-col">
+        <div class="card compact-note">
+          <div class="compare-label" style="color:var(--old-text);">脱構築</div>
+          <div class="body-sm">高額な市場調査、一発勝負の制作、同期前提のコミュニケーション設計</div>
+        </div>
+        <div class="card compact-note">
+          <div class="compare-label" style="color:var(--accent-strong);">再構築</div>
+          <div class="body-sm">A/Bテスト、プロダクト分析、ユーザーテスト、アジャイル、非同期コラボ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-5-02</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-5">
+    <div class="slide-head">
+      <div class="slide-title">必要なのは、新しい巨大フレームワークではない</div>
+      <div class="slide-message">既存の文書を「最新仕様」と「今回の変更」に分けて置き直すだけでよい</div>
+    </div>
+    <div class="slide-body">
+      <div class="definition-split">
+        <div class="definition-card">
+          <div class="definition-kicker">SPEC</div>
+          <div class="definition-title">各レイヤの最新仕様</div>
+          <div class="definition-summary">アプリケーションが今どうなっているかを束ねた正本。参照先は常にここに寄せる。</div>
+          <div class="mini-list">
+            <div class="mini-list-item"><span class="icon-chip">今</span><span>現在有効な仕様だけを置く</span></div>
+            <div class="mini-list-item"><span class="icon-chip">層</span><span>画面、API、DB、型、業務ルールをまとめる</span></div>
+            <div class="mini-list-item"><span class="icon-chip">正</span><span>過去版や変更理由は持たず、正本に集中する</span></div>
+          </div>
+        </div>
+        <div class="definition-card project">
+          <div class="definition-kicker">PROJECT</div>
+          <div class="definition-title">1要求の変更パッケージ</div>
+          <div class="definition-summary">今回変えたい要求を起点に、設計・実装・試験・報告へ分解した案件単位の束。</div>
+          <div class="mini-list">
+            <div class="mini-list-item"><span class="icon-chip">要</span><span>なぜ変えるか、何を変えるかを要求で定義する</span></div>
+            <div class="mini-list-item"><span class="icon-chip">設</span><span>基本設計、詳細設計、実装方針へ具体化する</span></div>
+            <div class="mini-list-item"><span class="icon-chip">履</span><span>完了後も消さず、変更理由と実施結果の履歴として残す</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="callout body" style="font-weight:700;">増やすのではなく、既存の文書を「現在」と「変更」に仕分け直すのが第5章の提案である</div>
+    </div>
+    <div class="slide-footer">
+      <span>Two Containers</span>
+      <span>Current State And Current Change</span>
+    </div>
+  </div>
+</body>
+</html>

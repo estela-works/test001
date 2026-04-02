@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-5-05</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-5">
+    <div class="slide-head">
+      <div class="slide-title">SPECは現在地、Projectは今回の変更計画と実施記録である</div>
+      <div class="slide-message">Projectは最新SPECを起点に要求を分解し、承認された差分だけが次のSPECへ戻る</div>
+    </div>
+    <div class="slide-body">
+      <div class="update-flow">
+        <div class="state-card">
+          <h3>現在のSPEC</h3>
+          <p>各レイヤの最新版だけを保持した正本。</p>
+          <div class="flow-stack">
+            <div class="flow-strip">画面仕様 / UI構成</div>
+            <div class="flow-strip">API / Backend責務</div>
+            <div class="flow-strip">DB / 型 / 業務ルール</div>
+          </div>
+        </div>
+        <div class="flow-arrow-large">→</div>
+        <div class="state-card project">
+          <h3>今回のProject</h3>
+          <p>1つの変更要求を起点に、実施内容まで分解する。</p>
+          <div class="flow-stack">
+            <div class="flow-strip">requirements</div>
+            <div class="flow-strip">basic-design</div>
+            <div class="flow-strip">detail-design</div>
+            <div class="flow-strip">test-spec / report</div>
+          </div>
+        </div>
+        <div class="flow-arrow-large">→</div>
+        <div class="state-card">
+          <h3>更新後のSPEC</h3>
+          <p>承認された変更だけを取り込み、次案件の現在地になる。</p>
+          <div class="flow-stack">
+            <div class="flow-strip">更新後の画面仕様</div>
+            <div class="flow-strip">更新後のAPI / DB仕様</div>
+            <div class="flow-strip">更新後の型 / ルール</div>
+          </div>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="card"><div class="body-sm"><strong>SPEC</strong><br>常に1つの正本として参照する。</div></div>
+        <div class="card"><div class="body-sm"><strong>Project</strong><br>案件ごとに複数残り、変更理由の履歴になる。</div></div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Relationship</span>
+      <span>Current State And Change Package</span>
+    </div>
+  </div>
+</body>
+</html>

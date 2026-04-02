@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Section 0 - 生成プロンプト一覧</title>
+<style>
+  :root {
+    --primary: #28AA3C;
+    --primary-dark: #145C20;
+    --primary-light: #D4EDDA;
+    --neutral-900: #1E352A;
+    --neutral-600: #6B7E74;
+    --neutral-300: #B0BFB6;
+    --neutral-100: #EDF5F0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Meiryo", sans-serif;
+    background: #f8faf9;
+    color: var(--neutral-900);
+    line-height: 1.7;
+    padding: 2rem;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-dark);
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--neutral-600);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    background: #f8faf9;
+    padding: 1rem 0;
+    z-index: 10;
+    border-bottom: 2px solid var(--neutral-300);
+  }
+  nav a {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+  nav a:hover { background: var(--primary-dark); }
+  .slide-section {
+    background: #fff;
+    border: 1px solid var(--neutral-300);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .slide-header {
+    background: var(--primary);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .slide-header .badge {
+    background: rgba(255,255,255,0.25);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+  }
+  .slide-body {
+    padding: 1.5rem;
+  }
+  .slide-body h1 { font-size: 1.3rem; text-align: left; margin: 1.2rem 0 0.5rem; color: var(--primary-dark); border-bottom: 2px solid var(--primary-light); padding-bottom: 0.3rem; }
+  .slide-body h2 { font-size: 1.1rem; margin: 1rem 0 0.4rem; color: var(--primary-dark); border-left: 4px solid var(--primary); padding-left: 0.6rem; }
+  .slide-body h3 { font-size: 0.95rem; margin: 0.8rem 0 0.3rem; color: var(--neutral-900); }
+  .slide-body p { margin: 0.4rem 0; }
+  .slide-body ul, .slide-body ol { margin: 0.4rem 0 0.4rem 1.5rem; }
+  .slide-body li { margin: 0.2rem 0; }
+  .slide-body pre {
+    background: var(--neutral-100);
+    border: 1px solid var(--neutral-300);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+    font-family: "Consolas", "Monaco", monospace;
+  }
+  .slide-body code {
+    background: var(--neutral-100);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  .slide-body strong { color: var(--primary-dark); }
+  .back-to-top {
+    display: block;
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--primary);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+<h1>Section 0: 第0章 生成プロンプト一覧</h1>
+<p class="subtitle">Gemini Pro Image APIに送信された実際のプロンプト（全7スライド）</p>
+<nav id="top">
+
+  <a href="#main-0-01">0-01</a>
+  <a href="#main-0-02">0-02</a>
+  <a href="#main-0-03">0-03</a>
+  <a href="#main-0-04">0-04</a>
+  <a href="#main-0-05">0-05</a>
+  <a href="#main-0-06">0-06</a>
+  <a href="#main-0-07">0-07</a>
+</nav>
+
+<section class="slide-section" id="main-0-01">
+  <div class="slide-header">
+    <span>Slide 1 / 7 — main-0-01</span>
+    <span class="badge">0-01</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-01 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, clean and modern Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Background: #FFFFFF (white)</li>
+<li>Main title text: #1E352A (dark green-tinted charcoal)</li>
+<li>Subtitle text: #28AA3C (brand green)</li>
+<li>Separator line: #28AA3C (brand green, thick)</li>
+<li>Footer text: #6B7E74 (medium gray)</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>講義全体の第一印象を決めるスライド。プロフェッショナルで信頼感があり、かつ「何か新しいことを学べそうだ」という期待感を与える。企業ロゴカラー（#28AA3C）をアクセントに使い、ブランドの一貫性を示す。余白を十分に取り、格式と親しみやすさのバランスを取る。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する講義。「AIネイティブ開発」をフレーム化し、歴史的課題を解きほぐし、SPEC&amp;Projectという具体手法を提案する。全6章＋クロージング59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造（制約→最適化対象→合理的戦略）を発見させ、講義全体への期待を作る</li>
+<li>前スライド: なし（講義の開始）</li>
+<li>次スライド: 0-02「AIネイティブ開発って何だと思いますか？」という問いかけで聴衆の参加を誘う</li>
+<li>このスライドの役割: 講義の格を示しつつ、堅すぎない雰囲気で「聴いてみよう」と思わせる導入</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>本講義「エージェントAIを利用したシステム開発 — AIネイティブ開発への転換」は、AIを単なるコーディング補助ツールとして使うのではなく、システム開発の手法そのものをAIがある前提で再設計する「AIネイティブ開発」という概念を提案する。講義は全6章構成で、まずAI（LLM）の仕組みを理解し（第1章）、現状の課題を特定し（第2章）、なぜその課題が生まれたかの歴史を辿り（第3章）、AIによるコスト構造の変化を示し（第4章）、具体的手法SPEC&amp;Projectを提案し（第5章）、その有効性を論証する（第6章）。聴衆は技術情報に明るい若手エンジニアと、20年以上の経験を持つベテランSE・プロマネが想定される。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像であり、動画の背景画像ではない。テキストはスライドの主要コンテンツであるため、指示されたテキストは全て画像内にレンダリングすること。system.txtの「テキストを焼き込まない」指示は本プロジェクトには適用しない。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>メインタイトル「エージェントAIを利用したシステム開発」</li>
+<li>サブタイトル「AIネイティブ開発への転換」</li>
+<li>日付・講演者名エリア（右下、小さく）</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|                                                                  |
+|                                                                  |
+|                                                                  |
+|         エージェントAIを利用した                                  |
+|             システム開発                                          |
+|                                                                  |
+|         ━━━━━━━━━━━━━━━━━━━━━                                  |
+|                                                                  |
+|         AIネイティブ開発への転換                                  |
+|                                                                  |
+|                                                                  |
+|                                                                  |
+|                                          2026.XX.XX  講演者名    |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A clean, professional title slide for a tech lecture presentation about AI-native software development. White (#FFFFFF) background with generous whitespace — the slide should feel open and inviting. Center-aligned large Japanese title &quot;エージェントAIを利用したシステム開発&quot; in dark charcoal (#1E352A) bold sans-serif font, taking up the visual center of the slide. Below the title, a thick horizontal line in green (#28AA3C) spanning about 40% of the width as a separator. Below the separator, subtitle &quot;AIネイティブ開発への転換&quot; in green (#28AA3C) medium-weight font, slightly smaller than the main title. Bottom-right corner shows &quot;2026.XX.XX  講演者名&quot; in small gray (#6B7E74) text. No photographs, no illustrations, no decorative elements — purely typographic with clean spacing. The overall impression should be: modern, trustworthy, intellectually stimulating — a lecture by a working professional, not an academic. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+
+<section class="slide-section" id="main-0-02">
+  <div class="slide-header">
+    <span>Slide 2 / 7 — main-0-02</span>
+    <span class="badge">0-02</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-02 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, clean Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Background: #FFFFFF (white)</li>
+<li>Question card background: #D4EDDA (light green)</li>
+<li>Question card left border: #28AA3C (brand green, 4px)</li>
+<li>Body text: #1E352A (dark charcoal)</li>
+<li>Expected answers hint: #6B7E74 (gray, smaller)</li>
+<li>✗ marks: #AA2896 (magenta-purple)</li>
+<li>Separator line: #B0BFB6 (light gray)</li>
+<li>Lead-in text: #28AA3C (brand green, bold)</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>聴衆に「自分はAIネイティブ開発を知っている」と思わせてから揺さぶる。問いかけで能動的な参加を促し、よくある誤解の否定で「じゃあ何なんだ？」という好奇心を引き出す。知的な挑発のスライド。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る</li>
+<li>前スライド: 0-01 タイトルスライド。講義の概要が示されたばかりで、聴衆はまだリラックスした状態</li>
+<li>次スライド: 0-03 インターネットネイティブの旧/新比較。「共通する構造」の1例目に入る</li>
+<li>このスライドの役割: 「○○ネイティブ＝ツールを使うこと」という素朴な理解を崩し、3つの事例への布石を打つ</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>話者は「今日のテーマは&quot;AIを活用したシステム開発&quot;ですが、最近よく聞く言葉があります。AIネイティブ開発って、何だと思いますか？」と問いかける。会場に考える間を取り、想定される回答は「AIをたくさん使う」「Copilotで爆速コーディング」「プロンプトエンジニアリングを駆使する」など。</p>
+<p>次に揺さぶりを入れる。「では、デジタルネイティブはパソコンをたくさん使う人のことですか？」「インターネットネイティブはネット検索が速い人のことですか？」と問い、どちらも違うと否定する。「○○ネイティブ」という言葉には共通する構造がある。各時代の変化を同じフレームで整理すると見えてくる：「制約が変わると、最適化すべき対象が変わり、合理的な戦略が変わる」。過去の事例からこの構造を確認していく、と次への導入を行う。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像。テキストは全て画像内にレンダリングすること。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>問いかけ「『AIネイティブ開発』って何だと思いますか？」（大きく、強調カード内）</li>
+<li>想定回答の例（小さめ、グレー）:「AIをたくさん使う？」「Copilotで爆速コーディング？」「プロンプトエンジニアリング？」</li>
+<li>誤解1「デジタルネイティブ = PCをたくさん使う人？」+ ✗マーク</li>
+<li>誤解2「インターネットネイティブ = 検索が速い人？」+ ✗マーク</li>
+<li>誘導文「→ どちらも違う」</li>
+<li>結論「○○ネイティブには共通する構造がある」</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|                                                                  |
+|      ┃                                                           |
+|      ┃  「AIネイティブ開発」って何だと思いますか？                |
+|      ┃                                                           |
+|      ┃  (AIをたくさん使う？ Copilotで爆速？ プロンプト？)        |
+|                                                                  |
+|      ────────────────────────────────────                        |
+|                                                                  |
+|       デジタルネイティブ = PCをたくさん使う人？  → ✗              |
+|       インターネットネイティブ = 検索が速い人？  → ✗              |
+|                                                                  |
+|       → どちらも違う                                              |
+|       ○○ネイティブには共通する構造がある                          |
+|                                                                  |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A lecture slide designed to provoke the audience into rethinking what &quot;AI-native development&quot; means. White (#FFFFFF) background. Upper section: a highlighted card with light green (#D4EDDA) background and thick green (#28AA3C) left border (4px). Inside the card, large bold Japanese text &quot;「AIネイティブ開発」って何だと思いますか？&quot; in dark charcoal (#1E352A). Below the question in smaller gray (#6B7E74) text, show typical expected answers as hints: &quot;AIをたくさん使う？ Copilotで爆速コーディング？ プロンプトエンジニアリング？&quot; — these represent what the audience likely thinks before being challenged. Below the card, a thin gray (#B0BFB6) horizontal separator line. Lower section: two lines showing common misconceptions about &quot;XX-native&quot; concepts, each with a magenta-purple (#AA2896) ✗ mark: &quot;デジタルネイティブ = PCをたくさん使う人？ → ✗&quot; and &quot;インターネットネイティブ = 検索が速い人？ → ✗&quot;. Below the denials, text &quot;→ どちらも違う&quot; in dark charcoal. Then green (#28AA3C) bold text: &quot;○○ネイティブには共通する構造がある&quot;. Clean layout with visual hierarchy: question → expected answers → denials → conclusion. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+
+<section class="slide-section" id="main-0-03">
+  <div class="slide-header">
+    <span>Slide 3 / 7 — main-0-03</span>
+    <span class="badge">0-03</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-03 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, two-column comparison layout, clean Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Background: #FFFFFF, Left: #F5E0F2 + #AA2896 border, Right: #D4EDDA + #28AA3C border, Text: #1E352A, Arrow: #28AA3C</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>「制約→最適化対象→戦略」の3層フレームで歴史的変化を整理する対比スライドの1枚目。左カラム（旧）には配信コストが高かった時代の構造を、右カラム（新）には配信コストがゼロになった時代の構造を配置。下部の「脱構築→再構築」では、消えた産業と生まれた産業を具体名で示す。3枚連続対比の開始点であり、レイアウトの統一がパターン発見の伏線になる。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る</li>
+<li>前スライド: 0-02 問いかけ。「○○ネイティブには共通する構造がある」と予告した直後。聴衆は「どんな構造？」と期待</li>
+<li>次スライド: 0-04 デジタルネイティブ（同じレイアウトで2例目）</li>
+<li>このスライドの役割: 3枚連続対比の1枚目。「制約/最適化/戦略」フレームの初出</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>1990年代後半、インターネットの普及により配信コスト・複製コストが限界費用ゼロに近づいた。それ以前の世界では、1対1通信（電話・電報）、1対多配信（新聞・テレビ）、静的な蓄積（電話帳・百科事典）は存在したが、多対多の流通は不可能だった。蓄積はあっても索引の切り口でしか引けない。そのため最適化対象は「限られた流通枠をいかに効率よく使うか」であり、合理的な戦略はゲートキーパー（出版社、テレビ局の編成、レコード会社）による選別だった。</p>
+<p>配信コストがゼロになると、最適化対象は「情報の発見効率」に移動する。誰でも情報を発信できるようになった結果、問題は「何を流通させるか」ではなく「膨大な情報の中からどう見つけるか」になった。合理的な戦略はN対N流通＋検索ベースの発見へと変わった。</p>
+<p>この変化により「配信の独占」が価値を失った。出版社の中間的編集機能、テレビ局の編成権、レコード会社の流通独占、電話帳・紙の百科事典といった静的索引ビジネス、CD・DVD小売、新聞販売網・取次といった物理的流通インフラが脱構築された。代わりに「探索・発見の最適化」に価値が移り、検索エンジン・SEO・レコメンド、インフルエンサー・レビュー文化によるフィルタリング、YouTube・Spotify等のプラットフォーム、レーティングやフォロワー経済による評判の可視化が再構築された。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像。テキストは全て画像内にレンダリングすること。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>ヘッダー「インターネットネイティブ（1990年代後半〜）」</li>
+<li>キーメッセージ「最適化対象の変化:「配信制約の最適化」→「探索制約の最適化」」</li>
+<li>左カラム（旧）の全内容、右カラム（新）の全内容</li>
+<li>下部の脱構築・再構築の具体例</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|  インターネットネイティブ（1990年代後半〜）                       |
+|  最適化対象の変化:「配信制約の最適化」→「探索制約の最適化」      |
++-------------------------------+--------------------------------+
+|  ┃ ≪ 旧 ≫                   |  ┃ ≪ 新 ≫                      |
+|  ┃                           |  ┃                              |
+|  ┃ 制約                     |  ┃ 制約                         |
+|  ┃  配信コスト・複製コスト高  |  ┃  配信コスト ≒ 0              |
+|  ┃  (新聞・TV・電話帳・百科)  |  ┃  検索コストも低下            |
+|  ┃                           |  ┃                              |
+|  ┃ 最適化対象               |  ┃ 最適化対象                   |
+|  ┃  限られた流通枠の効率利用  |  ┃  情報の発見効率              |
+|  ┃                           |  ┃                              |
+|  ┃ 戦略                     |  ┃ 戦略                         |
+|  ┃  ゲートキーパーによる選別  |  ┃  N対N流通＋検索ベース        |
+|  ┃  （1対多の配信独占）       |  ┃  の発見                      |
++-------------------------------+--------------------------------+
+|  脱構築                        → 再構築                          |
+|  出版社、TV局の編成、            検索・ランキング（Google）       |
+|  レコード会社の流通独占、        レビュー・インフルエンサー       |
+|  電話帳、紙の百科事典            YouTube、Spotify等のPF           |
+|  CD・DVD小売、新聞販売網         評判の可視化（レーティング）     |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A professional, information-rich lecture slide showing how &quot;Internet Native&quot; transformed society through a structural shift in optimization targets. White (#FFFFFF) background. Top: header &quot;インターネットネイティブ（1990年代後半〜）&quot; in large dark charcoal (#1E352A) bold. Key message: &quot;最適化対象の変化:「配信制約の最適化」→「探索制約の最適化」&quot;. Two equal-width columns. Left column &quot;≪ 旧 ≫&quot; with light pink (#F5E0F2) background and 4px magenta-purple (#AA2896) left border, containing three bold-labeled rows: &quot;制約: 配信コスト・複製コストが高い&quot; with sub-note &quot;(1対1通信: 電話、1対多: 新聞・TV、静的蓄積: 電話帳・百科事典。多対多の流通は不可能)&quot;, &quot;最適化対象: 限られた流通枠の効率利用&quot;, &quot;戦略: ゲートキーパーによる選別（出版社、TV局、レコード会社による1対多の配信独占）&quot;. Right column &quot;≪ 新 ≫&quot; with light green (#D4EDDA) background and 4px green (#28AA3C) left border: &quot;制約: 配信コスト ≒ 0（限界費用ゼロ）、検索コストも低下&quot;, &quot;最適化対象: 情報の発見効率（膨大な情報の中からどう見つけるか）&quot;, &quot;戦略: N対N流通＋検索ベースの発見&quot;. Below columns, a footer with green (#28AA3C) arrow connecting two sub-sections. &quot;脱構築:&quot; in magenta-purple lists: &quot;出版社の編集機能、TV局の編成権、レコード会社の流通独占、電話帳・紙の百科事典、CD・DVD小売、新聞販売網・取次&quot;. &quot;再構築:&quot; in green lists: &quot;検索エンジン・SEO・レコメンド、インフルエンサー・レビュー文化、YouTube・Spotify等のPF、評判の可視化（レーティング、フォロワー経済）&quot;. Dense but well-organized. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+
+<section class="slide-section" id="main-0-04">
+  <div class="slide-header">
+    <span>Slide 4 / 7 — main-0-04</span>
+    <span class="badge">0-04</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-04 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, two-column comparison layout, clean Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Identical to main-0-03. Background: #FFFFFF, Left: #F5E0F2 + #AA2896 border, Right: #D4EDDA + #28AA3C border</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>対比スライドの2枚目。0-03と完全に同じレイアウト構造で「制約/最適化/戦略」フレームの2例目を示す。聴衆は1枚目でフレームを学んでいるので、内容の理解が速くなり「パターンが見えてきた」という快感が芽生え始める。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る</li>
+<li>前スライド: 0-03 インターネットネイティブ。同一フレームの1例目を見た直後</li>
+<li>次スライド: 0-05 クラウドネイティブ（同じレイアウトで3例目）</li>
+<li>このスライドの役割: パターン認識の中間地点。「もしかして全部同じ構造？」と気づかせる</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>2000年代、デジタル技術の普及により試行コスト（時間・金銭・失敗リスク）が劇的に低下した。それ以前の世界では、調べものをするには図書館に行き、連絡には固定電話を使い、写真はフィルムで撮り、待ち合わせは事前に正確に決定する必要があった。Marc Prensky（2001）が指摘したように、これらの摩擦コストが人々の行動の閾値を形成していた。そのため最適化対象は「失敗回避（期待損失の最小化）」であり、合理的な戦略は事前計画と一発成功志向だった。</p>
+<p>試行コストがほぼゼロになると、最適化対象は「学習速度（試行回数 × フィードバック品質）の最大化」に移動する。失敗のコストが低いなら、計画に時間をかけるより、素早く試して修正する方が合理的になる。</p>
+<p>この変化により「事前最適化」が価値を失った。高額・長期の市場調査ビジネス、フィルム前提の一発勝負型プロダクション（映像制作や初回リリースに全てを賭ける広告）、電話中心の同期通信前提のコールセンター設計が脱構築された。代わりに「事後学習ループ」に価値が移り、A/Bテスト・プロダクトアナリティクスによるデータ駆動の改善基盤、UXリサーチ・ユーザーテストによる高速フィードバック設計、アジャイル・グロースハックという反復前提の開発手法、チャットツールに代表される非同期コラボレーションが再構築された。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像。テキストは全て画像内にレンダリングすること。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>ヘッダー「デジタルネイティブ（2000年代〜）」</li>
+<li>キーメッセージ「最適化対象の変化:「期待損失の最小化」→「学習速度の最大化」」</li>
+<li>左カラム（旧）・右カラム（新）の全内容</li>
+<li>下部の脱構築・再構築の具体例</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|  デジタルネイティブ（2000年代〜）                                 |
+|  最適化対象の変化:「期待損失の最小化」→「学習速度の最大化」      |
++-------------------------------+--------------------------------+
+|  ┃ ≪ 旧 ≫                   |  ┃ ≪ 新 ≫                      |
+|  ┃                           |  ┃                              |
+|  ┃ 制約                     |  ┃ 制約                         |
+|  ┃  試行コスト高い           |  ┃  試行コスト ≒ 0              |
+|  ┃  (図書館・固定電話・       |  ┃                              |
+|  ┃   フィルム・事前待合せ)    |  ┃                              |
+|  ┃ 最適化対象               |  ┃ 最適化対象                   |
+|  ┃  失敗回避                 |  ┃  学習速度                    |
+|  ┃  （期待損失の最小化）      |  ┃  (試行回数×FBの質)          |
+|  ┃ 戦略                     |  ┃ 戦略                         |
+|  ┃  事前計画・一発成功志向   |  ┃  反復試行（試して修正）      |
++-------------------------------+--------------------------------+
+|  脱構築                        → 再構築                          |
+|  高額・長期の市場調査            A/Bテスト、アナリティクス        |
+|  一発勝負型制作（フィルム映像）  UXリサーチ、ユーザーテスト       |
+|  同期通信前提のコールセンター    アジャイル、グロースハック        |
+|                                  非同期コラボ（チャットツール）    |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A professional lecture slide with EXACTLY the same two-column comparison layout as main-0-03. Visual consistency is critical for pattern recognition. White (#FFFFFF) background. Top: header &quot;デジタルネイティブ（2000年代〜）&quot; in large dark charcoal (#1E352A) bold, key message &quot;最適化対象の変化:「期待損失の最小化」→「学習速度の最大化」&quot;. Left column &quot;≪ 旧 ≫&quot; with light pink (#F5E0F2) background and magenta-purple (#AA2896) left border: &quot;制約: 試行コスト（時間・金銭・失敗リスク）が高い&quot; with sub-note &quot;(調べもの→図書館、連絡→固定電話、写真→フィルム、待ち合わせ→事前に正確に決定。摩擦コストが行動の閾値を形成)&quot;, &quot;最適化対象: 失敗回避（期待損失の最小化）&quot;, &quot;戦略: 事前計画・一発成功志向&quot;. Right column &quot;≪ 新 ≫&quot; with light green (#D4EDDA) background and green (#28AA3C) left border: &quot;制約: 試行コスト ≒ 0&quot;, &quot;最適化対象: 学習速度の最大化（試行回数 × フィードバック品質）&quot;, &quot;戦略: 反復試行（素早く試して修正する）&quot;. Footer with green arrow. &quot;脱構築:&quot;: &quot;高額・長期の市場調査ビジネス、一発勝負型プロダクション（フィルム映像制作、初回リリースに全てを賭ける広告）、同期通信前提のコールセンター設計&quot;. &quot;再構築:&quot;: &quot;A/Bテスト・プロダクトアナリティクス、UXリサーチ・ユーザーテスト、アジャイル・グロースハック、非同期コラボレーション（チャットツール）&quot;. All text legible. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+
+<section class="slide-section" id="main-0-05">
+  <div class="slide-header">
+    <span>Slide 5 / 7 — main-0-05</span>
+    <span class="badge">0-05</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-05 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, two-column comparison layout, clean Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Identical to main-0-03 and main-0-04. Background: #FFFFFF, Left: #F5E0F2 + #AA2896 border, Right: #D4EDDA + #28AA3C border</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>対比スライドの3枚目にして完結。同じフレームの3度目の登場で「やっぱり同じ構造だ！」という快感を生む。視覚的にも0-03/04と完全に同じレイアウト。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る</li>
+<li>前スライド: 0-04 デジタルネイティブ。同一フレームの2例目。聴衆は既に「また同じ構造だ」と予感</li>
+<li>次スライド: 0-06 共通構造の抽象化＋本質の提示</li>
+<li>このスライドの役割: パターン認識の完了点。次の抽象化スライドへの準備完了</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>2010年代、クラウドコンピューティングの普及により、リソース調達・変更コストが劇的に低下した。それ以前の世界では、サーバーの調達に4〜12週間を要し、数千万〜数億円のCAPEX（資本的支出）が必要だった。そのため最適化対象は「変更回数の最小化」であり、合理的な戦略は事前設計を入念に行い、大規模な変更を低頻度で実施すること（CAB＝Change Advisory Board承認、四半期リリース）だった。</p>
+<p>クラウドにより調達が秒単位、従量課金（OPEX）、廃棄コストもゼロになると、最適化対象は「リスク分散（変更あたりの影響最小化）」に移動する。大きな変更を1回やるより、小さな変更を高頻度で繰り返す方が、1回の失敗の影響が小さく、全体のリスクが低い。</p>
+<p>この変化により「変更抑制」が価値を失った。重い変更管理プロセス（CAB、四半期リリース承認組織）、サーバー調達・設置中心の運用と手作業の構成管理、モノリシック前提の設計、Active-Standby中心の&quot;障害ゼロ&quot;冗長構成が脱構築された。代わりに「変更の細分化と高速化」に価値が移り、IaC・CI/CD・GitOpsによる自動化・コード化、マイクロサービス・コンテナによる分割前提の設計、Chaos Engineering・Circuit Breakerによる障害前提の設計、SRE・SLO/Error Budget・カナリアリリースによる可観測性とリスク制御が再構築された。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像。テキストは全て画像内にレンダリングすること。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>ヘッダー「クラウドネイティブ（2010年代〜）」</li>
+<li>キーメッセージ「最適化対象の変化:「変更回数の最小化」→「変更単位の最小化」」</li>
+<li>左カラム（旧）・右カラム（新）の全内容</li>
+<li>下部の脱構築・再構築の具体例</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|  クラウドネイティブ（2010年代〜）                                 |
+|  最適化対象の変化:「変更回数の最小化」→「変更単位の最小化」      |
++-------------------------------+--------------------------------+
+|  ┃ ≪ 旧 ≫                   |  ┃ ≪ 新 ≫                      |
+|  ┃                           |  ┃                              |
+|  ┃ 制約                     |  ┃ 制約                         |
+|  ┃  リソース調達コスト高い   |  ┃  秒単位調達・従量課金        |
+|  ┃  (調達4-12週/              |  ┃  廃棄コストもゼロ            |
+|  ┃   数千万〜数億円CAPEX)     |  ┃                              |
+|  ┃ 最適化対象               |  ┃ 最適化対象                   |
+|  ┃  変更回数の最小化         |  ┃  リスク分散                  |
+|  ┃                           |  ┃  (変更あたりの影響最小化)    |
+|  ┃ 戦略                     |  ┃ 戦略                         |
+|  ┃  事前設計・大規模変更・   |  ┃  小さな変更を高頻度で        |
+|  ┃  低頻度リリース           |  ┃                              |
+|  ┃  (CAB承認/四半期リリース)  |  ┃                              |
++-------------------------------+--------------------------------+
+|  脱構築                        → 再構築                          |
+|  重い変更管理（CAB/四半期承認）  IaC、CI/CD、GitOps              |
+|  手作業の構成管理                マイクロサービス、コンテナ       |
+|  モノリシック設計                Chaos Eng.、Circuit Breaker     |
+|  Active-Standby冗長構成         SRE、SLO/Error Budget           |
+|                                  カナリアリリース                |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A professional lecture slide with EXACTLY the same two-column comparison layout as main-0-03 and main-0-04. Third and final repetition — identical visual structure for pattern recognition. White (#FFFFFF) background. Top: header &quot;クラウドネイティブ（2010年代〜）&quot; in large dark charcoal (#1E352A) bold, key message &quot;最適化対象の変化:「変更回数の最小化」→「変更単位の最小化」&quot;. Left column &quot;≪ 旧 ≫&quot; with light pink (#F5E0F2) background and magenta-purple (#AA2896) left border: &quot;制約: リソース調達・変更コストが高い&quot; with sub-note &quot;(サーバー調達に4〜12週間、数千万〜数億円のCAPEX)&quot;, &quot;最適化対象: 変更回数の最小化&quot;, &quot;戦略: 事前設計・大規模変更・低頻度リリース&quot; with sub-note &quot;(CAB承認、四半期リリース)&quot;. Right column &quot;≪ 新 ≫&quot; with light green (#D4EDDA) background and green (#28AA3C) left border: &quot;制約: 秒単位の調達、従量課金（OPEX）、廃棄コストもゼロ&quot;, &quot;最適化対象: リスク分散（変更あたりの影響最小化）&quot;, &quot;戦略: 小さな変更を高頻度で実施&quot;. Footer with green arrow. &quot;脱構築:&quot;: &quot;重い変更管理プロセス（CAB、四半期承認組織）、手作業の構成管理、モノリシック前提の設計、Active-Standby中心の障害ゼロ冗長構成&quot;. &quot;再構築:&quot;: &quot;IaC・CI/CD・GitOps（自動化・コード化）、マイクロサービス・コンテナ（分割前提）、Chaos Engineering・Circuit Breaker（障害前提）、SRE・SLO/Error Budget・カナリアリリース（可観測性・リスク制御）&quot;. Information-dense but structured. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+
+<section class="slide-section" id="main-0-06">
+  <div class="slide-header">
+    <span>Slide 6 / 7 — main-0-06</span>
+    <span class="badge">0-06</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-06 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, summary table + flow diagram + key statement, clean Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Background: #FFFFFF, Heading: #1E352A, Table/boxes: #EDF5F0 bg + #B0BFB6 border, Steps: #28AA3C bold, Arrows: #28AA3C, Separator: #28AA3C 4px, Abstract principle: #6B7E74, Key statement: #1E352A bold large</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>第0章の知的クライマックス。3つの事例で見えたパターンを5ステップのフロー図で構造化し、比較表で並べ、さらに抽象原理と本質を1文に凝縮する。本質文が講義全体のフレームとなり第6章で回収される伏線。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る</li>
+<li>前スライド: 0-05 クラウドネイティブ。3例目が終わり「全部同じ構造だ」と確信した直後</li>
+<li>次スライド: 0-07 講義の地図＋ブリッジ。「ではAIネイティブでは何が脱構築されるのか？」と問いを残す</li>
+<li>このスライドの役割: 3事例の抽象化＋本質の提示。話者は「この構造を覚えておいてください。今日の最後にもう一度使います」と伝える</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>3つの○○ネイティブ（インターネット、デジタル、クラウド）を並べると、同じ論理構造が見える。いずれも「あるコストが劇的に下がったとき、最適化すべき対象が変わり、旧い仕組みが無効化され、新しい仕組みが生まれた」という因果構造を持つ。</p>
+<p>共通する因果構造を5ステップで整理すると：(1) 技術革新により制約が変わる（コスト構造の激変）、(2) 最適化すべき対象が変わる（旧い目的関数が無効化される）、(3) 旧い最適化対象に依存していた仕組み・産業が価値を失う（脱構築）、(4) 新しい最適化対象に対する仕組み・産業が生まれる（再構築）、(5) それを「当たり前」として行動する＝○○ネイティブ。</p>
+<p>一段抽象化すると、「価値は&quot;希少だったもの&quot;ではなく&quot;新たにボトルネックになったもの&quot;に移る」。制約が消えると、その周辺の産業は消える。新しいボトルネックに対する産業が生まれる。</p>
+<p>そして本質：「○○ネイティブとは、新技術を使うことではない。旧い制約下で合理的だった最適化対象を捨て、新しいボトルネックに対して最適化する世界観で行動すること」。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像。テキストは全て画像内にレンダリングすること。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>見出し「○○ネイティブの共通構造」</li>
+<li>3事例の比較ミニ表</li>
+<li>5ステップフロー図</li>
+<li>抽象原理</li>
+<li>本質文</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|  ○○ネイティブの共通構造                                         |
+|                                                                  |
+|  |時代          |制約の変化  |最適化対象の移動              |    |
+|  |インターネット |配信コスト↓|配信制約 → 探索制約           |    |
+|  |デジタル       |試行コスト↓|期待損失最小化→学習速度最大化 |    |
+|  |クラウド       |変更コスト↓|変更回数最小化→変更単位最小化 |    |
+|                                                                  |
+|  ┌──────────┐   ┌──────────┐   ┌──────────┐                    |
+|  │ STEP 1   │→  │ STEP 2   │→  │ STEP 3   │                    |
+|  │ 制約変化  │   │ コスト構造│   │最適化対象 │                    |
+|  │          │   │ の激変   │   │ の移動   │                    |
+|  └──────────┘   └──────────┘   └──────────┘                    |
+|                                      ↓                          |
+|                 ┌──────────┐   ┌──────────┐                    |
+|                 │ STEP 5   │←  │ STEP 4   │                    |
+|                 │○○ネイティブ│   │脱構築→   │                    |
+|                 │=新世界観  │   │  再構築   │                    |
+|                 └──────────┘   └──────────┘                    |
+|                                                                  |
+|  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                     |
+|  価値は&quot;希少だったもの&quot;ではなく                                   |
+|  &quot;新たにボトルネックになったもの&quot;に移る                           |
+|                                                                  |
+|  ○○ネイティブとは、新技術を使うことではない。                     |
+|  旧い最適化対象を捨て、新しいボトルネックに対して                 |
+|  最適化する世界観で行動すること                                   |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A professional, information-rich lecture slide that crystallizes the pattern from three historical &quot;XX-native&quot; examples into a universal structure. This is the intellectual climax of Chapter 0. White (#FFFFFF) background. Top: heading &quot;○○ネイティブの共通構造&quot; in dark charcoal (#1E352A) bold. Below, a compact 3-row comparison mini-table with light green-gray (#EDF5F0) background: headers &quot;時代 | 制約の変化 | 最適化対象の移動 | 失われたもの | 生まれたもの&quot;, rows: &quot;インターネット | 配信コスト↓ | 配信制約→探索制約 | 配信の独占 | 探索・発見の最適化&quot;, &quot;デジタル | 試行コスト↓ | 期待損失最小化→学習速度最大化 | 事前最適化 | 事後学習ループ&quot;, &quot;クラウド | 変更コスト↓ | 変更回数最小化→変更単位最小化 | 変更抑制 | 変更の細分化・高速化&quot;. Below table, a 5-step U-shaped flow diagram: STEP 1 &quot;技術革新による制約変化&quot; → STEP 2 &quot;コスト構造の激変&quot; → STEP 3 &quot;最適化対象の移動（旧い目的関数が無効化）&quot; ↓ STEP 4 &quot;脱構築 → 再構築&quot; ← STEP 5 &quot;○○ネイティブ＝新世界観で行動する&quot;. Boxes: light green-gray (#EDF5F0) with gray (#B0BFB6) borders, &quot;STEP N&quot; in green (#28AA3C) bold. Green arrows between steps. Below diagram, thick green (#28AA3C) separator. Below separator, first line in gray (#6B7E74): &quot;価値は「希少だったもの」ではなく「新たにボトルネックになったもの」に移る&quot;. Then the KEY STATEMENT in the LARGEST, BOLDEST text on the slide, dark charcoal (#1E352A): &quot;○○ネイティブとは、新技術を使うことではない。旧い最適化対象を捨て、新しいボトルネックに対して最適化する世界観で行動すること&quot;. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+
+<section class="slide-section" id="main-0-07">
+  <div class="slide-header">
+    <span>Slide 7 / 7 — main-0-07</span>
+    <span class="badge">0-07</span>
+  </div>
+  <div class="slide-body">
+<h1>main-0-07 生成プロンプト</h1>
+<h1>スライド背景画像生成 共通仕様</h1>
+<h2>利用目的</h2>
+<ul>
+<li>3キャラクター会話劇の解説動画で使用する<strong>背景画像</strong>を生成する</li>
+<li>テキスト（見出し・ラベル・字幕）は Remotion のオーバーレイが描画するため、画像内にテキストを焼き込まない</li>
+</ul>
+<h2>デザイン方針</h2>
+<ul>
+<li>1枚の画像には1つの概念・事象のみを描く（1画像1概念ルール）</li>
+<li>写真風・イラスト風・地図風など、コンテンツに最適なスタイルを選択する</li>
+<li>テキストやラベルを画像内で出来るだけ書かない。固有名詞・国際的略語も最小量とする。</li>
+<li>人物の肖像は必ずイラスト・似顔絵・アイコンスタイルで描くこと（写真風・フォトリアリスティックな描写は厳禁）</li>
+<li>実在の人物の顔写真を使用しないこと。シルエット、アバター、シンプルなイラストで代替すること</li>
+</ul>
+<h2>プロンプト構造のルール</h2>
+<ul>
+<li>「## 生成指示」セクション: AI への指示。画像内にテキストとして描画しないこと</li>
+<li>「## コンセプトと文脈」セクション: 演出意図と文脈。画像内にテキストとして描画しないこと。画像の雰囲気・トーンの参考にすること</li>
+<li>「## 画像と字幕の役割分離」セクション: 画像で示す要素と字幕で示す要素の分離ルール。厳守すること</li>
+<li>「## 参考データ」セクション: 内容設計データ。テキストをそのまま描画せず、視覚的に表現すること</li>
+<li>「## 画像の説明」セクション: この指示に従って画像を生成すること</li>
+</ul>
+<h2>生成指示（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>スタイル: Professional lecture slide, roadmap layout, clean Japanese typography, flat design</p>
+<p>配色:</p>
+<ul>
+<li>Background: #FFFFFF, Question card: #D4EDDA bg + #28AA3C border, Text: #1E352A, Gray: #6B7E74, Roadmap: #EDF5F0 bg + #B0BFB6 dividers, Chapters: #28AA3C bold, Marker/arrows: #28AA3C</li>
+</ul>
+<h2>コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）</h2>
+<p>第0章の締めくくりであり講義全体のロードマップ。未解決の問いで正義感を刺激し、ロードマップで安心感を与え、第1章への自然な遷移を作る。</p>
+<ul>
+<li>講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚</li>
+<li>章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る</li>
+<li>前スライド: 0-06 共通構造＋本質。5ステップフレームが提示された直後</li>
+<li>次スライド: 1-01 第1章タイトル「LLMの基礎」</li>
+<li>このスライドの役割: 未解決の問いで正義感を刺激し、6章のロードマップで全体を見通させ、第1章への導線を作る</li>
+</ul>
+<h2>内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）</h2>
+<p>話者は次のように語る。「では、AIネイティブ開発において、脱構築されるべき&quot;旧い常識&quot;とは何か？」「システム開発の現場には、長年の合理的判断の中で育まれた常識がある」「それは本当に&quot;今も&quot;合理的なのか？」「今日の講義では、その常識を一度解きほぐし、AIがある前提で再構築していきます」。</p>
+<p>ここで聴衆に全体の見通しを与える。第1章ではまずAI（LLM）の仕組みを理解する — 道具を正しく知る。第2章ではLLMによる開発の課題を特定する — 道具だけでは解決しない壁がある。第3章ではシステム開発手法の歴史的課題を辿る — なぜその壁が生まれたのか。第4章ではAIが変える情報管理のコスト構造を示す — コスト構造の地殻変動。第5章では具体的手法SPEC&amp;Projectを提案する — 新しい合理的戦略。第6章ではその有効性を論証する — 納得の構造。</p>
+<p>最後に「再構築の前に、まずAIそのものの仕組みを理解しましょう」「仕組みがわかれば、何が変わり、何が変わらないかが見えてきます」と第1章への橋渡しを行う。</p>
+<h2>画像と字幕の役割分離（厳守）</h2>
+<p>これは講義用スライド画像。テキストは全て画像内にレンダリングすること。</p>
+<p>画像内に描画するテキスト:</p>
+<ul>
+<li>問いかけ「AIネイティブ開発で脱構築されるべき『旧い常識』とは何か？」</li>
+<li>補足「長年の合理的判断の中で育まれた常識は、本当に&quot;今も&quot;合理的なのか？」</li>
+<li>6章分のロードマップ（各章：章番号＋タイトル＋1行サマリー）</li>
+<li>第1章の右に現在地マーカー「◀── 次はここ」</li>
+<li>ブリッジ「再構築の前に、まずAIそのものの仕組みを理解しましょう」</li>
+</ul>
+<h2>参考データ（テキストをそのまま描画せず、視覚的に表現すること）</h2>
+<pre>
++================================================================+
+|                                                                  |
+|      ┃  AIネイティブ開発で脱構築されるべき                       |
+|      ┃         「旧い常識」とは何か？                             |
+|      ┃                                                           |
+|      ┃  長年の合理的判断の中で育まれた常識は                     |
+|      ┃  本当に&quot;今も&quot;合理的なのか？                                |
+|                          ▼                                       |
+|    ┌─────────────────────────────────────────────────────┐       |
+|    │  第1章  LLMの基礎                                    │ ◀次  |
+|    │         ── まず「道具」を正しく知る                    │      |
+|    ├─────────────────────────────────────────────────────┤       |
+|    │  第2章  LLMによる開発の課題                           │      |
+|    │         ── 道具だけでは解決しない壁                    │      |
+|    ├─────────────────────────────────────────────────────┤       |
+|    │  第3章  システム開発手法の歴史的課題                   │      |
+|    │         ── なぜその壁が生まれたのか                    │      |
+|    ├─────────────────────────────────────────────────────┤       |
+|    │  第4章  AIが変える情報管理のコスト構造                 │      |
+|    │         ── コスト構造の地殻変動                        │      |
+|    ├─────────────────────────────────────────────────────┤       |
+|    │  第5章  提案手法 SPEC&amp;Project                         │      |
+|    │         ── 新しい合理的戦略                            │      |
+|    ├─────────────────────────────────────────────────────┤       |
+|    │  第6章  なぜSPEC&amp;Projectが有効なのか                  │      |
+|    │         ── 納得の構造                                  │      |
+|    └─────────────────────────────────────────────────────┘       |
+|                                                                  |
+|    「再構築の前に、まずAIの仕組みを理解しましょう」      ──▶      |
+|                                                                  |
++================================================================+
+</pre>
+<h2>画像の説明</h2>
+<p>A professional lecture slide serving as both a provocative question and a comprehensive lecture roadmap. White (#FFFFFF) background. Top section: a highlighted card with light green (#D4EDDA) background and thick green (#28AA3C) left border (4px). Inside, two lines: first &quot;AIネイティブ開発で脱構築されるべき「旧い常識」とは何か？&quot; in bold large dark charcoal (#1E352A), second &quot;長年の合理的判断の中で育まれた常識は、本当に「今も」合理的なのか？&quot; in smaller gray (#6B7E74). Below card, green (#28AA3C) downward arrow. Main section: a large card with very light green-gray (#EDF5F0) background containing 6 chapter entries separated by thin gray (#B0BFB6) lines. Each entry: chapter number in green (#28AA3C) bold + title in dark charcoal, then &quot;──&quot; summary in gray (#6B7E74). &quot;第1章 LLMの基礎 ── まず「道具」を正しく知る&quot;, &quot;第2章 LLMによる開発の課題 ── 道具だけでは解決しない壁&quot;, &quot;第3章 システム開発手法の歴史的課題 ── なぜその壁が生まれたのか&quot;, &quot;第4章 AIが変える情報管理のコスト構造 ── コスト構造の地殻変動&quot;, &quot;第5章 提案手法 SPEC&amp;Project ── 新しい合理的戦略&quot;, &quot;第6章 なぜSPEC&amp;Projectが有効なのか ── 納得の構造&quot;. Right of Chapter 1: green marker &quot;◀── 次はここ&quot;. Bottom: bold &quot;「再構築の前に、まずAIそのものの仕組みを理解しましょう」&quot; with green right arrow. The roadmap conveys: &quot;this lecture will answer the big question through 6 structured chapters&quot;. Aspect ratio 16:9.</p>
+<p>画像サイズ: 1024x576px</p>
+  </div>
+</section>
+<a href="#top" class="back-to-top">▲ トップに戻る</a>
+
+</body></html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-5-06</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-5">
+    <div class="slide-head">
+      <div class="slide-title">1案件は「要求整理→設計→実装/試験→報告→SPEC更新」で閉じる</div>
+      <div class="slide-message">Projectを作って終わりではなく、確定した内容をSPECへ反映して初めて完了する</div>
+    </div>
+    <div class="slide-body">
+      <div class="phase-grid">
+        <div class="phase-card">
+          <div class="phase-code">STEP 1</div>
+          <h3>要求整理</h3>
+          <p>背景、目的、スコープを整理し、どのSPECを変える案件かを決める。</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-code">STEP 2</div>
+          <h3>基本/詳細設計</h3>
+          <p>Projectの中で基本設計と詳細設計へ分解し、実装方針を固める。</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-code">STEP 3</div>
+          <h3>実装/試験</h3>
+          <p>設計をもとに実装し、unit・integration・systemの観点で確認する。</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-code">STEP 4</div>
+          <h3>報告/レビュー</h3>
+          <p>実施結果、変更ファイル、判断内容をreportに残し、人間がレビューする。</p>
+        </div>
+        <div class="phase-card" style="background:#f7fbf8; border-color:#28AA3C;">
+          <div class="phase-code">STEP 5</div>
+          <h3>SPEC更新</h3>
+          <p>確定した差分だけをSPECへ戻し、次案件の最新仕様として承認する。</p>
+        </div>
+      </div>
+      <div class="callout body" style="font-weight:700;">更新されないSPECはすぐ古くなる。だから最終ステップを必ずSPEC更新に固定する</div>
+    </div>
+    <div class="slide-footer">
+      <span>Operation Cycle</span>
+      <span>Close With Spec Update</span>
+    </div>
+  </div>
+</body>
+</html>
