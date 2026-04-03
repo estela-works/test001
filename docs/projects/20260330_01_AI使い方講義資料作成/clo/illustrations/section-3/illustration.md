@@ -85,7 +85,7 @@ A professional presentation slide with two sections on white background. Navy (#
 - Accent: #B8860B amber
 **プロンプト**:
 ```
-A professional presentation slide on white background. Navy (#1B2A4A) header "旧い常識の脱構築". Upper section shows a structured framework diagram with 5 connected steps in a horizontal flow, rendered in navy boxes with amber (#B8860B) connecting arrows. Two steps are highlighted: "旧い制約: 情報管理コスト高い" and "旧い最適化: 情報管理の最小化" with amber emphasis borders. Lower section features a bold amber banner with text "AIの登場により、コスト構造が激変している" and a forward arrow icon pointing right toward "第4章へ". The overall feeling is a bridge slide creating anticipation. Flat design, minimal, clean typography.
+A professional presentation slide on white background. Navy (#1B2A4A) header "旧い常識の脱構築". Upper section shows a structured framework diagram with 5 connected steps in a horizontal flow, rendered in navy boxes with amber (#B8860B) connecting arrows. Two steps are highlighted: "旧い制約: 言語化コスト高い" and "旧い最適化: 情報管理の最小化" with amber emphasis borders. Lower section features a bold amber banner with text "AIの登場により、コスト構造が激変している" and a forward arrow icon pointing right toward "第4章へ". The overall feeling is a bridge slide creating anticipation. Flat design, minimal, clean typography.
 ```
 
 ---

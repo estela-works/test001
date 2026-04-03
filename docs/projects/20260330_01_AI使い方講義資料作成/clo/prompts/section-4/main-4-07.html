@@ -5,32 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>main-4-07</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .compact-compare {
+      gap: 6px;
+    }
+
+    .compact-compare .compare-col {
+      padding: 12px 14px 10px;
+      gap: 4px;
+    }
+
+    .compact-compare .compare-item {
+      padding-top: 4px;
+    }
+
+    .compact-compare .compare-item h3 {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .compact-compare .compare-item p {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .purpose-band {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 8px 16px;
+    }
+
+    .purpose-label {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .purpose-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+  </style>
 </head>
 <body>
   <div class="slide theme-section-4">
     <div class="slide-head">
-      <div class="slide-title">「管理する方が得」の時代へ、トレードオフが逆転した</div>
-      <div class="slide-message">管理コストが激減したなら、情報管理を最小化する合理性は崩れ、仕組み化が合理的になる</div>
+      <div class="slide-title">情報を残さない判断が高くつく時代</div>
+      <div class="slide-message">いまは情報を残さない判断の方が将来コストを増やす</div>
     </div>
-    <div class="slide-body">
-      <div class="two-col" style="flex:1;">
-        <div class="card stack-md">
-          <div class="compare-label" style="color:var(--old-text);">旧</div>
-          <div class="body" style="margin-top:12px;">管理コストが高い<br>↓<br><strong>管理を最小化する</strong></div>
-          <div class="muted-panel body-sm" style="margin-top:auto;">
-            更新や整合性維持に人手がかかりすぎるため、文書は必要最低限に絞るのが合理的だった。
-          </div>
-        </div>
-        <div class="card-accent card stack-md">
-          <div class="compare-label">新</div>
-          <div class="body" style="margin-top:12px;">管理コストが激減<br>↓<br><strong>管理を仕組み化する</strong></div>
-          <div class="muted-panel body-sm" style="margin-top:auto; background:rgba(255,255,255,0.62);">
-            生成と更新の下書きをAIに任せられるので、正本を保つ仕組みを作るほうが全体最適になる。
-          </div>
-        </div>
+    <div class="slide-body compact-compare">
+      <div class="purpose-band">
+        <div class="purpose-label">普遍の目的: 効率よく開発する</div>
+        <div class="purpose-sub">AIの登場でコスト構造が逆転した</div>
       </div>
-      <div class="lead-card">
-        <div class="lead-question" style="font-size:22px;">「管理する方が得」の時代へ、トレードオフが逆転した</div>
+      <div class="two-col" style="flex:1;">
+        <section class="compare-col compare-old">
+          <div class="compare-label">旧</div>
+          <div class="compare-item">
+            <h3>コスト構造</h3>
+            <p>情報の記載・更新・整合性維持がすべて人手作業で、高コストだった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>最適化対象</h3>
+            <p>管理を最小化する — 文書は必要最低限に絞り、暗黙知で回す。</p>
+          </div>
+          <div class="compare-item">
+            <h3>支配的な戦略</h3>
+            <p>動くソフトウェアを優先し、ドキュメントは後回しにする。</p>
+          </div>
+        </section>
+        <section class="compare-col compare-new">
+          <div class="compare-label">新</div>
+          <div class="compare-item">
+            <h3>コスト構造</h3>
+            <p>AIが生成・更新の下書きを担い、言語化コストが桁違いに低下した。</p>
+          </div>
+          <div class="compare-item">
+            <h3>最適化対象</h3>
+            <p>言語化を仕組み化する — 正しい知識を残し続ける仕組みを作る方が得になった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>支配的な戦略</h3>
+            <p>SSOTを設計し、AIと人間が同じ正しい知識を参照する運用を作る。</p>
+          </div>
+        </section>
+      </div>
+      <div class="lead-card" style="padding:10px 18px;">
+        <div class="lead-question" style="font-size:18px;">「言語化して残しておく方が得」の時代へ、トレードオフが逆転した</div>
       </div>
     </div>
     <div class="slide-footer">

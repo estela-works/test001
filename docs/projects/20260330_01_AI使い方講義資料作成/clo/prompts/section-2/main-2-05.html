@@ -9,28 +9,36 @@
 <body>
   <div class="slide theme-section-2">
     <div class="slide-head">
-      <div class="slide-title">SSOT: あらゆる情報要素は、ただ一つの場所にのみ管理される</div>
-      <div class="slide-message">DB設計では当たり前の原則なのに、プロジェクト情報管理にはまだ適用されていない</div>
+      <div class="slide-title">SSOT欠如でAIが迷い続ける構造</div>
+      <div class="slide-message">真実の置き場が一つでない限りAIは安定して働けない</div>
     </div>
-    <div class="slide-body">
-      <div class="diagram-board">
-        <div class="hub-layout">
-          <div class="hub-side">
-            <div class="hub-box">設計書</div>
-            <div class="hub-box">テスト仕様</div>
-            <div class="hub-box">画面仕様</div>
-          </div>
-          <div class="hub-center">SSOT<br>唯一の真実</div>
-          <div class="hub-side">
-            <div class="hub-box">コード参照</div>
-            <div class="hub-box">レビュー資料</div>
-            <div class="hub-box">運用ドキュメント</div>
-          </div>
+    <div class="slide-body" style="gap:16px;">
+      <div class="callout" style="text-align:center; padding:14px 24px; font-size:17px; line-height:1.6;">
+        <strong style="font-size:19px;">SSOT（Single Source of Truth）</strong><br>
+        ある事実について、正しい情報は常にただ一つだけ
+      </div>
+      <div style="text-align:center; font-size:15px; color:#666; margin:-4px 0;">しかし現場では──</div>
+      <div style="display:flex; gap:12px; justify-content:center;">
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">設計書</div>
+          <div class="body-sm">API仕様 v2.1</div>
+        </div>
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">コード</div>
+          <div class="body-sm">API仕様 v2.3</div>
+        </div>
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">議事録</div>
+          <div class="body-sm">API仕様 v2.0</div>
+        </div>
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">チャット</div>
+          <div class="body-sm">API仕様 v2.3?</div>
         </div>
       </div>
-      <div class="two-col">
-        <div class="card"><div class="body-sm"><strong>Codd 1970</strong><br>正規化で重複排除を理論化</div></div>
-        <div class="card"><div class="body-sm"><strong>Inmon 1992 以降</strong><br>組織全体で単一の信頼できるソースを扱う思想へ拡張</div></div>
+      <div style="text-align:center; font-size:15px; font-weight:700; color:var(--accent-strong);">↑ どれが正しい情報か誰にもわからない</div>
+      <div class="muted-panel" style="text-align:center; padding:10px 20px; font-size:14px;">
+        DB設計では正規化で当たり前にやっていること。しかしプロジェクト情報には適用されていない。
       </div>
     </div>
     <div class="slide-footer">

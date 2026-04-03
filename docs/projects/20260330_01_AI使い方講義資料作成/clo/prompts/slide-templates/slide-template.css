@@ -9,7 +9,7 @@
   --bg-slide: #ffffff;
   --text-strong: #1f2a2a;
   --text-body: #334040;
-  --text-muted: #6f7b7b;
+  --text-muted: #4a5656;
   --text-faint: #97a2a2;
   --line-soft: #d5dddd;
   --panel-soft: #f5f7f7;
@@ -402,7 +402,7 @@ body {
 
 .hub-layout {
   display: grid;
-  grid-template-columns: 1fr 220px 1fr;
+  grid-template-columns: 1fr 280px 1fr;
   gap: var(--gap-sm);
   align-items: center;
   height: 100%;
@@ -1365,6 +1365,9 @@ body {
 
 .mini-list-item .icon-chip {
   flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
 }
 
 .spec-layer-grid {

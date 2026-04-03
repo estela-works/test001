@@ -5,42 +5,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>main-5-07</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .principle-band {
+      background: var(--accent-soft);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 18px;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent-strong);
+      text-align: center;
+    }
+    .gate-card {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+    }
+    .gate-card h3 {
+      font-size: var(--body);
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+    .gate-role {
+      font-size: var(--body-sm);
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .gate-arrow {
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .gate-check {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+    }
+  </style>
 </head>
 <body>
   <div class="slide theme-section-5">
     <div class="slide-head">
-      <div class="slide-title">AIは要求書・設計書・SPEC更新案の下書きを支援し、人間が承認する</div>
-      <div class="slide-message">レビュー点を3か所に埋め込むと、完全自動化にせず運用を速くできる</div>
+      <div class="slide-title">AI下書きと人間承認を分ける責任設計</div>
+      <div class="slide-message">AI利用は自動化より責任の置き場を明確にする設計である</div>
     </div>
     <div class="slide-body">
-      <div class="checkpoint-grid">
-        <div class="checkpoint-card">
-          <div class="checkpoint-step">CHECK 1</div>
+      <div class="principle-band">AIが下書きする → 人間が承認する → SPECに反映する</div>
+      <div class="feature-grid-3" style="flex:1;">
+        <div class="gate-card">
           <h3>要求整理</h3>
-          <div class="checkpoint-pair"><strong>AI:</strong> 背景、目的、スコープ、ユーザーストーリーの叩き台を作る。</div>
-          <div class="checkpoint-pair"><strong>人間:</strong> 優先度、業務妥当性、見送り範囲を承認する。</div>
+          <div class="gate-role"><strong>AI:</strong> 叩き台を作成</div>
+          <div class="gate-arrow">↓</div>
+          <div class="gate-role"><strong>人間:</strong> 妥当性を承認</div>
+          <div class="gate-arrow">↓</div>
+          <div class="gate-check">✓</div>
         </div>
-        <div class="checkpoint-card">
-          <div class="checkpoint-step">CHECK 2</div>
+        <div class="gate-card">
           <h3>設計判断</h3>
-          <div class="checkpoint-pair"><strong>AI:</strong> 基本設計書、詳細設計書、実装方針の草案を作る。</div>
-          <div class="checkpoint-pair"><strong>人間:</strong> 責務分担、制約、例外処理、非機能要件を承認する。</div>
+          <div class="gate-role"><strong>AI:</strong> 設計案を作成</div>
+          <div class="gate-arrow">↓</div>
+          <div class="gate-role"><strong>人間:</strong> 技術判断を承認</div>
+          <div class="gate-arrow">↓</div>
+          <div class="gate-check">✓</div>
         </div>
-        <div class="checkpoint-card">
-          <div class="checkpoint-step">CHECK 3</div>
+        <div class="gate-card">
           <h3>SPEC更新</h3>
-          <div class="checkpoint-pair"><strong>AI:</strong> 完了した差分から最新断面の更新案を作る。</div>
-          <div class="checkpoint-pair"><strong>人間:</strong> 正本に残すべき仕様として最終承認する。</div>
+          <div class="gate-role"><strong>AI:</strong> 更新案を作成</div>
+          <div class="gate-arrow">↓</div>
+          <div class="gate-role"><strong>人間:</strong> 最終承認</div>
+          <div class="gate-arrow">↓</div>
+          <div class="gate-check">✓</div>
         </div>
       </div>
-      <div class="two-col">
-        <div class="card"><div class="body-sm"><strong>AIの役割</strong><br>叩き台を速く作り、差分整理を助ける。</div></div>
-        <div class="card"><div class="body-sm"><strong>人間の役割</strong><br>妥当性、優先度、現場制約の最終判断を担う。</div></div>
-      </div>
+      <div class="callout body" style="font-weight:700;">AIの出力が間違っていても承認で止まる。だから盲信にならない</div>
     </div>
     <div class="slide-footer">
       <span>Quality Mechanism 1</span>
-      <span>Draft By AI Approve By Human</span>
+      <span>Draft By AI, Approve By Human</span>
     </div>
   </div>
 </body>

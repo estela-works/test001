@@ -55,7 +55,7 @@ Professional presentation slide showing a two-layer architecture diagram. Title:
 - Accent: #7B4BAB (purple)
 **プロンプト**:
 ```
-Professional presentation slide with the title "AIネイティブ開発の定義 — 第0章フレーム回収" in navy. A comparison table with 5 columns: "時代", "制約の変化", "最適化対象の移動", "脱構造", "再構築". Four rows for: "インターネットN", "デジタルN", "クラウドN", and "AIネイティブ". The first three rows are in light gray background. The fourth row "AIネイティブ" is highlighted with a purple background and white text, containing: "情報管理コスト↓", "コンテキスト密度最大化", "暗黙知依存・ドキュメント軽視", "SPEC & Project・2層分離". A subtle decorative arrow on the left side connecting all four rows from top to bottom to show historical progression. White background, navy (#1B2A4A) text, purple (#7B4BAB) highlight for the AIネイティブ row. All text in Japanese.
+Professional presentation slide with the title "AIネイティブ開発の定義 — 第0章フレーム回収" in navy. A comparison table with 5 columns: "時代", "制約の変化", "最適化対象の移動", "脱構造", "再構築". Four rows for: "インターネットN", "デジタルN", "クラウドN", and "AIネイティブ". The first three rows are in light gray background. The fourth row "AIネイティブ" is highlighted with a purple background and white text, containing: "言語化コスト↓", "コンテキスト密度最大化", "暗黙知依存・ドキュメント軽視", "SPEC & Project・2層分離". A subtle decorative arrow on the left side connecting all four rows from top to bottom to show historical progression. White background, navy (#1B2A4A) text, purple (#7B4BAB) highlight for the AIネイティブ row. All text in Japanese.
 ```
 
 ---

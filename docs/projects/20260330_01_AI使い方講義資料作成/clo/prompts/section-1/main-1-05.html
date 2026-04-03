@@ -9,53 +9,45 @@
 <body>
   <div class="slide theme-section-1">
     <div class="slide-head">
-      <div class="slide-title">AIエージェントでも文脈上限は消えない</div>
-      <div class="slide-message">セッション継続に見えても、一度に使える文脈は有限である</div>
+      <div class="slide-title">コンテキストウィンドウとカンペの比喩</div>
+      <div class="slide-message">枠の大きさより限られた枠へ何を入れるかが結果を決める</div>
     </div>
     <div class="slide-body">
-      <div class="causal-flow">
-        <div class="causal-step">
-          <h3>長い履歴</h3>
-          <p>過去の会話、試行錯誤、調査ログ、修正前の情報が積み上がっていく。</p>
+      <div class="feature-grid-3" style="flex:1;">
+        <div class="feature-card">
+          <div class="pill">正確なカンペ</div>
+          <h3 style="margin-top:12px;">良い答案につながる</h3>
+          <p>整理された情報があり、必要な前提をその場で参照できる。</p>
+          <div class="thin-rule" style="margin:12px 0 8px;"></div>
+          <div class="body-sm"><strong>状態:</strong> 正しい事実が手元にある</div>
         </div>
-        <div class="causal-arrow">→</div>
-        <div class="causal-step">
-          <h3>選別と要約</h3>
-          <p>現在の作業に必要な情報だけを選び、短い作業文脈へ圧縮する。</p>
+        <div class="feature-card" style="background:#fbf7f6; border-color:#e5c8bf;">
+          <div class="pill" style="background:#f7e5e0; color:#b05a44;">間違いだらけのカンペ</div>
+          <h3 style="margin-top:12px;">間違った答案になる</h3>
+          <p>矛盾や古い情報があると、出力もそのまま汚染される。</p>
+          <div class="thin-rule" style="margin:12px 0 8px;"></div>
+          <div class="body-sm"><strong>状態:</strong> 間違った前提を信用してしまう</div>
         </div>
-        <div class="causal-arrow">→</div>
-        <div class="causal-step">
-          <h3>有限な作業文脈</h3>
-          <p>その時点で参照できるのは、圧縮後に残った限られた情報だけになる。</p>
-        </div>
-      </div>
-      <div class="stack-sm">
-        <div class="two-col">
-          <div class="card" style="background:#fbf7f6; border-color:#e5c8bf;">
-            <div class="compare-label" style="color:#b05a44;">誤解しがち</div>
-            <div class="bullet-lines">
-              <div class="bullet-line"><span class="icon-chip" style="background:#fff1ec; color:#b05a44;">1</span><span>セッションが続く = 以前の詳細まで全部そのまま覚えている、と見なしてしまう。</span></div>
-              <div class="bullet-line"><span class="icon-chip" style="background:#fff1ec; color:#b05a44;">2</span><span>大きな仕事を一回で頼んでも、同じ精度で最後まで持つと期待してしまう。</span></div>
-            </div>
-          </div>
-          <div class="card-accent card">
-            <div class="compare-label" style="color:var(--accent-strong);">結論</div>
-            <div class="body-sm"><strong>セッション継続と無限記憶は別物</strong>だと理解する。</div>
-            <div class="body-sm" style="margin-top:8px;">だからAIエージェントへの依頼は、文脈上限に収まる大きさへ切る必要がある。</div>
-          </div>
-        </div>
-        <div class="centered" style="gap:10px; flex-wrap:wrap;">
-          <div class="outline-pill">セッション継続</div>
-          <div class="arrow">→</div>
-          <div class="outline-pill">文脈は有限</div>
-          <div class="arrow">→</div>
-          <div class="outline-pill">仕事を小さく切る</div>
+        <div class="feature-card">
+          <div class="pill" style="background:#f4f6f6; color:#6f7b7b;">白紙のカンペ</div>
+          <h3 style="margin-top:12px;">学習データ頼みになる</h3>
+          <p>その場の文脈がないので、一般知識からもっともらしい続きを出すしかない。</p>
+          <div class="thin-rule" style="margin:12px 0 8px;"></div>
+          <div class="body-sm"><strong>状態:</strong> 既知パターンから補完するしかない</div>
         </div>
       </div>
+      <div class="token-row" style="margin-top:0;">
+        <div class="outline-pill">正しい情報</div>
+        <div class="arrow">→</div>
+        <div class="outline-pill">正しい前提</div>
+        <div class="arrow">→</div>
+        <div class="outline-pill">良い出力</div>
+      </div>
+      <div class="callout body" style="font-weight:700;">AIエージェントでも、有限な枠へ何を入れるかの設計が本質である</div>
     </div>
     <div class="slide-footer">
-      <span>Agent Context Limit</span>
-      <span>Session Continuity != Infinite Memory</span>
+      <span>Context Window</span>
+      <span>Cheat Sheet Metaphor</span>
     </div>
   </div>
 </body>

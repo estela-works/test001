@@ -5,34 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>main-3-05</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .context-band {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 18px;
+    }
+
+    .context-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .context-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .limit-card {
+      background: var(--panel-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .limit-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .limit-item:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    .limit-head {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .limit-body {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .flow-arrow {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      padding: 2px 0;
+    }
+
+    .conclusion-band {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 12px 18px;
+    }
+
+    .conclusion-head {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .conclusion-body {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-body);
+    }
+  </style>
 </head>
 <body>
   <div class="slide theme-section-3">
     <div class="slide-head">
-      <div class="slide-title">AIは暗黙知を読めない。暗黙知で回すチームは、AIに渡せる情報が少ない</div>
-      <div class="slide-message">これは意志の問題ではなくコストの問題であり、だからこそ前提が変われば解ける</div>
+      <div class="slide-title">暗黙知中心の開発が抱える構造限界</div>
+      <div class="slide-message">人には伝わる知識でもAIには渡らず再利用も広がらない</div>
     </div>
-    <div class="slide-body">
-      <div class="two-col">
-        <div class="card">
-          <div class="compare-label" style="color:#5d6f86;">暗黙知（人間の頭の中）</div>
-          <div class="bullet-lines" style="margin-top:10px;">
-            <div class="bullet-line"><span class="icon-chip" style="background:#eef3f6; color:#365166;">内</span><span>チーム外に持ち出しにくい</span></div>
-            <div class="bullet-line"><span class="icon-chip" style="background:#eef3f6; color:#365166;">失</span><span>メンバー離脱で消えやすい</span></div>
-            <div class="bullet-line"><span class="icon-chip" style="background:#eef3f6; color:#365166;">限</span><span>人数や組織を跨ぐと共有が難しい</span></div>
-          </div>
+    <div class="slide-body" style="gap:6px;">
+      <div class="context-band">
+        <div class="context-label">暗黙知で回す仕組みは合理的だった</div>
+        <div class="context-sub">しかし暗黙知には3つの構造的な限界がある</div>
+      </div>
+
+      <div class="limit-card">
+        <div class="limit-item">
+          <div class="limit-head">▸ チーム外に持ち出せない</div>
+          <div class="limit-body">対話やデモで共有した知識は、その場にいた人にしか残らない</div>
         </div>
-        <div class="card-accent card">
-          <div class="compare-label">AIのコンテキスト</div>
-          <div class="bullet-lines" style="margin-top:10px;">
-            <div class="bullet-line"><span class="icon-chip">読</span><span>文書化された情報しか読めない</span></div>
-            <div class="bullet-line"><span class="icon-chip">参</span><span>今ここに渡された情報しか参照できない</span></div>
-            <div class="bullet-line"><span class="icon-chip">差</span><span>暗黙知との間に断絶がある</span></div>
-          </div>
+        <div class="limit-item">
+          <div class="limit-head">▸ メンバー離脱で消失する</div>
+          <div class="limit-body">退職・異動で「あの人に聞けばわかる」が使えなくなる</div>
+        </div>
+        <div class="limit-item">
+          <div class="limit-head">▸ 人数・組織を跨ぐとスケールしない</div>
+          <div class="limit-body">チーム内では速いが、チーム間・世代間では伝わらない</div>
         </div>
       </div>
-      <div class="lead-card">
-        <div class="lead-question" style="font-size:20px;">暗黙知で回せる強いチームほど、AIには渡せる情報が少ない</div>
+
+      <div class="flow-arrow">▼ そして最大の問題</div>
+
+      <div class="conclusion-band">
+        <div class="conclusion-head">AIは暗黙知を読めない</div>
+        <div class="conclusion-body">文書化された情報しか参照できず、チームの記憶にはアクセスできない。暗黙知で強いチームほど、AIに渡せる情報が少ないという逆説が生まれる。</div>
       </div>
     </div>
     <div class="slide-footer">

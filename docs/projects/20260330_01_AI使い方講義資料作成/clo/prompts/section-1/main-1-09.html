@@ -9,30 +9,31 @@
 <body>
   <div class="slide theme-section-1">
     <div class="slide-head">
-      <div class="slide-title">依頼スコープを分けるエージェント運用</div>
-      <div class="slide-message">探索整理実装確認を分けるほど文脈上限の中で安定して働ける</div>
+      <div class="slide-title">AIの出力品質を決める三つの条件</div>
+      <div class="slide-message">正確・一貫・最新を満たすほど限られた枠を有効に使える</div>
     </div>
     <div class="slide-body">
-      <div class="diagram-board">
-        <div class="hub-layout">
-          <div class="hub-side">
-            <div class="hub-box">補助エージェント A<br><span class="mini-note">探索・収集</span></div>
-            <div class="hub-box">補助エージェント B<br><span class="mini-note">確認・検証</span></div>
-          </div>
-          <div class="hub-center">メインエージェント<br>本題の推論に集中</div>
-          <div class="hub-side">
-            <div class="hub-box">結果だけ返す<br><span class="mini-note">長いログを持ち込まない</span></div>
-            <div class="hub-box">必要な事実だけ共有<br><span class="mini-note">短く・集中・クリーン</span></div>
-          </div>
+      <div class="feature-grid-3" style="flex:1;">
+        <div class="feature-card centered" style="flex-direction:column; text-align:center; gap:10px;">
+          <div class="icon-chip" style="width:80px; height:80px; font-size:22px;">正確</div>
+          <p>事実として誤っていない。曖昧な推測を事実扱いしない。</p>
+        </div>
+        <div class="feature-card centered" style="flex-direction:column; text-align:center; gap:10px;">
+          <div class="icon-chip" style="width:80px; height:80px; font-size:22px;">一貫</div>
+          <p>情報同士が矛盾していない。複数の正解候補を同時に置かない。</p>
+        </div>
+        <div class="feature-card centered" style="flex-direction:column; text-align:center; gap:10px;">
+          <div class="icon-chip" style="width:80px; height:80px; font-size:22px;">最新</div>
+          <p>古い仕様や過去の前提が混ざっていない。今の判断に使える。</p>
         </div>
       </div>
-      <div class="card" style="background:#fbf7f6; border-color:#e5c8bf;">
-        <div class="body-sm"><strong style="color:#b05a44;">要点:</strong> 大きな仕事ほど、探索・整理・実装・確認を分けて結果だけ戻す方が文脈上限に収まりやすい。</div>
+      <div class="lead-card">
+        <div class="lead-question" style="font-size:22px;">同じモデルでも、限られた枠に何を入れるかで結果は劇的に変わる</div>
       </div>
     </div>
     <div class="slide-footer">
-      <span>Usage Tip 2</span>
-      <span>Agent Role Split</span>
+      <span>Core Principle</span>
+      <span>Accurate / Consistent / Current</span>
     </div>
   </div>
 </body>

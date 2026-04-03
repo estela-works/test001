@@ -9,29 +9,29 @@
 <body>
   <div class="slide theme-section-2">
     <div class="slide-head">
-      <div class="slide-title">解法の方向性は明快で、保管する層と伝える層を分けること</div>
-      <div class="slide-message">正本は1つに保ち、相手別の資料はそこから取り出して作る</div>
+      <div class="slide-title">情報管理とコミュニケーションの役割分離</div>
+      <div class="slide-message">伝わる文書と残る文書を分けない限りSSOTは立ち上がらない</div>
     </div>
-    <div class="slide-body">
-      <div class="layer-stack">
-        <div class="layer-box top">
-          <div class="layer-title">伝達層</div>
-          <div class="layer-grid">
-            <div class="output-card">レビュー資料</div>
-            <div class="output-card">顧客向け報告</div>
-            <div class="output-card">新メンバー説明</div>
-            <div class="output-card">会議用サマリー</div>
-          </div>
+    <div class="slide-body" style="gap:14px;">
+      <div class="layer-box bottom" style="padding:18px 24px;">
+        <div class="layer-title">保管層（SSOT）</div>
+        <div class="body-sm" style="margin-top:4px;">正確で完全な情報を一箇所に維持する。ここが「正しい情報」の置き場。</div>
+        <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+          <div class="outline-pill">API仕様</div>
+          <div class="outline-pill">DB定義</div>
+          <div class="outline-pill">業務ルール</div>
+          <div class="outline-pill">画面設計</div>
         </div>
-        <div class="roadmap-arrow">↓</div>
-        <div class="layer-box bottom">
-          <div class="layer-title">保管層</div>
-          <div class="body-sm">完全・正確・構造化された単一の情報基盤を保ち、伝達物はそこから必要に応じて作る。</div>
-          <div class="feature-grid-3" style="margin-top:14px;">
-            <div class="feature-card"><h3>正本は1つ</h3><p>どれが正しいかで迷わない。</p></div>
-            <div class="feature-card"><h3>伝達物は複数</h3><p>相手ごとに軽く作り分けられる。</p></div>
-            <div class="feature-card"><h3>役割を分離</h3><p>保管と説明を同じ文書に背負わせない。</p></div>
-          </div>
+      </div>
+      <div style="text-align:center; font-size:15px; color:var(--accent-strong); font-weight:700;">↓ 相手・目的に合わせて加工して渡す</div>
+      <div class="layer-box top" style="padding:18px 24px;">
+        <div class="layer-title">伝達層</div>
+        <div class="body-sm" style="margin-top:4px;">相手に合わせて作り分ける。使い捨てでよい。</div>
+        <div class="layer-grid" style="margin-top:10px;">
+          <div class="output-card">レビュー資料</div>
+          <div class="output-card">顧客向け報告</div>
+          <div class="output-card">新メンバー説明</div>
+          <div class="output-card">会議用サマリー</div>
         </div>
       </div>
       <div class="mini-note" style="text-align:right;">具体的な運用の型は第5章で扱う</div>

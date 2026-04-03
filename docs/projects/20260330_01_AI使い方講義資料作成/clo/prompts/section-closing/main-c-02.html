@@ -5,13 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>main-c-02</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .core-message {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0;
+      padding: 0 48px;
+    }
+    .core-deny {
+      font-size: 26px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .core-separator {
+      width: 320px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+    .core-assert {
+      font-size: 32px;
+      line-height: 1.5;
+      font-weight: 800;
+      color: var(--accent-strong);
+      margin-bottom: 24px;
+    }
+    .core-supplement {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      padding: 14px 20px;
+      max-width: 680px;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-body);
+    }
+  </style>
 </head>
 <body>
   <div class="slide theme-closing">
-    <div class="quote-card">
-      <div class="quote-mark">“</div>
-      <div class="pull-quote">AIの能力を引き出すために情報を整備するのではない。<br>情報を整備する行為自体をAIが支援する。</div>
-      <div class="quote-support">適切に分割された正確な情報が、AI の性能を引き上げる。だからまず始めることが大事。</div>
+    <div class="core-message">
+      <div class="core-deny">AIの能力を引き出すために<br>情報を整備するのではない。</div>
+      <div class="core-separator"></div>
+      <div class="core-assert">情報を整備する行為自体を<br>AIが支援する。</div>
+      <div class="core-supplement">適切に分割された正確な情報が、AIの性能を引き上げる。<br>だからまず始めることが大事。好循環は最初の一歩から回り始める。</div>
     </div>
     <div class="slide-footer">
       <span>Core Message</span>

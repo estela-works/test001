@@ -9,31 +9,31 @@
 <body>
   <div class="slide theme-section-3">
     <div class="slide-head">
-      <div class="slide-title">開発手法は「完成に向かう工程」には強いが、「完成後の情報維持」には弱い</div>
-      <div class="slide-message">コードは進化するのに、情報は放置されやすいという盲点がある</div>
+      <div class="slide-title">継続改修時代に薄い情報管理の手当て</div>
+      <div class="slide-message">既存の開発手法は立ち上げに手厚く情報の継続更新には仕組みがない</div>
     </div>
     <div class="slide-body">
       <div class="two-col" style="flex:1;">
         <div class="card-accent card stack-md">
           <div class="compare-label">手厚い領域</div>
           <div class="bullet-lines" style="margin-top:10px;">
-            <div class="bullet-line"><span class="icon-chip">設</span><span>新規設計プロセス</span></div>
-            <div class="bullet-line"><span class="icon-chip">試</span><span>テスト戦略（TDD / BDD）</span></div>
-            <div class="bullet-line"><span class="icon-chip">出</span><span>リリース管理（CI/CD）</span></div>
+            <div class="bullet-line" style="align-items:flex-start;"><span class="icon-chip">▸</span><span><strong>新規設計プロセス</strong><br><span class="body-sm" style="color:var(--text-muted);">要件定義から実装まで手順が確立されている</span></span></div>
+            <div class="bullet-line" style="align-items:flex-start;"><span class="icon-chip">▸</span><span><strong>テスト戦略（TDD / BDD）</strong><br><span class="body-sm" style="color:var(--text-muted);">品質を担保する型が既にある</span></span></div>
+            <div class="bullet-line" style="align-items:flex-start;"><span class="icon-chip">▸</span><span><strong>リリース管理（CI/CD）</strong><br><span class="body-sm" style="color:var(--text-muted);">ビルドから本番反映まで自動化されている</span></span></div>
           </div>
           <div class="muted-panel body-sm" style="margin-top:auto; background:rgba(255,255,255,0.62);">
-            完成物を前に進める工程には、既に多くの型と改善知見がある。
+            「ゼロから完成させる」工程には型と知見が既にある。
           </div>
         </div>
         <div class="card stack-md" style="background:#faf9f5;">
           <div class="compare-label" style="color:#8e7742;">手薄い領域</div>
           <div class="bullet-lines" style="margin-top:10px;">
-            <div class="bullet-line"><span class="icon-chip" style="background:#f6f1dd; color:#8e7742;">更</span><span>仕様の継続的最新化</span></div>
-            <div class="bullet-line"><span class="icon-chip" style="background:#f6f1dd; color:#8e7742;">理</span><span>変更の文脈の蓄積</span></div>
-            <div class="bullet-line"><span class="icon-chip" style="background:#f6f1dd; color:#8e7742;">維</span><span>長期の情報一貫性維持</span></div>
+            <div class="bullet-line" style="align-items:flex-start;"><span class="icon-chip">▸</span><span><strong>仕様を常に正しい状態に保つ</strong><br><span class="body-sm" style="color:var(--text-muted);">リリース後、設計書やAPI仕様を誰がいつ更新するか決まっていない</span></span></div>
+            <div class="bullet-line" style="align-items:flex-start;"><span class="icon-chip">▸</span><span><strong>正しい仕様を起点に変更を計画する</strong><br><span class="body-sm" style="color:var(--text-muted);">変更要求が来ても「今の正しい仕様」がどこにあるかわからない</span></span></div>
+            <div class="bullet-line" style="align-items:flex-start;"><span class="icon-chip">▸</span><span><strong>変更の理由と経緯を資産として残す</strong><br><span class="body-sm" style="color:var(--text-muted);">なぜその設計にしたかが消え、次の改修で同じ議論を繰り返す</span></span></div>
           </div>
           <div class="muted-panel body-sm" style="margin-top:auto; background:rgba(255,255,255,0.72);">
-            だから開発後半になるほど、コードは進むのに説明可能性だけが痩せていく。
+            WFにもAgileにも「完成後の仕様を維持し、そこから次の変更を設計する」プロセスは組み込まれていない。
           </div>
         </div>
       </div>

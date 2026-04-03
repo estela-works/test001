@@ -22,64 +22,58 @@
 
 
 ## 生成指示（この内容を画像内にテキストとして描画しないこと）
-スタイル: Professional lecture slide, two-column comparison layout, clean Japanese typography, flat design
+スタイル: Professional lecture slide, summary cards + pattern callout, clean Japanese typography, flat design
 配色:
-- Identical to main-0-03 and main-0-04. Background: #FFFFFF, Left: #F5E0F2 + #AA2896 border, Right: #D4EDDA + #28AA3C border
+- Background: #FFFFFF
+- Cards: #FFFFFF with #B0BFB6 border
+- Pattern box: white to pale green gradient with green left border
+- Accent: #28AA3C
+- Text: #1E352A / #6B7E74
 
 ## コンセプトと文脈（この内容を画像内にテキストとして描画しないこと）
-対比スライドの3枚目にして完結。同じフレームの3度目の登場で「やっぱり同じ構造だ！」という快感を生む。視覚的にも0-03/04と完全に同じレイアウト。
+2例見たあとに、観客自身の頭の中で「同じ構造だ」と言語化させるまとめスライド。ここでは新しい事例を足さず、インターネットとクラウドの2例だけでパターンが十分見えることを示す。
 - 講義全体の目的: エージェントAIを活用したシステム開発への転換を提案する。全59枚
 - 章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る
-- 前スライド: 0-04 デジタルネイティブ。同一フレームの2例目。聴衆は既に「また同じ構造だ」と予感
+- 前スライド: 0-04 クラウドネイティブ。同一フレームの2例目
 - 次スライド: 0-06 共通構造の抽象化＋本質の提示
-- このスライドの役割: パターン認識の完了点。次の抽象化スライドへの準備完了
+- このスライドの役割: 2例の観察結果を一文のパターンへ圧縮する
 
 ## 内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）
-2010年代、クラウドコンピューティングの普及により、リソース調達・変更コストが劇的に低下した。それ以前の世界では、サーバーの調達に4〜12週間を要し、数千万〜数億円のCAPEX（資本的支出）が必要だった。そのため最適化対象は「変更回数の最小化」であり、合理的な戦略は事前設計を入念に行い、大規模な変更を低頻度で実施すること（CAB＝Change Advisory Board承認、四半期リリース）だった。
+インターネットでは配信制約が消え、競争は届けることから見つけてもらうことへ移った。クラウドでは変更コストが下がり、競争は大きく固めることから小さく速く変えることへ移った。
 
-クラウドにより調達が秒単位、従量課金（OPEX）、廃棄コストもゼロになると、最適化対象は「リスク分散（変更あたりの影響最小化）」に移動する。大きな変更を1回やるより、小さな変更を高頻度で繰り返す方が、1回の失敗の影響が小さく、全体のリスクが低い。
-
-この変化により「変更抑制」が価値を失った。重い変更管理プロセス（CAB、四半期リリース承認組織）、サーバー調達・設置中心の運用と手作業の構成管理、モノリシック前提の設計、Active-Standby中心の"障害ゼロ"冗長構成が脱構築された。代わりに「変更の細分化と高速化」に価値が移り、IaC・CI/CD・GitOpsによる自動化・コード化、マイクロサービス・コンテナによる分割前提の設計、Chaos Engineering・Circuit Breakerによる障害前提の設計、SRE・SLO/Error Budget・カナリアリリースによる可観測性とリスク制御が再構築された。
+この2例だけでも見えてくるのは、技術が変えるのはツールの名前ではなく、何を最適化すべきかという判断軸だということ。ネイティブとは、新技術を使う人ではなく、新しい前提で動く人である。
 
 ## 画像と字幕の役割分離（厳守）
 これは講義用スライド画像。テキストは全て画像内にレンダリングすること。
 
 画像内に描画するテキスト:
-- ヘッダー「クラウドネイティブ（2010年代〜）」
-- キーメッセージ「最適化対象の変化:「変更回数の最小化」→「変更単位の最小化」」
-- 左カラム（旧）・右カラム（新）の全内容
-- 下部の脱構築・再構築の具体例
+- タイトル「二つのネイティブで見える共通構造」
+- メインメッセージ「二例だけでもネイティブの本質は最適化先の更新だと見えてくる」
+- 2枚の要約カード
+- PATTERNボックス
+- 結論コールアウト
 
 ## 参考データ（テキストをそのまま描画せず、視覚的に表現すること）
 ```
 +================================================================+
-|  クラウドネイティブ（2010年代〜）                                 |
-|  最適化対象の変化:「変更回数の最小化」→「変更単位の最小化」      |
-+-------------------------------+--------------------------------+
-|  ┃ ≪ 旧 ≫                   |  ┃ ≪ 新 ≫                      |
-|  ┃                           |  ┃                              |
-|  ┃ 制約                     |  ┃ 制約                         |
-|  ┃  リソース調達コスト高い   |  ┃  秒単位調達・従量課金        |
-|  ┃  (調達4-12週/              |  ┃  廃棄コストもゼロ            |
-|  ┃   数千万〜数億円CAPEX)     |  ┃                              |
-|  ┃ 最適化対象               |  ┃ 最適化対象                   |
-|  ┃  変更回数の最小化         |  ┃  リスク分散                  |
-|  ┃                           |  ┃  (変更あたりの影響最小化)    |
-|  ┃ 戦略                     |  ┃ 戦略                         |
-|  ┃  事前設計・大規模変更・   |  ┃  小さな変更を高頻度で        |
-|  ┃  低頻度リリース           |  ┃                              |
-|  ┃  (CAB承認/四半期リリース)  |  ┃                              |
-+-------------------------------+--------------------------------+
-|  脱構築                        → 再構築                          |
-|  重い変更管理（CAB/四半期承認）  IaC、CI/CD、GitOps              |
-|  手作業の構成管理                マイクロサービス、コンテナ       |
-|  モノリシック設計                Chaos Eng.、Circuit Breaker     |
-|  Active-Standby冗長構成         SRE、SLO/Error Budget           |
-|                                  カナリアリリース                |
+|  二つのネイティブで見える共通構造                                |
+|  二例だけでもネイティブの本質は最適化先の更新だと見えてくる      |
+|                                                                  |
+|  [Internet Native]         [Cloud Native]                        |
+|  配信から発見へ             大変更から小変更へ                    |
+|  配信制約が消えると、        変更コストが下がると、               |
+|  競争は見つかる力へ移る      小さく速く変える方が強くなる         |
+|                                                                  |
+|  [PATTERN]                                                     |
+|  技術が変えるのはツールそのものでなく、                           |
+|  何を最適化すべきかという判断軸である                             |
+|                                                                  |
+|  ○○ネイティブは「新技術を使う人」ではなく                         |
+|  「新しい前提で動く人」である                                    |
 +================================================================+
 ```
 
 ## 画像の説明
-A professional lecture slide with EXACTLY the same two-column comparison layout as main-0-03 and main-0-04. Third and final repetition — identical visual structure for pattern recognition. White (#FFFFFF) background. Top: header "クラウドネイティブ（2010年代〜）" in large dark charcoal (#1E352A) bold, key message "最適化対象の変化:「変更回数の最小化」→「変更単位の最小化」". Left column "≪ 旧 ≫" with light pink (#F5E0F2) background and magenta-purple (#AA2896) left border: "制約: リソース調達・変更コストが高い" with sub-note "(サーバー調達に4〜12週間、数千万〜数億円のCAPEX)", "最適化対象: 変更回数の最小化", "戦略: 事前設計・大規模変更・低頻度リリース" with sub-note "(CAB承認、四半期リリース)". Right column "≪ 新 ≫" with light green (#D4EDDA) background and green (#28AA3C) left border: "制約: 秒単位の調達、従量課金（OPEX）、廃棄コストもゼロ", "最適化対象: リスク分散（変更あたりの影響最小化）", "戦略: 小さな変更を高頻度で実施". Footer with green arrow. "脱構築:": "重い変更管理プロセス（CAB、四半期承認組織）、手作業の構成管理、モノリシック前提の設計、Active-Standby中心の障害ゼロ冗長構成". "再構築:": "IaC・CI/CD・GitOps（自動化・コード化）、マイクロサービス・コンテナ（分割前提）、Chaos Engineering・Circuit Breaker（障害前提）、SRE・SLO/Error Budget・カナリアリリース（可観測性・リスク制御）". Information-dense but structured. Aspect ratio 16:9.
+A lecture slide that summarizes two examples into one reusable pattern. White background. Top: title "二つのネイティブで見える共通構造" and message "二例だけでもネイティブの本質は最適化先の更新だと見えてくる". Middle: two summary cards, one for Internet Native with "配信から発見へ", one for Cloud Native with "大変更から小変更へ". Lower middle: a highlighted pattern box with a green left border reading "技術が変えるのはツールそのものでなく、何を最適化すべきかという判断軸である". Bottom: a strong conclusion callout "○○ネイティブは『新技術を使う人』ではなく『新しい前提で動く人』である". Aspect ratio 16:9.
 
 画像サイズ: 1024x576px

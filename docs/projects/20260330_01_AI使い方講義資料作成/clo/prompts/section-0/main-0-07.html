@@ -6,114 +6,106 @@
   <title>main-0-07</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
   <style>
-    .section-roadmap {
-      gap: 4px;
+    .profile-layout {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex: 1;
     }
 
-    .section-roadmap .lead-card {
-      padding: 12px 16px;
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
     }
 
-    .section-roadmap .lead-question {
-      font-size: 17px;
-      line-height: 1.35;
+    .profile-name {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-strong);
+      letter-spacing: 0.08em;
     }
 
-    .section-roadmap .lead-support {
-      font-size: 12px;
-      line-height: 1.4;
-      margin-top: 4px;
+    .profile-title {
+      font-size: 16px;
+      color: var(--text-muted);
+      font-weight: 600;
     }
 
-    .section-roadmap .roadmap-arrow {
-      font-size: 18px;
-    }
-
-    .section-roadmap .roadmap-panel {
-      padding: 6px;
-    }
-
-    .section-roadmap .roadmap-item {
-      padding: 8px 12px;
-      grid-template-columns: 60px 198px 1fr auto;
+    .profile-services {
+      display: flex;
       gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .section-roadmap .roadmap-no {
-      font-size: 12px;
+    .profile-pill {
+      background: var(--panel-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-body);
     }
 
-    .section-roadmap .roadmap-title {
-      font-size: 13px;
-      line-height: 1.3;
+    .profile-ai-card {
+      background: var(--accent-soft);
+      border: 1px solid #c0e0c6;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 22px;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    .section-roadmap .roadmap-desc {
-      font-size: 12px;
-      line-height: 1.35;
+    .profile-ai-card .card-heading {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--accent-strong);
     }
 
-    .section-roadmap .roadmap-bridge .body {
-      font-size: 13px;
-      line-height: 1.4;
+    .profile-ai-card .card-body {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-body);
+    }
+
+    .profile-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="slide theme-section-0">
     <div class="slide-head">
-      <div class="slide-title">AIネイティブ開発で脱構築されるべき「旧い常識」とは何か？</div>
-      <div class="slide-message">今日の講義で、その構造を6章に分けて順に解きほぐす</div>
+      <div class="slide-title">自己紹介</div>
+      <div class="slide-message">今日の話は実践者の視点からお伝えします</div>
     </div>
-    <div class="slide-body roadmap-compact section-roadmap">
-      <div class="lead-card">
-        <div class="lead-question">AIネイティブ開発で脱構築されるべき「旧い常識」とは何か？</div>
-        <div class="lead-support">長年の合理的判断の中で育まれた常識は、本当に今も合理的なのかをこの順番で解く。</div>
-      </div>
-      <div class="roadmap-arrow">↓</div>
-      <div class="roadmap-panel">
-        <div class="roadmap-list" style="flex:1;">
-          <div class="roadmap-item">
-            <div class="roadmap-no">第1章</div>
-            <div class="roadmap-title">LLMの基礎</div>
-            <div class="roadmap-desc">まず「道具」を正しく知る</div>
-            <div class="roadmap-now">次はここ</div>
-          </div>
-          <div class="roadmap-item">
-            <div class="roadmap-no">第2章</div>
-            <div class="roadmap-title">LLMによる開発の課題</div>
-            <div class="roadmap-desc">道具だけでは越えられない壁を見る</div>
-            <div></div>
-          </div>
-          <div class="roadmap-item">
-            <div class="roadmap-no">第3章</div>
-            <div class="roadmap-title">開発手法の歴史的課題</div>
-            <div class="roadmap-desc">その壁が生まれた背景を押さえる</div>
-            <div></div>
-          </div>
-          <div class="roadmap-item">
-            <div class="roadmap-no">第4章</div>
-            <div class="roadmap-title">情報管理のコスト構造変化</div>
-            <div class="roadmap-desc">AIで何が安くなり、何が重くなるかを見る</div>
-            <div></div>
-          </div>
-          <div class="roadmap-item">
-            <div class="roadmap-no">第5章</div>
-            <div class="roadmap-title">提案手法 SPEC &amp; Project</div>
-            <div class="roadmap-desc">新しい合理的戦略を提示する</div>
-            <div></div>
-          </div>
-          <div class="roadmap-item">
-            <div class="roadmap-no">第6章</div>
-            <div class="roadmap-title">なぜ有効なのか</div>
-            <div class="roadmap-desc">構造として納得できる形に整理する</div>
-            <div></div>
-          </div>
+    <div class="slide-body">
+      <div class="profile-layout">
+        <div class="profile-header">
+          <div class="profile-name">春風 卓</div>
+          <div class="profile-title">ESTELA WORKS株式会社 代表取締役</div>
         </div>
-      </div>
-      <div class="roadmap-bridge">
-        <div class="body">再構築の前に、まずAIそのものの仕組みを理解しましょう</div>
-        <div class="arrow">→</div>
+        <div class="profile-services">
+          <div class="profile-pill">ITコンサルティング</div>
+          <div class="profile-pill">AI活用支援</div>
+          <div class="profile-pill">システム開発</div>
+        </div>
+        <div class="profile-ai-card">
+          <div class="card-heading">AIを日常的に使い倒しています</div>
+          <div class="card-body">動画コンテンツのフルAI制作、開発プロセスへのAI統合など、日々実験と試行錯誤を繰り返しています。今日お話しするSPEC&Project方式も、自分の現場で実際に運用しているものです。</div>
+        </div>
+        <div class="profile-note">理論ではなく実践から得た知見をお伝えします</div>
       </div>
     </div>
   </div>

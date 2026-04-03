@@ -39,50 +39,46 @@
 - 章の目的: 「○○ネイティブ」の共通構造を発見させ、講義全体への期待を作る
 - 前スライド: 0-01 タイトルスライド。講義の概要が示されたばかりで、聴衆はまだリラックスした状態
 - 次スライド: 0-03 インターネットネイティブの旧/新比較。「共通する構造」の1例目に入る
-- このスライドの役割: 「○○ネイティブ＝ツールを使うこと」という素朴な理解を崩し、3つの事例への布石を打つ
+- このスライドの役割: 「○○ネイティブ＝ツールに詳しい人」という素朴な理解を崩し、2つの事例への入口を作る
 
 ## 内容説明（この内容を画像内にテキストとして描画しないこと。スライドの背景知識として理解に使うこと）
 話者は「今日のテーマは"AIを活用したシステム開発"ですが、最近よく聞く言葉があります。AIネイティブ開発って、何だと思いますか？」と問いかける。会場に考える間を取り、想定される回答は「AIをたくさん使う」「Copilotで爆速コーディング」「プロンプトエンジニアリングを駆使する」など。
 
-次に揺さぶりを入れる。「では、デジタルネイティブはパソコンをたくさん使う人のことですか？」「インターネットネイティブはネット検索が速い人のことですか？」「クラウドネイティブはAWSに詳しい人のことですか？」と問い、どれも本質ではないと否定する。「○○ネイティブ」という言葉には共通する構造がある。各時代の変化を同じフレームで整理すると見えてくる：「制約が変わると、最適化すべき対象が変わり、合理的な戦略が変わる」。過去の事例からこの構造を確認していく、と次への導入を行う。
+次に揺さぶりを入れる。「では、インターネットネイティブはネット検索が速い人のことですか？」「クラウドネイティブはAWSに詳しい人のことですか？」と問い、どちらも本質ではないと否定する。「○○ネイティブ」という言葉には共通する構造がある。各時代の変化を同じフレームで整理すると見えてくるのは、制約が変わると最適化すべき対象が変わり、合理的な戦略が変わるということだ。ここから2つの事例でその構造を確認していく。
 
 ## 画像と字幕の役割分離（厳守）
 これは講義用スライド画像。テキストは全て画像内にレンダリングすること。
 
 画像内に描画するテキスト:
-- ヘッダー「AIネイティブ開発は何が新しいのか？」
-- リード文「『AIをたくさん使うこと』ではなく、『ネイティブ』の意味から考える。」
+- タイトル「AIネイティブ開発という言葉の意味」
+- メインメッセージ「AIを多用する話でなく前提転換を問う言葉である」
 - 強調カード見出し「最初に出やすい答え」
 - 想定回答の例（小さめ、グレー）:「AIをたくさん使うこと？」「Copilotで爆速コーディング？」「プロンプトが上手いこと？」
-- 誤解1「デジタルネイティブ = PCをたくさん使う人？」+ 「誤解」ラベル
-- 誤解2「インターネットネイティブ = 検索が速い人？」+ 「誤解」ラベル
-- 誤解3「クラウドネイティブ = AWSに詳しい人？」+ 「誤解」ラベル
+- 誤解1「インターネットネイティブ = 検索が速い人？」+ 「誤解」ラベル
+- 誤解2「クラウドネイティブ = AWSに詳しい人？」+ 「誤解」ラベル
 - 誘導文「どれも本質ではない」
 - 結論「○○ネイティブには共通する構造がある」
 
 ## 参考データ（テキストをそのまま描画せず、視覚的に表現すること）
 ```
 +================================================================+
-|                                                                  |
-|      AIネイティブ開発は何が新しいのか？                           |
-|      「AIをたくさん使うこと」ではなく、「ネイティブ」の意味から考える。 |
+|      AIネイティブ開発という言葉の意味                              |
+|      AIを多用する話でなく前提転換を問う言葉である                  |
 |                                                                  |
 |      ┃  最初に出やすい答え                                        |
 |      ┃  AIをたくさん使うこと？ Copilotで爆速？ プロンプト？       |
 |                                                                  |
 |      ────────────────────────────────────                        |
 |                                                                  |
-|       デジタルネイティブ = PCをたくさん使う人？   [誤解]           |
 |       インターネットネイティブ = 検索が速い人？   [誤解]           |
 |       クラウドネイティブ = AWSに詳しい人？       [誤解]           |
 |                                                                  |
 |       どれも本質ではない                                          |
 |       ○○ネイティブには共通する構造がある                          |
-|                                                                  |
 +================================================================+
 ```
 
 ## 画像の説明
-A lecture slide designed to reframe what "AI-native development" actually means. White (#FFFFFF) background. Top: large dark charcoal (#1E352A) header "AIネイティブ開発は何が新しいのか？" with a green (#28AA3C) lead line below: "『AIをたくさん使うこと』ではなく、『ネイティブ』の意味から考える。". Upper middle: a highlighted card with light green (#D4EDDA) background and thick green (#28AA3C) left border (4px). Inside the card, bold Japanese text "最初に出やすい答え" and smaller gray (#6B7E74) hint text: "AIをたくさん使うこと？ Copilotで爆速コーディング？ プロンプトが上手いこと？". Below the card, a thin gray (#B0BFB6) horizontal separator line. Lower section: three lines showing common misconceptions about "XX-native" concepts with a compact neutral badge labeled "誤解": "デジタルネイティブ = PCをたくさん使う人？", "インターネットネイティブ = 検索が速い人？", and "クラウドネイティブ = AWSに詳しい人？". Below them, text "どれも本質ではない" in dark charcoal. Then green (#28AA3C) bold text: "○○ネイティブには共通する構造がある". Do not include template footer labels. Clean layout with visual hierarchy: framing → expected answers → denials → conclusion. Aspect ratio 16:9.
+A lecture slide that reframes the phrase "AI-native development" away from tool enthusiasm and toward a change in assumptions. White (#FFFFFF) background. Top: title "AIネイティブ開発という言葉の意味" in bold dark charcoal (#1E352A), with message "AIを多用する話でなく前提転換を問う言葉である" below it in green (#28AA3C). Upper middle: a highlighted card with light green (#D4EDDA) background and thick green (#28AA3C) left border. Inside the card, bold text "最初に出やすい答え" and smaller gray hint text "AIをたくさん使うこと？ Copilotで爆速コーディング？ プロンプトが上手いこと？". Below the card, a thin gray separator line. Lower section: two misconception rows with compact neutral badges labeled "誤解": "インターネットネイティブ = 検索が速い人？" and "クラウドネイティブ = AWSに詳しい人？". Below them, dark charcoal text "どれも本質ではない". Then a strong green conclusion: "○○ネイティブには共通する構造がある". No footer labels. Aspect ratio 16:9.
 
 画像サイズ: 1024x576px

@@ -4,9 +4,8 @@
     {"id": "main-0-02", "content": {"type": "key-point", "text": "「AIネイティブ開発」って何だと思いますか？", "emphasis": "問いかけ＋ゆさぶり"}},
     {"id": "main-0-03", "content": {"type": "comparison", "heading": "インターネットネイティブ（1990年代後半〜）", "left": {"label": "旧", "items": ["配信コスト高い", "配信枠の効率利用", "ゲートキーパーによる選別"]}, "right": {"label": "新", "items": ["配信コスト≒0", "情報の発見効率", "N対N流通＋検索ベース"]}}},
     {"id": "main-0-04", "content": {"type": "comparison", "heading": "デジタルネイティブ（2000年代〜）", "left": {"label": "旧", "items": ["試行コスト高い", "失敗回避", "事前計画・一発成功志向"]}, "right": {"label": "新", "items": ["試行コスト≒0", "学習速度", "反復試行"]}}},
-    {"id": "main-0-05", "content": {"type": "comparison", "heading": "クラウドネイティブ（2010年代〜）", "left": {"label": "旧", "items": ["リソース調達コスト高い", "変更回数の最小化", "大規模変更・低頻度リリース"]}, "right": {"label": "新", "items": ["秒単位・従量課金", "リスク分散", "小さな変更を高頻度で"]}}},
-    {"id": "main-0-06", "content": {"type": "key-point", "text": "○○ネイティブとは、旧い最適化対象を捨て、新しいボトルネックに対して最適化する世界観で行動すること", "emphasis": "共通構造＋本質"}},
-    {"id": "main-0-07", "content": {"type": "key-point", "text": "AIネイティブ開発で脱構築されるべき「旧い常識」とは何か？", "emphasis": "伏線＋講義の地図"}},
+    {"id": "main-0-05", "content": {"type": "key-point", "text": "○○ネイティブ＝新技術を使う人ではなく、新しい前提で動く人", "emphasis": "共通構造と本質"}},
+    {"id": "main-0-06", "content": {"type": "key-point", "text": "AIネイティブ開発で脱構築されるべき「旧い常識」とは何か？", "emphasis": "伏線＋講義の地図"}},
 
     {"id": "main-1-01", "content": {"type": "title", "text": "第1章: LLMの基礎", "subtitle": "AIの仕組みを理解する"}},
     {"id": "main-1-02", "content": {"type": "key-point", "text": "ChatGPTやCopilotを使ったことがある人？", "emphasis": "問いかけ"}},
@@ -34,10 +33,10 @@
     {"id": "main-3-03", "content": {"type": "paragraph", "text": "既存手法は「プロジェクト単位」で完結する設計。プロジェクト間の情報連続性の仕組みがない"}},
     {"id": "main-3-04", "content": {"type": "paragraph", "text": "「ドキュメント軽視」は怠慢ではなく、組織パフォーマンス最大化のための合理的判断だった"}},
     {"id": "main-3-05", "content": {"type": "bullet-points", "heading": "暗黙知の限界", "items": ["チーム外に持ち出せない", "メンバー離脱で消失", "スケールしない", "AIに渡せない"]}},
-    {"id": "main-3-06", "content": {"type": "key-point", "text": "「情報管理コスト高い→情報管理を最小化するのが合理的」— これが脱構築されるべき旧い常識", "emphasis": "第0章フレーム適用"}},
+    {"id": "main-3-06", "content": {"type": "key-point", "text": "「言語化コスト高い→情報管理を最小化するのが合理的」— これが脱構築されるべき旧い常識", "emphasis": "第0章フレーム適用"}},
 
     {"id": "main-4-01", "content": {"type": "title", "text": "第4章: AIが変える情報管理のコスト構造", "subtitle": "諦めていたことが可能になる転換点"}},
-    {"id": "main-4-02", "content": {"type": "comparison", "heading": "情報の記載・更新コストの劇的な低下", "left": {"label": "以前", "items": ["情報管理コスト >> 開発コスト", "諦めるのが合理的"]}, "right": {"label": "現在", "items": ["情報管理コストが劇的低下", "管理する方が合理的な領域が拡大"]}}},
+    {"id": "main-4-02", "content": {"type": "comparison", "heading": "情報の記載・更新コストの劇的な低下", "left": {"label": "以前", "items": ["言語化コスト >> 開発コスト", "諦めるのが合理的"]}, "right": {"label": "現在", "items": ["言語化コストが劇的低下", "管理する方が合理的な領域が拡大"]}}},
     {"id": "main-4-03", "content": {"type": "paragraph", "text": "暗黙知の肯定を否定するのではない。人間の暗黙知＋AIが読める形式知＝チーム能力の拡張"}},
     {"id": "main-4-04", "content": {"type": "paragraph", "text": "好循環: 情報管理→良質コンテキスト→AI出力向上→情報管理効率化→...（加速）"}},
     {"id": "main-4-05", "content": {"type": "paragraph", "text": "悪循環: 暗黙知放置→コンテキストなし→AI低品質→「AI使えない」判断→停滞"}},
@@ -52,12 +51,11 @@
     {"id": "main-5-05", "content": {"type": "paragraph", "text": "SPECは「今」を、Projectは「変化」を管理する。SPECがプロジェクト間のバトン"}},
     {"id": "main-5-06", "content": {"type": "paragraph", "text": "5ステップのサイクル: 立ち上げ→実装→レビュー→SPEC更新→次のProjectへ"}},
     {"id": "main-5-07", "content": {"type": "paragraph", "text": "AIは下書き、人間が承認。好循環が品質を自己強化する"}},
-    {"id": "main-5-08", "content": {"type": "paragraph", "text": "AIはコードと照合しながら更新するため、反復すれば正しい内容に収束する"}},
+
     {"id": "main-5-09", "content": {"type": "bullet-points", "heading": "この方式がもたらす効果", "items": ["SSOT実現", "暗黙知の形式知化", "PJ間の連続性", "好循環フライホイール", "チーム能力の拡張"]}},
     {"id": "main-5-10", "content": {"type": "key-point", "text": "では、具体的に第2〜3章の各課題にどうアンサーするのか？", "emphasis": "ブリッジ"}},
 
     {"id": "main-6-01", "content": {"type": "comparison", "heading": "コンテキスト密度の向上", "left": {"label": "従来", "items": ["散在した情報をかき集めた大量テキスト", "ノイズまみれ"]}, "right": {"label": "SPEC&Project", "items": ["specs/api/対象API.md（最新仕様）", "projects/今回/requirements.md（変更要件）", "同じモデルでも圧倒的高精度"]}}},
-    {"id": "main-6-02", "content": {"type": "paragraph", "text": "第2〜3章の全課題に対してSPEC&Projectは具体的アンサーを持っている"}},
     {"id": "main-6-03", "content": {"type": "paragraph", "text": "SSOT層（SPEC）とアウトプット層（AI生成）を分離する。アウトプットは使い捨て"}},
     {"id": "main-6-04", "content": {"type": "paragraph", "text": "AIネイティブ開発を第0章のフレームで整理する"}},
     {"id": "main-6-05", "content": {"type": "bullet-points", "heading": "まとめ", "items": ["全課題にSPEC&Projectで具体的アンサーがある", "2層分離で情報管理とコミュニケーションを両立", "理論だけでなく11案件で実証済み"]}},

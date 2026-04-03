@@ -6,75 +6,141 @@
   <title>main-0-05</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
   <style>
-    .compact-compare {
-      gap: 8px;
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .compact-compare .compare-col {
-      padding: 16px 16px 14px;
-      gap: 8px;
-    }
-
-    .compact-compare .compare-item {
-      padding-top: 6px;
-    }
-
-    .compact-note {
+    .summary-card {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
       padding: 12px 16px;
     }
 
-    .compact-note .body-sm {
-      color: var(--text-body);
+    .summary-label {
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .summary-theme {
+      font-size: 15px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .summary-shift {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .structure-flow {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
+      align-items: center;
+    }
+
+    .structure-step {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .structure-step .step-no {
+      margin-bottom: 0;
+    }
+
+    .step-title {
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .step-copy {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .structure-arrow {
+      text-align: center;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .structure-callout {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      padding: 10px 18px;
     }
   </style>
 </head>
 <body>
   <div class="slide theme-section-0">
     <div class="slide-head">
-      <div class="slide-title">クラウドで合理的な戦略は「大きく変えない」から「小さく速く変える」へ移った</div>
-      <div class="slide-message">変更コストが下がると、回数を減らすより影響を小さく刻むほうが強い</div>
+      <div class="slide-title">○○ネイティブの共通構造と本質</div>
+      <div class="slide-message">ネイティブとは新技術導入でなく前提変化による最適化先の更新である</div>
     </div>
-    <div class="slide-body compact-compare">
-      <div class="two-col" style="flex:1;">
-        <section class="compare-col compare-old">
-          <div class="compare-label">旧</div>
-          <div class="compare-item">
-            <h3>コスト構造</h3>
-            <p>サーバ調達や設定変更が重く、環境を変えるたびに時間も人手も大きく必要だった。</p>
-          </div>
-          <div class="compare-item">
-            <h3>最適化対象</h3>
-            <p>変更回数そのものを減らし、大きな更新を慎重に通すことが合理的だった。</p>
-          </div>
-          <div class="compare-item">
-            <h3>支配的な戦略</h3>
-            <p>大規模リリース、重い変更管理、手作業の構成管理が中心だった。</p>
-          </div>
-        </section>
-        <section class="compare-col compare-new">
-          <div class="compare-label">新</div>
-          <div class="compare-item">
-            <h3>コスト構造</h3>
-            <p>環境作成や反映が秒単位になり、変更の実験と復旧が現実的になった。</p>
-          </div>
-          <div class="compare-item">
-            <h3>最適化対象</h3>
-            <p>変更単位を小さくし、失敗しても影響を局所化できることが重要になった。</p>
-          </div>
-          <div class="compare-item">
-            <h3>支配的な戦略</h3>
-            <p>小さく頻繁に出す運用、可観測性、即時ロールバックが前提になる。</p>
-          </div>
-        </section>
-      </div>
-      <div class="two-col">
-        <div class="card compact-note">
-          <div class="compare-label" style="color:var(--old-text);">脱構築</div>
-          <div class="body-sm">重い変更管理、手作業の構成管理、モノリシック設計、四半期リリース前提</div>
+    <div class="slide-body" style="gap:12px; justify-content:center;">
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-label">Internet Native</div>
+          <div class="summary-theme">配信から発見へ</div>
+          <div class="summary-shift">配信制約が消えると、競争は届ける力から見つかる力へ移る。</div>
         </div>
-        <div class="card compact-note">
-          <div class="compare-label" style="color:var(--accent-strong);">再構築</div>
-          <div class="body-sm">IaC、CI/CD、GitOps、マイクロサービス、SRE、Error Budget</div>
+        <div class="summary-card">
+          <div class="summary-label">Cloud Native</div>
+          <div class="summary-theme">大変更・低頻度から小変更・高頻度へ</div>
+          <div class="summary-shift">変更コストが下がると、大きく固めるより小さく速く変える方が強くなる。</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="structure-flow">
+          <div class="structure-step">
+            <div class="step-no">STEP 1</div>
+            <div class="step-title">技術革新で制約が変わる</div>
+            <div class="step-copy">高かったコストが一気に下がり前提が崩れる</div>
+          </div>
+          <div class="structure-arrow">→</div>
+          <div class="structure-step">
+            <div class="step-no">STEP 2</div>
+            <div class="step-title">コスト構造が激変する</div>
+            <div class="step-copy">希少だったものが余剰になり新しいボトルネックが立つ</div>
+          </div>
+          <div class="structure-arrow">→</div>
+          <div class="structure-step">
+            <div class="step-no">STEP 3</div>
+            <div class="step-title">最適化対象が移動する</div>
+            <div class="step-copy">新しい制約に合わせた判断が必要になる</div>
+          </div>
+          <div class="structure-arrow">→</div>
+          <div class="structure-step">
+            <div class="step-no">STEP 4</div>
+            <div class="step-title">脱構築と再構築が起きる</div>
+            <div class="step-copy">古い戦略を捨て新しい最適化が生まれる</div>
+          </div>
+        </div>
+        <div class="structure-callout">
+          <div class="body" style="font-weight:800; color:var(--accent-strong);">○○ネイティブ＝新技術を使う人ではなく、新しい前提で動く人</div>
         </div>
       </div>
     </div>

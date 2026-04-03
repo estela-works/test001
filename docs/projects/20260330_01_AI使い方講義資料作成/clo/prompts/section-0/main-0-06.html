@@ -6,149 +6,114 @@
   <title>main-0-06</title>
   <link rel="stylesheet" href="../slide-templates/slide-template.css">
   <style>
-    .summary-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .section-roadmap {
+      gap: 4px;
     }
 
-    .summary-card {
-      background: #ffffff;
-      border: 1px solid var(--line-soft);
-      border-radius: 14px;
-      padding: 14px 16px;
+    .section-roadmap .lead-card {
+      padding: 12px 16px;
     }
 
-    .summary-label {
+    .section-roadmap .lead-question {
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .section-roadmap .lead-support {
       font-size: 12px;
       line-height: 1.4;
-      font-weight: 800;
-      color: var(--accent);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-top: 4px;
     }
 
-    .summary-theme {
-      font-size: 16px;
+    .section-roadmap .roadmap-arrow {
+      font-size: 18px;
+    }
+
+    .section-roadmap .roadmap-panel {
+      padding: 6px;
+    }
+
+    .section-roadmap .roadmap-item {
+      padding: 8px 12px;
+      grid-template-columns: 60px 198px 1fr auto;
+      gap: 10px;
+    }
+
+    .section-roadmap .roadmap-no {
+      font-size: 12px;
+    }
+
+    .section-roadmap .roadmap-title {
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    .section-roadmap .roadmap-desc {
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .section-roadmap .roadmap-bridge .body {
+      font-size: 13px;
       line-height: 1.4;
-      font-weight: 800;
-      color: var(--text-strong);
-      margin-bottom: 6px;
-    }
-
-    .summary-shift {
-      font-size: 15px;
-      line-height: 1.55;
-      color: var(--text-muted);
-    }
-
-    .structure-flow {
-      display: grid;
-      grid-template-columns: 1fr 36px 1fr 36px 1fr 36px 1fr;
-      align-items: center;
-      flex: 1;
-    }
-
-    .structure-step {
-      background: #ffffff;
-      border: 1px solid var(--line-soft);
-      border-radius: 16px;
-      padding: 14px 16px;
-      min-height: 124px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .structure-step .step-no {
-      margin-bottom: 0;
-    }
-
-    .step-title {
-      font-size: 16px;
-      line-height: 1.4;
-      font-weight: 800;
-      color: var(--text-strong);
-    }
-
-    .step-copy {
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--text-muted);
-    }
-
-    .structure-arrow {
-      text-align: center;
-      font-size: 24px;
-      line-height: 1;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .structure-callout {
-      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
-      border: 1px solid #cfe5d3;
-      border-left: 5px solid var(--accent);
-      border-radius: 0 16px 16px 0;
-      padding: 14px 18px;
     }
   </style>
 </head>
 <body>
   <div class="slide theme-section-0">
     <div class="slide-head">
-      <div class="slide-title">○○ネイティブとは、新技術を使うことではない</div>
-      <div class="slide-message">旧い最適化対象を捨て、新しいボトルネックに対して最適化する世界観で行動すること</div>
+      <div class="slide-title">AIネイティブ開発で崩れる開発常識</div>
+      <div class="slide-message">これから崩すのはAIの性能でなく現場に残る前提そのものである</div>
     </div>
-    <div class="slide-body">
-      <div class="summary-row">
-        <div class="summary-card">
-          <div class="summary-label">Internet Native</div>
-          <div class="summary-theme">配信から発見へ</div>
-          <div class="summary-shift">配信制約 → 探索制約</div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-label">Digital Native</div>
-          <div class="summary-theme">失敗回避から学習へ</div>
-          <div class="summary-shift">期待損失最小化 → 学習速度最大化</div>
-        </div>
-        <div class="summary-card">
-          <div class="summary-label">Cloud Native</div>
-          <div class="summary-theme">重い変更から小さな変更へ</div>
-          <div class="summary-shift">変更回数最小化 → 変更単位最小化</div>
+    <div class="slide-body roadmap-compact section-roadmap">
+      <div class="lead-card">
+        <div class="lead-question">AIネイティブ開発で脱構築されるべき「旧い常識」とは何か？</div>
+        <div class="lead-support">長年の合理的判断の中で育まれた常識は、本当に今も合理的なのかをこの順番で解く。</div>
+      </div>
+      <div class="roadmap-arrow">↓</div>
+      <div class="roadmap-panel">
+        <div class="roadmap-list" style="flex:1;">
+          <div class="roadmap-item">
+            <div class="roadmap-no">第1章</div>
+            <div class="roadmap-title">LLMの基礎</div>
+            <div class="roadmap-desc">まず「道具」を正しく知る</div>
+            <div class="roadmap-now">次はここ</div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-no">第2章</div>
+            <div class="roadmap-title">LLMによる開発の課題</div>
+            <div class="roadmap-desc">道具だけでは越えられない壁を見る</div>
+            <div></div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-no">第3章</div>
+            <div class="roadmap-title">開発手法の歴史的課題</div>
+            <div class="roadmap-desc">その壁が生まれた背景を押さえる</div>
+            <div></div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-no">第4章</div>
+            <div class="roadmap-title">情報管理のコスト構造変化</div>
+            <div class="roadmap-desc">AIで何が安くなり、何が重くなるかを見る</div>
+            <div></div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-no">第5章</div>
+            <div class="roadmap-title">提案手法 SPEC &amp; Project</div>
+            <div class="roadmap-desc">新しい合理的戦略を提示する</div>
+            <div></div>
+          </div>
+          <div class="roadmap-item">
+            <div class="roadmap-no">第6章</div>
+            <div class="roadmap-title">なぜ有効なのか</div>
+            <div class="roadmap-desc">構造として納得できる形に整理する</div>
+            <div></div>
+          </div>
         </div>
       </div>
-      <div class="diagram-board" style="display:flex; flex-direction:column; gap:16px;">
-        <div class="structure-flow">
-          <div class="structure-step">
-            <div class="step-no">STEP 1</div>
-            <div class="step-title">技術革新で制約が変わる</div>
-            <div class="step-copy">今まで高かったコストが一気に下がり、前提そのものが崩れる。</div>
-          </div>
-          <div class="structure-arrow">→</div>
-          <div class="structure-step">
-            <div class="step-no">STEP 2</div>
-            <div class="step-title">コスト構造が激変する</div>
-            <div class="step-copy">希少だったものが余剰になり、別の場所に新しいボトルネックが立つ。</div>
-          </div>
-          <div class="structure-arrow">→</div>
-          <div class="structure-step">
-            <div class="step-no">STEP 3</div>
-            <div class="step-title">最適化対象が移動する</div>
-            <div class="step-copy">旧来の合理性ではなく、新しい制約に合わせた判断が必要になる。</div>
-          </div>
-          <div class="structure-arrow">→</div>
-          <div class="structure-step">
-            <div class="step-no">STEP 4</div>
-            <div class="step-title">脱構築と再構築が起きる</div>
-            <div class="step-copy">古い戦略を捨て、新しいボトルネックに最適化した実務が生まれる。</div>
-          </div>
-        </div>
-        <div class="structure-callout">
-          <div class="body" style="font-weight:800; color:var(--accent-strong);">○○ネイティブとは、新しいボトルネックに対して最適化する世界観で行動すること</div>
-        </div>
+      <div class="roadmap-bridge">
+        <div class="body">再構築の前に、まずAIそのものの仕組みを理解しましょう</div>
+        <div class="arrow">→</div>
       </div>
     </div>
   </div>
