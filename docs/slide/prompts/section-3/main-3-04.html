@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-3-04</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .cause-band {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 18px;
+    }
+
+    .cause-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .cause-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--accent);
+      padding: 2px 0;
+    }
+
+    .tradeoff-card {
+      background: var(--panel-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .tradeoff-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .tradeoff-body {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-body);
+    }
+
+    .ceremony-card {
+      background: var(--panel-soft);
+      border: 1px solid var(--line-soft);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .ceremony-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-strong);
+      margin-bottom: 8px;
+    }
+
+    .ceremony-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 4px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      padding: 5px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    .ceremony-name {
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .ceremony-desc {
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide theme-section-3">
+    <div class="slide-head">
+      <div class="slide-title">ドキュメント軽視を生んだ時代背景</div>
+      <div class="slide-message">当時は情報管理より実装優先が合理的になるコスト構造だった</div>
+    </div>
+    <div class="slide-body" style="gap:6px;">
+      <div class="cause-band">
+        <div class="cause-label">当時のコスト構造: 情報管理＝人手作業 → コストが高すぎた</div>
+        <div class="cause-sub">エンジニアの有限な時間を情報整理に使うのは割に合わなかった</div>
+      </div>
+
+      <div class="flow-arrow">▼ だから</div>
+
+      <div class="tradeoff-card">
+        <div class="tradeoff-title">合理的トレードオフ: リソースを設計・実装・検証に集中させた</div>
+        <div class="tradeoff-body">「動くソフトウェア ＞ 包括的なドキュメント」は怠慢ではなく、当時の最適解だった。</div>
+      </div>
+
+      <div class="flow-arrow">▼ さらに</div>
+
+      <div class="ceremony-card">
+        <div class="ceremony-title">スクラムは暗黙知で回す仕組みを洗練させた</div>
+        <div class="ceremony-row">
+          <div class="ceremony-name">デイリー</div>
+          <div class="ceremony-desc">文書ではなく対話で状況を共有する</div>
+        </div>
+        <div class="ceremony-row">
+          <div class="ceremony-name">レビュー</div>
+          <div class="ceremony-desc">仕様書ではなくデモが真実になる</div>
+        </div>
+        <div class="ceremony-row">
+          <div class="ceremony-name">レトロ</div>
+          <div class="ceremony-desc">知見はチームの記憶として蓄積される</div>
+        </div>
+        <div class="ceremony-row">
+          <div class="ceremony-name">バックログ</div>
+          <div class="ceremony-desc">優先順位の理由はPOの頭の中に残りやすい</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Reasonable At The Time</span>
+      <span>XP / Scrum</span>
+    </div>
+  </div>
+</body>
+</html>

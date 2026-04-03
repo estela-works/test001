@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-2-05</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-2">
+    <div class="slide-head">
+      <div class="slide-title">SSOT欠如でAIが迷い続ける構造</div>
+      <div class="slide-message">真実の置き場が一つでない限りAIは安定して働けない</div>
+    </div>
+    <div class="slide-body" style="gap:16px;">
+      <div class="callout" style="text-align:center; padding:14px 24px; font-size:17px; line-height:1.6;">
+        <strong style="font-size:19px;">SSOT（Single Source of Truth）</strong><br>
+        ある事実について、正しい情報は常にただ一つだけ
+      </div>
+      <div style="text-align:center; font-size:15px; color:#666; margin:-4px 0;">しかし現場では──</div>
+      <div style="display:flex; gap:12px; justify-content:center;">
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">設計書</div>
+          <div class="body-sm">API仕様 v2.1</div>
+        </div>
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">コード</div>
+          <div class="body-sm">API仕様 v2.3</div>
+        </div>
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">議事録</div>
+          <div class="body-sm">API仕様 v2.0</div>
+        </div>
+        <div class="card" style="flex:1; text-align:center; padding:14px 8px;">
+          <div class="body-sm" style="font-weight:700; margin-bottom:6px;">チャット</div>
+          <div class="body-sm">API仕様 v2.3?</div>
+        </div>
+      </div>
+      <div style="text-align:center; font-size:15px; font-weight:700; color:var(--accent-strong);">↑ どれが正しい情報か誰にもわからない</div>
+      <div class="muted-panel" style="text-align:center; padding:10px 20px; font-size:14px;">
+        DB設計では正規化で当たり前にやっていること。しかしプロジェクト情報には適用されていない。
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>SSOT</span>
+      <span>One Source Per Fact</span>
+    </div>
+  </div>
+</body>
+</html>

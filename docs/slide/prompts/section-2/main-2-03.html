@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-2-03</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .symptom-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .symptom-card {
+      background: var(--old-soft);
+      border: 1px solid var(--old-line);
+      border-radius: 12px;
+      padding: 12px 14px;
+    }
+
+    .symptom-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--old-text);
+      margin-bottom: 4px;
+    }
+
+    .symptom-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-body);
+    }
+
+    .source-frame {
+      border: 2px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 10px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .source-frame-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .source-card {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .source-card h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-strong);
+      margin: 0;
+    }
+
+    .source-card p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-muted);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide theme-section-2">
+    <div class="slide-head">
+      <div class="slide-title">開発現場の情報が散在・矛盾・陳腐化する現実</div>
+      <div class="slide-message">現場は三条件を同時に破る情報環境のままAIを使っている</div>
+    </div>
+    <div class="slide-body" style="gap:14px; justify-content:center;">
+      <div class="symptom-row">
+        <div class="symptom-card">
+          <div class="symptom-label">① 散在</div>
+          <div class="symptom-desc">必要情報が複数の場所に分散している</div>
+        </div>
+        <div class="symptom-card">
+          <div class="symptom-label">② 矛盾</div>
+          <div class="symptom-desc">資料間で内容が食い違っている</div>
+        </div>
+        <div class="symptom-card">
+          <div class="symptom-label">③ 陳腐化</div>
+          <div class="symptom-desc">古い情報が整理されず残り続ける</div>
+        </div>
+      </div>
+      <div class="source-frame">
+        <div class="source-frame-label">現場の情報空間</div>
+        <div class="source-grid">
+          <div class="source-card">
+            <h3>設計書</h3>
+            <p>誰が最新化するか曖昧</p>
+          </div>
+          <div class="source-card">
+            <h3>コード</h3>
+            <p>実装は正しいが文脈を語らない</p>
+          </div>
+          <div class="source-card">
+            <h3>Slack</h3>
+            <p>合意はあるが正しい知識ではない</p>
+          </div>
+          <div class="source-card">
+            <h3>議事録</h3>
+            <p>読むコストが高く更新されない</p>
+          </div>
+          <div class="source-card">
+            <h3>個人メモ</h3>
+            <p>退職や異動で消える</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Current State</span>
+      <span>Scattered / Contradictory / Stale</span>
+    </div>
+  </div>
+</body>
+</html>

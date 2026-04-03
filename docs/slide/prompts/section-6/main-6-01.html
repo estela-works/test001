@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-6-01</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-6">
+    <div class="slide-head">
+      <div class="slide-title">AI出力を左右する文脈密度の考え方</div>
+      <div class="slide-message">AIは濃く短い文脈を渡せる設計で強くなる</div>
+    </div>
+    <div class="slide-body">
+      <div class="two-col" style="flex:1;">
+        <div class="compare-col compare-old">
+          <div class="compare-label">従来</div>
+          <div class="compare-item"><h3>コンテキスト</h3><p>古い仕様、チャット履歴、関連の薄い資料まで混ざる。</p></div>
+          <div class="compare-item"><h3>密度</h3><p>ノイズが多く、LLM の注意が散る。</p></div>
+          <div class="compare-item"><h3>結果</h3><p>同じモデルでも、ぶれた回答になりやすい。</p></div>
+        </div>
+        <div class="compare-col compare-new">
+          <div class="compare-label">SPEC&amp;Project</div>
+          <div class="compare-item"><h3>コンテキスト</h3><p>最新仕様と今回の変更要件だけを切り出して渡せる。</p></div>
+          <div class="compare-item"><h3>密度</h3><p>有用情報の比率が高く、文脈の焦点がぶれない。</p></div>
+          <div class="compare-item"><h3>結果</h3><p>同じモデルでも、説明の精度と一貫性が上がる。</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Context Density</span>
+      <span>Most Practical Advantage</span>
+    </div>
+  </div>
+</body>
+</html>

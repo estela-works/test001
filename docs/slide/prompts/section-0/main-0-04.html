@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-0-04</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .purpose-band {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 10px 18px;
+    }
+
+    .purpose-label {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .compact-note {
+      padding: 10px 16px;
+    }
+
+    .compact-note .body-sm {
+      color: var(--text-body);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide theme-section-0">
+    <div class="slide-head">
+      <div class="slide-title">クラウドネイティブの変更戦略の変化</div>
+      <div class="slide-message">変更コスト低下で大変更抑制より小さな変更反復が強くなる</div>
+    </div>
+    <div class="slide-body" style="gap:8px;">
+      <div class="purpose-band">
+        <div class="purpose-label">不変の目的: システムを安全に成長させる</div>
+      </div>
+      <div class="two-col" style="flex:1;">
+        <section class="compare-col compare-old">
+          <div class="compare-label">旧</div>
+          <div class="compare-item">
+            <h3>コスト構造</h3>
+            <p>サーバ調達や設定変更が重く、変えるたびに時間も人手も必要だった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>最適化対象</h3>
+            <p>大きな変更を低頻度で慎重に通すことが合理的だった。</p>
+          </div>
+          <div class="compare-item">
+            <h3>支配的な戦略</h3>
+            <p>大規模リリース、重い変更管理、手作業の構成管理。</p>
+          </div>
+        </section>
+        <section class="compare-col compare-new">
+          <div class="compare-label">新</div>
+          <div class="compare-item">
+            <h3>コスト構造</h3>
+            <p>環境作成や反映が秒単位になり、変更の実験と復旧が現実的に。</p>
+          </div>
+          <div class="compare-item">
+            <h3>最適化対象</h3>
+            <p>小さな変更を高頻度で出し、失敗の影響を局所化する。</p>
+          </div>
+          <div class="compare-item">
+            <h3>支配的な戦略</h3>
+            <p>小さく頻繁に出す運用、可観測性、即時ロールバック。</p>
+          </div>
+        </section>
+      </div>
+      <div class="two-col">
+        <div class="card compact-note">
+          <div class="compare-label" style="color:var(--old-text);">脱構築</div>
+          <div class="body-sm">重い変更管理、手作業の構成管理、モノリシック設計、四半期リリース前提</div>
+        </div>
+        <div class="card compact-note">
+          <div class="compare-label" style="color:var(--accent-strong);">再構築</div>
+          <div class="body-sm">IaC、CI/CD、GitOps、マイクロサービス、SRE、Error Budget</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

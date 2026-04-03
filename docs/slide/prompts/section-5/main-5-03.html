@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-5-03</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-5">
+    <div class="slide-head">
+      <div class="slide-title">SPECが最新仕様の正しい知識を束ねる役割</div>
+      <div class="slide-message">正しい知識が一つあればチームは何を信じるかで迷わなくなる</div>
+    </div>
+    <div class="slide-body">
+      <div class="card" style="flex:1; background:#f7fbf8; border-color:#cfe5d3; padding:18px;">
+        <div class="code-chip-row" style="margin-bottom:14px;">
+          <div class="code-chip">最新版だけを持つ</div>
+          <div class="code-chip">上書き更新する</div>
+          <div class="code-chip">参照先は常に1つ</div>
+        </div>
+        <div class="spec-layer-grid" style="grid-template-columns:repeat(2, 1fr);">
+          <div class="spec-layer-card">
+            <h3>画面/UI</h3>
+            <div class="code-chip-row">
+              <div class="code-chip">basic-design-frontend</div>
+              <div class="code-chip">detail-design-frontend</div>
+            </div>
+            <p>画面構成、画面遷移、テンプレート構造、イベント設計。</p>
+          </div>
+          <div class="spec-layer-card">
+            <h3>API/Backend</h3>
+            <div class="code-chip-row">
+              <div class="code-chip">basic-design-backend</div>
+              <div class="code-chip">detail-design-api</div>
+              <div class="code-chip">detail-design-logic</div>
+            </div>
+            <p>責務分担、エンドポイント、バリデーション、ロジック方針。</p>
+          </div>
+          <div class="spec-layer-card">
+            <h3>DB/Type/State</h3>
+            <div class="code-chip-row">
+              <div class="code-chip">detail-design-db</div>
+              <div class="code-chip">detail-design-sql</div>
+              <div class="code-chip">detail-design-types</div>
+              <div class="code-chip">detail-design-store</div>
+            </div>
+            <p>型定義、状態管理、ストアの責務と更新ルール。</p>
+          </div>
+          <div class="spec-layer-card">
+            <h3>Architecture/Rule</h3>
+            <div class="code-chip-row">
+              <div class="code-chip">layer responsibility</div>
+              <div class="code-chip">validation</div>
+              <div class="code-chip">business rule</div>
+            </div>
+            <p>全体責務、境界、権限、判定条件など「今の正解」をここに寄せる。</p>
+          </div>
+        </div>
+      </div>
+      <div class="callout body" style="font-weight:700;">古い状態や変更理由はProjectへ逃がし、SPECには現在断面だけを残す</div>
+    </div>
+    <div class="slide-footer">
+      <span>SPEC</span>
+      <span>Latest Cross Layer Specification</span>
+    </div>
+  </div>
+</body>
+</html>

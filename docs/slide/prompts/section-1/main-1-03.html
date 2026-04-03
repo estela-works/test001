@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-1-03</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-1">
+    <div class="slide-head">
+      <div class="slide-title">会話に見えるLLMの出力生成原理</div>
+      <div class="slide-message">対話に見えても実態は文章の続きを当てる処理にすぎない</div>
+    </div>
+    <div class="slide-body">
+      <div class="diagram-board stack-md centered" style="justify-content:center;">
+        <div class="token-stream">
+          <div class="token">日本の</div>
+          <div class="arrow">→</div>
+          <div class="token">首都は</div>
+          <div class="arrow">→</div>
+          <div class="token token-highlight">東京</div>
+          <div class="arrow">→</div>
+          <div class="token">です</div>
+          <div class="arrow">→</div>
+          <div class="token">...</div>
+        </div>
+        <div class="callout body" style="max-width:760px; font-weight:800;">LLMがやっていること = 前にある文章を見て、次に来るトークンを予測する</div>
+        <div class="mini-note" style="text-align:center;">前にある文章が変われば、次の予測も変わる</div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Mechanism</span>
+      <span>Token Prediction</span>
+    </div>
+  </div>
+</body>
+</html>

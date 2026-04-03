@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-1-04</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+</head>
+<body>
+  <div class="slide theme-section-1">
+    <div class="slide-head">
+      <div class="slide-title">LLMにおける会話理解と文脈予測の違い</div>
+      <div class="slide-message">人の意図理解を期待せず文脈設計で精度を上げるべきだ</div>
+    </div>
+    <div class="slide-body">
+      <div class="diagram-board stream-layout">
+        <div class="bubble-stack">
+          <div class="speech a"><strong>人間</strong>: ログイン機能を修正して</div>
+          <div class="speech b"><strong>AI</strong>: どの部分をどう修正しますか？</div>
+          <div class="speech a"><strong>人間</strong>: 前回話した件で</div>
+          <div class="speech b" style="opacity:0.5;"><strong>AI</strong>: <span style="color:var(--accent-strong); font-weight:800;">???</span></div>
+        </div>
+        <div class="stream-box">
+          <div class="stream-line"><strong>人間:</strong> ログイン機能を修正して</div>
+          <div class="stream-line"><strong>AI:</strong> どの部分をどう修正しますか？</div>
+          <div class="stream-line"><strong>人間:</strong> 前回話した件で</div>
+          <div class="stream-line"><strong>AI:</strong> <span style="color:var(--accent-strong); font-weight:800;">...</span></div>
+          <div class="thin-rule"></div>
+          <div class="body-sm">LLMは「会話」ではなく、このテキスト列の続きを予測しているだけ。<br>「前回」はこのテキストの中に存在しない。</div>
+        </div>
+      </div>
+      <div class="callout body" style="font-weight:700;">だから、前段に何を載せる（コンテキスト）かがそのまま出力品質を決める</div>
+    </div>
+    <div class="slide-footer">
+      <span>Conversation As Text Stream</span>
+      <span>Context Matters</span>
+    </div>
+  </div>
+</body>
+</html>

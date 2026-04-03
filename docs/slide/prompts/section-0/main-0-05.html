@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>main-0-05</title>
+  <link rel="stylesheet" href="../slide-templates/slide-template.css">
+  <style>
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .summary-card {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 12px 16px;
+    }
+
+    .summary-label {
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .summary-theme {
+      font-size: 15px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .summary-shift {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    .structure-flow {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
+      align-items: center;
+    }
+
+    .structure-step {
+      background: #ffffff;
+      border: 1px solid var(--line-soft);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .structure-step .step-no {
+      margin-bottom: 0;
+    }
+
+    .step-title {
+      font-size: 14px;
+      line-height: 1.4;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .step-copy {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .structure-arrow {
+      text-align: center;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .structure-callout {
+      background: linear-gradient(180deg, #f9fbfb 0%, var(--accent-soft) 100%);
+      border: 1px solid #cfe5d3;
+      border-left: 5px solid var(--accent);
+      border-radius: 0 14px 14px 0;
+      padding: 10px 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide theme-section-0">
+    <div class="slide-head">
+      <div class="slide-title">○○ネイティブの共通構造と本質</div>
+      <div class="slide-message">ネイティブとは新技術導入でなく前提変化による最適化先の更新である</div>
+    </div>
+    <div class="slide-body" style="gap:12px; justify-content:center;">
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-label">Internet Native</div>
+          <div class="summary-theme">配信から発見へ</div>
+          <div class="summary-shift">配信制約が消えると、競争は届ける力から見つかる力へ移る。</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Cloud Native</div>
+          <div class="summary-theme">大変更・低頻度から小変更・高頻度へ</div>
+          <div class="summary-shift">変更コストが下がると、大きく固めるより小さく速く変える方が強くなる。</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div class="structure-flow">
+          <div class="structure-step">
+            <div class="step-no">STEP 1</div>
+            <div class="step-title">技術革新で制約が変わる</div>
+            <div class="step-copy">高かったコストが一気に下がり前提が崩れる</div>
+          </div>
+          <div class="structure-arrow">→</div>
+          <div class="structure-step">
+            <div class="step-no">STEP 2</div>
+            <div class="step-title">コスト構造が激変する</div>
+            <div class="step-copy">希少だったものが余剰になり新しいボトルネックが立つ</div>
+          </div>
+          <div class="structure-arrow">→</div>
+          <div class="structure-step">
+            <div class="step-no">STEP 3</div>
+            <div class="step-title">最適化対象が移動する</div>
+            <div class="step-copy">新しい制約に合わせた判断が必要になる</div>
+          </div>
+          <div class="structure-arrow">→</div>
+          <div class="structure-step">
+            <div class="step-no">STEP 4</div>
+            <div class="step-title">脱構築と再構築が起きる</div>
+            <div class="step-copy">古い戦略を捨て新しい最適化が生まれる</div>
+          </div>
+        </div>
+        <div class="structure-callout">
+          <div class="body" style="font-weight:800; color:var(--accent-strong);">○○ネイティブ＝新技術を使う人ではなく、新しい前提で動く人</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
