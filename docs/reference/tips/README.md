@@ -22,6 +22,7 @@
 | ファイル | 説明 |
 |----------|------|
 | [dcard-home5g-screen-spec.md](dcard-home5g-screen-spec.md) | dカード設定処理フロー・home 5G顧客詳細画面の仕様メモ |
+| [internet-hikari-data-source-comparison.md](internet-hikari-data-source-comparison.md) | 既契約連携拡大：インターネット／光データ取得先の3案比較検討 |
 
 ### WebRelease2リファレンス
 
