@@ -6,7 +6,7 @@
 
 | 項目 | 影響度 | 概要 | 実務上の確認ポイント | 参照 |
 | --- | --- | --- | --- | --- |
-| Reactivity Transform の非推奨化 | 高 | 3.3 時点で実験的機能として後退し、3.4 で削除される前提になった | `$ref`, `$computed`, `vue/macros`, `reactivityTransform` 設定があるか検索する | 公式: https://blog.vuejs.org/posts/vue-3-3 / 補足: https://vuejs.org/guide/extras/reactivity-transform.html / GitHub: https://github.com/vuejs/rfcs/discussions/502 |
+| Reactivity Transform の非推奨化 | 高 | 3.3 時点で実験的機能として後退し、3.4 で削除される前提になった | `$ref`, `$computed`, `vue/macros`, `reactivityTransform` 設定があるか検索する | 公式: https://blog.vuejs.org/posts/vue-3-3 / 補足: https://vuejs.org/guide/extras/reactivity-transform.html / GitHub RFC: https://github.com/vuejs/rfcs/discussions/369 |
 | `defineModel` はまだ experimental | 中 | 3.3 の `defineModel` は便利だが、3.4 で安定化するまで仕様固定前 | 3.3 時点で使っている場合、3.4 で API 前提を再確認する | 公式: https://blog.vuejs.org/posts/vue-3-3 / GitHub: https://github.com/vuejs/rfcs/discussions/503 |
 | TSX の `jsxImportSource` 事前対応 | 中 | 3.3 ブログ時点で、3.4 では global JSX namespace を外す予定と明言 | TSX 利用プロジェクトは `tsconfig.json` に `jsxImportSource: "vue"` を入れる準備をする | 公式: https://blog.vuejs.org/posts/vue-3-3 / 公式 API: https://vuejs.org/api/sfc-script-setup.html |
 | imported / complex types 対応により `defineProps` 周辺の型解決経路が変わる | 低 | `defineProps<T>()` が import 型を解決するようになり、TS / tsconfig 解決の影響を受けやすくなる | `paths`, `baseUrl`, 型解決の暗黙依存がないか確認する | 公式: https://blog.vuejs.org/posts/vue-3-3 / GitHub PR: https://github.com/vuejs/core/pull/8083 |
@@ -16,7 +16,7 @@
 | 項目 | 影響度 | 概要 | 実務上の確認ポイント | 参照 |
 | --- | --- | --- | --- | --- |
 | Global JSX Namespace の削除 | 高 | `Vue 3.4` から global `JSX` namespace を既定登録しない | TSX で `JSX.Element` などを直接使っていないか確認し、`jsxImportSource: "vue"` または `vue/jsx` を明示する | 公式: https://blog.vuejs.org/posts/vue-3-4 / 参考 docs: https://vuejs.org/api/sfc-script-setup.html |
-| Reactivity Transform の削除 | 高 | experimental 機能のため minor で削除。`@vitejs/plugin-vue` 5+ でも core では使えない | `$ref` 系構文、`reactivityTransform: true`、`script.refSugar` 前提を除去する。継続利用は Vue Macros に寄せる | 公式: https://blog.vuejs.org/posts/vue-3-4 / 公式 docs: https://vuejs.org/guide/extras/reactivity-transform.html / GitHub: https://github.com/vuejs/rfcs/discussions/502 |
+| Reactivity Transform の削除 | 高 | experimental 機能のため minor で削除。`@vitejs/plugin-vue` 5+ でも core では使えない | `$ref` 系構文、`reactivityTransform: true`、`script.refSugar` 前提を除去する。継続利用は Vue Macros に寄せる | 公式: https://blog.vuejs.org/posts/vue-3-4 / 公式 docs: https://vuejs.org/guide/extras/reactivity-transform.html / GitHub RFC: https://github.com/vuejs/rfcs/discussions/369 |
 | `app.config.unwrapInjectedRef` の削除 | 中 | 3.3 で既定化された挙動を 3.4 で固定化し、無効化できなくなった | provide/inject で ref unwrap の挙動切替に依存していないか確認する | 公式: https://blog.vuejs.org/posts/vue-3-4 |
 | `@vnodeXXX` リスナーが compiler error に昇格 | 中 | 警告ではなくビルドエラーになる | `@vnodeMounted`, `@vnodeUpdated` などを `@vue:mounted` 系へ置換する | 公式: https://blog.vuejs.org/posts/vue-3-4 |
 | `v-is` の削除 | 中 | 3.3 で非推奨、3.4 で削除 | `v-is` を `is="vue:..."` に置換する | 公式: https://blog.vuejs.org/posts/vue-3-4 |

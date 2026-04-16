@@ -1,70 +1,84 @@
 # 主要依存ライブラリ互換マトリクス
 
-この表は、`Vue 3.2 -> 3.5` の移行で安全側に倒した推奨ラインをまとめたものです。UI ライブラリは「Vue minor ごとの厳密な最小 patch」を公式が公開していないケースが多いため、原則は `同時 major 変更を避ける` 方針です。厳密な peerDependencies は導入前に各ライブラリの `package.json` でも確認してください。
+この表は、`Vue 3.2 -> 3.5` の移行で安全側に倒した推奨ラインをまとめたものです。数値は `2026-04-16` 時点で公式 release / docs から確認できた版をベースにしています。UI ライブラリは「Vue minor ごとの厳密な最小 patch」を公式が公開していないケースが多いため、`現行の公式 stable 系` を推奨値として置き、最小必要版が断定できないものは `[要検証]` を付けています。
 
 ## 推奨マトリクス
 
 | ライブラリ | Vue 3.2 系 | Vue 3.3 系 | Vue 3.4 系 | Vue 3.5 系 | 補足 |
 | --- | --- | --- | --- | --- | --- |
-| Vue Router | `4.x` | `4.x` | `4.x` | `4.x` | 公式ルータは `4.x` 系。core upgrade とは分離しやすい |
-| Pinia | `2.x` | `2.x` | `2.x` | `2.x` 優先 | `3.x` は Vue 3 専用かつ TS 5+ 前提。core upgrade と同時に上げない方が安全 |
-| Vuex | `4.x` | `4.x` | `4.x` | `4.x` | 新規採用より維持運用前提。Pinia への将来移行は別計画で扱う |
-| `@vue/test-utils` | `2.x` | `2.x` | `2.x` | `2.x` | Vue 3 向けは `2.x` 系 |
-| Vuetify | `3.x` | `3.x` | `3.x` | `3.x` | Vuetify 2 は EOL。Vue 3 系では 3 系へ揃える |
-| Element Plus | `2.x` | `2.x` | `2.x` | `2.x` | Vue 3 前提の UI ライブラリ |
-| PrimeVue | `3.x` 維持推奨 | `3.x` 維持推奨 | `3.x` または `4.x` [要検証] | `3.x` または `4.x` [要検証] | Vue core と UI major を同時に上げない方が安全 |
+| Vue Router | `4.6.4+ [要検証]` | `4.6.4+ [要検証]` | `4.6.4+ [要検証]` | `4.6.4+` | 公式 release で確認できる `4.x` 最新は `v4.6.4`。release には `5.x` 系もあるため、既存 Vue 3 系では `4.6.x` 維持が安全 |
+| Pinia | `2.3.1+ [要検証]` | `2.3.1+ [要検証]` | `2.3.1+ [要検証]` | `2.3.1+` | `v2` 系の公式 release で確認できる最新は `v2.3.1`。`v3.0.4+` は `Vue 3 only` かつ `TypeScript 5+` 前提 |
+| Vuex | `4.0.2` | `4.0.2` | `4.0.2` | `4.0.2` | 公式 release の最新は `v4.0.2`。新規採用より維持運用前提 |
+| `@vue/test-utils` | `2.4.6+ [要検証]` | `2.4.6+ [要検証]` | `2.4.6+ [要検証]` | `2.4.6+` | 公式 release で確認できる `2.x` 最新は `v2.4.6` |
+| Vuetify | `3.12.5+ [要検証]` | `3.12.5+ [要検証]` | `3.12.5+ [要検証]` | `3.12.5+ [要検証]` | 公式 release で確認できる `3.x` 最新は `v3.12.5`。Vue minor ごとの最小必要版は公式未表明 |
+| Element Plus | `2.13.7+ [要検証]` | `2.13.7+ [要検証]` | `2.13.7+ [要検証]` | `2.13.7+ [要検証]` | 公式 release で確認できる `2.x` 最新は `2.13.7`。Vue minor ごとの最小必要版は公式未表明 |
+| PrimeVue | `4.5.5+ [要検証]` | `4.5.5+ [要検証]` | `4.5.5+ [要検証]` | `4.5.5+ [要検証]` | 公式 release で確認できる現行最新は `PrimeVue 4.5.5`。`3.x` 継続採用は別途 lockfile 検証が必要 |
 
 ## ライブラリ別メモ
 
-### Vue Router 4.x
+### Vue Router
 
-- 公式ルータは `4.x`
-- `Vue 3.2 -> 3.5` の core upgrade では、通常は Router major を変えずに進める
-- 参照: https://router.vuejs.org/
+- 公式 release で確認できる `4.x` 最新は `v4.6.4`
+- `Vue 3.2 -> 3.5` の core upgrade では、通常は Router major を変えず `4.6.x` 系に寄せるのが安全
+- `5.x` 系は存在するため、既存プロジェクトを据え置きで上げるなら `npm install vue-router@^4.6.4` のように major を固定する
+- 参照:
+  - https://router.vuejs.org/
+  - https://github.com/vuejs/router/releases
 
 ### Pinia
 
-- 現行 docs のトップは `v3.x` だが、移行観点では `2.x` 維持が安全
+- `v2` 系の公式 release で確認できる最新は `v2.3.1`
 - `Pinia v3` は `Only Vue 3 is supported`、かつ `TypeScript 5 or newer is required`
-- Vue core と Pinia major を同時に上げると切り分けが難しい
+- `Vue 3.2 -> 3.5` の core upgrade と同時に store major を動かしたくない場合は `2.3.1+` を推奨
+- `TypeScript 5+` へ同時に寄せられるなら `3.0.4+` も選択肢だが、切り分け難易度は上がる
 - 参照:
+  - https://github.com/vuejs/pinia/releases
   - https://pinia.vuejs.org/introduction.html
   - https://pinia.vuejs.org/cookbook/migration-v2-v3.html
 
 ### Vuex 4
 
-- `Vuex 4` は Vue 3 向けの既存選択肢
-- 既存プロジェクトでは `Vuex 4` のまま core を先に上げる方が安全
-- Pinia 移行は別案件として扱う
-- 参照: https://vuex.vuejs.org/
+- 公式 release の最新は `v4.0.2`
+- `Vuex 4` は Vue 3 対応の既存選択肢で、既存プロジェクトではそのまま core を先に上げる方が安全
+- Pinia への移行は別案件として扱う
+- 参照:
+  - https://github.com/vuejs/vuex/releases
+  - https://vuex.vuejs.org/
 
-### `@vue/test-utils` 2.x
+### `@vue/test-utils`
 
-- Vue 3 系のテストユーティリティは `2.x`
-- Vue core と一緒に patch/minor を追従するのはよいが、major を跨ぐ必要は通常ない
-- 参照: https://test-utils.vuejs.org/guide/
+- 公式 release で確認できる `2.x` 最新は `v2.4.6`
+- Vue 3 系のテストユーティリティは `2.x` で、core と一緒に patch/minor を追従するのはよいが major を跨ぐ必要は通常ない
+- 参照:
+  - https://github.com/vuejs/test-utils/releases
+  - https://test-utils.vuejs.org/guide/
 
 ### Vuetify
 
-- Vuetify 2 は EOL。Vue 3 系では `Vuetify 3`
-- Vue 2 / Vuetify 2 を残しているプロジェクトは、Vue core upgrade と同時に UI 移行計画が必要
-- 参照: https://v2.vuetifyjs.com/en/about/eol/
+- `Vuetify 2` は EOL。Vue 3 系では `Vuetify 3`
+- 公式 release で確認できる `3.x` 最新は `v3.12.5`
+- ただし Vue minor ごとの最小必要 patch は公式に表で出ていないため、`3.12.5+` は推奨値であり下限保証ではない [要検証]
+- 参照:
+  - https://github.com/vuetifyjs/vuetify/releases
+  - https://v2.vuetifyjs.com/en/about/eol/
 
 ### Element Plus
 
-- 公式インストール例が Vue 3 を前提としている
-- 少なくとも Vue 3 minor upgrade の範囲では `2.x` 維持が安全
+- 公式インストール例は Vue 3 を前提としている
+- 公式 release で確認できる `2.x` 最新は `2.13.7`
+- Vue minor ごとの最小必要 patch は公式未表明のため、`2.13.7+` は推奨値として扱う [要検証]
 - 参照:
+  - https://github.com/element-plus/element-plus/releases
   - https://element-plus.org/en-US/guide/installation
   - https://element-plus.org/en-US/guide/migration
 
 ### PrimeVue
 
-- `PrimeVue 3.x` も `4.x` も Vue 3 ベース
+- 公式 release で確認できる現行最新は `PrimeVue 4.5.5`
 - ただし UI ライブラリの major change は見た目・テーマ・スタイル層の影響が大きい
-- Vue core を `3.2 -> 3.5` に上げる作業と、PrimeVue `3 -> 4` は分ける方が事故率が低い
+- 既存で `3.x` を使っている場合は、Vue core を `3.2 -> 3.5` に上げる作業と `PrimeVue 3 -> 4` を分ける方が安全 [要検証]
 - 参照:
-  - https://v3.primevue.org/vite
+  - https://github.com/primefaces/primevue/releases
   - https://primevue.org/setup
 
 ## 実務ルール
@@ -86,5 +100,5 @@ pnpm why @vitejs/plugin-vue
 
 ## [要検証] メモ
 
-- PrimeVue の `3.x / 4.x` 境界は、Vue minor よりテーマ層と自プロジェクトの導入方式の影響が大きい
-- Vuetify / Element Plus / PrimeVue の「Vue 3.2, 3.3, 3.4, 3.5 ごとの最小 patch」は公式に統一表がないため、採用時は lockfile 解決結果を確認する
+- Vue Router / Pinia / `@vue/test-utils` も、上表は「2026-04-16 時点の公式 release ベース推奨値」であり「各 Vue minor での最低必要版」そのものではない [要検証]
+- Vuetify / Element Plus / PrimeVue の「Vue 3.2, 3.3, 3.4, 3.5 ごとの最小 patch」は公式に統一表がないため、採用時は lockfile 解決結果と peerDependencies を確認する

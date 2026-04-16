@@ -56,12 +56,42 @@
 
 ## 事例6
 
-- 事例タイトル: Reactivity Transform のつもりで props destructure を使っていたら 3.4 以降で設計前提が変わった
-- 発生バージョン: `3.3 -> 3.4 -> 3.5`
-- 症状: `$ref` 系を使っていたコードが core では維持できず、props destructure だけが別機能として残る
-- 原因: Reactivity Transform 廃止後、`Reactive Props Destructure` が独立機能として 3.5 で安定化
-- 対策: `$ref` 系構文と props destructure を分離して考える。継続利用が必要なら Vue Macros を検討
-- 出典(URL): https://zenn.dev/comm_vue_nuxt/articles/reactive-props-destructure
+- 事例タイトル: `eslint` / `eslint-plugin-vue` 更新で `npm install` が `ERESOLVE could not resolve` になる
+- 発生バージョン: `vue 3.4.21`, `vuetify 3.5.13`, `@vitejs/plugin-vue 5.0.4`, `eslint 9.9.0`, `eslint-plugin-vue 9.24.0`, `@vue/eslint-config-typescript 13.0.0`, `vue-tsc 2.0.7`
+- 症状: 依存一括更新後に `npm error ERESOLVE could not resolve` が発生し、`npm install` / `npm ci` が止まる
+- 原因: `@vue/eslint-config-typescript 13.0.0` が `eslint@^8.56.0` を要求しており、`eslint@9.9.0` と依存解決が衝突
+- 対策: `eslint`, `eslint-plugin-vue`, `@vue/eslint-config-typescript` を別々に上げず、peerDependencies を先に確認する。CI では lockfile 更新前に `npm ci` を先行実行して検知する
+- 出典(URL): https://github.com/orgs/vuejs/discussions/11660
+- 自プロジェクトへの該当可能性: 高
+
+## 事例7
+
+- 事例タイトル: `Vue 3.4.16` で `Element Plus 2.5.5` の描画系コンポーネントが表示されない
+- 発生バージョン: `Vue 3.4.16`, `Element Plus 2.5.5`
+- 症状: `el-select` のドロップダウンが表示されず、popup layer が `display: none` のままになる。`el-container`, `el-menu`, `el-scrollbar`, `el-overlay` なども影響
+- 原因: `v-show` 周辺の `3.4.16` 回帰で、render function ベースのコンポーネント表示が崩れた
+- 対策: `3.4.15` との差分確認を優先し、UI ライブラリ側の issue ではなく Vue core 側の回帰も疑う。UI ライブラリを使っていても core patch 差分を無視しない
+- 出典(URL): https://github.com/vuejs/core/issues/10294
+- 自プロジェクトへの該当可能性: 高
+
+## 事例8
+
+- 事例タイトル: `Vuetify 3.7.3 - 3.7.5` を `Vue 3.5.13` と組み合わせると `VFileUpload` を import できない
+- 発生バージョン: `Vuetify 3.7.3 - 3.7.5`, `Vue 3.5.13`
+- 症状: `import { VFileUpload } from 'vuetify/labs/VFileUpload'` で `Cannot find module 'vuetify/labs/VFileUpload' or its corresponding type declarations`
+- 原因: 公式 docs / playground の案内と実際の公開物が一致していない状態
+- 対策: UI ライブラリの docs だけで採用判断せず、実際に lockfile 解決後の型解決と import 可否をサンプルで確認する
+- 出典(URL): https://github.com/vuetifyjs/vuetify/issues/20777
+- 自プロジェクトへの該当可能性: 中
+
+## 事例9
+
+- 事例タイトル: `Vue 3.5.6` へ上げたら本番メモリ使用量が 1 時間で `200 MB -> 500 MB` に増えた報告 [要検証]
+- 発生バージョン: `Vue 3.5.5 -> 3.5.6`
+- 症状: 長時間稼働でメモリ消費が増え、`3.5.5` に戻すと正常化したという報告
+- 原因: `scope: reactivity` ラベル付き issue だが、再現条件と根本原因は issue 上で十分に確定していない [要検証]
+- 対策: 本番監視では Vue minor 更新直後に heap / RSS / SSR 応答時間を比較し、異常時は patch rollback できるようにする
+- 出典(URL): https://github.com/vuejs/core/issues/11956
 - 自プロジェクトへの該当可能性: 中
 
 ---
@@ -69,11 +99,13 @@
 ## 使い方
 
 - GitHub Issue は「既知の再現条件と議論」を掴むために使う
+- GitHub Discussion は「依存解決や設定衝突で CI / install が止まる例」を掴むのに有効
 - Stack Overflow は「現場でのハマり方」を掴むために使う
 - Zenn / Qiita は「日本語での整理」と「導入時の見落とし」を補うために使う
 
 ## この文書から分かる傾向
 
 - core 自体の breaking change より、`toolchain` と `型周辺` の不整合で止まりやすい
+- UI ライブラリ障害でも、原因が Vue core patch 回帰にあるケースがある
 - `3.4` では削除 API、`3.5` では新 API の誤用がハマりどころ
 - `useTemplateRef()` は便利だが、従来の `ref(null)` を全面廃止できるわけではない
