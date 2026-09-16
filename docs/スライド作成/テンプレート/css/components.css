@@ -1,0 +1,317 @@
+/* ============================================================
+   components.css — 16パターンの構成部品
+   定義: 02_16パターン定義_20260824.md §2
+   ★モノクロ印刷でも判別できるよう、緑だけで区別しない（塗り・枠線・位置を併用）
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   T-01 扉（表紙／章扉／Appendix扉）
+   ------------------------------------------------------------ */
+.slide--cover {
+  background: linear-gradient(135deg, var(--cover-from), var(--cover-to));
+  justify-content: center;
+  color: #fff;
+}
+.cover-to    { font-size: 22px; color: var(--primary-light); letter-spacing: .04em; }
+.cover-title { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.4; margin-top: 26px; }
+.cover-rule  { width: 88px; height: 5px; background: var(--primary); border-radius: 3px; margin: 40px 0 34px; }
+.cover-meta  { font-size: 18px; color: #b9c6c0; line-height: 2; }
+.cover-brand { position: absolute; right: var(--pad-x); bottom: var(--pad-bottom); font-size: 17px; color: #93a49d; }
+.cover-tag {
+  display: inline-block; align-self: flex-start;   /* .slide が flex のため、指定しないと横幅いっぱいに伸びる */
+  font-size: 14px; letter-spacing: .08em;
+  border: 1px solid var(--primary); color: var(--primary-light);
+  padding: 4px 12px; border-radius: 3px;
+}
+
+.slide--section { justify-content: center; background: var(--bg-soft); }
+.section-no    { font-family: var(--font-en); font-size: 22px; letter-spacing: .18em; color: var(--primary-dark); font-weight: 700; }
+.section-title { font-size: 44px; font-weight: 700; color: var(--ink); margin-top: 18px; line-height: 1.4; }
+.section-rule  { width: 88px; height: 5px; background: var(--primary); border-radius: 3px; margin-top: 32px; }
+
+/* ------------------------------------------------------------
+   T-02 エグゼクティブサマリ
+   ------------------------------------------------------------ */
+.sum-conc {
+  background: var(--primary-pale);
+  border-left: 8px solid var(--primary);
+  padding: 26px 30px;
+  border-radius: 0 6px 6px 0;
+}
+.sum-conc-label { font-size: 15px; font-weight: 700; letter-spacing: .1em; color: var(--primary-dark); margin-bottom: 10px; }
+.sum-conc-text  { font-size: var(--fs-lead); font-weight: 700; color: var(--ink); line-height: 1.55; }
+.sum-reasons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 32px; }
+.sum-no {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--primary); color: #fff;
+  font-family: var(--font-en); font-size: 15px; font-weight: 700;
+  margin-bottom: 14px;
+}
+.sum-h { font-size: 20px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.sum-t { font-size: var(--fs-small); color: var(--text-sub); margin-top: 10px; line-height: 1.65; }
+
+/* ------------------------------------------------------------
+   T-03 ワンメッセージ
+   ------------------------------------------------------------ */
+.slide--one .s-body { justify-content: center; }
+.one-msg { font-size: 50px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.one-msg em { font-style: normal; background: linear-gradient(transparent 60%, var(--primary-light) 60%); }
+.one-sub { font-size: 22px; color: var(--text-sub); margin-top: 34px; }
+
+/* ------------------------------------------------------------
+   T-04 ファクト提示（facts / case）
+   ------------------------------------------------------------ */
+.facts { display: flex; flex-direction: column; gap: 12px; }
+.fact {
+  display: flex; gap: 18px; align-items: flex-start;
+  padding: 18px 24px; background: var(--bg-soft);
+  border-left: 4px solid var(--line-strong); border-radius: 0 5px 5px 0;
+}
+.fact--key { border-left-color: var(--primary); background: var(--primary-pale); }
+.fact-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); margin-top: 12px; }
+.fact-text { font-size: var(--fs-body); color: var(--text); line-height: 1.6; }
+.fact-text strong { color: var(--ink); font-weight: 700; }
+.fact-src { font-size: 13px; color: var(--text-sub); margin-top: 6px; }
+
+.case { display: grid; grid-template-columns: 1.1fr 1fr; gap: 34px; align-items: center; }
+.case-quote {
+  font-size: 24px; color: var(--ink); line-height: 1.7;
+  padding-left: 26px; border-left: 5px solid var(--primary);
+}
+.case-who { font-size: var(--fs-small); color: var(--text-sub); margin-top: 18px; }
+.case-ev { display: flex; flex-direction: column; gap: 18px; }
+.case-ev-item { background: var(--bg-soft); border-radius: 6px; padding: 20px 24px; }
+.case-ev-v { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--primary-dark); line-height: 1.1; }
+.case-ev-l { font-size: var(--fs-small); color: var(--text-sub); margin-top: 8px; }
+
+/* ------------------------------------------------------------
+   T-05 数値ハイライト（single / kpi）
+   ------------------------------------------------------------ */
+.big-wrap { display: flex; align-items: baseline; gap: 16px; }
+.big-num {
+  font-family: var(--font-en); font-size: var(--fs-huge); font-weight: 700;
+  color: var(--primary-dark); line-height: 1.35; letter-spacing: -.02em;
+}
+.big-unit { font-size: 40px; font-weight: 700; color: var(--primary-dark); }
+.big-imp  { font-size: 26px; color: var(--ink); line-height: 1.6; margin-top: 30px; max-width: 900px; }
+.big-imp strong { color: var(--primary-dark); }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.kpi { background: var(--bg-soft); border-top: 5px solid var(--primary); border-radius: 3px 3px 6px 6px; padding: 24px 26px; }
+.kpi-v { font-family: var(--font-en); font-size: 46px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+.kpi-v span { font-family: var(--font-ja); font-size: 20px; margin-left: 4px; }
+.kpi-l { font-size: var(--fs-small); color: var(--text-sub); margin-top: 12px; line-height: 1.55; }
+
+/* ------------------------------------------------------------
+   T-06 論拠3点
+   ------------------------------------------------------------ */
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+.three-col { border-top: 5px solid var(--primary); padding-top: 24px; }
+.three-no { font-family: var(--font-en); font-size: 15px; font-weight: 700; letter-spacing: .1em; color: var(--primary-dark); }
+.three-h { font-size: 23px; font-weight: 700; color: var(--ink); line-height: 1.5; margin-top: 12px; }
+.three-t { font-size: var(--fs-small); color: var(--text-sub); line-height: 1.7; margin-top: 14px; }
+
+/* ------------------------------------------------------------
+   T-07 グラフ（chart + insight callout）
+   ------------------------------------------------------------ */
+.chart-wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 34px; align-items: center; height: 100%; }
+.chart { width: 100%; }
+.chart text { font-family: var(--font-ja); fill: var(--text-sub); }
+.chart .c-val { fill: var(--ink); font-weight: 700; }
+.callout {
+  background: var(--primary-pale);
+  border-left: 6px solid var(--primary);
+  padding: 22px 24px; border-radius: 0 6px 6px 0;
+}
+.callout-h { font-size: 21px; font-weight: 700; color: var(--ink); line-height: 1.5; }
+.callout-t { font-size: var(--fs-small); color: var(--text-sub); margin-top: 12px; line-height: 1.7; }
+
+/* ------------------------------------------------------------
+   T-08 対比（lr / tb）  ★C10 左＝現状、右＝到達
+   ------------------------------------------------------------ */
+.gap { display: grid; grid-template-columns: 1fr 64px 1fr; align-items: stretch; gap: 0; }
+.gap-panel { border: 2px solid var(--line-strong); border-radius: 8px; padding: 26px 28px; background: var(--neutral-pale); }
+.gap-panel.to { border-color: var(--primary); background: var(--primary-pale); }
+.gap-label { font-size: 15px; font-weight: 700; letter-spacing: .1em; color: var(--text-sub); margin-bottom: 18px; }
+.gap-panel.to .gap-label { color: var(--primary-dark); }
+.gap-list { display: flex; flex-direction: column; gap: 14px; }
+.gap-item { font-size: var(--fs-small); color: var(--text); line-height: 1.6; padding-left: 20px; position: relative; }
+.gap-item::before { content: ""; position: absolute; left: 0; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: var(--neutral); }
+.gap-panel.to .gap-item::before { background: var(--primary); }
+.gap-arrow { display: flex; align-items: center; justify-content: center; }
+.gap-arrow svg { width: 40px; height: 40px; }
+
+.gap--tb { grid-template-columns: 1fr; grid-template-rows: 1fr 56px 1fr; }
+.gap--tb .gap-arrow svg { transform: rotate(90deg); }
+
+/* ------------------------------------------------------------
+   T-09 2軸マトリクス
+   ------------------------------------------------------------ */
+.matrix-wrap { display: flex; justify-content: center; align-items: center; height: 100%; min-height: 0; }
+/* 🔴 2026-08-31: SVGは幅基準で拡大され、箱の高さを超えていた（検査で 48px のはみ出し）。
+   高さを基準にし、幅を比例で縮める。 */
+.matrix { display: block; height: 100%; width: auto; max-width: 100%; }
+.matrix text { font-family: var(--font-ja); }
+.matrix .q-label { fill: var(--text-sub); font-size: 15px; }
+.matrix .ax-label { fill: var(--ink); font-size: 17px; font-weight: 700; }
+.matrix .plot-l { fill: var(--ink); font-size: 15px; }
+
+/* ------------------------------------------------------------
+   T-10 評価表（compare / qa / risk） ★Harvey Ball はモノクロ安全
+   ------------------------------------------------------------ */
+.tbl { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+.tbl th, .tbl td { border-bottom: 1px solid var(--line); padding: 14px 18px; text-align: left; vertical-align: top; line-height: 1.6; }
+.tbl thead th { background: var(--bg-soft); color: var(--text-sub); font-weight: 700; font-size: 15px; border-bottom: 2px solid var(--line-strong); }
+.tbl tbody th { color: var(--ink); font-weight: 700; width: 220px; }
+.tbl td.c { text-align: center; }
+.tbl .col-rec { background: var(--primary-pale); }
+.tbl thead th.col-rec { background: var(--primary); color: #fff; border-bottom-color: var(--primary-dark); }
+.tbl-rec-tag { display: inline-block; font-size: 12px; letter-spacing: .06em; background: var(--primary-dark); color: #fff; padding: 2px 8px; border-radius: 3px; margin-left: 8px; }
+
+/* Harvey Ball：塗り量で示すのでモノクロ印刷でも判別できる */
+.hb { display: inline-block; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--ink); vertical-align: middle; }
+.hb-0 { background: #fff; }                                                   /* 空  = 要検討 */
+.hb-1 { background: conic-gradient(var(--ink) 0 25%, #fff 25% 100%); }        /* 1/4 = 一部  */
+.hb-2 { background: conic-gradient(var(--ink) 0 50%, #fff 50% 100%); }        /* 半分 = 可   */
+.hb-3 { background: var(--ink); }                                             /* 全部 = 優   */
+
+.tbl--qa tbody th { width: 380px; }
+.tbl--risk tbody th { width: 260px; }
+
+/* ------------------------------------------------------------
+   T-11 構造図（レイヤー）
+   ------------------------------------------------------------ */
+.layers { display: flex; flex-direction: column; gap: 12px; }
+.layer {
+  display: grid; grid-template-columns: 210px 1fr; gap: 26px; align-items: center;
+  background: var(--bg-soft); border-left: 8px solid var(--line-strong);
+  padding: 16px 26px; border-radius: 0 6px 6px 0;  /* 2026-08-31: 2段見出しで本文領域が約30px減ったため詰めた（4層が収まらなかった） */
+}
+.layer--top { border-left-color: var(--primary); background: var(--primary-pale); }
+.layer-name { font-size: 22px; font-weight: 700; color: var(--ink); }
+.layer-no { font-family: var(--font-en); font-size: 13px; letter-spacing: .1em; color: var(--text-sub); display: block; margin-bottom: 6px; }
+.layer-t { font-size: var(--fs-small); color: var(--text-sub); line-height: 1.65; }
+
+/* ------------------------------------------------------------
+   T-12 プロセス／フロー  ★最大5ステップ
+   ------------------------------------------------------------ */
+.flow { display: flex; align-items: stretch; gap: 0; }
+.flow-step { flex: 1; text-align: center; }
+.flow-box {
+  background: var(--bg-soft); border-top: 5px solid var(--primary);
+  border-radius: 3px 3px 6px 6px; padding: 24px 18px; height: 100%;
+}
+.flow-no { font-family: var(--font-en); font-size: 13px; letter-spacing: .1em; color: var(--primary-dark); font-weight: 700; }
+.flow-h { font-size: 21px; font-weight: 700; color: var(--ink); margin-top: 10px; line-height: 1.45; }
+.flow-t { font-size: 15px; color: var(--text-sub); margin-top: 12px; line-height: 1.6; }
+.flow-meta { font-size: 14px; color: var(--text-sub); margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-strong); }
+.flow-arrow { flex: none; width: 40px; display: flex; align-items: center; justify-content: center; }
+.flow-arrow svg { width: 22px; height: 22px; }
+
+/* ------------------------------------------------------------
+   T-13 ロードマップ
+   ------------------------------------------------------------ */
+.road { display: grid; grid-template-columns: 190px 1fr; gap: 0 18px; align-items: center; }
+.road-head { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.road-head div { font-size: 15px; font-weight: 700; color: var(--text-sub); text-align: center; padding-bottom: 12px; border-bottom: 2px solid var(--line-strong); }
+.road-name { font-size: var(--fs-small); font-weight: 700; color: var(--ink); padding: 14px 0; }
+.road-track { position: relative; height: 46px; display: flex; align-items: center; }
+.road-bar {
+  position: absolute; height: 34px; border-radius: 4px;
+  background: var(--primary-light); border: 2px solid var(--primary);
+  display: flex; align-items: center; padding: 0 14px;
+  font-size: 15px; color: var(--ink); font-weight: 700;
+}
+.road-bar--sub { background: var(--neutral-pale); border-color: var(--neutral); font-weight: 400; color: var(--text-sub); }
+.road-goal {
+  margin-top: 22px; background: var(--primary-pale); border-left: 6px solid var(--primary);
+  padding: 18px 24px; border-radius: 0 6px 6px 0;
+  font-size: var(--fs-small); color: var(--ink);
+}
+.road-goal strong { color: var(--primary-dark); }
+
+/* ------------------------------------------------------------
+   T-14 体制・役割  ★相手側の工数を必ず書く
+   ------------------------------------------------------------ */
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 22px; }  /* 2026-08-31: 3固定だと2枚のとき右が空く */
+.role {
+  border: 2px solid var(--line-strong); border-radius: 8px; padding: 24px 26px; background: var(--bg-soft);
+  display: flex; flex-direction: column;   /* 2026-08-31: 下段を底に揃える */
+}
+.role--own { border-color: var(--primary); background: var(--primary-pale); }
+.role-side { font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--text-sub); }
+.role--own .role-side { color: var(--primary-dark); }
+.role-name { font-size: 22px; font-weight: 700; color: var(--ink); margin-top: 10px; }
+.role-tasks { font-size: var(--fs-small); color: var(--text-sub); margin-top: 14px; line-height: 1.7; }
+.role-load {
+  margin-top: auto; padding-top: 14px;   /* 2026-08-31: auto で底へ寄せる */ padding-top: 14px; border-top: 1px dashed var(--line-strong);
+  font-size: var(--fs-small); color: var(--ink); font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   T-15 費用・投資対効果  ★前提条件を必ず書く
+   ------------------------------------------------------------ */
+.cost-wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: 34px; align-items: start; }
+.cost-total {
+  background: var(--primary-pale); border-left: 8px solid var(--primary);
+  padding: 24px 28px; border-radius: 0 6px 6px 0;
+}
+.cost-total-l { font-size: 15px; font-weight: 700; letter-spacing: .08em; color: var(--primary-dark); }
+.cost-total-v { font-family: var(--font-en); font-size: 46px; font-weight: 700; color: var(--ink); margin-top: 10px; line-height: 1.25; }
+.cost-total-v span { font-family: var(--font-ja); font-size: 20px; }
+.cost-back { margin-top: 16px; font-size: var(--fs-small); color: var(--text); line-height: 1.7; }
+.cost-assume {
+  margin-top: 16px; padding: 14px 20px; background: var(--bg-soft);
+  border: 1px dashed var(--line-strong); border-radius: 6px;
+  font-size: 15px; color: var(--text-sub); line-height: 1.65;
+}
+.cost-assume b { color: var(--ink); }
+
+/* ------------------------------------------------------------
+   T-16 ネクストアクション  ★最大3件・日付と担当を必ず入れる
+   ------------------------------------------------------------ */
+.next { display: flex; flex-direction: column; gap: 16px; }
+.next-row {
+  display: grid; grid-template-columns: 48px 1fr 210px 190px; gap: 20px; align-items: center;
+  background: var(--bg-soft); border-left: 4px solid var(--line-strong);
+  padding: 22px 26px; border-radius: 0 6px 6px 0;
+}
+.next-row--first { border-left-color: var(--primary); background: var(--primary-pale); }
+.next-no {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--neutral); color: #fff; font-family: var(--font-en); font-weight: 700; font-size: 15px;
+}
+.next-row--first .next-no { background: var(--primary); }
+.next-what { font-size: var(--fs-body); color: var(--ink); font-weight: 700; line-height: 1.5; }
+.next-meta { font-size: var(--fs-small); color: var(--text-sub); }
+.next-meta b { color: var(--ink); }
+
+/* ------------------------------------------------------------
+   カタログ（index.html）専用
+   ------------------------------------------------------------ */
+.cat-body { background: #f2f5f4; padding: 56px 48px 80px; }
+.cat-h1 { font-size: 34px; font-weight: 700; color: var(--ink); }
+.cat-lead { font-size: 17px; color: var(--text-sub); margin-top: 14px; line-height: 1.8; max-width: 960px; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-top: 40px; }
+.cat-card {
+  background: #fff; border-radius: 8px; padding: 24px 26px;
+  border: 1px solid var(--line); text-decoration: none; display: block;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+.cat-card:hover { border-color: var(--primary); }
+.cat-id { font-family: var(--font-en); font-size: 13px; font-weight: 700; letter-spacing: .1em; color: var(--primary-dark); }
+.cat-name { font-size: 21px; font-weight: 700; color: var(--ink); margin-top: 8px; }
+.cat-use { font-size: 15px; color: var(--text-sub); margin-top: 12px; line-height: 1.65; }
+.cat-q { display: inline-block; font-size: 12px; letter-spacing: .06em; background: var(--bg-soft); color: var(--text-sub); border: 1px solid var(--line); padding: 3px 9px; border-radius: 3px; margin-top: 14px; }
+.cat-sec { font-size: 15px; font-weight: 700; letter-spacing: .1em; color: var(--text-sub); margin-top: 44px; padding-bottom: 10px; border-bottom: 2px solid var(--line-strong); }
+
+/* 途中で改行させたくない語（日付・時刻・金額・型番など）に付ける。
+   2026/8/25 追加。A8 で「2026年12月15／日」と日付の途中で折れたため。
+   🔴 2026/9/12 修正: **`white-space: nowrap` だけでは効いていなかった。**
+   インライン style で指定しても（＝詳細度の問題ではなく）日本語の文字間の
+   改行は止まらず、`word-break: keep-all` を足して初めて止まる。
+   `.slide * { text-wrap: pretty }`（slide.css）との併用時に再現。
+   詳細と実験結果は ../README.md の CSS 修正履歴（2026-09-12）。 */
+.slide .nb, .nb { white-space: nowrap; text-wrap: nowrap; word-break: keep-all; }

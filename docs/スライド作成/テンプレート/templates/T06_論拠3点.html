@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-06 論拠3点 — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-06 論拠3点
+     一言   : 主張を3本柱で支える（ピラミッド原則）
+     使う局面: Q2「なぜそう言えるのか」。ワンメッセージの断定を受けて根拠を並べる
+     メッセージラインの型:
+       〈結論〉と言える理由は、〈観点〉の3点です
+     情報量の上限: 3点固定。4点になったらMECEが崩れているか、1点が余分
+     使ってはいけない場面: 根拠が2点しかないとき（水増しした3点目は必ず弱く、そこを突かれる）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-06
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<section class="slide">
+  <div class="s-topic">〈結論〉の根拠</div>
+  <h2 class="s-title">〈結論〉と言える理由は、次の3点です</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="three">
+      <div class="three-col">
+        <div class="three-no">REASON 1</div>
+        <div class="three-h">〈根拠1の見出し〉</div>
+        <div class="three-t">〈3行以内で補足。数値があれば出典を s-src へ〉</div>
+      </div>
+      <div class="three-col">
+        <div class="three-no">REASON 2</div>
+        <div class="three-h">〈根拠2の見出し〉</div>
+        <div class="three-t">〈3行以内で補足〉</div>
+      </div>
+      <div class="three-col">
+        <div class="three-no">REASON 3</div>
+        <div class="three-h">〈根拠3の見出し〉</div>
+        <div class="three-t">〈3行以内で補足〉</div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>3点は同じ階層に揃える。</b>1つだけ抽象度が違うと崩れる。<b>推測を含む箇所は断定しない</b>——盛ると後で崩れる。</div>
+
+</body>
+</html>

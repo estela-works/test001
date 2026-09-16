@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-10 評価表 — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-10 評価表
+     一言   : 複数案・懸念・リスクを表で並べ、選ばせる／潰す
+     使う局面: Q4・Q5「うちでも本当にできるのか」
+     メッセージラインの型:
+       比較「〈評価軸〉で見ると、〈選択肢〉が最適です」／懸念「よくいただくご懸念には、すべてお答えできます」
+     情報量の上限: 6列×6行（軽量版4×4）
+     使ってはいけない場面: 選択肢が2つのとき（→T-08の左右対比のほうが速い）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-10
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<!-- ▼ バリアント1: compare（比較・Harvey Ball）
+     hb-3=全塗り（優） / hb-2=半分（可） / hb-1=1/4（一部） / hb-0=空（要検討）
+     ★塗りの量で示すので、モノクロ印刷でも判別できる
+     ------------------------------------------------------------ -->
+<section class="slide">
+  <div class="s-topic">〈選択肢〉の比較評価</div>
+  <h2 class="s-title">〈評価軸〉で見ると、〈選択肢〉が最適です</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>評価軸</th>
+          <th class="c">〈選択肢A〉</th>
+          <th class="c col-rec">〈選択肢B〉<span class="tbl-rec-tag">推奨</span></th>
+          <th class="c">〈選択肢C〉</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>〈軸1〉</th><td class="c"><span class="hb hb-3"></span></td><td class="c col-rec"><span class="hb hb-2"></span></td><td class="c"><span class="hb hb-1"></span></td></tr>
+        <tr><th>〈軸2〉</th><td class="c"><span class="hb hb-0"></span></td><td class="c col-rec"><span class="hb hb-3"></span></td><td class="c"><span class="hb hb-2"></span></td></tr>
+        <tr><th>〈軸3〉</th><td class="c"><span class="hb hb-2"></span></td><td class="c col-rec"><span class="hb hb-3"></span></td><td class="c"><span class="hb hb-1"></span></td></tr>
+        <tr class="lite-hide"><th>〈軸4〉</th><td class="c"><span class="hb hb-1"></span></td><td class="c col-rec"><span class="hb hb-2"></span></td><td class="c"><span class="hb hb-3"></span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">評価は円の塗り量で表示（塗りが多いほど優れる）。数値での点数化は前提の置き方で結果が変わるため行っていません</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<!-- ▼ バリアント2: qa（懸念Q&A）★相手が言う前にこちらから出す（原則3） -->
+<section class="slide">
+  <div class="s-topic">ご懸念への回答</div>
+  <h2 class="s-title">よくいただくご懸念には、すべてお答えできます</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <table class="tbl tbl--qa">
+      <thead><tr><th>ご懸念</th><th>回答</th></tr></thead>
+      <tbody>
+        <tr><th>〈懸念1〉</th><td>〈回答1〉</td></tr>
+        <tr><th>〈懸念2〉</th><td>〈回答2〉</td></tr>
+        <tr><th>〈懸念3〉</th><td>〈回答3〉</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<!-- ▼ バリアント3: risk（リスクと対策） -->
+<section class="slide">
+  <div class="s-topic">想定リスクと対策</div>
+  <h2 class="s-title">想定されるリスクは3点で、いずれも対策があります</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <table class="tbl tbl--risk">
+      <thead><tr><th>リスク</th><th>影響</th><th>対策</th></tr></thead>
+      <tbody>
+        <tr><th>〈リスク1〉</th><td>〈影響〉</td><td>〈対策〉</td></tr>
+        <tr><th>〈リスク2〉</th><td>〈影響〉</td><td>〈対策〉</td></tr>
+        <tr><th>〈リスク3〉</th><td>〈影響〉</td><td>〈対策〉</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>点数化しない。</b>細かく点数を付けると精度があるように見えるが、前提で順位が変わる。<b>塗り分け（Harvey Ball）はそれを避ける道具</b>で、モノクロ印刷でも判別できる。</div>
+
+</body>
+</html>

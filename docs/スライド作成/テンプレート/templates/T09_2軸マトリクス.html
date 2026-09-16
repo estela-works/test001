@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-09 2軸マトリクス — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-09 2軸マトリクス
+     一言   : 2つの軸で位置づけ、優先順位を客観的に見せる
+     使う局面: Q4「どうすればいいのか」（着手順の合意）
+     メッセージラインの型:
+       〈軸1〉と〈軸2〉で見ると、〈対象〉から着手すべきです
+     情報量の上限: プロットは6個（軽量版4個）。象限名は各1語
+     使ってはいけない場面: 軸が実質1つのとき（項目が対角線上に並んだら、それは順位表＝T-10）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-09
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<section class="slide">
+  <div class="s-topic">〈軸1〉×〈軸2〉での位置づけ</div>
+  <h2 class="s-title">〈軸1〉と〈軸2〉で見ると、〈対象〉から着手すべきです</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="matrix-wrap">
+      <svg class="matrix" viewBox="0 0 900 400" role="img" aria-label="〈2軸の説明〉">
+        <!-- 推奨象限の下敷き（右上を推奨にすると自然） -->
+        <rect x="450" y="30" width="380" height="150" fill="#E8FAF1"/>
+        <!-- 軸 -->
+        <line x1="70" y1="180" x2="850" y2="180" stroke="#c9d2ce" stroke-width="2"/>
+        <line x1="450" y1="20" x2="450" y2="340" stroke="#c9d2ce" stroke-width="2"/>
+        <!-- 軸ラベル -->
+        <text class="ax-label" x="860" y="176" text-anchor="end">〈X軸〉大 →</text>
+        <text class="ax-label" x="458" y="34">↑ 〈Y軸〉高い</text>
+        <text class="q-label" x="80"  y="176">← 〈X軸〉小</text>
+        <text class="q-label" x="458" y="336">↓ 〈Y軸〉低い</text>
+        <text class="q-label" x="462" y="56" font-weight="700" fill="#088F5A">最優先</text>
+        <!-- プロット（推奨だけ塗りつぶす。最大6個） -->
+        <circle cx="700" cy="95"  r="15" fill="#15C176"/>
+        <text class="plot-l" x="700" y="70"  text-anchor="middle" font-weight="700">〈推奨する施策〉</text>
+        <circle cx="560" cy="140" r="12" fill="#9BF0C3" stroke="#15C176" stroke-width="2"/>
+        <text class="plot-l" x="560" y="122" text-anchor="middle">〈施策2〉</text>
+        <circle cx="690" cy="285" r="12" fill="#fff" stroke="#8c9a94" stroke-width="2"/>
+        <text class="plot-l" x="690" y="263" text-anchor="middle">〈施策3〉</text>
+        <circle cx="270" cy="290" r="12" fill="#fff" stroke="#8c9a94" stroke-width="2"/>
+        <text class="plot-l" x="270" y="268" text-anchor="middle">〈施策4〉</text>
+      </svg>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">〈X軸の定義〉、〈Y軸の定義〉で評価</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>プロット位置の根拠を必ず持っておく。</b>「なぜここ？」に答えられないと、その場で位置を動かされて図が崩れる。<b>評価の定義を出典行に書く</b>。</div>
+
+</body>
+</html>

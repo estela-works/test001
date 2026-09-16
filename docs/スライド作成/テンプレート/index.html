@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ESTELA WORKS スライドテンプレート カタログ</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/slide.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body class="cat-body">
+
+<h1 class="cat-h1">スライドテンプレート カタログ（全16種）</h1>
+<p class="cat-lead">
+  <b>「どんなデザインか」ではなく「どの主張をするときに使うか」で引く索引です。</b>
+  作りたいスライドが、相手のどの問い（Q1〜Q8）に答えるものかを決めてから、この一覧で型を選んでください。
+  <br><b>⚠️ この Q1〜Q8 は「型A 問題提起型」の連鎖です。</b>
+  型B〜E（手段提示・選択支援・報告承認・関係構築）で作った場合は、
+  <code>スペック/システム/スライド作成/内容検討ガイド.md</code> の 4-1「型ごとのテンプレート対応」で引いてください。
+  <br><b>🔴 中小企業の経営者が相手なら、軽量版（<code>slide slide--lite</code>）が既定です。</b>
+  <br>定義の全文は <code>プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md</code>、進め方は
+  <code>スペック/システム/スライド作成/業務フロー.md</code> にあります。
+</p>
+<p class="cat-lead">
+  <b>▶ <a href="samples/sample_deck.html" style="color:#088F5A;">16枚を通したサンプル提案を見る</a></b>
+  （架空事例。テンプレートに実際の文言が入った状態）<br>
+  PDF化: Chrome で <code>Ctrl+P</code> →「PDFに保存」／<b>余白: なし</b>／<b>背景のグラフィック: ON</b>／倍率: 既定
+</p>
+
+<div class="cat-sec">枠組み — 資料の骨格を作る</div>
+<div class="cat-grid">
+  <a class="cat-card" href="templates/T01_扉.html">
+    <div class="cat-id">T-01</div><div class="cat-name">扉</div>
+    <div class="cat-use">場を開く／区切る。表紙・章扉・Appendix扉の3バリアント。</div>
+    <span class="cat-q">全体</span>
+  </a>
+  <a class="cat-card" href="templates/T02_エグゼクティブサマリ.html">
+    <div class="cat-id">T-02</div><div class="cat-name">エグゼクティブサマリ</div>
+    <div class="cat-use">忙しい決裁者に先に全部渡す。結論1文＋根拠3点。一人歩き対策の中核。</div>
+    <span class="cat-q">全体</span>
+  </a>
+</div>
+
+<div class="cat-sec">主張 — 相手を当事者にする</div>
+<div class="cat-grid">
+  <a class="cat-card" href="templates/T03_ワンメッセージ.html">
+    <div class="cat-id">T-03</div><div class="cat-name">ワンメッセージ</div>
+    <div class="cat-use">最重要の1点を突きつける。主語を相手にする。一般論を書かない。</div>
+    <span class="cat-q">Q1 自分に関係あるのか</span>
+  </a>
+  <a class="cat-card" href="templates/T04_ファクト提示.html">
+    <div class="cat-id">T-04</div><div class="cat-name">ファクト提示</div>
+    <div class="cat-use">認識をそろえる（事実の列挙）／証言で裏づける（実績・事例）。出典必須。</div>
+    <span class="cat-q">Q1・Q7 なぜあなたか</span>
+  </a>
+  <a class="cat-card" href="templates/T05_数値ハイライト.html">
+    <div class="cat-id">T-05</div><div class="cat-name">数値ハイライト</div>
+    <div class="cat-use">数字1つで深刻さを渡す。巨大数値1つ／KPIタイル4〜6個。含意を必ず添える。</div>
+    <span class="cat-q">Q3 どのくらい深刻か</span>
+  </a>
+  <a class="cat-card" href="templates/T06_論拠3点.html">
+    <div class="cat-id">T-06</div><div class="cat-name">論拠3点</div>
+    <div class="cat-use">主張を3本柱で支える（ピラミッド原則）。3点固定。粒度を揃える。</div>
+    <span class="cat-q">Q2 なぜそう言えるのか</span>
+  </a>
+</div>
+
+<div class="cat-sec">分析 — データで示す</div>
+<div class="cat-grid">
+  <a class="cat-card" href="templates/T07_グラフ.html">
+    <div class="cat-id">T-07</div><div class="cat-name">グラフ</div>
+    <div class="cat-use">推移・比較・構成比・要因分解（ウォーターフォール）・脱落（ファネル）。必ず解釈を右に添える。円グラフは使わない。</div>
+    <span class="cat-q">Q2・Q3</span>
+  </a>
+  <a class="cat-card" href="templates/T08_対比.html">
+    <div class="cat-id">T-08</div><div class="cat-name">対比</div>
+    <div class="cat-use">As-Is / To-Be（左右）、Before / After（上下）。左右で行数を揃える。</div>
+    <span class="cat-q">Q3・Q4</span>
+  </a>
+  <a class="cat-card" href="templates/T09_2軸マトリクス.html">
+    <div class="cat-id">T-09</div><div class="cat-name">2軸マトリクス</div>
+    <div class="cat-use">2軸で位置づけ、着手順を合意する。プロット位置の根拠を持つこと。</div>
+    <span class="cat-q">Q4 どうすればいいか</span>
+  </a>
+  <a class="cat-card" href="templates/T10_評価表.html">
+    <div class="cat-id">T-10</div><div class="cat-name">評価表</div>
+    <div class="cat-use">比較（Harvey Ball）／懸念Q&amp;A／リスクと対策の3バリアント。点数化しない。</div>
+    <span class="cat-q">Q4・Q5 うちでもできるか</span>
+  </a>
+  <a class="cat-card" href="templates/T11_構造図.html">
+    <div class="cat-id">T-11</div><div class="cat-name">構造図</div>
+    <div class="cat-use">レイヤー・体系・関係を見せる。層は3つまで。下から上へ説明する。</div>
+    <span class="cat-q">Q4</span>
+  </a>
+</div>
+
+<div class="cat-sec">実行 — できると思わせる</div>
+<div class="cat-grid">
+  <a class="cat-card" href="templates/T12_プロセス.html">
+    <div class="cat-id">T-12</div><div class="cat-name">プロセス／フロー</div>
+    <div class="cat-use">手順・因果を順序で見せる。最大5ステップ。各ステップに担当を書く。</div>
+    <span class="cat-q">Q4・Q8</span>
+  </a>
+  <a class="cat-card" href="templates/T13_ロードマップ.html">
+    <div class="cat-id">T-13</div><div class="cat-name">ロードマップ</div>
+    <div class="cat-use">時間軸でフェーズを見せる。相手側の作業を必ず1本置く。未確定の日付は引かない。</div>
+    <span class="cat-q">Q5</span>
+  </a>
+  <a class="cat-card" href="templates/T14_体制.html">
+    <div class="cat-id">T-14</div><div class="cat-name">体制・役割</div>
+    <div class="cat-use">誰がやるのかに答える。相手の工数を必ず書く（書かないと後で揉める）。</div>
+    <span class="cat-q">Q5 誰がやるのか</span>
+  </a>
+  <a class="cat-card" href="templates/T15_費用.html">
+    <div class="cat-id">T-15</div><div class="cat-name">費用・投資対効果</div>
+    <div class="cat-use">内訳＋前提条件＋回収見込み。前提を書かない試算は出さない。</div>
+    <span class="cat-q">Q6 いくらかかるのか</span>
+  </a>
+  <a class="cat-card" href="templates/T16_ネクストアクション.html">
+    <div class="cat-id">T-16</div><div class="cat-name">ネクストアクション</div>
+    <div class="cat-use">決めさせる／動かす。やること・誰が・いつまで。最大3件、最初の1件は最小にする。</div>
+    <span class="cat-q">Q8 まず何をすればいいか</span>
+  </a>
+</div>
+
+<div class="cat-sec">全16種に共通する規約</div>
+<p class="cat-lead">
+  ① タイトルはメッセージ（完全な文）で書く　② 45〜50文字・2行以内　③「〜し、かつ〜」が入ったら2枚に割る
+  ④ 敬体（です・ます）　⑤ 定量的主張には必ず出典行　⑥ ページ番号は常時　⑦ 1枚60秒以内
+  ⑧ 緑は面と線に使い、文字色にしない　⑨ 同種要素でフォントサイズを変えない　⑩ 視線は左→右（現状を左、到達を右）
+  ⑪ スピーカーノートを併記　⑫ 軽量版は <code>class="slide--lite"</code> を足し、減らす要素に <code>class="lite-hide"</code> を付ける
+</p>
+
+</body>
+</html>

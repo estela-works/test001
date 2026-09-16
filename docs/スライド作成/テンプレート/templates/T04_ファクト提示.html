@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-04 ファクト提示 — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-04 ファクト提示
+     一言   : 認識をそろえる／証言で裏づける
+     使う局面: Q1・Q2（現状共有）、Q7「なぜあなたに頼むのか」（事例バリアント）
+     メッセージラインの型:
+       〈対象〉について、〈N〉つの事実が確認できています
+     情報量の上限: 5件（軽量版3件）。1件は1文
+     使ってはいけない場面: 事実に出典がないとき（確度が付けられない項目はここに載せない・原則5）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-04
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<!-- ▼ バリアント1: facts（事実の列挙） -->
+<section class="slide">
+  <div class="s-topic">〈対象〉に関する事実</div>
+  <h2 class="s-title">〈対象〉について、〈N〉つの事実が確認できています</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="facts">
+      <!-- 最も重要な1件だけ fact--key を付ける -->
+      <div class="fact fact--key">
+        <div class="fact-dot"></div>
+        <div>
+          <div class="fact-text">〈事実1。数値は <strong>strong</strong> で囲む〉</div>
+          <div class="fact-src">出典: 〈出典・確認日〉</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-dot"></div>
+        <div>
+          <div class="fact-text">〈事実2〉</div>
+          <div class="fact-src">出典: 〈出典・確認日〉</div>
+        </div>
+      </div>
+      <div class="fact">
+        <div class="fact-dot"></div>
+        <div>
+          <div class="fact-text">〈事実3〉</div>
+          <div class="fact-src">出典: 〈出典・確認日〉</div>
+        </div>
+      </div>
+      <!-- 4件目以降は軽量版で落とす -->
+      <div class="fact lite-hide">
+        <div class="fact-dot"></div>
+        <div>
+          <div class="fact-text">〈事実4：前向きな事実を置く〉</div>
+          <div class="fact-src">出典: 〈出典・確認日〉</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<!-- ▼ バリアント2: case（実績・事例 ＝ Quote + Evidence） -->
+<section class="slide">
+  <div class="s-topic">〈規模・業種〉での解決実績</div>
+  <h2 class="s-title">〈同様の課題を、〈規模・業種〉で解決しています〉</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="case">
+      <div>
+        <div class="case-quote">「〈お客様の言葉をそのまま〉」</div>
+        <div class="case-who">〈会社規模・業種・役職〉</div>
+      </div>
+      <div class="case-ev">
+        <div class="case-ev-item">
+          <div class="case-ev-v">〈数値〉</div>
+          <div class="case-ev-l">〈何の数値か〉</div>
+        </div>
+        <div class="case-ev-item">
+          <div class="case-ev-v">〈数値〉</div>
+          <div class="case-ev-l">〈何の数値か〉</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>事実だけを置き、解釈はまだ足さない。</b>1件ずつ確認を取ると以降の議論の土台が固まる。<b>最後の1件は前向きな事実</b>にする——できない話だけを並べない。</div>
+
+</body>
+</html>

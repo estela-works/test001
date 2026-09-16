@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-13 ロードマップ — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-13 ロードマップ
+     一言   : 時間軸で、いつ何が起きるかを見せる
+     使う局面: Q5「うちでも本当にできるのか」（実行可能性の証明）
+     メッセージラインの型:
+       〈期間〉で〈到達点〉まで進みます
+     情報量の上限: フェーズ4つ・ワークストリーム3本（軽量版はフェーズ3・1本）
+     使ってはいけない場面: 期間が確定していないとき（引いた線はそのまま約束として扱われる）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-13
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<section class="slide">
+  <div class="s-topic">〈期間〉の工程</div>
+  <h2 class="s-title">〈期間〉で、〈到達点〉まで進みます</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="road">
+      <div></div>
+      <div class="road-head"><div>〈期間1〉</div><div>〈期間2〉</div><div>〈期間3〉</div></div>
+
+      <div class="road-name">〈フェーズ1〉</div>
+      <div class="road-track"><div class="road-bar" style="left:0; width:32%;">〈作業内容〉</div></div>
+
+      <div class="road-name">〈フェーズ2〉</div>
+      <div class="road-track"><div class="road-bar" style="left:30%; width:40%;">〈作業内容〉</div></div>
+
+      <div class="road-name">〈フェーズ3〉</div>
+      <div class="road-track"><div class="road-bar" style="left:62%; width:26%;">〈作業内容〉</div></div>
+
+      <!-- ★相手側の作業は必ず1本置く -->
+      <div class="road-name">貴社のご対応</div>
+      <div class="road-track"><div class="road-bar road-bar--sub" style="left:0; width:100%;">〈相手側の作業と負荷〉</div></div>
+    </div>
+    <div class="road-goal"><strong>〈期限〉：</strong>〈到達している状態を、相手を主語にして書く〉</div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>相手側の作業を必ず書く。</b>Q5の本音は「うちは何をやらされるのか」。最下段の帯がその答え。<b>確定していない日付は引かない</b>。</div>
+
+</body>
+</html>

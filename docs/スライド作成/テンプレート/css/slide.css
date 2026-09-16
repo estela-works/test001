@@ -1,0 +1,173 @@
+/* ============================================================
+   slide.css — 版面・共通骨格・印刷設定
+   1280 x 720 px = 13.333in x 7.5in = PowerPoint 既定の 16:9 と完全一致
+   ============================================================ */
+
+/* --- ページ設定：Chrome の「PDFに保存」で 1スライド＝1ページ ---
+   余白: なし ／ 背景のグラフィック: ON ／ 倍率: 既定
+   ------------------------------------------------------------ */
+@page { size: 1280px 720px; margin: 0; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-ja);
+  color: var(--text);
+  line-height: var(--lh-body);
+  background: #dfe4e2;           /* 画面編集時の台紙。印刷では出ない */
+  font-feature-settings: "palt" 1;
+}
+
+/* ============================================================
+   スライド本体
+   ============================================================ */
+.slide {
+  position: relative;
+  width: var(--slide-w);
+  height: var(--slide-h);
+  background: var(--bg);
+  margin: 28px auto;             /* 画面のみ。印刷では @page が効く */
+  padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,.16);
+}
+
+/* ============================================================
+   見出し（2段。2026-08-30 改定）
+   上段 .s-topic  ＝ タイトル。そのスライドが何についての1枚か（事柄の名前、体言中心、25文字目安・1行）
+   下段 .s-title  ＝ メッセージライン。理解してほしいこと（主張）
+   C1 2段見出し / C2 メッセージライン 45〜50文字・2行以内 / C4 敬体
+   ⚠ .s-topic は後から追加した要素。無い旧資料はそのまま描画される
+   ============================================================ */
+/* トピック行があるときは、上余白をその分だけ詰める */
+.slide:has(> .s-topic) { padding-top: 34px; }
+.s-topic {
+  font-size: var(--fs-topic, 18px);
+  font-weight: 700;
+  color: var(--text-sub);
+  line-height: 1.35;
+  letter-spacing: .01em;
+  margin-bottom: 6px;
+  white-space: nowrap;            /* 1行に収める。溢れたらタイトルが長すぎる */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: none;
+}
+
+.s-title {
+  font-size: var(--fs-title);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: var(--lh-title);
+  letter-spacing: .005em;
+  /* 2行を超えたら主張が2つある＝2枚に割る（C3） */
+  max-height: calc(var(--fs-title) * var(--lh-title) * 2);
+  overflow: hidden;
+}
+.s-title em {                     /* 強調は緑の面ではなく下線帯で */
+  font-style: normal;
+  background: linear-gradient(transparent 62%, var(--primary-light) 62%);
+}
+.s-rule {
+  width: 76px; height: 5px;
+  background: var(--primary);
+  border-radius: 3px;
+  margin-top: 18px;
+  flex: none;
+}
+.s-sub {                          /* タイトル直下の補足1行 */
+  font-size: var(--fs-body);
+  color: var(--text-sub);
+  margin-top: 14px;
+}
+
+/* --- 本文領域：タイトルとフッタの間を占める ------------------ */
+.s-body {
+  flex: 1;
+  min-height: 0;
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ============================================================
+   フッタ：出典（C5）＋ページ番号（C6）
+   ============================================================ */
+.s-foot {
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 14px;
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-note);
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+.s-src { max-width: 900px; }
+.s-page { font-family: var(--font-en); letter-spacing: .06em; flex: none; }
+
+/* ============================================================
+   スピーカーノート（C11）：画面では見える／印刷では消える
+   ============================================================ */
+.notes {
+  width: var(--slide-w);
+  margin: -18px auto 40px;
+  padding: 18px 24px;
+  background: #2b3230;
+  color: #d8e0dc;
+  font-size: 15px;
+  line-height: 1.75;
+  border-radius: 0 0 6px 6px;
+}
+.notes b { color: #fff; }
+.notes-label {
+  font-family: var(--font-en);
+  font-size: 12px; letter-spacing: .14em;
+  color: var(--primary-light);
+  display: block; margin-bottom: 8px;
+}
+
+/* ============================================================
+   軽量バリアント .slide--lite（C12 / 決裁事項①）
+   中小企業の経営者向け。要素を減らし、文字を大きくする。
+   ★HTMLは同じ。クラスを足すだけで密度が切り替わる。
+   ============================================================ */
+.slide--lite { --fs-body: 23px; --fs-small: 19px; }
+.slide--lite .lite-hide { display: none !important; }   /* 4件目以降・5列目以降に付ける */
+.slide--lite .s-src     { font-size: 13px; opacity: .8; } /* 出典は脚注扱いに落とす */
+
+/* ============================================================
+   印刷
+   ============================================================ */
+@media print {
+  body { background: #fff; }
+  .slide {
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+  .slide:last-of-type { page-break-after: auto; break-after: auto; }
+  .notes, .screen-only { display: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* 画面だけに出す操作パネル等 */
+@media screen {
+  .print-only { display: none !important; }
+}
+
+/* 🔴 1文字だけの行（泣き別れ）を減らす。2026/8/25 追加。
+   日本語の禁則処理は「行頭に句読点を置かない」までしか面倒を見ず、
+   「最終行が1文字」は防いでくれない。text-wrap: pretty は最終行が
+   極端に短くならないよう改行位置を調整する（Chrome 117+）。
+   ⚠️ 対応していない環境では単に無視されるだけで、崩れは起きない。 */
+.slide, .slide * { text-wrap: pretty; }

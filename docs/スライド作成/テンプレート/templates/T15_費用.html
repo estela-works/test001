@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-15 費用・投資対効果 — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-15 費用・投資対効果
+     一言   : いくらかかるのかに答える
+     使う局面: Q6「いくらかかるのか」
+     メッセージラインの型:
+       初期〈金額〉・月額〈金額〉で、〈期間〉での回収を見込めます
+     情報量の上限: 内訳5行（軽量版3行）。前提条件は必ず併記
+     使ってはいけない場面: 効果額の根拠が薄いとき（前提を書かない試算は出さない）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-15
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<section class="slide">
+  <div class="s-topic">費用と回収見込み</div>
+  <h2 class="s-title">初期〈金額〉・月額〈金額〉で、〈期間〉での回収を見込めます</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="cost-wrap">
+      <div>
+        <table class="tbl">
+          <thead><tr><th>項目</th><th>金額</th><th>期間</th></tr></thead>
+          <tbody>
+            <tr><th>初期費用</th><td>〈金額〉</td><td>—</td></tr>
+            <tr><th>〈サービス名〉</th><td>〈金額〉 / 月</td><td>〈期間〉</td></tr>
+            <tr><th>保守</th><td>〈金額〉 / 月</td><td>〈期間〉</td></tr>
+            <tr class="lite-hide"><th>〈その他〉</th><td>〈金額〉</td><td>〈備考〉</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="cost-total">
+          <div class="cost-total-l">〈期間〉のご負担</div>
+          <div class="cost-total-v">〈金額〉<span> 円</span></div>
+        </div>
+        <div class="cost-back">〈効果額の説明。<strong>数値</strong>は strong で囲む〉</div>
+        <!-- ★前提条件は省略しない。ここを書かない試算は出さない -->
+        <div class="cost-assume">
+          <b>前提条件</b><br>
+          ・〈前提1（見込み値なら「<b>見込み値</b>」と明記）〉<br>
+          ・〈前提2〉<br>
+          ・〈前提3〉
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">効果額は前提条件に依存する見込み値であり、保証するものではありません</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>前提を書かない試算は出さない。</b>回収期間は最も検証される数字で、一度崩れると全ページの信用が飛ぶ。<b>不利な前提を自分で書く</b>ほうが結果的に強い。</div>
+
+</body>
+</html>

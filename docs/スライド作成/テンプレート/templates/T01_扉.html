@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-01 扉 — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-01 扉
+     一言   : 場を開く／区切る
+     使う局面: 冒頭（表紙）、章の切り替え（章扉）、本編と根拠の境（Appendix扉）
+     メッセージラインの型:
+       表紙は提案の名前（メッセージではなく件名でよい＝唯一の例外）／章扉は「これから〈何〉をご説明します」
+     情報量の上限: 件名は2行以内。章扉に説明文を書かない
+     使ってはいけない場面: 章が3つ未満のときに章扉を入れる（間延びする）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-01
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<!-- ▼ バリアント1: 表紙 -->
+<section class="slide slide--cover">
+  <div class="cover-to">〈相手先名〉 御中</div>
+  <h1 class="cover-title">〈提案の件名〉</h1>
+  <div class="cover-rule"></div>
+  <div class="cover-meta">〈YYYY年M月D日〉<br>ご提案</div>
+  <div class="cover-brand">ESTELA WORKS株式会社</div>
+</section>
+
+<!-- ▼ バリアント2: 章扉（章が3つ以上あるときだけ使う） -->
+<section class="slide slide--section">
+  <div class="section-no">SECTION 〈N〉</div>
+  <h1 class="section-title">〈これから何をご説明するか〉</h1>
+  <div class="section-rule"></div>
+</section>
+
+<!-- ▼ バリアント3: Appendix扉 -->
+<section class="slide slide--section">
+  <div class="section-no">APPENDIX</div>
+  <h1 class="section-title">参考資料</h1>
+  <div class="section-rule"></div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>表紙は読ませる場所ではなく、始まりの合図。</b>件名だけを置き、口頭で持ち時間と進め方の枠を先に共有する。</div>
+
+</body>
+</html>

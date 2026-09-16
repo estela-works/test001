@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-11 構造図 — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-11 構造図
+     一言   : 全体像・階層・関係を1枚で見せる
+     使う局面: Q4。「何を作るのか」の輪郭を渡す
+     メッセージラインの型:
+       〈対象〉は〈N〉つの層で構成されます
+     情報量の上限: 4層（軽量版3層）。1層あたりの要素は3つまで
+     使ってはいけない場面: 層に順序も包含関係もないとき（それは単なる箇条書き＝T-04）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-11
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<section class="slide">
+  <div class="s-topic">〈対象〉の構成</div>
+  <h2 class="s-title">〈対象〉は、〈N〉つの層で構成されます</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="layers">
+      <!-- 最上位（＝到達点）だけ layer--top を付ける -->
+      <div class="layer layer--top">
+        <div class="layer-name"><span class="layer-no">LAYER 3</span>〈最上位層の名前〉</div>
+        <div class="layer-t">〈2行以内で説明〉</div>
+      </div>
+      <div class="layer">
+        <div class="layer-name"><span class="layer-no">LAYER 2</span>〈中間層の名前〉</div>
+        <div class="layer-t">〈2行以内で説明〉</div>
+      </div>
+      <div class="layer">
+        <div class="layer-name"><span class="layer-no">LAYER 1</span>〈土台層の名前〉</div>
+        <div class="layer-t">〈2行以内で説明〉</div>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>層は3つまで。</b>層を増やすのは網羅性の誇示であって理解の助けにならない。<b>下から上に説明する</b>と積み上がりが伝わる。</div>
+
+</body>
+</html>

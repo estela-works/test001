@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>T-05 数値ハイライト — ESTELA WORKS スライドテンプレート</title>
+<link rel="stylesheet" href="../css/tokens.css">
+<link rel="stylesheet" href="../css/slide.css">
+<link rel="stylesheet" href="../css/components.css">
+</head>
+<body>
+
+<!-- ============================================================
+     T-05 数値ハイライト
+     一言   : 数字1つで深刻さを渡す
+     使う局面: Q3「どのくらい深刻なのか」
+     メッセージラインの型:
+       〈対象〉は〈数値〉です。これは〈含意〉を意味します
+     情報量の上限: 巨大数値は1つ。KPIタイルは4〜6個（軽量版3個）
+     使ってはいけない場面: その数値の出典が示せないとき（大きく出した数字ほど検証される）
+     定義書  : プロジェクト/_完了/20260824_スライドテンプレート製作/02_16パターン定義_20260824.md T-05
+     ------------------------------------------------------------
+     使い方: 〈  〉を置き換える。行を減らすのは可、増やすのは上限まで。
+     軽量版（中小企業の経営者向け）にするには、<section> に slide--lite を足し、
+     減らす要素に class="lite-hide" を付ける。
+     ============================================================ -->
+
+<!-- ▼ バリアント1: single（巨大数値1つ） -->
+<section class="slide">
+  <div class="s-topic">〈対象〉の規模</div>
+  <h2 class="s-title">〈対象〉は〈数値〉。〈含意〉に相当します</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="big-wrap">
+      <div class="big-num">〈数値〉</div>
+      <div class="big-unit">〈単位〉</div>
+    </div>
+    <div class="big-imp">〈この数値が何を意味するか。<strong>要点</strong>は strong で囲む〉</div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典〉（〈計算式を必ず書く〉）</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<!-- ▼ バリアント2: kpi（指標タイル 4〜6個） -->
+<section class="slide">
+  <div class="s-topic">〈対象〉の現状指標</div>
+  <h2 class="s-title">〈現状を示す指標をまとめて示す1文〉</h2>
+  <div class="s-rule"></div>
+  <div class="s-body">
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi-v">〈値〉<span>〈単位〉</span></div><div class="kpi-l">〈指標名〉</div></div>
+      <div class="kpi"><div class="kpi-v">〈値〉<span>〈単位〉</span></div><div class="kpi-l">〈指標名〉</div></div>
+      <div class="kpi"><div class="kpi-v">〈値〉<span>〈単位〉</span></div><div class="kpi-l">〈指標名〉</div></div>
+      <div class="kpi lite-hide"><div class="kpi-v">〈値〉<span>〈単位〉</span></div><div class="kpi-l">〈指標名〉</div></div>
+      <div class="kpi lite-hide"><div class="kpi-v">〈値〉<span>〈単位〉</span></div><div class="kpi-l">〈指標名〉</div></div>
+      <div class="kpi lite-hide"><div class="kpi-v">〈値〉<span>〈単位〉</span></div><div class="kpi-l">〈指標名〉</div></div>
+    </div>
+  </div>
+  <div class="s-foot">
+    <div class="s-src">出典: 〈出典・確認日〉</div>
+    <div class="s-page">〈N〉</div>
+  </div>
+</section>
+
+<div class="notes"><span class="notes-label">SPEAKER NOTES</span>
+<b>数字だけ置いて終わらない。</b>「で、それが何？」に先回りして含意を言う。<b>計算式を出典行に必ず書く</b>。</div>
+
+</body>
+</html>
